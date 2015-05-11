@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>censiq</title>
+        <!--
+        <link rel="stylesheet" href="js/jquery.mobile-1.4.2/jquery.mobile-1.4.2.min.css" >
+        -->
+        <link rel="stylesheet" href="css/themes/q.min.css" />
+        <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
+        <link rel="stylesheet" href="js/jquery.mobile-1.4.2/jquery.mobile.structure-1.4.2.min.css" />
+    </head>
+    <body>
+        
+        <!-- cityAssetStep0Page -->
+        <div data-role="page" id="cityAssetStep0Page"></div>
+        <!-- /cityAssetStep0Page -->
+        
+        <!-- cityAssetStep1Page -->
+        <div data-role="page" id="cityAssetStep1Page"></div>
+        <!-- /cityAssetStep1Page -->
+        
+        
+        <!-- censusPageStep2 -->
+        <div data-role="page" id="cityAssetStep2Page">
+            <div data-role="header" class="header" data-position="fixed">
+                <a href="#" data-rel="back" class="ui-btn ui-btn-icon-left ui-btn-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-back ui-alt-icon ui-nodisc-icon"></a>
+                <a href="index.html" id="homeButton" rel="external" class="ui-btn ui-btn-right ui-btn-icon-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-home ui-alt-icon ui-nodisc-icon">Home</a>
+				<h1>Bene Comunale</h1>
+			</div>
+            <div data-role="main" class="ui-content">
+                
+                <ul data-role="listview" data-inset="false" data-theme="b">
+                    <li>
+                        <label>Tipologia</label>
+                        <select id="cityAssetType"></select>
+                    </li>
+                    <li>
+                        <label>Nome</label>
+                        <input type="text" id="cityAssetName" />
+                    </li>
+                    <li>
+                        <label>Descrizione</label>
+                        <textarea id="cityAssetDescription"></textarea>
+                    </li>
+                    <li>
+                        <label>Annotazioni</label>
+                        <textarea id="cityAssetNotes"></textarea>
+                    </li>
+                </ul>
+                
+                <!--
+                <ul data-role="listview" data-inset="true">
+                    <li>
+                        <a href="#" id="saveButton" class="ui-btn ui-icon-check ui-btn-icon-left">Salva</a>
+                    </li>
+                </ul>
+                -->
+            </div>
+            <div data-role="footer" class="footer"  data-position="fixed" align="center" style="background:none !important; background-color: #f2f2f2 !important;">
+                <div style="line-height:25px; color:#0086cc;">3 di 3</div>
+                <a href="#" id="saveButton" class="button-confirm next-step" data-step="2">SALVA</a>
+            </div>
+        </div>
+        <!-- /censusPageStep2 -->
+        
+        
+        <!-- summaryPage -->
+        <div data-role="page" id="summaryPage"></div>
+        <!-- /summaryPage -->
+        
+        
+        
+        
+        <!-- ### DIALOGS ### -->
+        <!-- mapPage -->
+        <div data-role="page" _data-dialog="true" _data-fullscreen="true" id="mapPage">
+             <div data-role="header"  data-position="fixed">
+                <a href="javascript:app.closeMap(false)" class="ui-btn ui-btn-icon-left ui-btn-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-back ui-alt-icon ui-nodisc-icon">Annulla</a>
+				<h1>Mappa</h1>
+                <a href="javascript:app.closeMap(true)" class="ui-btn ui-corner-all ui-icon-check ui-btn-icon-left ui-btn-icon-notext ui-shadow ui-corner-all">Conferma</a>
+			</div>
+            <div data-role="main" _class="ui-content">
+                <div id="map" style="height:100%;"></div>
+            </div>
+            <!-- <div data-role="footer" class="footer"  data-position="fixed"></div> -->
+        </div>
+        <!-- /mapPage -->
+        <!-- photoPage  -->
+        <div data-role="page" data-dialog="true" data-fullscreen="true" id="photoPage">
+            <div data-role="main" class="ui-content" style="padding-top:0;padding-bottom:0;text-align:center">
+                <a href="#">
+                    <img src="" style="margin:0 auto; width:100%" />
+                </a>
+            </div>
+        </div>
+        <!-- /photoPage  -->
+        <script src="phonegap.js"></script>
+        <script src="js/jquery-2.1.0.min.js"></script>
+        <script src="js/jquery.mobile-1.4.2/jquery.mobile-1.4.2.min.js"></script>
+        <script src="js/common/page.injector.js"></script>
+        <script src="js/common/config.js"></script>
+        <script src="js/common/helper.js"></script>
+        <script src="js/common/barcodeReader.js"></script>
+        <script src="js/common/geoLocation.js"></script>
+        <script src="js/common/camera.js"></script>
+        <script src="js/common/auth.js"></script>
+        <script src="js/common/services.js"></script>
+        <script src="js/data/data.js"></script>
+        <script src="js/data/census.js"></script>
+        <script src="js/data/census.cityasset.js"></script>
+        <script src="js/apps/census.cityasset.js"></script>
+        <script src="js/apps/census.common.js"></script>
+        <script>
+            app.initialize();
+        </script>
+    </body>
+</html>

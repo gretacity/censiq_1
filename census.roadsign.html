@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>CensiQ</title>
+        <!--
+        <link rel="stylesheet" href="js/jquery.mobile-1.4.2/jquery.mobile-1.4.2.min.css" >
+        -->
+        <link rel="stylesheet" href="css/themes/q.min.css" />
+        <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
+        <link rel="stylesheet" href="js/jquery.mobile-1.4.2/jquery.mobile.structure-1.4.2.min.css" />
+        <style>
+            .roadsign-picture {
+                background:url('img/roadsign.png') center no-repeat;
+            }
+        </style>
+    </head>
+    <body>
+        
+        <!-- roadSignStep0Page -->
+        <div data-role="page" id="roadSignStep0Page"></div>
+        <!-- /roadSignStep0Page -->
+        
+        <!-- roadSignStep1Page -->
+        <div data-role="page" id="roadSignStep1Page"></div>
+        <!-- /roadSignStep1Page -->
+        
+    	<!-- roadSignStep2Page -->
+	
+    	<div data-role="page" id='roadSignStep2Page'>
+            
+    		<div data-role="header" class="header" data-position="fixed">
+                <a href="#" data-rel="back" class="ui-btn ui-btn-icon-left ui-btn-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-back ui-alt-icon ui-nodisc-icon"></a>
+                <a href="index.html" id="homeButton" rel="external" class=" ui-btn-right ui-icon-toolbar-button toolbar-button-home ui-btn ui-btn-icon-left ui-nodisc-icon ui-btn-icon-notext">Home</a>
+				<h1>Segnaletica</h1>
+				<div style="padding-top:0.2em">
+					<a style="width: 100%; float:right;" href="#" id="addRoadSignButton" class="ui-btn ui-car ui-icon-plus ui-btn-icon-left  ui-nodisc-icon ">						
+						Aggiungi cartello
+						<img src="img/add_car.png" style="max-width: 3em; float: right; width: 2em;">
+					</a>
+				</div>  
+			</div>
+            
+			<div data-role="main" class="ui-content">
+
+                <div id="roadSignContainer" data-role="collapsible-set" data-collapsed="true" data-theme="b"></div>
+                <!--
+                <div id="startMessage" style="border:solid 1px #000;padding: 10px;text-align:center;position:relative;background-color:#fff">
+                    <div style="background:url('img/carat-u-black.png');position:absolute;width:15px;height:15px;top:-9px;right:-1px;"></div>
+                    Aggiungi un cartello
+                </div> -->
+                <!--
+                <ul data-role="listview" data-inset="true">
+                    <li><a href="#roadSignStep3Page" data-transition="slide" class="next-step --ui-disabled" data-step="2">Avanti</a></li>
+                </ul>
+                -->
+            </div>
+            <div data-role="footer" class="footer"  data-position="fixed" align="center" style="background:none !important; background-color: #f2f2f2 !important;">
+                <div style="line-height:25px;  color:#0086cc;">3 di 4</div>
+                <a href="#" class="button-next next-step" data-step="2">AVANTI</a>
+            </div>
+    	</div>
+    	<!-- /roadSignStep2Page -->
+        
+        
+        
+        
+        <!-- roadSignStep3Page -->
+        <div data-role="page" id="roadSignStep3Page">
+            <div data-role="header" class="header" data-position="fixed">
+                <a href="#" data-rel="back" class="ui-btn ui-btn-icon-left ui-btn-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-back ui-alt-icon ui-nodisc-icon"></a>
+                <a href="index.html" id="homeButton" rel="external" class="ui-icon-toolbar-button toolbar-button-home ui-btn ui-btn-icon-left ui-nodisc-icon ui-btn-icon-notext">Home</a>
+				<h1>Segnaletica</h1>
+            </div>
+            <div data-role="main" class="ui-content">                
+                <div data-role="collapsible-set" data-collapsed="true">
+                    <div data-role="collapsible" data-collapsed="true" 
+                         data-collapsed-icon="carat-r" data-expanded-icon="carat-d">
+                        <h1>
+                            Pali e staffe
+                        </h1>
+                        <ul data-role="listview" data-theme="b">
+                            <li>
+                                <label for="totPoles">Numero pali</label>
+                                <input type="number" id="totPoles" min="0" />
+                            </li>
+                            <li>
+                                <label for="poleDiameter">Diametro pali in mm</label>
+                                <select id="poleDiameter"></select>
+                            </li>
+                            <li>
+                                <label for="poleHeight">Altezza dei pali in mm</label>
+                                <input type="number" id="poleHeight" placeholder="Altezza pali" min="0" />
+                            </li>
+                            <li>
+                                <label for="totBrackets">Numero staffe monofacciali</label>
+                                <input type="number" id="totBrackets" min="0" />
+                            </li>
+                            <li>
+                                <label for="totBrackets2">Numero staffe bifacciali</label>
+                                <input type="number" id="totBrackets2" min="0" />
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div data-role="collapsible" data-collapsed="true" 
+                         data-collapsed-icon="carat-r" data-expanded-icon="carat-d">
+                        <h1>
+                            Pali e staffe controvento
+                        </h1>
+                        <ul data-role="listview" data-theme="b">
+                            <li>
+                                <label for="totUpwindPoles">Numero pali controvento</label>
+                                <input type="number" id="totUpwindPoles" min="0" />
+                            </li>
+                            <li>
+                                <label for="upwindPoleDiameter">Diametro pali controvento in mm</label>
+                                <select id="upwindPoleDiameter"></select>
+                            </li>
+                            <li>
+                                <label for="upwindPoleHeight">Altezza dei pali controvento in mm</label>
+                                <input type="number" id="upwindPoleHeight" min="0" placeholder="Altezza pali" />
+                            </li>
+                            <li>
+                                <label for="totUpwindBrackets">Numero staffe monofacciali</label>
+                                <input type="number" id="totUpwindBrackets" min="0" />
+                            </li>
+                            <li>
+                                <label for="totUpwindBrackets2">Numero staffe bifacciali</label>
+                                <input type="number" id="totUpwindBrackets2" min="0" />
+                            </li>
+                            <li>
+                                <label for="totUpwindBrackets3">Numero staffe controvento</label>
+                                <input type="number" id="totUpwindBrackets3" min="0" />
+                            </li>
+                        </ul>                        
+                    </div>                    
+                </div>
+            </div>
+            <div data-role="footer" class="footer"  data-position="fixed" align="center" style="background:none !important; background-color: #f2f2f2 !important;">
+                <div style="line-height:25px; color:#0086cc;">4 di 4</div>
+                <a href="#" id="saveButton" class="button-confirm next-step" data-step="3">SALVA</a>
+            </div>
+        </div>
+        <!-- /roadSignStep3Page -->
+        
+        
+        <div data-role="page" id="summaryPage"></div>
+        
+        
+        
+        <!-- ### DIALOGS ### -->
+        
+        <!-- mapPage -->
+        <div data-role="page" _data-dialog="true" _data-fullscreen="true" id="mapPage">
+            <div data-role="header" class="header" data-position="fixed">
+                <a href="javascript:app.closeMap(false)" class="ui-btn ui-btn-icon-left ui-btn-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-back ui-alt-icon ui-nodisc-icon">Annulla</a>
+				<h1>Mappa</h1>
+                <a href="javascript:app.closeMap(true)" class="ui-btn ui-corner-all ui-icon-check ui-btn-icon-left ui-btn-icon-notext ui-shadow ui-corner-all">Conferma</a>
+			</div>
+            <div data-role="main" cclass="ui-content" >
+                <div id="map"></div>
+            </div>
+            <!-- <div data-role="footer" class="footer"  data-position="fixed"></div> -->
+        </div>
+        <!-- /mapPage -->
+        
+        <!-- roadSignFinder -->
+        <div data-role="dialog" id="roadSignFinder">
+            <div data-role="header" class="header"><h1>Ricerca segnale</h1></div>
+            <div data-role="main" class="ui-content">
+                <select id="roadSignShapeList" data-theme="b" disabled></select>
+                <input type="search" id="searchRoadSignText" data-theme="b" data-mini="true" placeholder="Nome segnale o codice" />
+                <div data-role="controlgroup" data-type="horizontal" data-theme="b" sstyle="float:right;display:block;">
+                    <a href="javascript:app.closeRoadSignFinder()" class="ui-btn ui-icon-back ui-btn-icon-right" data-mini="true" data-theme="c">Chiudi</a>
+                    <a href="javascript:app.searchRoadSign()" class="ui-btn ui-icon-search ui-btn-icon-right" data-mini="true">Cerca</a>
+                </div>
+                <ul data-role="listview" id="roadSignList" data-inset="true">
+                </ul>
+            </div>
+        </div>
+        <!-- /roadSignFinder -->
+        
+        
+        <!-- listDialog -->
+        <div data-role="dialog" id="listDialog">
+            <div data-role="header" class="header"><h1 class="title"></h1></div>
+            <div data-role="main" class="ui-content">
+                <ul data-role="listview" data-inset="true"></ul>
+            </div>
+        </div>
+        <!-- /listDialog -->
+        
+        
+        <!-- roadSignManufacturerPage -->
+        <div data-role="dialog" id="roadSignManufacturerPage">
+            <div data-role="header" class="header"><h1>Produzione</h1></div>
+            <div data-role="main" _class="ui-content">
+                <ul data-role="listview" data-theme="b">
+                    <li>
+                        <label for="roadSignManufacturerName">Azienda produttrice</label>
+                        <input type="text" id="roadSignManufacturerName" placeholder="Nome azienda" />
+                    </li>
+                    <li>
+                        <label for="roadSignManufacturerNo">Numero autorizzazione</label>
+                        <input type="text" id="roadSignManufacturerNo" placeholder="Autorizzazione azienda" />
+                    </li>
+                    <li>
+                        <label for="roadSignManufacturerYear">Anno produzione</label>
+                        <input type="number" id="roadSignManufacturerYear" placeholder="Anno produzione" />
+                    </li>
+                </ul>
+                <div data-role="controlgroup" data-theme="b" data-type="horizontal" _align="center" style="float:right;display:block;">
+                    <a href="javascript:app.closeRoadSignManufacturerPanel()" class="ui-btn ui-icon-back ui-btn-icon-right" data-mini="true" data-theme="c">Chiudi</a>
+                    <a href="javascript:app.setRoadSignManufacturer()" class="ui-btn ui-icon-check ui-btn-icon-right" data-mini="true">Conferma</a>
+                </div>
+            </div>
+        </div>
+        <!-- /roadSignManufacturerPage -->
+        
+        <!-- roadSignInstallerPage -->
+        <div data-role="dialog" id="roadSignInstallerPage">
+            <div data-role="header" class="header"><h1>Installazione</h1></div>
+            <div data-role="main" _class="ui-content">
+                <ul data-role="listview" data-theme="b">
+                    <li>
+                        <label for="roadSignInstallerName">Azienda installatrice</label>
+                        <input type="text" id="roadSignInstallerName" placeholder="Nome azienda" />
+                    </li>
+                    <li>
+                        <label for="roadSignInstallationDate">Anno installazione</label>
+                        <input type="text" id="roadSignInstallationDate" placeholder="Anno installazione" />
+                    </li>
+                </ul>
+                <div data-role="controlgroup" data-theme="b" data-type="horizontal" _align="center" style="float:right;display:block;">
+                    <a href="javascript:app.closeRoadSignInstallerPanel()" class="ui-btn ui-icon-back ui-btn-icon-right" data-mini="true" data-theme="c">Chiudi</a>
+                    <a href="javascript:app.setRoadSignInstaller()" class="ui-btn ui-icon-check ui-btn-icon-right" data-mini="true">Conferma</a>
+                </div>
+            </div>
+        </div>
+        <!-- /roadSignInstallerPage -->
+        
+        <!-- roadSignOwnerPage -->
+        <div data-role="dialog" id="roadSignOwnerPage">
+            <div data-role="header" class="header"><h1>Proprietario</h1></div>
+            <div data-role="main" _class="ui-content">
+                <ul data-role="listview" data-theme="b">
+                    <li>
+                        <label for="roadSignOwnerName">Ente proprietario</label>
+                        <input type="text" id="roadSignOwnerName" placeholder="Nome proprietario" />
+                    </li>
+                </ul>
+                <div data-role="controlgroup" data-theme="b" data-type="horizontal" _align="center" style="float:right;display:block;">
+                    <a href="javascript:app.closeRoadSignOwnerPanel()" class="ui-btn ui-icon-back ui-btn-icon-right" data-mini="true" data-theme="c">Chiudi</a>
+                    <a href="javascript:app.setRoadSignOwner()" class="ui-btn ui-icon-check ui-btn-icon-right" data-mini="true">Conferma</a>
+                </div>
+            </div>
+        </div>
+        <!-- /roadSignOwnerPage -->
+        
+        <!-- roadSignOrdinancePage -->
+        <div data-role="dialog" id="roadSignOrdinancePage">
+            <div data-role="main" _class="ui-content">
+                <ul data-role="listview" data-theme="b" data-inset="false">
+                    <li>
+                        <label for="roadSignOrdinanceNo">Ordinanza</label>
+                        <input type="text" id="roadSignOrdinanceNo" placeholder="Ordinanza n." />
+                    </li>
+                    <li>
+                        <label for="roadSignOrdinanceDate">del</label>
+                        <input type="date" id="roadSignOrdinanceDate" data-clear-btn="true" />
+                    </li>
+                </ul>
+                <div data-role="controlgroup" data-theme="b" data-type="horizontal" _align="center" style="float:right;display:block;">
+                    <a href="javascript:app.closeRoadSignOrdinancePanel()" class="ui-btn ui-icon-back ui-btn-icon-right" data-mini="true" data-theme="c">Chiudi</a>
+                    <a href="javascript:app.setRoadSignOrdinance()" class="ui-btn ui-icon-check ui-btn-icon-right" data-mini="true">Conferma</a>
+                </div>
+            </div>
+        </div>
+        <!-- /roadSignOrdinancePage -->
+        
+        <script src="phonegap.js"></script>
+        <script src="js/jquery-2.1.0.min.js"></script>
+        <script src="js/jquery.mobile-1.4.2/jquery.mobile-1.4.2.min.js"></script>
+        <script src="js/common/page.injector.js"></script>
+        <script src="js/common/config.js"></script>
+        <script src="js/common/helper.js"></script>
+        <script src="js/common/barcodeReader.js"></script>
+        <script src="js/common/geoLocation.js"></script>
+        <script src="js/common/camera.js"></script>
+        <script src="js/common/auth.js"></script>
+        <script src="js/common/services.js"></script>
+        <script src="js/data/data.js"></script>
+        <script src="js/data/census.js"></script>
+        <script src="js/data/census.roadsign.js"></script>
+        <script src="js/apps/census.roadsign.js"></script>
+        <script src="js/apps/census.common.js"></script>
+        <script>
+            app.initialize();
+        </script>
+    </body>
+</html>

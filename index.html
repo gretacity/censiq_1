@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, target-densitydpi=medium-dpi" />
+		<title>CensiQ</title>
+        
+        <!--
+        <link rel="stylesheet" href="js/jquery.mobile-1.4.2/jquery.mobile-1.4.2.min.css" />
+        -->
+        
+        <link rel="stylesheet" href="css/themes/q.min.css" />
+        <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
+        <link rel="stylesheet" href="js/jquery.mobile-1.4.2/jquery.mobile.structure-1.4.2.min.css" />
+        
+    </head>
+    <body>
+        <!-- index page -->
+    	<div data-role="page" id="indexPage">
+            
+    		<div data-role="header" class="header" data-position="fixed">
+				<h1>CensiQ</h1>
+                <a href="#settingsPage" data-transition="slideup" class="ui-btn ui-btn-right ui-icon-toolbar-button toolbar-button-option ui-btn-icon-right ui-alt-icon ui-nodisc-icon ui-btn-icon-notext"> Impostazioni</a>
+			</div>
+            
+			<div data-role="main" class="ui-content">
+				<center>
+					<p> Puoi avviare un censimento di beni comunali e segnaletica stradale e sincronizzarli in un secondo momento.
+					</p>
+				</center>
+				<div id="homeGrid" style="margin-top: 1.5em;">
+                    <div>
+                        <a href="#censusTypePage" id="censusButton" data-transition="slide" class="ui-btn uui-btn-primary ui-disabled">
+                            <img src="img/add.png" style="max-height:5em;" />
+                            <span id="reportingCount" class="ui-li-count-cust ui-li-count-reporting ui-li-count-home" style="display:none;"></span>
+                        </a>
+						<a href="synchronize.html" data-transition="slide" id="synchronizeButton" rel="external" class='ui-disabled ui-btn uui-btn-primary'>
+                        <img src="img/sync.png" style="max-height:5em;" />
+						<p style="margin: 0;"></p>
+					</a>
+                    </div>
+				</div>
+
+				<!--
+                <ul data-role="listview" data-inset="false" data-split-theme="b">
+                    <li data-role="divider">Operazioni</li>
+                    <li>
+                        <a href="#censusTypePage" id="censusButton" data-transition="slide" class="ui-disabled">
+                            <h2>Censisci</h2>
+                            <p>Avvia il censimento di beni comunali e segnaletica stradale.</p>
+                        </a>
+                        <a href="#censusTypePage" id="censusSideButton" data-transition="slide" class="ui-disabled">Censisci</a>
+                    </li>
+                    <li>
+                        <a href="synchronize.html" data-transition="slide" id="synchronizeButton" rel="external" class='ui-disabled'>
+                            <h2>Sincronizza</h2>
+                            <p>Non ci sono elementi da sincronizzare</p>
+                        </a>
+                        <a href="synchronize.html" data-transition="slide" id="synchronizeSideButton" rel="external" class="ui-disabled">Sincronizza</a>
+                    </li>
+                </ul>
+				-->
+                
+                <!-- database log -->
+                <div id="log" style="text-align:center;"></div>
+                
+            </div>
+            
+            <div data-role="footer" class="footer"  class="footer"  class="footer"data-position="fixed"></div>
+    	</div>
+    	<!-- /index page -->
+        
+        
+        <!-- censusTypePage -->
+        <div data-role="page" id='censusTypePage'>
+    		<div data-role="header" class="header" data-position="fixed">
+                <a href="#indexPage" data-transition="slide" data-direction="reverse" id="homeButton" class="ui-btn ui-btn-icon-left ui-btn-right ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-home ui-alt-icon ui-nodisc-icon">Home</a>
+				<h1>Censimento</h1>
+			</div>
+			<div data-role="main" class="ui-content">
+			<p>Scegli il tipo di censimento 1:
+			</p>
+                <ul data-role="listview" style="margin-top: 2em;">
+                    <li>
+                        <img src="img/Property.png" style="z-index:100; margin-top: 1em;">
+						<a href="census.cityasset.html"  style="text-align:center;height: 1em; line-height: 3.7em;" id="censusCityAssetButton" rel="external" data-transition="slide">Bene comunale
+						</a>
+                    </li>
+                    <li>
+                        <img src="img/road.png" style="z-index:100; margin-top: 1em;">
+						<a href="census.roadsign.html"  style="text-align:center;height: 1em; line-height: 3.7em;" id="censusRoadSignButton" rel="external" data-transition="slide">Segnaletica stradale
+						</a>
+                    </li>
+                    <li>
+                        <img src="img/guardrail.png" style="z-index:100; margin-top: 1em;">
+                            <a href="census.guardrail.html"  style="text-align:center;height: 1em; line-height: 3.7em;" id="censusCityAssetButton" rel="external" data-transition="slide">Guard rail
+						</a>
+                    </li>
+                </ul>
+            </div>
+            <div data-role="footer" class="footer"  class="footer"  data-position="fixed"></div>
+        </div>
+        <!-- /censusTypePage -->
+
+        <!-- settingsPage -->
+        <div data-role="page" id="settingsPage">
+            <div data-role="header" class="header" data-position="fixed">
+                <a href="#indexPage" data-transition="slideup" data-direction="reverse" id="homeButton" class="ui-btn ui-btn-icon-left ui-btn-right ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-home ui-alt-icon ui-nodisc-icon">Home</a>
+                <h1>Impostazioni</h1>
+            </div>
+            <div data-role="main" class="ui-content">
+                <!--<h2>Impostazioni</h2-->
+                <fieldset data-role="controlgroup">
+                    <legend><h2>Aggiornamento dati</h2></legend>
+                    <p id="lastUpdateInfo">Informazioni sull'ultimo aggiornamento effettuato</p>
+                    <a href="#" id="updateNowButton" class="ui-btn">Aggiorna adesso</a>
+                </fieldset>
+                <br />
+                <fieldset data-role="controlgroup">
+                    <legend><h2>Connettività</h2></legend>
+                    <p>Per le operazioni che necessitano di una connessione dati</p>
+                    <input type="checkbox" id="useWifiOnly" />
+                    <label for="useWifiOnly">Usa solo connessioni WIFI</a>
+                </fieldset>
+            </div>
+            <div data-role="footer" class="footer"  class="footer"  data-position="fixed"></div>
+        </div>
+        <!-- /settingsPage -->
+        
+        <script src="phonegap.js"></script>
+        <script src="js/jquery-2.1.0.min.js"></script>
+        <script src="js/jquery.mobile-1.4.2/jquery.mobile-1.4.2.min.js"></script>
+        <script src="js/common/config.js"></script>
+        <script src="js/common/helper.js"></script>
+        <script src="js/common/auth.js"></script>
+        <script src="js/common/services.js"></script>
+        <script src="js/data/data.js"></script>
+        <script src="js/apps/index.js"></script>
+        
+        <script>
+            app.initialize();
+        </script>
+    </body>
+</html>

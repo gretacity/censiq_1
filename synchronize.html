@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>CensiQ - Sincronizzazione</title>
+        <!--
+        <link rel="stylesheet" href="js/jquery.mobile-1.4.2/jquery.mobile-1.4.2.min.css" />
+        -->
+        <link rel="stylesheet" href="css/themes/q.min.css" />
+        <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
+        <link rel="stylesheet" href="js/jquery.mobile-1.4.2/jquery.mobile.structure-1.4.2.min.css" />
+    </head>
+    <body>
+        
+    	<!-- index page -->
+    	<div data-role="page" id='synchronizePage'>
+            <div data-role="header" class="header" data-position="fixed">
+                <a href="index.html" data-transition="slide" data-direction="reverse" id="homeButton" rel="external" class="ui-btn ui-btn-icon-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-home ui-alt-icon ui-nodisc-icon">Home</a>
+				<h1>Sincronizzazione</h1>
+                <img id="deleteButton" src="img/delete.png" class="ui-btn-right ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" style="height: 2.6em;width: 2.6em">
+				
+            </div>
+            <div data-role="main" class="ui-content">
+                <div id="log" style="text-align:center;padding-bottom: 2em;">log</div>
+                <ul id="itemList" data-role="listview" data-inset="false"></ul>
+            </div>
+            
+            <div data-role="footer" class="footer"  data-position="fixed" align="center" style="background:none !important; background-color: #f2f2f2 !important;">
+                <!--<div data-role="controlgroup" data-type="horizontal">-->
+                    <div id="progressContainer" align="left" style="display:none;padding:0;margin:0; color:#0086cc !important;">
+                        <span id="progressPercentage"></span> 
+                        <div style="padding:0;width:100%;height:5px;background-color:#00F; color:#00F !important;">
+                            <div id="progressIndicator" style="padding:0;width:0;height:5px;background-color:#0F0; color:#00F !important;"></div>
+                        </div>
+                    </div>
+                <a href="#" id="syncButton" class="button-confirm">SINCRONIZZA</a>
+                    <!--<a href="#" id="syncButton" class="ui-btn ui-btn-icon-notext ui-nodisc-icon"  style="display:block; border:none; margin: 0 auto;/* float: right; */background: url('img/sync.png') no-repeat center center;background-size: contain;height: 3em;width: 100%;"></a>
+                      -->
+                <!--</div>-->
+            </div>
+    	</div>
+    	<!-- /index page -->
+        
+        <script src="phonegap.js"></script>
+        <script src="js/jquery-2.1.0.min.js"></script>
+        <script src="js/jquery.mobile-1.4.2/jquery.mobile-1.4.2.min.js"></script>
+        <script src="js/common/config.js"></script>
+        <script src="js/common/helper.js"></script>
+        <script src="js/common/auth.js"></script>
+        <script src="js/common/services.js"></script>
+        <script src="js/data/data.js"></script>
+        <script src="js/data/census.js"></script>
+        <script src="js/data/census.cityasset.js"></script>
+        <script src="js/data/census.roadsign.js"></script>
+        <script src="js/data/census.guardrail.js"></script>
+        <script src="js/apps/synchronize.js"></script>
+        <script>
+            app.initialize();
+        </script>
+        
+    </body>
+</html>

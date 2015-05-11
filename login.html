@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>CensiQ - Login</title>
+        <!--
+        <link rel="stylesheet" href="js/jquery.mobile-1.4.2/jquery.mobile-1.4.2.min.css" >
+        -->
+        <link rel="stylesheet" href="css/themes/q.min.css" />
+        <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
+        <link rel="stylesheet" href="js/jquery.mobile-1.4.2/jquery.mobile.structure-1.4.2.min.css" />
+    </head>
+    <body>
+    	<!-- index page -->
+    	<div data-role="page" id='indexPage'>
+    		<div data-role="header" class="header">
+				<h1>Login</h1>
+			</div>
+			<div data-role="main" class="ui-content">
+                <ul data-role="listview" data-inset="true" data-theme="b">
+                    <li>
+                        <label for="username">Username</label>
+                        <input type="text" id="username" required />
+                    </li>
+                    <li>
+                        <label for="password">Password</label>
+                        <input type="password" id="password" required />
+                    </li>
+                    <li>
+                        <div data-role="controlgroup" data-type="horizontal">
+                            <a href="javascript:$.mobile.back();" id="cancelButton" class="ui-btn ui-icon-back ui-btn-icon-left">Annulla</a>
+                            <a href="#" id="loginButton" class="ui-btn ui-icon-check ui-btn-icon-left">Login</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div data-role="footer" class="footer" data-position="fixed" ></div>
+    	</div>
+    	<!-- /index page -->
+        
+        <script src="phonegap.js"></script>
+        <script src="js/jquery-2.1.0.min.js"></script>
+        <script src="js/jquery.mobile-1.4.2/jquery.mobile-1.4.2.min.js"></script>
+        <script src="js/common/config.js"></script>
+        <script src="js/common/helper.js"></script>
+        <script src="js/common/auth.js"></script>
+        <script src="js/apps/login.js"></script>
+        <script>
+            app.initialize();
+        </script>
+        
+    </body>
+</html>

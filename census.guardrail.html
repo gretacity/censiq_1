@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>CensiQ</title>
+        <!--
+        <link rel="stylesheet" href="js/jquery.mobile-1.4.2/jquery.mobile-1.4.2.min.css" >
+        -->
+        <link rel="stylesheet" href="css/themes/q.min.css" />
+        <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
+        <link rel="stylesheet" href="js/jquery.mobile-1.4.2/jquery.mobile.structure-1.4.2.min.css" />
+        <style>
+            .roadsign-picture {
+                background:url('img/roadsign.png') center no-repeat;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- elencoGuardrailPage -->
+        <div data-role="page" id='ElencoGuardrailPage'>
+            <div data-role="header" class="header" data-position="fixed">
+                <a href="index.html" data-transition="slide" data-direction="reverse" id="homeButton" rel="external" class="ui-btn ui-btn-icon-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-home ui-alt-icon ui-nodisc-icon">Home</a>
+				<h1>Guardrail</h1>
+                <img id="closeButton" src="img/close.png" class="ui-disabled ui-btn-right ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" style=" top: 4.5em; left:0.5em; height: 2.6em;width: 2.6em">
+                <img id="addButton" src="img/addpoint.png" class="ui-disabled ui-btn-right ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" style="top: 4.5em; height: 2.6em;width: 2.6em">
+                <img id="newButton" src="img/add_car.png" class="ui-btn-right ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" style="top: 4.5em; height: 2.6em;width: 2.6em; right: 3em;">
+                <img id="deleteButton" src="img/delete.png" class="ui-disabled ui-btn-right ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" style="height: 2.6em;width: 2.6em">
+
+            </div>
+            <div data-role="main" class="ui-content">
+                <div id="log" style="text-align:center;padding-bottom: 2em;">log</div>
+                <ul id="itemList" data-role="listview" data-inset="false"></ul>
+            </div>
+            
+            <div data-role="footer" class="footer"  data-position="fixed" align="center" style="background:none !important; background-color: #f2f2f2 !important;">
+                <!--<div data-role="controlgroup" data-type="horizontal">-->
+                    <div id="progressContainer" align="left" style="display:none;padding:0;margin:0; color:#0086cc !important;">
+                        <span id="progressPercentage"></span> 
+                        <div style="padding:0;width:100%;height:5px;background-color:#00F; color:#00F !important;">
+                            <div id="progressIndicator" style="padding:0;width:0;height:5px;background-color:#0F0; color:#00F !important;"></div>
+                        </div>
+                    </div>
+                <!--<a href="#" id="syncButton" class="button-confirm">SINCRONIZZA</a>-->
+                    <!--<a href="#" id="syncButton" class="ui-btn ui-btn-icon-notext ui-nodisc-icon"  style="display:block; border:none; margin: 0 auto;/* float: right; */background: url('img/sync.png') no-repeat center center;background-size: contain;height: 3em;width: 100%;"></a>
+                      -->
+                <!--</div>-->
+            </div>
+    	</div>
+        <!-- /elencoGuardrailPage -->
+        <!-- localizeGuardrailPage -->
+                <div data-role="page" id='localizeGuardrailPage'>
+            <div data-role="header" class="header" data-position="fixed">
+                <a href="#" data-rel="back" class="ui-btn ui-btn-icon-left ui-btn-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-back ui-alt-icon ui-nodisc-icon"></a>
+				<h1>Aggiungi punto</h1>
+            </div>
+            <div data-role="main" class="ui-content">
+                <ul data-role="listview" data-inset="false" data-theme="b">
+                    <li>
+                        <!-- <input type="hidden" id="inizio" value="2" /> -->
+                        <label for="parent">Qr Code Inizio </label>
+                        <input type="text" id="parent" readonly="readonly"/>
+                    </li>
+                    <li data-role="list-divider">
+                        <div>
+                            <img src="img/identificazione.png" class="ui-li-icon" style="width:2.5em; float:left;">
+                            <h2 style="margin: .65em 0 !important; float:left;"> Identificazione</h2>
+                        </div>
+                    </li>
+                    <li data-icon="camera">
+                        <a href="#" id="acquireQrCodePointButton">
+                            <label>Aquisisci da fotocamera</label>
+                        </a>
+                    </li>
+                    <li data-theme="b">
+                        <input type="text" id="qrCode_point" placeholder="QR code punto" />
+                    </li>
+                </ul>
+                <ul data-role="listview" data-inset="false" data-theme="b">
+                    <li data-role="list-divider">
+                        <div>
+                            <img src="img/localizzazione.png" class="ui-li-icon" style="width:2.5em; float:left;">
+                            <h2 style="margin: .65em 0 !important; float:left;"> Localizzazione</h2></div>
+                    </li>
+                    <li id="getCoordinatesPanelPoint" data-icon="refresh">
+                        <a href="#" id="getCoordinatesButtonPoint">
+                            <label id="geoStatusTitle">Ottieni</label>
+                        </a>
+                    </li>
+                    <li>
+                        <input type="hidden" id="latLng" />
+                        <label for="latLng">Latitudine, longitudine e altitudine</label>
+                        <p id="geoStatusText" style="white-space:normal;"></p>
+                    </li>
+
+
+                    <li id="openMapPanel" style="display:none;">
+                        <input type="hidden" id="positionIsCorrect" />
+                        <a href="#" id="openMapPageButton">
+                        <div>
+                                <img src="img/maps.png" class="ui-li-icon" style="width:2.5em; float:left;">
+                                <label>Perfeziona sulla mappa</label>
+                                <p id="correctPositionPanel" style="_font-size:1em;color:#d00;white-space: normal;">
+                                </p>
+                        </div>
+                        </a>
+                    </li>
+                    <li role="listdivider"></li>
+                                <li>
+                                    <label for="comune">Comune</label>
+                                    <input id="comune_point" placeholder="Comune" />
+                                </li>
+                                <li>
+                                    <label for="provincia">Provincia</label>
+                                    <input id="provincia_point" placeholder="Provincia" />
+                                </li>
+                                <li>
+                                    <label for="street">Strada / Via</label>
+                                    <input id="street_point" placeholder="Strada o via" />
+                                </li>
+                                <li>
+                                    <label for="streetNumber">Km / Civico</label>
+                                    <input id="streetNumber_point" placeholder="Km o numero civico" />
+                                </li>
+               </ul>
+            </div>
+            <div data-role="footer" class="footer"  data-position="fixed" align="center" style="background:none !important; background-color: #f2f2f2 !important;">
+                <!--<div data-role="controlgroup" data-type="horizontal">-->
+                <a href="#" id="saveButton" class="button-confirm next-step" data-step="3">SALVA</a>
+                <!--<a href="#" id="syncButton" class="button-confirm">SINCRONIZZA</a>-->
+                    <!--<a href="#" id="syncButton" class="ui-btn ui-btn-icon-notext ui-nodisc-icon"  style="display:block; border:none; margin: 0 auto;/* float: right; */background: url('img/sync.png') no-repeat center center;background-size: contain;height: 3em;width: 100%;"></a>
+                    -->
+                <!--</div>-->
+            </div>
+    	</div>
+        <!-- roadSignStep0Page -->
+        <div data-role="page" id="guardrailStep0Page"></div> 
+        <!-- /roadSignStep0Page -->
+        
+        <!-- roadSignStep1Page -->
+        <div data-role="page" id="guardrailStep1Page"></div>
+        <!-- /roadSignStep1Page -->
+     
+        <!-- roadSignStep2Page --> 
+        <div data-role="page" id="guardrailStep2Page">
+            <div data-role="header" class="header" data-position="fixed">
+                <a href="#" data-rel="back" class="ui-btn ui-btn-icon-left ui-btn-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-back ui-alt-icon ui-nodisc-icon"></a>
+                <a href="index.html" id="homeButton" rel="external" class="ui-icon-toolbar-button toolbar-button-home ui-btn ui-btn-icon-left ui-nodisc-icon ui-btn-icon-notext">Home</a>
+                    <h1> Guard Rail</h1>
+            </div>
+            <div data-role="main" class="ui-content">   
+                 <div data-role="collapsible-set" data-collapsed="true">
+                    <div data-role="collapsible" data-collapsed="true" 
+                         data-collapsed-icon="carat-r" data-expanded-icon="carat-d">
+                        <h1>
+                            Classificazione barriera
+                        </h1>
+                        <ul data-role="listview" data-theme="b">
+                            <li>
+                                <label for="classe">Classe</label>
+                                <select id="classe" data-theme="b"></select>
+                            </li>
+                            <li>
+                                <label for="spartitraffico">Spartitraffico</label>
+                                <select id="spartitraffico" data-theme="b"></select>
+                            </li>
+                            <li>
+                                <label for="pali">Altezza totale da piano viabile (m)</label>
+                                <input type="number" id="pianoVariabile" min="0" />
+                            </li>
+                            <li>
+                                <label for="tipologia">Tipologia</label>
+                                <select id="tipologia" data-theme="b"></select>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+                    <div data-role="collapsible" data-collapsed="true" 
+                         data-collapsed-icon="carat-r" data-expanded-icon="carat-d">
+                        <h1>
+                            Geometria della barriera
+                        </h1>
+                        <ul data-role="listview" data-theme="b">
+                            <li>
+                                <label for="fasce">Fasce orizzontali</label>
+                                <select id="fasce" data-theme="b"></select>
+                            </li>
+                            <li><h2>Paletti di sostegno</h2></li>
+                            <li>
+                                <label for="tipologiaPaletto">Tipologia paletto</label>
+                                <select id="tipologiaPaletto" data-theme="b"></select>
+                            </li>
+                            <li>
+                                <label for="sezione">Sezione paletto (m)</label>
+                                <input type="number" id="sezione" min="0" />
+                            </li>
+                            <li>
+                                <label for="interasse">Interasse paletto (m)</label>
+                                <input type="number" id="interasse" min="0" />
+                            </li>                           
+                            <li>
+                                <label for="ancoraggio">Ancoraggio</label>
+                                <select id="ancoraggio"></select>
+                            </li>
+                        </ul>                    
+                    </div>                    
+                </div>
+             
+            </div>                         
+            <div data-role="footer" class="footer"  data-position="fixed" align="center" style="background:none !important; background-color: #f2f2f2 !important;">
+                <div style="line-height:25px; color:#0086cc;">2 di 3</div>
+                <a href="#" class="button-next next-step" data-step="2">AVANTI</a>
+                
+            </div>
+        </div>
+         <!-- /roadSignStep2Page -->
+        
+        <!-- roadSignStep2Page 
+        <div data-role="page" id="guardrailStep2Page">
+            <div data-role="header" class="header" data-position="fixed">
+                <a href="#" data-rel="back" class="ui-btn ui-btn-icon-left ui-btn-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-back ui-alt-icon ui-nodisc-icon"></a>
+                <a href="index.html" id="homeButton" rel="external" class="ui-icon-toolbar-button toolbar-button-home ui-btn ui-btn-icon-left ui-nodisc-icon ui-btn-icon-notext">Home</a>
+                    <h1> Guard Rail</h1>
+            </div>
+            <div data-role="main" class="ui-content">                
+                 <div data-role="collapsible-set" data-collapsed="true">
+                    <div data-role="collapsible" data-collapsed="true" 
+                         data-collapsed-icon="carat-r" data-expanded-icon="carat-d">
+                        <h1>
+                            Tipo Smontaggio
+                        </h1>
+                        <ul data-role="listview" data-theme="b">
+                            <li>
+                                <label for="nastri">Numero nastri</label>
+                                <input type="number" id="nastri" min="0" />
+                            </li>
+                            <li>
+                                <label for="pali">Numero pali</label>
+                                <input type="number" id="pali" min="0" />
+                            </li>
+                            <li>
+                                <label for="terminali">Gruppi terminali</label>
+                                <input type="text" id="terminali" placeholder="Gruppo Termiali" />
+                            </li>
+                            <li>
+                                <label for="barriera">Tipologia Barriera</label>
+                                <select id="barriera" data-theme="b"></select>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div data-role="collapsible" data-collapsed="true" 
+                         data-collapsed-icon="carat-r" data-expanded-icon="carat-d">
+                        <h1>
+                            Tipo Montaggio
+                        </h1>
+                        <ul data-role="listview" data-theme="b">
+                            <li>
+                                <label for="Mnastri">Numero nastri</label>
+                                <input type="number" id="Mnastri" min="0" />
+                            </li>
+                            <li>
+                                <label for="Mpali">Numero pali</label>
+                                <input type="number" id="Mpali" min="0" />
+                            </li>
+                            <li>
+                                <label for="Mterminali">Gruppi terminali</label>
+                                <input type="text" id="Mterminali" placeholder="Gruppo Termiali" />
+                            </li>
+                            <li>
+                                <label for="Mbarriera">Tipologia Barriera</label>
+                                <select id="Mbarriera"></select>
+                            </li>
+                        </ul>                    
+                    </div>                    
+                </div>
+             
+            </div>                         
+            <div data-role="footer" class="footer"  data-position="fixed" align="center" style="background:none !important; background-color: #f2f2f2 !important;">
+                <div style="line-height:25px; color:#0086cc;">3 di 4</div>
+                <a href="#" class="button-next next-step" data-step="2">AVANTI</a>
+                
+            </div>
+        </div>
+         roadSignStep2Page -->
+        
+        <!-- roadSignStep3Page -->
+	
+    	<div data-role="page" id='guardrailStep3Page'>
+            
+        </div>
+    	<!-- /roadSignStep3Page -->
+        
+        <div data-role="page" id="summaryPage"></div>
+        
+        
+        
+        <!-- ### DIALOGS ### -->
+        
+        <!-- mapPage -->
+        <div data-role="page" _data-dialog="true" _data-fullscreen="true" id="mapPage">
+             <div data-role="header"  data-position="fixed">
+                <a href="javascript:app.closeMap(false)" class="ui-btn ui-btn-icon-left ui-btn-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-back ui-alt-icon ui-nodisc-icon">Annulla</a>
+				<h1>Mappa</h1>
+                <a href="javascript:app.closeMap(true)" class="ui-btn ui-corner-all ui-icon-check ui-btn-icon-left ui-btn-icon-notext ui-shadow ui-corner-all">Conferma</a>
+			</div>
+            <div data-role="main" _class="ui-content">
+                <div id="map" style="height:100%;"></div>
+            </div>
+            <!-- <div data-role="footer" class="footer"  data-position="fixed"></div> -->
+        </div>
+        <!-- /mapPage -->
+        
+        <!-- listDialog -->
+        <div data-role="dialog" id="listDialog">
+            <div data-role="header" class="header"><h1 class="title"></h1></div>
+            <div data-role="main" class="ui-content">
+                <ul data-role="listview" data-inset="true"></ul>
+            </div>
+        </div>
+        <!-- /listDialog -->
+        
+        
+        
+        <script src="phonegap.js"></script>
+        <script src="js/jquery-2.1.0.min.js"></script>
+        <script src="js/jquery.mobile-1.4.2/jquery.mobile-1.4.2.min.js"></script>
+        <script src="js/common/page.injector.js"></script>
+        <script src="js/common/config.js"></script>
+        <script src="js/common/helper.js"></script>
+        <script src="js/common/barcodeReader.js"></script>
+        <script src="js/common/geoLocation.js"></script>
+        <script src="js/common/camera.js"></script>
+        <script src="js/common/auth.js"></script>
+        <script src="js/common/services.js"></script>
+        <script src="js/data/data.js"></script>
+        <script src="js/data/census.js"></script>
+        <script src="js/data/census.guardrail.js"></script>
+        <script src="js/apps/census.guardrail.js"></script>
+        <script src="js/apps/census.common.js"></script>
+        <script>
+            app.initialize();
+        </script>
+    </body>
+</html>

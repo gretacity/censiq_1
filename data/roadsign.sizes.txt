@@ -1,0 +1,1 @@
+[{"id":"1","nome":"30 cm","formato":null,"base":null,"altezza":null}]
