@@ -4,6 +4,8 @@ ul.mainlist
   margin: 0 auto !important;
   list-style: none;
   padding: 0;
+  border-radius: 20px;
+  overflow: hidden;
 }
 
 ul.mainlist li

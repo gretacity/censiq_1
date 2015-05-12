@@ -213,7 +213,7 @@ var app = {
                 var row = result.rows.item(i);
                 if(row.entity_type==3)
                 {
-                    console.log("ROW",row);
+                    //console.log("ROW",row);
                     var obj = data.deserialize(row, row.entity_type);
                     if(obj.guardrail.guardrailInfo.inizio==1)
                     {    
