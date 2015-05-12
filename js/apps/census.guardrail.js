@@ -177,7 +177,19 @@ var app = {
             $.mobile.silentScroll(app.pageOffsetTop);
         });
     },
-    
+    showPoints: function(id)
+    {
+       
+        if($('#'+id).height()==0)
+        {
+            var height=$('#'+id).prop('scrollHeight');
+            $('#'+id).animate({height: height});
+        }
+        else
+        {
+            $('#'+id).animate({height: 0});
+        }    
+    },
     // deviceready Event Handler
     //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
@@ -190,43 +202,83 @@ var app = {
         
        
         //console.log("DATA FETCH",this);
+        //
+        
         data.fetch({status: [data.REC_STATUS_ADDED, data.REC_STATUS_SYNCH_ERROR]}, function(result) {
             //console.log("RESULT SYNC FETCH",result);
             var itemCount = result.rows.length;
             var html = '';
-            for(var i = 0; i < itemCount; i++) {
-                //console.log('itemcout',itemCount);
+            for(var i = 0; i < itemCount; i++) 
+            {
                 var row = result.rows.item(i);
-                //var obj = data.cityAsset.deserialize(row);
-                //console.log("OGGETTO Synch ",row); //row ha latitudine e longitudine
-                //console.log("TIPO=",row.entity_type);
-                if(row.entity_type==3){
+                if(row.entity_type==3)
+                {
                     console.log("ROW",row);
-                var obj = data.deserialize(row, row.entity_type);
-                //console.log("OBJ",obj);
-                var itemId = 'item' + obj.id;
-                var name = data.shortDescription(obj);
-                var qrCode = obj.qrCode;
-                var dateAdded = Date.parseFromYMDHMS(row.date_added).toDMYHMS();
-                html += '<li style="padding:0;' + (false ? 'background-color:#f00;' : '') + '">' + 
-                                                '<img onclick="app.deleteItems:(\''+obj.id+'\')" src="img/delete.png" style="float:right;margin-right:10px; height:30px;width: 30px">'+
+                    var obj = data.deserialize(row, row.entity_type);
+                    if(obj.guardrail.guardrailInfo.inizio==1)
+                    {    
+                        //console.log("OBJ",obj);
+                        var itemId = 'item' + obj.id;
+                        var name = data.shortDescription(obj);
+                        var qrCode = obj.qrCode;
+                        var dateAdded = Date.parseFromYMDHMS(row.date_added).toDMYHMS();
+                        html += '<li id="row'+qrCode+'" style="padding:0;' + (false ? 'background-color:#f00;' : '') + '">' + 
+                                '<img onclick="app.deleteItems:(\''+obj.id+'\')" src="img/delete.png" style="float:right;margin-right:10px; height:30px;width: 30px">'+
+                                '<img onclick="app.closeItems(\''+obj.id+'\')" src="img/close.png" style="float:right;margin-right:10px; height:30px;width: 30px">'+
+                                '<img onclick="app.updateItems(\''+obj.qrCode+'\')" src="img/add_car.png" style="float:right;margin-right:10px; height:30px;width: 30px">'+
 
-                        '<img onclick="app.closeItems(\''+obj.id+'\')" src="img/close.png" style="float:right;margin-right:10px; height:30px;width: 30px">'+
-                        '<img onclick="app.updateItems(\''+obj.qrCode+'\')" src="img/add_car.png" style="float:right;margin-right:10px; height:30px;width: 30px">'+
-                       
-                        //'<input type="checkbox" id="' + itemId + '" data-qrCode="'+obj.qrCode+'" data-id="' + obj.id + '"  onchange="app.countItemToGuardrail()" />' + 
-                        '<label for="' + itemId +'">' + CensusTypeNames[obj.entityType];
-                if(name != '') {
-                    html += '<br />' + name;
+                                //'<input type="checkbox" id="' + itemId + '" data-qrCode="'+obj.qrCode+'" data-id="' + obj.id + '"  onchange="app.countItemToGuardrail()" />' + 
+                                '<label for="' + itemId +'">' +obj.street +' >> '+obj.comune +' >> '+obj.provincia ;
+                        if(name != '')
+                        {
+                            html += '<br />' + name;
+                        }
+                        html += '<br /> codice ' + qrCode +
+                                '</label>' +
+                                '</li>';
+                    }
                 }
-                html += '<br /> codice ' + qrCode +
-                        '<br /> aggiunto il ' + dateAdded + '</label>' +
-                        '</li>';
-            }}
-        
+            }
+            
             $('#itemList').html(html);
-            $('#itemList').listview("refresh");
+            //$('#itemList').listview("refresh");
             $('#elencoGuardrailPage').trigger('create');
+            for(var i = 0; i < itemCount; i++) 
+            {
+                var row = result.rows.item(i);
+                if(row.entity_type==3)
+                {
+                    var obj = data.deserialize(row, row.entity_type);
+
+                    if(obj.guardrail.guardrailInfo.inizio!=1)
+                    {   
+                        var parent=$("#row"+obj.guardrail.guardrailInfo.parent);
+                        if($("#child"+obj.guardrail.guardrailInfo.parent,parent).length==0)
+                        {
+                            var txt='<div style="float:right">'+
+                                        '<div style="float:right;"><a style="text-decoration:none" href="javascript:app.showPoints(\'child'+obj.guardrail.guardrailInfo.parent+'\')">Punti</a></div>'+
+                                        '<ul id="child'+obj.guardrail.guardrailInfo.parent+'" class="mainlistChild"></ul>'+
+                                        
+                                    '</div>'        
+                            ;
+                            
+                            var child=$(txt);   
+                            child.appendTo(parent); 
+                        }
+                        var itemId = 'item' + obj.id;
+                        var name = data.shortDescription(obj);
+                        var txt= 
+                                '<li id="row'+obj.id+'" style="padding:0;' + (false ? 'background-color:#f00;' : '') + '">' + 
+                                'Punto '+($("#child"+obj.guardrail.guardrailInfo.parent+" li").length+1)+
+                                '<img onclick="app.deleteItems:(\''+obj.id+'\')" src="img/delete.png" style="vertical-align:middle;float:right;margin-left:10px; height:25px;width: 25px">'+
+                                '</li>';
+                        var row_c=$(txt);
+                        row_c.appendTo($("#child"+obj.guardrail.guardrailInfo.parent));
+                       
+                       
+                    }
+                }
+            }
            
  
         });

@@ -210,7 +210,7 @@ data.guardrail = {
         ];
     },
     
-        getGuardrailTipologia: function() {
+    getGuardrailTipologia: function() {
         return [
             {name: 'Metallica (alluminio,acciaio)'},
             {name: 'Misto (legno-metallo)'},
@@ -275,11 +275,14 @@ data.guardrail = {
     },
     
     returnSQLArray: function (str,callback) {
+        
         if(data._db == null) data.open();
         var result = [];
+        console.log(str);
         data._db.transaction(
                 function (tx, results) {
                     tx.executeSql(str, [], function(tx, rs) { 
+                        console.log("---+++++++++++++");
                         for(var i=0; i<rs.rows.length; i++) {
                             var row = rs.rows.item(i);
                             console.log("ROW",row);
