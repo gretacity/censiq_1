@@ -222,7 +222,7 @@ var app = {
                         var qrCode = obj.qrCode;
                         var dateAdded = Date.parseFromYMDHMS(row.date_added).toDMYHMS();
                         html += '<li id="row'+qrCode+'" style="padding:0;' + (false ? 'background-color:#f00;' : '') + '">' + 
-                                '<img onclick="app.deleteItems:(\''+obj.id+'\')" src="img/delete.png" style="float:right;margin-right:10px; height:30px;width: 30px">'+
+                                '<img onclick="app.deleteItems(\''+obj.qrCode+'\')" src="img/delete.png" style="float:right;margin-right:10px; height:30px;width: 30px">'+
                                 '<img onclick="app.closeItems(\''+obj.id+'\')" src="img/close.png" style="float:right;margin-right:10px; height:30px;width: 30px">'+
                                 '<img onclick="app.updateItems(\''+obj.qrCode+'\')" src="img/add_car.png" style="float:right;margin-right:10px; height:30px;width: 30px">'+
                                  
@@ -269,7 +269,7 @@ var app = {
                         var txt= 
                                 '<li id="row'+obj.id+'" style="padding:0;' + (false ? 'background-color:#f00;' : '') + '">' + 
                                 'Punto '+($("#child"+obj.guardrail.guardrailInfo.parent+" li").length+1)+
-                                '<img onclick="app.deleteItems:(\''+obj.id+'\')" src="img/delete.png" style="vertical-align:middle;float:right;margin-left:10px; height:25px;width: 25px">'+
+                                '<img onclick="app.deleteItems(\''+obj.id+'\')" src="img/delete.png" style="vertical-align:middle;float:right;margin-left:10px; height:25px;width: 25px">'+
                                 '</li>';
                         var row_c=$(txt);
                         row_c.appendTo($("#child"+obj.guardrail.guardrailInfo.parent));
@@ -335,7 +335,7 @@ var app = {
             if(buttonIndex == 1) {
               
                 
-                    var liElem = $(this).parents('li');
+                    var liElem = $('#row'+itemId);
                     data.delete(itemId, function() {
                         liElem.remove();
                     

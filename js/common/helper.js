@@ -51,6 +51,7 @@ var helper = {
     },
     
     confirm: function(message, callback, title, buttonLabels)  {
+       
         if(config.EMULATE_ON_BROWSER) {
             var result = confirm(message);
             if(callback != null) {
