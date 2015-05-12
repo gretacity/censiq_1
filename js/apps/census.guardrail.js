@@ -114,19 +114,8 @@ var app = {
         document.addEventListener('deviceready', this.onDeviceReady, false);
         // Force onDeviceReady if it's a browser
         if(config.EMULATE_ON_BROWSER) this.onDeviceReady();
-        $('#closeButton').on('click', app.closeItems); 
-        $('#deleteButton').on('click', app.deleteItems);
-        $('#addButton').on('click', function(){
-            $('#itemList li input[type="checkbox"]:checked').each(function() {
-                var qrCode = $(this).attr("data-qrCode");
-                 $('#parent','#localizeGuardrailPage').val(qrCode);
-            });
-            $.mobile.changePage('#localizeGuardrailPage', {
-                transition: 'slide',
-                reverse: false,
-                changeHash: false
-                });
-        });
+        //$('#closeButton').on('click', app.closeItems); 
+        //$('#deleteButton').on('click', app.deleteItems);
         $pageAdd = $('#localizeGuardrailPage');
         $('#acquireQrCodePointButton', $pageAdd).on('click', this.acquireQrCodePoint);
         $('#getCoordinatesPanelPoint', $pageAdd).on('click', this.acquireGeoCoordinatesPoint);
@@ -221,14 +210,17 @@ var app = {
                 var qrCode = obj.qrCode;
                 var dateAdded = Date.parseFromYMDHMS(row.date_added).toDMYHMS();
                 html += '<li style="padding:0;' + (false ? 'background-color:#f00;' : '') + '">' + 
-                        '<input type="checkbox" id="' + itemId + '" data-qrCode="'+obj.qrCode+'" data-id="' + obj.id + '"  onchange="app.countItemToGuardrail()" />' + 
+                        //'<input type="checkbox" id="' + itemId + '" data-qrCode="'+obj.qrCode+'" data-id="' + obj.id + '"  onchange="app.countItemToGuardrail()" />' + 
                         '<label for="' + itemId +'">' + CensusTypeNames[obj.entityType];
                 if(name != '') {
                     html += '<br />' + name;
                 }
                 html += '<br /> codice ' + qrCode +
                         '<br /> aggiunto il ' + dateAdded + '</label>' +
-                        '</li>';
+                        '<img onclick="app.closeItems(\''+obj.id+'\')" src="img/close.png" class="ui-btn-right ui-btn-icon-notext" style=" right:80px; height:44px;width: 44px">'+
+                        '<img onclick="app.updateItems(\''+obj.qrCode+'\')" src="img/add_car.png" class="ui-btn-right ui-btn-icon-notext" style=" right:160px; height:44px;width: 44px">'+
+                        '<img onclick="app.deleteItems:(\''+obj.id+'\')" src="img/delete.png" class="ui-btn-right ui-btn-icon-notext" style=" right:0.5em; height: 44px;width: 44px">'+
+                       '</li>';
             }}
         
             $('#itemList').html(html);
@@ -267,20 +259,29 @@ var app = {
         }
         console.log('Received Event: ' + id);
     },
-    closeItems: function(){
-                $('#itemList li input[type="checkbox"]:checked').each(function() {
-                    //console.log("QUI",$('#itemList li'));
-                    var itemId = $(this).attr("data-id");
-                    //console.log("ID",itemId);
-                    var liElem = $(this).parents('li');
-                    data.close(itemId);
-                });
+    closeItems: function(itemId)
+    {
+        data.close(itemId);
     },
 
-    deleteItems: function() {
+
+    updateItems: function(qrCode){
+           
+            $('#parent','#localizeGuardrailPage').val(qrCode);
+            $.mobile.changePage('#localizeGuardrailPage', {
+                transition: 'slide',
+                reverse: false,
+                changeHash: false
+                });
+        },
+        
+
+
+
+    deleteItems: function(itemId) {
         helper.confirm('Eliminare in modo definitivo gli elementi selezionati?', function(buttonIndex) {
             if(buttonIndex == 1) {
-                //app.lockUI();
+              
                 $('#itemList li input[type="checkbox"]:checked').each(function() {
                     var itemId = $(this).attr("data-id");
                     var liElem = $(this).parents('li');
@@ -389,24 +390,7 @@ var app = {
         $logPanel = $('#log');
         $logPanel.html((allItems == 0) ? 'Nessun elemento.'
                                        : itemToGuardrail + ' ' + ' di ' + allItems + ' elementi ');
-        if(itemToGuardrail == 1) {
-            $('#closeButton').removeClass('ui-disabled');
-            $('#deleteButton').removeClass('ui-disabled');
-            $('#newButton').removeClass('ui-disabled');
-            
-            
-        }else if(false){
-            $('#addButton').removeClass('ui-disabled');
         
-        } else if(itemToGuardrail > 1 ) {
-            $('#closeButton').addClass('ui-disabled');
-            $('#addButton').addClass('ui-disabled');
-            $('#newButton').addClass('ui-disabled');
-        }else if(itemToGuardrail == 0 ) {
-            $('#closeButton').addClass('ui-disabled');
-            $('#deleteButton').addClass('ui-disabled');
-            $('#addButton').addClass('ui-disabled');
-        }
     },
     save: function() {
         var supportTableData = {grcen: []};
