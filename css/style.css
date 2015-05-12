@@ -3,6 +3,7 @@ ul.mainlist
   width: 95% !important;
   margin: 0 auto !important;
   list-style: none;
+  padding: 0;
 }
 
 ul.mainlist li

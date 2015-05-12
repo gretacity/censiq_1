@@ -209,10 +209,10 @@ var app = {
                 var qrCode = obj.qrCode;
                 var dateAdded = Date.parseFromYMDHMS(row.date_added).toDMYHMS();
                 html += '<li style="padding:0;' + (false ? 'background-color:#f00;' : '') + '">' + 
-                                                '<img onclick="app.deleteItems:(\''+obj.id+'\')" src="img/delete.png" style="float:right;margin-right:10px; height:35px;width: 35px">'+
+                                                '<img onclick="app.deleteItems:(\''+obj.id+'\')" src="img/delete.png" style="float:right;margin-right:10px; height:30px;width: 30px">'+
 
-                        '<img onclick="app.closeItems(\''+obj.id+'\')" src="img/close.png" style="float:right;margin-right:10px; height:35px;width: 35px">'+
-                        '<img onclick="app.updateItems(\''+obj.qrCode+'\')" src="img/add_car.png" style="float:right;margin-right:10px; height:35px;width: 35px">'+
+                        '<img onclick="app.closeItems(\''+obj.id+'\')" src="img/close.png" style="float:right;margin-right:10px; height:30px;width: 30px">'+
+                        '<img onclick="app.updateItems(\''+obj.qrCode+'\')" src="img/add_car.png" style="float:right;margin-right:10px; height:30px;width: 30px">'+
                        
                         //'<input type="checkbox" id="' + itemId + '" data-qrCode="'+obj.qrCode+'" data-id="' + obj.id + '"  onchange="app.countItemToGuardrail()" />' + 
                         '<label for="' + itemId +'">' + CensusTypeNames[obj.entityType];
