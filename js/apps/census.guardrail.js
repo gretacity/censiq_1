@@ -188,8 +188,7 @@ var app = {
         
         // For Android devices
         
-        $logPanel = $('#log');
-        $logPanel.html('Recupero elementi da visualizzare...');
+       
         //console.log("DATA FETCH",this);
         data.fetch({status: [data.REC_STATUS_ADDED, data.REC_STATUS_SYNCH_ERROR]}, function(result) {
             //console.log("RESULT SYNC FETCH",result);
@@ -210,6 +209,11 @@ var app = {
                 var qrCode = obj.qrCode;
                 var dateAdded = Date.parseFromYMDHMS(row.date_added).toDMYHMS();
                 html += '<li style="padding:0;' + (false ? 'background-color:#f00;' : '') + '">' + 
+                                                '<img onclick="app.deleteItems:(\''+obj.id+'\')" src="img/delete.png" style="float:right;margin-right:10px; height:35px;width: 35px">'+
+
+                        '<img onclick="app.closeItems(\''+obj.id+'\')" src="img/close.png" style="float:right;margin-right:10px; height:35px;width: 35px">'+
+                        '<img onclick="app.updateItems(\''+obj.qrCode+'\')" src="img/add_car.png" style="float:right;margin-right:10px; height:35px;width: 35px">'+
+                       
                         //'<input type="checkbox" id="' + itemId + '" data-qrCode="'+obj.qrCode+'" data-id="' + obj.id + '"  onchange="app.countItemToGuardrail()" />' + 
                         '<label for="' + itemId +'">' + CensusTypeNames[obj.entityType];
                 if(name != '') {
@@ -217,10 +221,7 @@ var app = {
                 }
                 html += '<br /> codice ' + qrCode +
                         '<br /> aggiunto il ' + dateAdded + '</label>' +
-                        '<img onclick="app.closeItems(\''+obj.id+'\')" src="img/close.png" class="ui-btn-right ui-btn-icon-notext" style=" right:80px; height:44px;width: 44px">'+
-                        '<img onclick="app.updateItems(\''+obj.qrCode+'\')" src="img/add_car.png" class="ui-btn-right ui-btn-icon-notext" style=" right:160px; height:44px;width: 44px">'+
-                        '<img onclick="app.deleteItems:(\''+obj.id+'\')" src="img/delete.png" class="ui-btn-right ui-btn-icon-notext" style=" right:0.5em; height: 44px;width: 44px">'+
-                       '</li>';
+                        '</li>';
             }}
         
             $('#itemList').html(html);

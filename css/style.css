@@ -2,6 +2,7 @@ ul.mainlist
 {
   width: 95% !important;
   margin: 0 auto !important;
+  list-style: none;
 }
 
 ul.mainlist li
