@@ -1,0 +1,8 @@
+li.button
+{
+    width: 70% !important;
+    margin: 0 auto !important;
+    border-radius: 20px !important;
+    overflow: hidden !important;
+    margin-bottom: 10px !important;
+}

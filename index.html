@@ -10,7 +10,7 @@
         <!--
         <link rel="stylesheet" href="js/jquery.mobile-1.4.2/jquery.mobile-1.4.2.min.css" />
         -->
-        
+        <link rel="stylesheet" href="css/style.css" />
         <link rel="stylesheet" href="css/themes/q.min.css" />
         <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
         <link rel="stylesheet" href="js/jquery.mobile-1.4.2/jquery.mobile.structure-1.4.2.min.css" />
@@ -80,23 +80,29 @@
 				<h1>Censimento</h1>
 			</div>
 			<div data-role="main" class="ui-content">
-			<p>Scegli il tipo di censimento 1:
+			<p>Scegli il tipo di censimento :
 			</p>
                 <ul data-role="listview" style="margin-top: 2em;">
-                    <li>
-                        <img src="img/Property.png" style="z-index:100; margin-top: 1em;">
-						<a href="census.cityasset.html"  style="text-align:center;height: 1em; line-height: 3.7em;" id="censusCityAssetButton" rel="external" data-transition="slide">Bene comunale
-						</a>
+                    <li class="button">
+                       
+                            <img src="img/Property.png" style="z-index:100; margin-top: 1em;">
+                            <a href="census.cityasset.html"  style="text-align:center;height: 1em; line-height: 3.7em;" id="censusCityAssetButton" rel="external" data-transition="slide">Bene comunale
+                            </a>
+                       
                     </li>
-                    <li>
+                    <li class="button">
+                  
                         <img src="img/road.png" style="z-index:100; margin-top: 1em;">
 						<a href="census.roadsign.html"  style="text-align:center;height: 1em; line-height: 3.7em;" id="censusRoadSignButton" rel="external" data-transition="slide">Segnaletica stradale
 						</a>
+                        
                     </li>
-                    <li>
+                    <li class="button">
+                    
                         <img src="img/guardrail.png" style="z-index:100; margin-top: 1em;">
                             <a href="census.guardrail.html"  style="text-align:center;height: 1em; line-height: 3.7em;" id="censusCityAssetButton" rel="external" data-transition="slide">Guard rail
 						</a>
+                      
                     </li>
                 </ul>
             </div>
