@@ -228,74 +228,7 @@
         </div>
          <!-- /roadSignStep2Page -->
         
-        <!-- roadSignStep2Page 
-        <div data-role="page" id="guardrailStep2Page">
-            <div data-role="header" class="header" data-position="fixed">
-                <a href="#" data-rel="back" class="ui-btn ui-btn-icon-left ui-btn-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-back ui-alt-icon ui-nodisc-icon"></a>
-                <a href="index.html" id="homeButton" rel="external" class="ui-icon-toolbar-button toolbar-button-home ui-btn ui-btn-icon-left ui-nodisc-icon ui-btn-icon-notext">Home</a>
-                    <h1> Guard Rail</h1>
-            </div>
-            <div data-role="main" class="ui-content">                
-                 <div data-role="collapsible-set" data-collapsed="true">
-                    <div data-role="collapsible" data-collapsed="true" 
-                         data-collapsed-icon="carat-r" data-expanded-icon="carat-d">
-                        <h1>
-                            Tipo Smontaggio
-                        </h1>
-                        <ul data-role="listview" data-theme="b">
-                            <li>
-                                <label for="nastri">Numero nastri</label>
-                                <input type="number" id="nastri" min="0" />
-                            </li>
-                            <li>
-                                <label for="pali">Numero pali</label>
-                                <input type="number" id="pali" min="0" />
-                            </li>
-                            <li>
-                                <label for="terminali">Gruppi terminali</label>
-                                <input type="text" id="terminali" placeholder="Gruppo Termiali" />
-                            </li>
-                            <li>
-                                <label for="barriera">Tipologia Barriera</label>
-                                <select id="barriera" data-theme="b"></select>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <div data-role="collapsible" data-collapsed="true" 
-                         data-collapsed-icon="carat-r" data-expanded-icon="carat-d">
-                        <h1>
-                            Tipo Montaggio
-                        </h1>
-                        <ul data-role="listview" data-theme="b">
-                            <li>
-                                <label for="Mnastri">Numero nastri</label>
-                                <input type="number" id="Mnastri" min="0" />
-                            </li>
-                            <li>
-                                <label for="Mpali">Numero pali</label>
-                                <input type="number" id="Mpali" min="0" />
-                            </li>
-                            <li>
-                                <label for="Mterminali">Gruppi terminali</label>
-                                <input type="text" id="Mterminali" placeholder="Gruppo Termiali" />
-                            </li>
-                            <li>
-                                <label for="Mbarriera">Tipologia Barriera</label>
-                                <select id="Mbarriera"></select>
-                            </li>
-                        </ul>                    
-                    </div>                    
-                </div>
-             
-            </div>                         
-            <div data-role="footer" class="footer"  data-position="fixed" align="center" style="background:none !important; background-color: #f2f2f2 !important;">
-                <div style="line-height:25px; color:#0086cc;">3 di 4</div>
-                <a href="#" class="button-next next-step" data-step="2">AVANTI</a>
-                
-            </div>
-        </div>
-         roadSignStep2Page -->
+       
         
         <!-- roadSignStep3Page -->
 	
@@ -311,13 +244,13 @@
         <!-- ### DIALOGS ### -->
         
         <!-- mapPage -->
-        <div data-role="page" _data-dialog="true" _data-fullscreen="true" id="mapPage">
+        <div data-role="page" data-dialog="true" data-fullscreen="true" id="mapPage">
              <div data-role="header"  data-position="fixed">
                 <a href="javascript:app.closeMap(false)" class="ui-btn ui-btn-icon-left ui-btn-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-back ui-alt-icon ui-nodisc-icon">Annulla</a>
 				<h1>Mappa</h1>
                 <a href="javascript:app.closeMap(true)" class="ui-btn ui-corner-all ui-icon-check ui-btn-icon-left ui-btn-icon-notext ui-shadow ui-corner-all">Conferma</a>
 			</div>
-            <div data-role="main" _class="ui-content">
+            <div data-role="main" class="ui-content">
                 <div id="map" style="height:100%;"></div>
             </div>
             <!-- <div data-role="footer" class="footer"  data-position="fixed"></div> -->

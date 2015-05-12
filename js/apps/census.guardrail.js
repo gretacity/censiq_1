@@ -255,7 +255,7 @@ var app = {
                         if($("#child"+obj.guardrail.guardrailInfo.parent,parent).length==0)
                         {
                             var txt='<div style="float:right">'+
-                                        '<div style="float:right;"><a style="text-decoration:none" href="javascript:app.showPoints(\'child'+obj.guardrail.guardrailInfo.parent+'\')">Punti</a></div>'+
+                                        '<div style="float:right;"><a id="p_child'+obj.guardrail.guardrailInfo.parent+'" style="text-decoration:none" href="javascript:app.showPoints(\'child'+obj.guardrail.guardrailInfo.parent+'\')">Punti</a></div>'+
                                         '<ul id="child'+obj.guardrail.guardrailInfo.parent+'" class="mainlistChild"></ul>'+
                                         
                                     '</div>'        
@@ -268,11 +268,18 @@ var app = {
                         var name = data.shortDescription(obj);
                         var txt= 
                                 '<li id="row'+obj.id+'" style="padding:0;' + (false ? 'background-color:#f00;' : '') + '">' + 
-                                'Punto '+($("#child"+obj.guardrail.guardrailInfo.parent+" li").length+1)+
+                                'Punto '+($("#child"+obj.guardrail.guardrailInfo.parent+" li").length+2)+
                                 '<img onclick="app.deleteItems(\''+obj.id+'\')" src="img/delete.png" style="vertical-align:middle;float:right;margin-left:10px; height:25px;width: 25px">'+
                                 '</li>';
                         var row_c=$(txt);
                         row_c.appendTo($("#child"+obj.guardrail.guardrailInfo.parent));
+                        var pt="punti";
+                        if($("#child"+obj.guardrail.guardrailInfo.parent+" li").length==1)
+                        {
+                            pt="punto";
+                        }    
+                        
+                        $('#p_child'+obj.guardrail.guardrailInfo.parent).html($("#child"+obj.guardrail.guardrailInfo.parent+" li").length+" "+pt);
                        
                        
                     }

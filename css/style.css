@@ -35,6 +35,8 @@ ul.mainlistChild
   margin: 0;
   overflow: hidden;
   clear:both;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 
