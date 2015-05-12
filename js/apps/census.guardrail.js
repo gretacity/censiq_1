@@ -395,9 +395,9 @@ var app = {
             $('#newButton').removeClass('ui-disabled');
             
             
-        }else if(){
+        }else if(false){
             $('#addButton').removeClass('ui-disabled');
-        }
+        
         } else if(itemToGuardrail > 1 ) {
             $('#closeButton').addClass('ui-disabled');
             $('#addButton').addClass('ui-disabled');
