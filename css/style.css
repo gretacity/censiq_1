@@ -1,3 +1,28 @@
+ul.ui-listview
+{
+  width: 95% !important;
+  margin: 0 auto !important;
+}
+
+ul.ui-listview li
+{
+    padding:10px!important;
+   
+}
+
+ul.ui-listview li:nth-child(odd)
+{
+    background: rgba(75,75, 255, 0.1)!important;
+    
+}
+ul.ui-listview li:nth-child(even)
+{
+    background: rgba(111,111, 111, 0.1)!important;
+   
+}
+
+
+
 li.button
 {
     width: 80% !important;

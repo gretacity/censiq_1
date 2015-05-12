@@ -226,7 +226,7 @@ var app = {
             $('#itemList').html(html);
             $('#itemList').listview("refresh");
             $('#elencoGuardrailPage').trigger('create');
-            app.countItemToGuardrail();
+           
  
         });
         
@@ -289,8 +289,8 @@ var app = {
                         liElem.remove();
                     });
                 });
-                //app.unlockUI();
-                setTimeout(app.countItemToGuardrail, 100);
+                
+             
             }
         }, 'Conferma eliminazione', ['Si', 'No']);
     },
@@ -383,15 +383,7 @@ var app = {
     },
     
    
-        countItemToGuardrail: function() {
-        var connectionAvailable = helper.isOnline();
-        var allItems = $('#itemList li').length;
-        var itemToGuardrail = $('#itemList li input[type="checkbox"]:checked').length;
-        $logPanel = $('#log');
-        $logPanel.html((allItems == 0) ? 'Nessun elemento.'
-                                       : itemToGuardrail + ' ' + ' di ' + allItems + ' elementi ');
-        
-    },
+       
     save: function() {
         var supportTableData = {grcen: []};
         // Form is valid, proceed with saving.
