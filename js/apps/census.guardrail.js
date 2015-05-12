@@ -217,7 +217,6 @@ var app = {
                     var obj = data.deserialize(row, row.entity_type);
                     if(obj.guardrail.guardrailInfo.inizio==1)
                     {    
-                        //console.log("OBJ",obj);
                         var itemId = 'item' + obj.id;
                         var name = data.shortDescription(obj);
                         var qrCode = obj.qrCode;
@@ -226,14 +225,14 @@ var app = {
                                 '<img onclick="app.deleteItems:(\''+obj.id+'\')" src="img/delete.png" style="float:right;margin-right:10px; height:30px;width: 30px">'+
                                 '<img onclick="app.closeItems(\''+obj.id+'\')" src="img/close.png" style="float:right;margin-right:10px; height:30px;width: 30px">'+
                                 '<img onclick="app.updateItems(\''+obj.qrCode+'\')" src="img/add_car.png" style="float:right;margin-right:10px; height:30px;width: 30px">'+
-
+                                 
                                 //'<input type="checkbox" id="' + itemId + '" data-qrCode="'+obj.qrCode+'" data-id="' + obj.id + '"  onchange="app.countItemToGuardrail()" />' + 
-                                '<label for="' + itemId +'">' +obj.street +' >> '+obj.comune +' >> '+obj.provincia ;
+                                '<label for="' + itemId +'">'+qrCode+'<br>' +obj.street +' >> '+obj.comune  ;
                         if(name != '')
                         {
                             html += '<br />' + name;
                         }
-                        html += '<br /> codice ' + qrCode +
+                        html += 
                                 '</label>' +
                                 '</li>';
                     }
@@ -335,12 +334,11 @@ var app = {
         helper.confirm('Eliminare in modo definitivo gli elementi selezionati?', function(buttonIndex) {
             if(buttonIndex == 1) {
               
-                $('#itemList li input[type="checkbox"]:checked').each(function() {
-                    var itemId = $(this).attr("data-id");
+                
                     var liElem = $(this).parents('li');
                     data.delete(itemId, function() {
                         liElem.remove();
-                    });
+                    
                 });
                 
              
