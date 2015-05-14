@@ -4,16 +4,29 @@ var app = {
     STEP_1: 1,
     STEP_2: 2,
     STEP_3: 3,
-
-    census: new Census(CensusTypes.guardrail),
+    STEP_4: 4,
+    STEP_5: 5,
+    STEP_6: 6,
+    STEP_7: 7,
+    STEP_10: 10,
+    STEP_11: 11,
+    STEP_12: 12,
+    STEP_13: 13,
+    STEP_14: 14,
+    STEP_15: 15,
+    C_LAT:0,
+    C_LON:0,
+    C_ACC:0,
+    ACQ_GPS:true,
+    ID_GPS:0,    
+    ID_MARKER:null,
+    SELECTED_QRCODE: null,
     
+    census: new Census(CensusTypes.guardrail),
     localizationPageId: 'guardrailStep0Page',
     picturesPageId: 'guardrailStep1Page',
     picturesPageIdd: 'guardrailStep3Page',
-
-    
     pageOffsetTop: 0,
-    
     // Application Constructor
     initialize: function() {
         // Custom fields used for localization (street , no/km)
@@ -110,13 +123,16 @@ var app = {
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
-        
         document.addEventListener('deviceready', this.onDeviceReady, false);
         // Force onDeviceReady if it's a browser
         if(config.EMULATE_ON_BROWSER) this.onDeviceReady();
         //$('#closeButton').on('click', app.closeItems); 
         //$('#deleteButton').on('click', app.deleteItems);
         $pageAdd = $('#localizeGuardrailPage');
+        $('#mapGuardrailPage').on('pageshow', this.showMapPage);
+        $('#mapLocalizeGuardrailPage').on('pageshow', this.showMapPositionPage);
+        
+        
         $('#acquireQrCodePointButton', $pageAdd).on('click', this.acquireQrCodePoint);
         $('#getCoordinatesPanelPoint', $pageAdd).on('click', this.acquireGeoCoordinatesPoint);
         $('#openMapPageButtonPoint', $pageAdd).on('click', function() {
@@ -222,10 +238,10 @@ var app = {
                         var qrCode = obj.qrCode;
                         var dateAdded = Date.parseFromYMDHMS(row.date_added).toDMYHMS();
                         html += '<li id="row'+qrCode+'" style="padding:0;' + (false ? 'background-color:#f00;' : '') + '">' + 
-                                '<img onclick="app.deleteItems(\''+obj.qrCode+'\')" src="img/delete.png" style="float:right;margin-right:10px; height:30px;width: 30px">'+
-                                '<img onclick="app.closeItems(\''+obj.id+'\')" src="img/close.png" style="float:right;margin-right:10px; height:30px;width: 30px">'+
-                                '<img onclick="app.updateItems(\''+obj.qrCode+'\')" src="img/add_car.png" style="float:right;margin-right:10px; height:30px;width: 30px">'+
-                                 
+                                '<img onclick="app.deleteItems(\''+qrCode+'\')" src="img/delete.png" style="float:right;margin-right:10px; height:32px;width: 32px">'+
+                                '<img onclick="app.closeItems(\''+obj.id+'\')" src="img/close.png" style="float:right;margin-right:10px; height:32px;width: 32px">'+
+                                '<img onclick="app.updateItems(\''+qrCode+'\')" src="img/add_car.png" style="float:right;margin-right:10px; height:32px;width: 32px">'+
+                                '<img onclick="app.showMap(\''+qrCode+'\')" src="img/world.png" style="float:right;margin-right:10px; height:32px;width: 32px">'+
                                 //'<input type="checkbox" id="' + itemId + '" data-qrCode="'+obj.qrCode+'" data-id="' + obj.id + '"  onchange="app.countItemToGuardrail()" />' + 
                                 '<label for="' + itemId +'">'+qrCode+'<br>' +obj.street +' >> '+obj.comune  ;
                         if(name != '')
@@ -255,7 +271,9 @@ var app = {
                         if($("#child"+obj.guardrail.guardrailInfo.parent,parent).length==0)
                         {
                             var txt='<div style="float:right">'+
-                                        '<div style="float:right;"><a id="p_child'+obj.guardrail.guardrailInfo.parent+'" style="text-decoration:none" href="javascript:app.showPoints(\'child'+obj.guardrail.guardrailInfo.parent+'\')">Punti</a></div>'+
+                                        '<div style="float:right;width: 126px;margin-bottom:3px">'+
+                                        '<a id="p_child'+obj.guardrail.guardrailInfo.parent+'" style="margin-right:16px;text-decoration:none;line-height:32px;float:right" href="javascript:app.showPoints(\'child'+obj.guardrail.guardrailInfo.parent+'\')">Punti</a>'+
+                                        '</div>'+
                                         '<ul id="child'+obj.guardrail.guardrailInfo.parent+'" class="mainlistChild"></ul>'+
                                         
                                     '</div>'        
@@ -267,9 +285,9 @@ var app = {
                         var itemId = 'item' + obj.id;
                         var name = data.shortDescription(obj);
                         var txt= 
-                                '<li id="row'+obj.id+'" style="padding:0;' + (false ? 'background-color:#f00;' : '') + '">' + 
+                                '<li id="row'+obj.id+'" style="padding:0;">' + 
                                 'Punto '+($("#child"+obj.guardrail.guardrailInfo.parent+" li").length+2)+
-                                '<img onclick="app.deleteItems(\''+obj.id+'\')" src="img/delete.png" style="vertical-align:middle;float:right;margin-left:10px; height:25px;width: 25px">'+
+                                '<img onclick="app.deleteItems(\''+obj.id+'\')" src="img/delete.png" style="vertical-align:middle;float:right;margin-left:10px; height:32px;width: 32px">'+
                                 '</li>';
                         var row_c=$(txt);
                         row_c.appendTo($("#child"+obj.guardrail.guardrailInfo.parent));
@@ -305,6 +323,7 @@ var app = {
         }
     },
     
+    
 
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -323,6 +342,121 @@ var app = {
         data.close(itemId);
     },
 
+
+    readGPS :function(map)
+    {
+        if(app.ID_GPS!=0)
+        {
+            clearInterval(app.ID_GPS);
+        }   
+        if(app.ID_MARKER!=null)
+        {    
+          app.ID_MARKER.setMap(null);
+        }
+    
+        var markerPoint = new google.maps.LatLng(34.3333333+Math.random()*1,14.534-Math.random()*1);
+            
+        var marker = new google.maps.Marker({
+                position: markerPoint,
+                map: map,
+                draggable: false,
+                animation: google.maps.Animation.DROP,
+                title: app.SELECTED_QRCODE
+            });
+
+        var infowindow = new google.maps.InfoWindow({content: '<div>' + app.SELECTED_QRCODE + '</div>'});
+        infowindow.open(map, marker);
+        if(app.ID_MARKER==null)
+        {   
+            //map.setCenter(markerPoint); 
+            //map.panTo(markerPoint);
+        }
+        app.ID_MARKER=marker;
+        if(app.ACQ_GPS)
+        {
+            app.ID_GPS=setInterval(function(){app.readGPS(map)},5000);
+        }    
+    },
+
+    showMapPositionPage: function()
+    {
+        var point=null;
+        
+        app.id_map="map_1";
+       
+        app.openMap();
+        //app.mapLoaded
+        
+        setTimeout( function()
+        {
+            var map= app._map;
+             map.setZoom(5);
+            app.readGPS(map);
+
+        }
+        ,900);        
+    },
+    showMapPage: function()
+    {
+        $('#btnback').on('click', function(){
+            $.mobile.changePage('#ElencoGuardrailPage', {
+                transition: 'slide',
+                reverse: false,
+                changeHash: false
+                });
+        });
+        
+        data.fetch({status: [data.REC_STATUS_ADDED, data.REC_STATUS_SYNCH_ERROR]}, function(result) {
+            //console.log("RESULT SYNC FETCH",result);
+            var itemCount = result.rows.length;
+            var point=null;
+            app.id_map="map_0";
+            app.openMap();
+            setTimeout( function(){
+                
+                var map = app._map;
+                for(var i = 0; i < itemCount; i++) 
+                {
+                    var row = result.rows.item(i);
+                    if(row.entity_type==3)
+                    {
+                        var obj = data.deserialize(row, row.entity_type);
+                        if(obj.guardrail.guardrailInfo.parent== app.SELECTED_QRCODE || obj.qrCode==app.SELECTED_QRCODE)
+                        {
+                            var markerPoint = new google.maps.LatLng(obj.position.latitude+i+34.3333333, obj.position.longitude-i+14.534);
+                            if(obj.qrCode==app.SELECTED_QRCODE)
+                            {
+                                point=markerPoint;
+                            }    
+                            var marker = new google.maps.Marker({
+                                    position: markerPoint,
+                                    map: map,
+                                    draggable: false,
+                                    animation: google.maps.Animation.DROP,
+                                    title: app.SELECTED_QRCODE
+                                });
+
+                            var infowindow = new google.maps.InfoWindow({content: '<div>' + app.SELECTED_QRCODE + '</div>'});
+                            infowindow.open(map, marker);
+
+                        }
+                    }
+                }
+                //map.panTo(point);
+                },900);
+        }); 
+    },
+
+    showMap :function(qrCode)
+    {
+      
+        $.mobile.changePage('#mapGuardrailPage', {
+                transition: 'slide',
+                reverse: false,
+                changeHash: false
+                });
+        app.SELECTED_QRCODE=qrCode;        
+    },
 
     updateItems: function(qrCode){
            
@@ -394,6 +528,19 @@ var app = {
                     stepValidCallback();
                     }
         }
+        if(stepIndex == app.STEP_10)
+        {
+            // Validate step 0
+            if($.trim($('#qrCode_point').val()) == '')
+            {
+                errors.push('specificare il QR-code');
+                stepNotValidCallback(errors);
+             
+            } 
+            else {
+                stepValidCallback();
+            }
+        }
     },
     
     
@@ -401,10 +548,13 @@ var app = {
         //
     },
             
-    stepCompleted: function() {        
+    stepCompleted: function() {   
+        
+        
         // Current step
         var step = $(this).attr('data-step');        
         // Valitate step once completed
+    
         app.validateStep(step, function() {
             // Success: move forward
             if(step == app.STEP_0) {
@@ -416,6 +566,10 @@ var app = {
             } else if(step == app.STEP_3) {
                 app.save();
             }
+            else  if(step == app.STEP_10) {
+                $.mobile.changePage('#mapLocalizeGuardrailPage');
+            }
+            
         }, function(errors) {
             // Validation failed: display an error message if there is at least one
             if(Array.isArray(errors) && errors.length > 0) {
@@ -437,6 +591,22 @@ var app = {
            // $.mobile.changePage('#guardrailStep1Page');
         //} else if(step == app.STEP_3) {
             $.mobile.changePage('#guardrailStep2Page');
+        }
+        else if(step == app.STEP_4) {
+           // $.mobile.changePage('#guardrailStep1Page');
+        //} else if(step == app.STEP_3) {
+            $.mobile.changePage('#guardrailStep4Page');
+        }
+        
+        else if(step == app.STEP_10) {
+           // $.mobile.changePage('#guardrailStep1Page');
+        //} else if(step == app.STEP_3) {
+            $.mobile.changePage('#ElencoGuardrailPage');
+        }
+        else if(step == app.STEP_11) {
+           // $.mobile.changePage('#guardrailStep1Page');
+        //} else if(step == app.STEP_3) {
+            $.mobile.changePage('#localizeGuardrailPage');
         }
     },
     

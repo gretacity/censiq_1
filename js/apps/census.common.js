@@ -137,6 +137,7 @@ app.acquireGeoCoordinatesPoint = function() {
  *  Functions related to maps service
  */
 app._adjustedCoords = null;
+app.id_map = 'map';
 app._map = null;
 app._marker = null;
 app.mapLoaded = function() {
@@ -162,7 +163,7 @@ app.openMap = function() {
     };
     
     if(app._map == null) {
-        app._map = new google.maps.Map(document.getElementById('map'), options);
+        app._map = new google.maps.Map(document.getElementById(app.id_map), options);
         var markerPoint = new google.maps.LatLng(lat, lng);///---
         app._marker = new google.maps.Marker({
             position: markerPoint,
@@ -193,7 +194,7 @@ app.openMap = function() {
             
             
         setTimeout(function(){
-            helper.maximizeMap('#map');
+            helper.maximizeMap('#'+app.id_map);
         },100);
     } else {
         var markerPoint = new google.maps.LatLng(lat, lng);

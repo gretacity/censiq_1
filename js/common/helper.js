@@ -76,6 +76,8 @@ var helper = {
         var page = mapEl.closest('div[data-role="page"]');
 //console.log("ID PAGE",page);
         var pageHeight = page.outerHeight();
+       
+        
 //console.log("Altezza PAGE",pageHeight);
         var height = 0;
         height += $('div[data-role="header"]', page).outerHeight();
@@ -90,7 +92,7 @@ var helper = {
         });
 //console.log("ALTEZZA TOTALE",height);
         mapEl.height(
-            pageHeight - height-height
+            pageHeight - height
         );
 //console.log("ALTEZZA MAPPA",mapEl.height());
     }

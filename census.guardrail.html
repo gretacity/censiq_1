@@ -23,48 +23,37 @@
         <div data-role="page" id='ElencoGuardrailPage'>
             <div data-role="header" class="header" data-position="fixed">
                 <a href="index.html" data-transition="slide" data-direction="reverse" id="homeButton" rel="external" class="ui-btn ui-btn-icon-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-home ui-alt-icon ui-nodisc-icon">Home</a>
-				<h1>Guardrail</h1>
-                <!--                
-                <img id="closeButton" src="img/close.png" class="ui-disabled ui-btn-right ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" style=" top: 4.5em; left:0.5em; height: 2.6em;width: 2.6em">
-                -->
-                <!--
-                <img id="addButton" src="img/addpoint.png" class="ui-disabled ui-btn-right ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" style="top: 4.5em; height: 2.6em;width: 2.6em">
-                -->
-               
-                
-                <!--
-                <img id="deleteButton" src="img/delete.png" class="ui-disabled ui-btn-right ui-btn-icon-notext ui-alt-icon ui-nodisc-icon" style="height: 2.6em;width: 2.6em">
-                -->
+		<h1>Guardrail</h1>
             </div>
-             <div style="overflow:hidden;margin-top: 10px; width: 95% !important; margin: 10px auto !important">
+            <div style="overflow:hidden;margin-top: 10px; width: 95% !important; margin: 10px auto !important">
                 <img id="newButton" src="img/add_car.png" class="" style="height: 44px;width: 44px;vertical-align:middle">
                 Nuovo guardrail
-                </div>
+            </div>
             <div data-role="main">
-            
                 <ul class="mainlist" id="itemList" ></ul>
             </div>
-            
-            <div data-role="footer" class="footer"  data-position="fixed" align="center" style="background:none !important; background-color: #f2f2f2 !important;">
-                <!--<div data-role="controlgroup" data-type="horizontal">-->
-                    <div id="progressContainer" align="left" style="display:none;padding:0;margin:0; color:#0086cc !important;">
-                        <span id="progressPercentage"></span> 
-                        <div style="padding:0;width:100%;height:5px;background-color:#00F; color:#00F !important;">
-                            <div id="progressIndicator" style="padding:0;width:0;height:5px;background-color:#0F0; color:#00F !important;"></div>
-                        </div>
-                    </div>
-                <!--<a href="#" id="syncButton" class="button-confirm">SINCRONIZZA</a>-->
-                    <!--<a href="#" id="syncButton" class="ui-btn ui-btn-icon-notext ui-nodisc-icon"  style="display:block; border:none; margin: 0 auto;/* float: right; */background: url('img/sync.png') no-repeat center center;background-size: contain;height: 3em;width: 100%;"></a>
-                      -->
-                <!--</div>-->
-            </div>
+            <div data-role="footer" class="footer ui-footer ui-bar-inherit ui-footer-fixed slideup ui-fixed-hidden" data-position="fixed" role="contentinfo"></div>
     	</div>
         <!-- /elencoGuardrailPage -->
-        <!-- localizeGuardrailPage -->
-                <div data-role="page" id='localizeGuardrailPage'>
+        <!-- mappaGuardrailPage -->
+        <div data-role="page" id='mapGuardrailPage'>
             <div data-role="header" class="header" data-position="fixed">
-                <a href="#" data-rel="back" class="ui-btn ui-btn-icon-left ui-btn-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-back ui-alt-icon ui-nodisc-icon"></a>
-				<h1>Aggiungi punto</h1>
+                <a id="btnback" href="#" class="ui-btn-left toolbar-button-back ui-alt-icon ui-nodisc-icon ui-btn ui-icon-toolbar-button ui-btn-icon-notext" data-role="button" role="button"></a>
+                <h1>Guardrail</h1>
+            </div>
+            
+            <div data-role="main">
+                <div id="map_0"></div>
+            </div>
+            <div data-role="footer" class="footer ui-footer ui-bar-inherit ui-footer-fixed slideup ui-fixed-hidden" data-position="fixed" role="contentinfo"></div>
+    	</div>
+        <!-- /mappaGuardrailPage -->
+        
+        <!-- localizeGuardrailPage -->
+        <div data-role="page" id='localizeGuardrailPage'>
+            <div data-role="header" class="header" data-position="fixed">
+                <a href="#" data-step="10" class="ui-btn ui-btn-icon-left ui-btn-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-back ui-alt-icon ui-nodisc-icon prev-step"></a>
+				<h1>Inquadra QR-Code</h1>
             </div>
             <div data-role="main" class="ui-content">
                 <ul data-role="listview" data-inset="false" data-theme="b">
@@ -88,6 +77,36 @@
                         <input type="text" id="qrCode_point" placeholder="QR code punto" />
                     </li>
                 </ul>
+            </div>
+            <div data-role="footer" class="footer"  data-position="fixed" align="center" style="background:none !important; background-color: #f2f2f2 !important;">
+                <div style="line-height:25px; color:#0086cc;">1 di 2</div>
+                <a href="#"  class="button-next next-step" data-step="10">AVANTI</a>
+                
+            </div>
+    	</div>
+        <!-- /mappaGuardrailPage -->
+        
+        
+         <div data-role="page" id='mapLocalizeGuardrailPage'>
+            <div data-role="header" class="header" data-position="fixed">
+                <a data-step="11" id="btnback" href="#" class="ui-btn-left toolbar-button-back ui-alt-icon ui-nodisc-icon ui-btn ui-icon-toolbar-button ui-btn-icon-notext prev-step" data-role="button" role="button" ></a>
+                <h1>Guardrail</h1>
+            </div>
+            
+            <div data-role="main">
+                <div id="map_1"></div>
+            </div>
+            <div data-role="footer" class="footer ui-footer ui-bar-inherit ui-footer-fixed slideup ui-fixed-hidden" data-position="fixed" role="contentinfo"></div>
+    	</div>
+        
+        
+        <!-- localizeGuardrailPage -->
+        <div data-role="page" id='mapresultGuardrailPage'>
+            <div data-role="header" class="header" data-position="fixed">
+                <a href="#" data-rel="back" class="ui-btn ui-btn-icon-left ui-btn-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-back ui-alt-icon ui-nodisc-icon"></a>
+                <h1>Aquisisci Coordinate</h1>
+            </div>
+            <div data-role="main" class="ui-content">
                 <ul data-role="listview" data-inset="false" data-theme="b">
                     <li data-role="list-divider">
                         <div>
@@ -118,22 +137,22 @@
                         </a>
                     </li>
                     <li role="listdivider"></li>
-                                <li>
-                                    <label for="comune">Comune</label>
-                                    <input id="comune_point" placeholder="Comune" />
-                                </li>
-                                <li>
-                                    <label for="provincia">Provincia</label>
-                                    <input id="provincia_point" placeholder="Provincia" />
-                                </li>
-                                <li>
-                                    <label for="street">Strada / Via</label>
-                                    <input id="street_point" placeholder="Strada o via" />
-                                </li>
-                                <li>
-                                    <label for="streetNumber">Km / Civico</label>
-                                    <input id="streetNumber_point" placeholder="Km o numero civico" />
-                                </li>
+                    <li>
+                        <label for="comune">Comune</label>
+                        <input id="comune_point" placeholder="Comune" />
+                    </li>
+                    <li>
+                        <label for="provincia">Provincia</label>
+                        <input id="provincia_point" placeholder="Provincia" />
+                    </li>
+                    <li>
+                        <label for="street">Strada / Via</label>
+                        <input id="street_point" placeholder="Strada o via" />
+                    </li>
+                    <li>
+                        <label for="streetNumber">Km / Civico</label>
+                        <input id="streetNumber_point" placeholder="Km o numero civico" />
+                    </li>
                </ul>
             </div>
             <div data-role="footer" class="footer"  data-position="fixed" align="center" style="background:none !important; background-color: #f2f2f2 !important;">
