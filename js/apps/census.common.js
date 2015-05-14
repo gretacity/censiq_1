@@ -163,6 +163,7 @@ app.openMap = function() {
     };
     
     if(app._map == null) {
+        
         app._map = new google.maps.Map(document.getElementById(app.id_map), options);
         var markerPoint = new google.maps.LatLng(lat, lng);///---
         app._marker = new google.maps.Marker({
@@ -191,8 +192,8 @@ app.openMap = function() {
                 app.census.position.longitude =app._marker.getPosition().lng();
                 page.injector.GeoCoordinatesAcquired(app.census.position);             
             });
-            
-            
+           
+          
         setTimeout(function(){
             helper.maximizeMap('#'+app.id_map);
         },100);

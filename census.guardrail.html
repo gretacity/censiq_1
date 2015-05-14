@@ -79,7 +79,7 @@
                 </ul>
             </div>
             <div data-role="footer" class="footer"  data-position="fixed" align="center" style="background:none !important; background-color: #f2f2f2 !important;">
-                <div style="line-height:25px; color:#0086cc;">1 di 2</div>
+                <div style="line-height:25px; color:#0086cc;">1 di 3</div>
                 <a href="#"  class="button-next next-step" data-step="10">AVANTI</a>
                 
             </div>
@@ -90,13 +90,39 @@
          <div data-role="page" id='mapLocalizeGuardrailPage'>
             <div data-role="header" class="header" data-position="fixed">
                 <a data-step="11" id="btnback" href="#" class="ui-btn-left toolbar-button-back ui-alt-icon ui-nodisc-icon ui-btn ui-icon-toolbar-button ui-btn-icon-notext prev-step" data-role="button" role="button" ></a>
-                <h1>Guardrail</h1>
+                
             </div>
             
             <div data-role="main">
                 <div id="map_1"></div>
             </div>
-            <div data-role="footer" class="footer ui-footer ui-bar-inherit ui-footer-fixed slideup ui-fixed-hidden" data-position="fixed" role="contentinfo"></div>
+            <div data-role="footer" class="footer"  data-position="fixed" align="center" style="background:none !important; background-color: #f2f2f2 !important;">
+                <div style="line-height:25px; color:#0086cc;">2 di 3</div>
+                <a href="#"  class="button-next next-step" data-step="11">AVANTI</a>
+                
+            </div>
+            <div id="gps_control" style="z-index:1000;position:absolute;top:10px;right:10px;height:45px;overflow:hidden">
+                <div style="float:right;text-align:center;background:#ffffff;padding:12px; border-radius:5px;overflow:hidden;">
+                    <a id="start_gps" style="font-size:14px;font-family:Arial !important;color:#3388cc;font-weight:normal">Stop GPS</a>
+                </div>
+                 <div style="min-width:100px;margin-right:10px;padding:2px;float:right;background:#ffffff; border-radius:5px;overflow:hidden;">
+                     <div id="latitudine" style="background:#ffffff;padding:0 5px;overflow:hidden;font-family:Arial !important;color:#3388cc;font-weight:normal">
+                         Lat:
+                     </div>
+                     <div id="longitudine" style="background:#ffffff;padding:0 5px;overflow:hidden;font-family:Arial !important;color:#3388cc;font-weight:normal">
+                         Lon:
+                     </div>
+                     
+                </div> 
+                <div style="min-width:100px;margin-right:10px;padding:2px;float:right;background:#ffffff; border-radius:5px;overflow:hidden;">
+                     <div id="accuratezza" style="background:#ffffff;padding:0 5px;overflow:hidden;font-family:Arial !important;color:#3388cc;font-weight:normal">
+                         Acc:
+                     </div>
+                     
+                     
+                </div> 
+            </div>     
+           
     	</div>
         
         

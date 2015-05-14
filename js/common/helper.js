@@ -94,6 +94,10 @@ var helper = {
         mapEl.height(
             pageHeight - height
         );
+        if(typeof(app._map) != 'string')
+        {
+            google.maps.event.trigger(app._map, 'resize')
+        }    
 //console.log("ALTEZZA MAPPA",mapEl.height());
     }
 }

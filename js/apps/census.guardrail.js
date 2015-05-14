@@ -341,60 +341,82 @@ var app = {
     {
         data.close(itemId);
     },
-
-
-    readGPS :function(map)
+    
+    startGPS :function()
     {
         if(app.ID_GPS!=0)
         {
             clearInterval(app.ID_GPS);
-        }   
-        if(app.ID_MARKER!=null)
-        {    
-          app.ID_MARKER.setMap(null);
+            app.ID_GPS=0;
+            $("#start_gps").html("Start GPS");
+            $("#start_gps").css("color", "#FF1111");
         }
-    
-        var markerPoint = new google.maps.LatLng(34.3333333+Math.random()*1,14.534-Math.random()*1);
-            
-        var marker = new google.maps.Marker({
+        else
+        {
+            app.ID_GPS=setInterval(function(){app.readGPS()},1000);
+            $("#start_gps").html("Stop GPS");
+            $("#start_gps").css("color", "#3388cc");
+        }
+    }, 
+     
+
+    readGPS :function()
+    {
+        var map=app._map;
+        if(app.ID_GPS!=0)
+        {
+            clearInterval(app.ID_GPS);
+        }
+        app.C_LAT=34.3333333+Math.random()*1;
+        app.C_LON=14.534-Math.random()*1;
+        app.C_ACC=Math.random()*10; 
+        var markerPoint = new google.maps.LatLng(app.C_LAT,app.C_LON);
+        $("#latitudine").html('Lat:  '+app.C_LAT.toFixed(5));
+        $("#longitudine").html('Lon:  '+app.C_LON.toFixed(5));
+        $("#accuratezza").html('Acc:  '+app.C_ACC.toFixed(1));
+        
+        
+        if(app.ID_MARKER==null)
+        {    
+          //app.ID_MARKER.setMap(null);
+          var marker = new google.maps.Marker({
                 position: markerPoint,
                 map: map,
                 draggable: false,
                 animation: google.maps.Animation.DROP,
                 title: app.SELECTED_QRCODE
             });
+            app.ID_MARKER=marker;
 
+        }
+        else
+        {    
+            app.ID_MARKER.setPosition(markerPoint );
+        }
+        
         var infowindow = new google.maps.InfoWindow({content: '<div>' + app.SELECTED_QRCODE + '</div>'});
         infowindow.open(map, marker);
-        if(app.ID_MARKER==null)
-        {   
-            //map.setCenter(markerPoint); 
-            //map.panTo(markerPoint);
-        }
-        app.ID_MARKER=marker;
+        map.panTo(markerPoint);
         if(app.ACQ_GPS)
         {
-            app.ID_GPS=setInterval(function(){app.readGPS(map)},5000);
+            app.ID_GPS=setInterval(function(){app.readGPS()},1000);
         }    
     },
 
     showMapPositionPage: function()
     {
+        $('#start_gps').on('click', function(){app.startGPS();});
         var point=null;
-        
         app.id_map="map_1";
-       
         app.openMap();
-        //app.mapLoaded
-        
         setTimeout( function()
         {
             var map= app._map;
-             map.setZoom(5);
-            app.readGPS(map);
+            map.setZoom(10);
+            app.readGPS();
 
         }
-        ,900);        
+        ,300);        
     },
     showMapPage: function()
     {
@@ -442,7 +464,7 @@ var app = {
                         }
                     }
                 }
-                //map.panTo(point);
+                map.panTo(point);
                 },900);
         }); 
     },
@@ -569,6 +591,14 @@ var app = {
             else  if(step == app.STEP_10) {
                 $.mobile.changePage('#mapLocalizeGuardrailPage');
             }
+            else if(step == app.STEP_11)
+            {
+                if(app.ID_GPS!=0)
+                {
+                    clearInterval(app.ID_GPS);
+                }    
+                //$.mobile.changePage('#localizeGuardrailPage');
+            }
             
         }, function(errors) {
             // Validation failed: display an error message if there is at least one
@@ -606,6 +636,10 @@ var app = {
         else if(step == app.STEP_11) {
            // $.mobile.changePage('#guardrailStep1Page');
         //} else if(step == app.STEP_3) {
+            if(app.ID_GPS!=0)
+            {
+                clearInterval(app.ID_GPS);
+            }    
             $.mobile.changePage('#localizeGuardrailPage');
         }
     },
