@@ -367,8 +367,8 @@ var app = {
         {
             clearInterval(app.ID_GPS);
         }
-        app.C_LAT=34.3333333+Math.random()*1;
-        app.C_LON=14.534-Math.random()*1;
+        app.C_LAT=38.2+Math.random()*0.01;
+        app.C_LON=15.7-Math.random()*0.01;
         app.C_ACC=Math.random()*10; 
         var markerPoint = new google.maps.LatLng(app.C_LAT,app.C_LON);
         $("#latitudine").html('Lat:  '+app.C_LAT.toFixed(5));
@@ -386,7 +386,7 @@ var app = {
                 animation: google.maps.Animation.DROP,
                 title: app.SELECTED_QRCODE
             });
-            app.ID_MARKER=marker;
+            
 
         }
         else
@@ -396,7 +396,12 @@ var app = {
         
         var infowindow = new google.maps.InfoWindow({content: '<div>' + app.SELECTED_QRCODE + '</div>'});
         infowindow.open(map, marker);
-        map.panTo(markerPoint);
+        if(app.ID_MARKER==null)
+        { 
+            app.ID_MARKER=marker;
+            map.panTo(markerPoint);
+        }
+        
         if(app.ACQ_GPS)
         {
             app.ID_GPS=setInterval(function(){app.readGPS()},1000);
