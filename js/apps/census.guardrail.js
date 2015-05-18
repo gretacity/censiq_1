@@ -117,7 +117,7 @@ var app = {
         $('#guardrailStep2Page').on('pageshow',  this.acquireCoords);
         
         $('#acquireQrCodePointButton', $pageAdd).on('click', this.acquireQrCodePoint);
-        $('#acquireQrCodePointButton', $('#guardrailStep0Page')).on('click', this.acquireQrCodePoint);
+        //$('#acquireQrCodePointButton', $('#guardrailStep0Page')).on('click', this.acquireQrCode);
         
         
         $('#getCoordinatesPanelPoint', $pageAdd).on('click', this.acquireGeoCoordinatesPoint);
