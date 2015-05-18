@@ -32,8 +32,8 @@ var app = {
         */
         //page.injector.injectPage('#guardrailStep3Page', '3pictures', {title: 'Guard Rail', footerText: '2 di 4'});
         
-        page.injector.injectPage('#summaryPage', 'summary', {continueLink: '#guardrailStep0Page'});
         page.injector.injectPage('#guardrailStep4Page', 'dinamica', {title: 'Guard Rail', footerText: '5 di 5'});
+        page.injector.injectPage('#summaryPage', 'summary', {continueLink: '#guardrailStep0Page'});
         
         var html = '<option>Classe</option>';
         var guardrailClasse = data.guardrail.getGuardrailClasse();
@@ -117,6 +117,9 @@ var app = {
         $('#guardrailStep2Page').on('pageshow',  this.acquireCoords);
         
         $('#acquireQrCodePointButton', $pageAdd).on('click', this.acquireQrCodePoint);
+        $('#acquireQrCodePointButton', $('#guardrailStep0Page')).on('click', this.acquireQrCodePoint);
+        
+        
         $('#getCoordinatesPanelPoint', $pageAdd).on('click', this.acquireGeoCoordinatesPoint);
         $('#openMapPageButtonPoint', $pageAdd).on('click', function() {
             //helper.maximizeContent();
@@ -212,19 +215,20 @@ var app = {
                         var name = data.shortDescription(obj);
                         var qrCode = obj.qrCode;
                         var dateAdded = Date.parseFromYMDHMS(row.date_added).toDMYHMS();
-                        html += '<li id="row'+qrCode+'" style="padding:0;' + (false ? 'background-color:#f00;' : '') + '">' + 
-                                '<img onclick="app.deleteItems(\''+qrCode+'\')" src="img/delete.png" style="float:right;margin-right:10px; height:32px;width: 32px">'+
+                        html += '<li style="padding:0;' + (false ? 'background-color:#f00;' : '') + '">' + 
+                                '<img onclick="app.deleteItems(\''+obj.id+'\')" src="img/delete.png" style="float:right;margin-right:10px; height:32px;width: 32px">'+
                                 '<img onclick="app.closeItems(\''+obj.id+'\')" src="img/close.png" style="float:right;margin-right:10px; height:32px;width: 32px">'+
                                 '<img onclick="app.updateItems(\''+qrCode+'\')" src="img/add_car.png" style="float:right;margin-right:10px; height:32px;width: 32px">'+
                                 '<img onclick="app.showMap(\''+qrCode+'\')" src="img/world.png" style="float:right;margin-right:10px; height:32px;width: 32px">'+
                                 //'<input type="checkbox" id="' + itemId + '" data-qrCode="'+obj.qrCode+'" data-id="' + obj.id + '"  onchange="app.countItemToGuardrail()" />' + 
-                                '<label for="' + itemId +'">'+qrCode+'<br>' +obj.street +' >> '+obj.comune  ;
+                                '<label for="' + itemId +'">'+qrCode+'<br>'+obj.guardrail.guardrailInfo.nomei+'<br>Via ' +obj.guardrail.street +' >> '+obj.guardrail.comune  ;
                         if(name != '')
                         {
                             html += '<br />' + name;
                         }
                         html += 
                                 '</label>' +
+                                '<div id="row'+qrCode+'" ></div>'+
                                 '</li>';
                     }
                 }
@@ -260,7 +264,7 @@ var app = {
                         var name = data.shortDescription(obj);
                         var txt= 
                                 '<li id="row'+obj.id+'" style="padding:0;">' + 
-                                'Punto '+($("#child"+obj.guardrail.guardrailInfo.parent+" li").length+2)+
+                                'QR '+obj.qrCode+
                                 '<img onclick="app.deleteItems(\''+obj.id+'\')" src="img/delete.png" style="vertical-align:middle;float:right;margin-left:10px; height:32px;width: 32px">'+
                                 '</li>';
                         var row_c=$(txt);
@@ -667,21 +671,17 @@ var app = {
         }
         else if(stepIndex == app.STEP_4)
         {
-            if ($( "#radio-choice-21" ).is(':checked'))
+            if($.trim($('#nameIni').val()) == '')
             {
-                if($.trim($('#nameIni').val()) == '')
-                {
-                    errors.push('specificare il nome');
-                    $('#nameIni').focus();
-                    stepNotValidCallback(errors);
-                }
-                else
-                {
-                    stepValidCallback();
-                }
-            }else {
-                    stepValidCallback();
-                    }
+                errors.push('Etichetta inizio tratta');
+                $('#nameIni').focus();
+                stepNotValidCallback(errors);
+            }
+            else
+            {
+                stepValidCallback();
+            }
+           
         }
         else if(stepIndex == app.STEP_10)
         {
@@ -811,6 +811,11 @@ var app = {
          
             $.mobile.changePage('#guardrailStep1Page');
         }
+        else if(step == app.STEP_3)
+        {
+         
+            $.mobile.changePage('#guardrailStep2Page');
+        }
         else if(step == app.STEP_4)
         {
             $.mobile.changePage('#guardrailStep3Page');
@@ -896,7 +901,7 @@ var app = {
         var imageKeysGr = ['foto0','foto1', 'foto2', 'foto3','foto4','foto5','foto6'];
         for(var i in imageKeysGr) {
             var k = imageKeysGr[i];
-            var imageSrcGr = $('#guardrailStep3Page a[data-viewtype="' + k + '"][data-showview] img').attr('src');
+            var imageSrcGr = $('#guardrailStep4Page a[data-viewtype="' + k + '"][data-showview] img').attr('src');
             if(imageSrcGr != '') {
                 // Remove this from src attribute:
                 //data:image/jpeg;base64,
@@ -923,9 +928,6 @@ var app = {
         guardrailInfo.interasse = $('#interasse').val();                           
         guardrailInfo.ancoraggio = $('#ancoraggio').val();                             
         guardrailInfo.classeElemento = $('#classeElemento').val(); 
-        //guardrailInfo.parent = $('input[type="radio"].guardrail-mark:checked').val(); 
-        //guardrailInfo.parent = $('#nomiInizio').val(); 
-        //guardrailInfo.kmInizio = $('#kmInizio').val();
         guardrailInfo.parent = $('#parent').val();
         guardrailInfo.textAlberi=$('#nAlberi').val();
         guardrailInfo.textPali=$('#nPali').val();
@@ -938,11 +940,15 @@ var app = {
         guardrailInfo.classeAttenuatore=$('#classeAttenuatore').val();
         //guardrailInfo.fine = $('input[type="radio"].guardrail-mark2:checked').val();
         //guardrailInfo.kmFine = $('#kmFine').val();
-        //guardrailInfo.nomei = $('#nameIni').val();                                 // nome inizio
+        guardrailInfo.nomei = $('#nameIni').val();                                 // nome inizio
+        
+        
+        
+        
         //guardrailInfo.sequenzai = $('#SeqIni').val();                              // numero sequenza iniziale
         guardrailInfo.chiuso =0;
 
-        guardrailInfo.nomei=$('#nomeIni').val();                              // nome inizio associato
+        //guardrailInfo.nomei=$('#nomeIni').val();                              // nome inizio associato
         if(guardrailInfo.parent!=''){
         guardrailInfo.inizio=0;}else{ guardrailInfo.inizio=1;}
         app.census.guardrail.guardrailInfo = guardrailInfo;

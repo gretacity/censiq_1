@@ -257,7 +257,7 @@ var page = {
             //}console.log('titolo',title);
             
             var content ='<div data-role="header" data-position="fixed">' +
-				'<a href="#" data-rel="back" class="ui-btn ui-btn-icon-left ui-btn-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-back ui-alt-icon ui-nodisc-icon"></a>' +
+				'<a href="#" data-step="4" class="prev-step ui-btn ui-btn-icon-left ui-btn-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-back ui-alt-icon ui-nodisc-icon"></a>' +
                                 '<a href="index.html" id="homeButton" rel="external" class="ui-btn ui-btn-icon-right ui-btn-right ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-home ui-alt-icon ui-nodisc-icon">Home</a>' +
                                 '<h1 class="title">' + params.title + '</h1>' +
                             '</div>' +
@@ -447,8 +447,8 @@ var page = {
                     '</fieldset>';*/
             content += '</div>'+
             '<div data-role="footer" class="footer"  data-position="fixed" align="center" style="background:none !important; background-color: #f2f2f2 !important;">'+
-            '<div style="line-height:25px; color:#0086cc;">3 di 3</div>'+
-            '<a href="#" id="saveButton" class="button-confirm next-step" data-step="3">SALVA</a>'+
+            '<div style="line-height:25px; color:#0086cc;">5 di 5</div>'+
+            '<a href="#" id="saveButton" class="button-confirm next-step" data-step="4">SALVA</a>'+
             '</div>';            
             $(selector).html(content).page();
             //inizio
