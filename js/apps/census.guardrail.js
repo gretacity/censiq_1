@@ -145,7 +145,9 @@ var app = {
         // Step 0
         $page0 = $('#guardrailStep0Page');
         $('#acquireQrCodeButton', $page0).on('click', this.acquireQrCode);
-        $('#getCoordinatesPanel', $page0).on('click', this.acquireGeoCoordinates);
+        //$('#getCoordinatesPanel', $page0).on('click', this.acquireGeoCoordinates);
+        
+        /*
         $('#openMapPageButton', $page0).on('click', function() {
             //helper.maximizeContent();
             setTimeout(function() {
@@ -158,6 +160,7 @@ var app = {
                 });
             }, 100);
         });
+        */
         // Step1
         
         
