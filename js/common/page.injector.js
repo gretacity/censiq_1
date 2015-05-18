@@ -565,7 +565,7 @@ var page = {
         var latlng;
         
             geoLocation.reverseGeocoding(pos, function(result) {
-                //console.log(result);
+               
                 if(result) {
                     $('#street', $.mobile.activePage).val(result.road);
                     $('#streetNumber', $.mobile.activePage).val(result.streetNumber);
@@ -578,7 +578,7 @@ var page = {
                     }
                     else
                         $('#comune', $.mobile.activePage).val(result.city);
-                    //console.log(result);
+                    
                 }
             });
         },

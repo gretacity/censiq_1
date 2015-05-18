@@ -140,12 +140,14 @@ app._adjustedCoords = null;
 app.id_map = 'map';
 app._map = null;
 app._marker = null;
+app.addEvent=true;
+app.addMarker=true;
 app.mapLoaded = function() {
     console.log('Map scripts was loaded');
 }
 app.openMap = function() {
     if(typeof(google) == 'undefined') {
-        helper.alert('Il servizio mappe non &egrave; al momento disponibile');
+        helper.alert('Il servizio mappe non è al momento disponibile');
         return false;
     }
 
@@ -165,35 +167,41 @@ app.openMap = function() {
     if(app._map == null) {
         
         app._map = new google.maps.Map(document.getElementById(app.id_map), options);
+        
+      
         var markerPoint = new google.maps.LatLng(lat, lng);///---
-        app._marker = new google.maps.Marker({
-            position: markerPoint,
-            map: app._map,
-            draggable: true,
-            animation: google.maps.Animation.DROP,
-            title: 'Posizione del segnale'
-        });
-        google.maps.event.addListener(
-                app._map,
-                'click',
-                function(e) {
-                    app._marker.setPosition(e.latLng);
+        if(app.addMarker)
+        { 
+            app._marker = new google.maps.Marker({
+                position: markerPoint,
+                map: app._map,
+                draggable: true,
+                animation: google.maps.Animation.DROP,
+                title: 'Posizione'
+            });
+        }
+        if(app.addEvent)
+        {    
+            google.maps.event.addListener(
+                    app._map,
+                    'click',
+                    function(e) {
+                        app._marker.setPosition(e.latLng);
+                        app._adjustedCoords = app._marker.getPosition();                
+                        app.census.position.latitude =app._marker.getPosition().lat();
+                        app.census.position.longitude =app._marker.getPosition().lng();
+                        page.injector.GeoCoordinatesAcquired(app.census.position);   
+                    });
+            google.maps.event.addListener(
+                app._marker, 
+                'dragend', 
+                function() {
                     app._adjustedCoords = app._marker.getPosition();                
                     app.census.position.latitude =app._marker.getPosition().lat();
                     app.census.position.longitude =app._marker.getPosition().lng();
-                    page.injector.GeoCoordinatesAcquired(app.census.position);   
+                    page.injector.GeoCoordinatesAcquired(app.census.position);             
                 });
-        google.maps.event.addListener(
-            app._marker, 
-            'dragend', 
-            function() {
-                app._adjustedCoords = app._marker.getPosition();                
-                app.census.position.latitude =app._marker.getPosition().lat();
-                app.census.position.longitude =app._marker.getPosition().lng();
-                page.injector.GeoCoordinatesAcquired(app.census.position);             
-            });
-           
-          
+        }  
         setTimeout(function(){
             helper.maximizeMap('#'+app.id_map);
         },100);

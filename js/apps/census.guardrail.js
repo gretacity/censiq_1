@@ -14,43 +14,26 @@ var app = {
     STEP_13: 13,
     STEP_14: 14,
     STEP_15: 15,
-    C_LAT:0,
-    C_LON:0,
-    C_ACC:0,
     ACQ_GPS:true,
     ID_GPS:0,    
-    ID_MARKER:null,
     SELECTED_QRCODE: null,
     
     census: new Census(CensusTypes.guardrail),
     localizationPageId: 'guardrailStep0Page',
-    picturesPageId: 'guardrailStep1Page',
-    picturesPageIdd: 'guardrailStep3Page',
+    picturesPageId: 'guardrailStep3Page',
+    picturesPageIdd: 'guardrailStep4Page',
     pageOffsetTop: 0,
     // Application Constructor
     initialize: function() {
         // Custom fields used for localization (street , no/km)
-        var additionalContent = '<li role="listdivider">&nbsp;</li>' +
-                                '<li>' +
-                                    '<label for="comune">Comune</label>' +
-                                    '<input id="comune" placeholder="Comune" />' +
-                                '</li>' +
-                                '<li>' +
-                                    '<label for="provincia">Provincia</label>' +
-                                    '<input id="provincia" placeholder="Provincia" />' +
-                                '</li>' +
-                                '<li>' +
-                                    '<label for="street">Strada / Via</label>' +
-                                    '<input id="street" placeholder="Strada o via" />' +
-                                '</li>' +
-                                '<li>' +
-                                    '<label for="streetNumber">Km / Civico</label>' +
-                                    '<input id="streetNumber" placeholder="Km o numero civico" />' +
-                                '</li>';
+      
+        /* 
         page.injector.injectPage('#guardrailStep0Page', 'localize', {title: 'Guard Rail', footerText: '1 di 3', additionalContent: additionalContent});
-        //page.injector.injectPage('#guardrailStep1Page', '3pictures', {title: 'Guard Rail', footerText: '2 di 4'});
+        */
+        //page.injector.injectPage('#guardrailStep3Page', '3pictures', {title: 'Guard Rail', footerText: '2 di 4'});
+        
         page.injector.injectPage('#summaryPage', 'summary', {continueLink: '#guardrailStep0Page'});
-        page.injector.injectPage('#guardrailStep3Page', 'dinamica', {title: 'Guard Rail', footerText: '3 di 3'});
+        page.injector.injectPage('#guardrailStep4Page', 'dinamica', {title: 'Guard Rail', footerText: '5 di 5'});
         
         var html = '<option>Classe</option>';
         var guardrailClasse = data.guardrail.getGuardrailClasse();
@@ -58,7 +41,6 @@ var app = {
             html += '<option>' + guardrailClasse[i].name + '</option>';
         }
         $('#classe').html(html);
-        
         var html = '<option>Posizione</option>';
         var guardrailSpartitraffico = data.guardrail.getGuardrailSpartitraffico();
         for(var i in guardrailSpartitraffico) {
@@ -126,12 +108,13 @@ var app = {
         document.addEventListener('deviceready', this.onDeviceReady, false);
         // Force onDeviceReady if it's a browser
         if(config.EMULATE_ON_BROWSER) this.onDeviceReady();
-        //$('#closeButton').on('click', app.closeItems); 
-        //$('#deleteButton').on('click', app.deleteItems);
         $pageAdd = $('#localizeGuardrailPage');
         $('#mapGuardrailPage').on('pageshow', this.showMapPage);
         $('#mapLocalizeGuardrailPage').on('pageshow', this.showMapPositionPage);
+        $('#guardrailStep1Page').on('pageshow', this.showMapPositionPage);
         
+        $('#mapresultGuardrailPage').on('pageshow',  this.acquireCoords);
+        $('#guardrailStep2Page').on('pageshow',  this.acquireCoords);
         
         $('#acquireQrCodePointButton', $pageAdd).on('click', this.acquireQrCodePoint);
         $('#getCoordinatesPanelPoint', $pageAdd).on('click', this.acquireGeoCoordinatesPoint);
@@ -173,9 +156,9 @@ var app = {
             }, 100);
         });
         // Step1
+        
+        
         var $page1 = $('#guardrailStep1Page');
-        //var id = $page1[0].id;
-        //console.log('id', id);
         $('a[data-addview]', $page1).on('click', this.acquirePhoto);
         $('a[data-removeview]', $page1).on('click', this.removePhoto);
         //$('a[data-showview]', $page1).on('click', this.showPhotoDialog);
@@ -195,7 +178,6 @@ var app = {
     },
     showPoints: function(id)
     {
-       
         if($('#'+id).height()==0)
         {
             var height=$('#'+id).prop('scrollHeight');
@@ -210,16 +192,9 @@ var app = {
     //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
-    onDeviceReady: function() {
+    onDeviceReady: function() 
+    {
         app.receivedEvent('deviceready');
-    
-        
-        // For Android devices
-        
-       
-        //console.log("DATA FETCH",this);
-        //
-        
         data.fetch({status: [data.REC_STATUS_ADDED, data.REC_STATUS_SYNCH_ERROR]}, function(result) {
             //console.log("RESULT SYNC FETCH",result);
             var itemCount = result.rows.length;
@@ -278,7 +253,6 @@ var app = {
                                         
                                     '</div>'        
                             ;
-                            
                             var child=$(txt);   
                             child.appendTo(parent); 
                         }
@@ -298,16 +272,12 @@ var app = {
                         }    
                         
                         $('#p_child'+obj.guardrail.guardrailInfo.parent).html($("#child"+obj.guardrail.guardrailInfo.parent+" li").length+" "+pt);
-                       
-                       
                     }
                 }
             }
            
  
         });
-        
-        
         $('#qrCode').val(config.QR_CODE_TEST);
         $('#qrCode_point').val(config.QR_CODE_TEST);
         // For Android devices
@@ -341,25 +311,117 @@ var app = {
     {
         data.close(itemId);
     },
-    
+    acquireCoords: function()
+    {
+       
+        var town;
+        var city;
+        var village;
+        var latlng;
+        geoLocation.reverseGeocoding(app.census.position, function(result) 
+        {
+           
+            if(result)
+            {
+                if(jQuery.mobile.path.getLocation().indexOf('guardrailStep2Page')>0)
+                {
+                    $('#street').val(result.road);
+                    $('#provincia').val(result.prov);
+                    if (result.village != null ){                
+                        $('#comune').val(result.village);
+                    }
+                    else if (result.town != null ){                
+                        $(' #comune').val(result.town);
+                    }
+                    else
+                    {    
+                        $('#comune').val(result.city);
+                    }
+                }
+                else
+                {    
+                    $('#street_point').val(result.road);
+                    $('#provincia_point').val(result.prov);
+                    if (result.village != null ){                
+                        $('#comune_point').val(result.village);
+                    }
+                    else if (result.town != null ){                
+                        $(' #comune_point').val(result.town);
+                    }
+                    else
+                    {    
+                        $('#comune_point').val(result.city);
+                    }
+                }
+            }
+        });
+    },
     startGPS :function()
     {
         if(app.ID_GPS!=0)
         {
             clearInterval(app.ID_GPS);
             app.ID_GPS=0;
-            $("#start_gps").html("Start GPS");
-            $("#start_gps").css("color", "#FF1111");
+            if(jQuery.mobile.path.getLocation().indexOf('guardrailStep1Page')>0)
+            {
+                $("#start_gps_0").html("GPS");
+                $("#start_gps_0").css("color", "#FF1111");
+                if(app._marker!=null)
+                {
+                    google.maps.event.addListener(
+                    app._marker, 
+                    'dragend', 
+                    function() {
+                        app._adjustedCoords = app._marker.getPosition();                
+                        app.census.position.latitude =app._marker.getPosition().lat();
+                        app.census.position.longitude =app._marker.getPosition().lng();
+                        $("#latitudine_0").html('Lat:  '+app.census.position.latitude.toFixed(5));
+                        $("#longitudine_0").html('Lon:  '+app.census.position.longitude.toFixed(5));
+                        //page.injector.GeoCoordinatesAcquired(app.census.position);             
+                    });
+                }
+                
+            }
+            else
+            {    
+                $("#start_gps_1").html("GPS");
+                $("#start_gps_1").css("color", "#FF1111");
+                if(app._marker!=null)
+                {
+                    google.maps.event.addListener(
+                    app._marker, 
+                    'dragend', 
+                    function() {
+                        app._adjustedCoords = app._marker.getPosition();                
+                        app.census.position.latitude =app._marker.getPosition().lat();
+                        app.census.position.longitude =app._marker.getPosition().lng();
+                        $("#latitudine_1").html('Lat:  '+app.census.position.latitude.toFixed(5));
+                        $("#longitudine_1").html('Lon:  '+app.census.position.longitude.toFixed(5));
+                        //page.injector.GeoCoordinatesAcquired(app.census.position);             
+                    });
+                }
+                
+            }    
         }
         else
         {
-            app.ID_GPS=setInterval(function(){app.readGPS()},1000);
-            $("#start_gps").html("Stop GPS");
-            $("#start_gps").css("color", "#3388cc");
-        }
+            if(jQuery.mobile.path.getLocation().indexOf('guardrailStep1Page')>0)
+            {
+                google.maps.event.clearListeners(app._marker, 'dragend');
+                app.ID_GPS=setInterval(function(){app.readGPS()},1000);
+                $("#start_gps_0").html("MANUALE");
+                $("#start_gps_0").css("color", "#3388cc");
+            }
+            else
+            {
+                google.maps.event.clearListeners(app._marker, 'dragend');
+                app.ID_GPS=setInterval(function(){app.readGPS()},1000);
+                $("#start_gps_1").html("MANUALE");
+                $("#start_gps_1").css("color", "#3388cc");
+            }
+        }    
+        
     }, 
-     
-
     readGPS :function()
     {
         var map=app._map;
@@ -367,38 +429,55 @@ var app = {
         {
             clearInterval(app.ID_GPS);
         }
-        app.C_LAT=38.2+Math.random()*0.01;
-        app.C_LON=15.7-Math.random()*0.01;
-        app.C_ACC=Math.random()*10; 
-        var markerPoint = new google.maps.LatLng(app.C_LAT,app.C_LON);
-        $("#latitudine").html('Lat:  '+app.C_LAT.toFixed(5));
-        $("#longitudine").html('Lon:  '+app.C_LON.toFixed(5));
-        $("#accuratezza").html('Acc:  '+app.C_ACC.toFixed(1));
+        app.census.position.latitude =38.2+Math.random()*0.01;
+        app.census.position.longitude =15.7-Math.random()*0.01;
+        app.census.position.accuracy=Math.random()*10; 
+        app.census.position.altitude=Math.random()*10; 
+        
+       
         
         
-        if(app.ID_MARKER==null)
-        {    
-          //app.ID_MARKER.setMap(null);
-          var marker = new google.maps.Marker({
-                position: markerPoint,
-                map: map,
-                draggable: false,
-                animation: google.maps.Animation.DROP,
-                title: app.SELECTED_QRCODE
-            });
-            
-
+        var markerPoint = new google.maps.LatLng(app.census.position.latitude,app.census.position.longitude);
+        if(jQuery.mobile.path.getLocation().indexOf('guardrailStep1Page')>0)
+        {
+            $("#latitudine_0").html('Lat:  '+app.census.position.latitude.toFixed(5));
+            $("#longitudine_0").html('Lon:  '+app.census.position.longitude.toFixed(5));
+            $("#accuratezza_0").html('Acc:  '+app.census.position.accuracy.toFixed(1))+' m';
+            $("#altezza_0").html('H:  '+app.census.position.altitude.toFixed(1))+' m';
         }
         else
         {    
-            app.ID_MARKER.setPosition(markerPoint );
+            $("#latitudine_1").html('Lat:  '+app.census.position.latitude.toFixed(5));
+            $("#longitudine_1").html('Lon:  '+app.census.position.longitude.toFixed(5));
+            $("#accuratezza_1").html('Acc:  '+app.census.position.accuracy.toFixed(1))+' m';
+            $("#altezza_1").html('H:  '+app.census.position.altitude.toFixed(1))+' m';
+        }
+       
+
+        
+        
+        if(app._marker==null)
+        {    
+          //app._marker.setMap(null);
+          var marker = new google.maps.Marker({
+                position: markerPoint,
+                map: map,
+                draggable: true,
+                animation: google.maps.Animation.DROP,
+                title: app.SELECTED_QRCODE
+            });
+            var infowindow = new google.maps.InfoWindow({content: '<div>' + app.SELECTED_QRCODE + '</div>'});
+            infowindow.open(map, marker);
+        }
+        else
+        {    
+            app._marker.setPosition(markerPoint );
         }
         
-        var infowindow = new google.maps.InfoWindow({content: '<div>' + app.SELECTED_QRCODE + '</div>'});
-        infowindow.open(map, marker);
-        if(app.ID_MARKER==null)
+      
+        if(app._marker==null)
         { 
-            app.ID_MARKER=marker;
+            app._marker=marker;
             map.panTo(markerPoint);
         }
         
@@ -410,9 +489,23 @@ var app = {
 
     showMapPositionPage: function()
     {
-        $('#start_gps').on('click', function(){app.startGPS();});
+      
+       
         var point=null;
-        app.id_map="map_1";
+        app._map = null;
+        app._marker=null;
+        if(jQuery.mobile.path.getLocation().indexOf('guardrailStep1Page')>0)
+        {
+            $('#start_gps_0').on('click', function(){app.startGPS();});
+            app.id_map="map_0";
+        }
+        else
+        {    
+            $('#start_gps_1').on('click', function(){app.startGPS();});
+            app.id_map="map_1";
+        }
+        app.addEvent=false;
+        app.addMarker=false;
         app.openMap();
         setTimeout( function()
         {
@@ -437,7 +530,11 @@ var app = {
             //console.log("RESULT SYNC FETCH",result);
             var itemCount = result.rows.length;
             var point=null;
-            app.id_map="map_0";
+            app._map = null;
+            app._marker=null;
+            app.addEvent=false;
+            app.addMarker=false;
+            app.id_map="map";
             app.openMap();
             setTimeout( function(){
                 
@@ -516,46 +613,77 @@ var app = {
     
     validateStep: function(stepIndex, stepValidCallback, stepNotValidCallback) {
         var errors = [];
-        if(stepIndex == app.STEP_0) {
-            // Validate step 0
-            if($.trim($('#qrCode').val()) == '') {
+        if(stepIndex == app.STEP_0)
+        {
+            if($.trim($('#qrCode').val()) == '')
+            {
                 errors.push('specificare il QR-code');
                 stepNotValidCallback(errors);
-            } else if($.trim($('#latLng').val()) == '') {
-                helper.confirm('La posizione GPS non è stata specificata.\nVuoi procedere comunque?', function(buttonIndex) {
-                    if(buttonIndex == 2) {
-                        stepNotValidCallback();
-                    } else {
-                        stepValidCallback();
-                    }
-                }, 'Localizzazione GPS', ['Si', 'No']);
-            } else {
+            } else
+            {
                 stepValidCallback();
             }
-        } else if(stepIndex == app.STEP_1) {
+        } 
+        else if(stepIndex == app.STEP_1) 
+        {
             // Validate step 1
             stepValidCallback();
-        } else if(stepIndex == app.STEP_2) {
-            // Validate step 2
+        } 
+        else if(stepIndex == app.STEP_2)
+        {
+           if($.trim($('#comune').val()) == '')
+            {
+                errors.push('specificare Comune');
+                stepNotValidCallback(errors);
+             
+            }
+            else if($.trim($('#provincia').val()) == '')
+            {
+                errors.push('specificare Provincia');
+                stepNotValidCallback(errors);
+             
+            }
+            
+            else if($.trim($('#street').val()) == '')
+            {
+                errors.push('specificare Strada');
+                stepNotValidCallback(errors);
+             
+            } 
+            else if($.trim($('#streetNumber').val()) == '')
+            {
+                errors.push('specificare Km');
+                stepNotValidCallback(errors);
+             
+            } 
+            else 
+            {    
+                stepValidCallback();
+            }
+        } 
+        else if(stepIndex == app.STEP_3)
+        {
             stepValidCallback();
-        } else if(stepIndex == app.STEP_3) {
-            // Validate step 3 
-           //stepValidCallback();}
-           
-            if ($( "#radio-choice-21" ).is(':checked')){
-                if($.trim($('#nameIni').val()) == '') {
+        }
+        else if(stepIndex == app.STEP_4)
+        {
+            if ($( "#radio-choice-21" ).is(':checked'))
+            {
+                if($.trim($('#nameIni').val()) == '')
+                {
                     errors.push('specificare il nome');
                     $('#nameIni').focus();
                     stepNotValidCallback(errors);
                 }
-                else {
+                else
+                {
                     stepValidCallback();
                 }
             }else {
                     stepValidCallback();
                     }
         }
-        if(stepIndex == app.STEP_10)
+        else if(stepIndex == app.STEP_10)
         {
             // Validate step 0
             if($.trim($('#qrCode_point').val()) == '')
@@ -568,29 +696,77 @@ var app = {
                 stepValidCallback();
             }
         }
+        else if(stepIndex == app.STEP_11)
+        {
+                
+            stepValidCallback();
+            
+        }
+        else  if(stepIndex == app.STEP_12)
+        {
+            if($.trim($('#comune_point').val()) == '')
+            {
+                errors.push('specificare Comune');
+                stepNotValidCallback(errors);
+             
+            }
+            else if($.trim($('#provincia_point').val()) == '')
+            {
+                errors.push('specificare Provincia');
+                stepNotValidCallback(errors);
+             
+            }
+            
+            else if($.trim($('#street_point').val()) == '')
+            {
+                errors.push('specificare Strada');
+                stepNotValidCallback(errors);
+             
+            } 
+            else if($.trim($('#streetNumber_point').val()) == '')
+            {
+                errors.push('specificare Km');
+                stepNotValidCallback(errors);
+             
+            } 
+            else 
+            {    
+                stepValidCallback();
+            }
+            
+        }
     },
-    
-    
     stepStarted: function() {
         //
     },
-            
+           
     stepCompleted: function() {   
         
         
         // Current step
         var step = $(this).attr('data-step');        
         // Valitate step once completed
-    
+   
         app.validateStep(step, function() {
             // Success: move forward
-            if(step == app.STEP_0) {
-                //$.mobile.changePage('#guardrailStep1Page');
-            //} else if(step == app.STEP_1) {
+            if(step == app.STEP_0)
+            {
+                 $.mobile.changePage('#guardrailStep1Page');
+            }
+            else if(step == app.STEP_1)
+            {
                 $.mobile.changePage('#guardrailStep2Page');
-            } else if(step == app.STEP_2) {
+            } 
+            else if(step == app.STEP_2) 
+            {
                 $.mobile.changePage('#guardrailStep3Page');
-            } else if(step == app.STEP_3) {
+            }
+            else if(step == app.STEP_3) 
+            {
+                $.mobile.changePage('#guardrailStep4Page');
+            }
+            else if(step == app.STEP_4 || step == app.STEP_12)
+            {
                 app.save();
             }
             else  if(step == app.STEP_10) {
@@ -601,9 +777,14 @@ var app = {
                 if(app.ID_GPS!=0)
                 {
                     clearInterval(app.ID_GPS);
-                }    
-                //$.mobile.changePage('#localizeGuardrailPage');
+                }  
+               
+                $.mobile.changePage('#mapresultGuardrailPage');
             }
+            else
+            {
+               
+            }    
             
         }, function(errors) {
             // Validation failed: display an error message if there is at least one
@@ -619,18 +800,20 @@ var app = {
         
         if(step == app.STEP_0) {
             //$.mobile.changePage('index.html#censusTypePage');
-            $.mobile.back();
-        } else if(step == app.STEP_1) {
+            $.mobile.changePage('census.guardrail.html');
+        } 
+        else if(step == app.STEP_1)
+        {
             $.mobile.changePage('#guardrailStep0Page');
-        } else if(step == app.STEP_2) {
-           // $.mobile.changePage('#guardrailStep1Page');
-        //} else if(step == app.STEP_3) {
-            $.mobile.changePage('#guardrailStep2Page');
+        } 
+        else if(step == app.STEP_2)
+        {
+         
+            $.mobile.changePage('#guardrailStep1Page');
         }
-        else if(step == app.STEP_4) {
-           // $.mobile.changePage('#guardrailStep1Page');
-        //} else if(step == app.STEP_3) {
-            $.mobile.changePage('#guardrailStep4Page');
+        else if(step == app.STEP_4)
+        {
+            $.mobile.changePage('#guardrailStep3Page');
         }
         
         else if(step == app.STEP_10) {
@@ -647,6 +830,12 @@ var app = {
             }    
             $.mobile.changePage('#localizeGuardrailPage');
         }
+         else if(step == app.STEP_12) {
+          $.mobile.changePage('#mapLocalizeGuardrailPage');
+        }
+        
+        
+        
     },
     
    

@@ -43,7 +43,7 @@
             </div>
             
             <div data-role="main">
-                <div id="map_0"></div>
+                <div id="map"></div>
             </div>
             <div data-role="footer" class="footer ui-footer ui-bar-inherit ui-footer-fixed slideup ui-fixed-hidden" data-position="fixed" role="contentinfo"></div>
     	</div>
@@ -89,7 +89,7 @@
         
          <div data-role="page" id='mapLocalizeGuardrailPage'>
             <div data-role="header" class="header" data-position="fixed">
-                <a data-step="11" id="btnback" href="#" class="ui-btn-left toolbar-button-back ui-alt-icon ui-nodisc-icon ui-btn ui-icon-toolbar-button ui-btn-icon-notext prev-step" data-role="button" role="button" ></a>
+                <a data-step="11" href="#" class="ui-btn-left toolbar-button-back ui-alt-icon ui-nodisc-icon ui-btn ui-icon-toolbar-button ui-btn-icon-notext prev-step" data-role="button" role="button" ></a>
                 
             </div>
             
@@ -101,23 +101,27 @@
                 <a href="#"  class="button-next next-step" data-step="11">AVANTI</a>
                 
             </div>
-            <div id="gps_control" style="z-index:1000;position:absolute;top:10px;right:10px;height:45px;overflow:hidden">
-                <div style="float:right;text-align:center;background:#ffffff;padding:12px; border-radius:5px;overflow:hidden;">
-                    <a id="start_gps" style="font-size:14px;font-family:Arial !important;color:#3388cc;font-weight:normal">Stop GPS</a>
+            <div id="gps_control_1" style="z-index:1000;position:absolute;top:10px;right:10px;height:45px;overflow:hidden">
+                <div style="width:95px;float:right;text-align:center;background:#ffffff;padding:12px; border-radius:5px;overflow:hidden;">
+                    <a id="start_gps_1" style="font-size:14px;font-family:Arial !important;color:#3388cc;font-weight:normal">MANUALE</a>
                 </div>
                  <div style="min-width:90px;margin-right:10px;padding:2px;float:right;background:#ffffff; border-radius:5px;overflow:hidden;">
-                     <div id="latitudine" style="font-size:.9em;background:#ffffff;padding:0 5px;overflow:hidden;font-family:Arial !important;color:#3388cc;font-weight:normal">
+                     <div id="latitudine_1" style="font-size:.9em;background:#ffffff;padding:0 5px;overflow:hidden;font-family:Arial !important;color:#3388cc;font-weight:normal">
                          Lat:
                      </div>
-                     <div id="longitudine" style="font-size:.9em;background:#ffffff;padding:0 5px;overflow:hidden;font-family:Arial !important;color:#3388cc;font-weight:normal">
+                     <div id="longitudine_1" style="font-size:.9em;background:#ffffff;padding:0 5px;overflow:hidden;font-family:Arial !important;color:#3388cc;font-weight:normal">
                          Lon:
                      </div>
                      
                 </div> 
                 <div style="min-width:80px;margin-right:10px;padding:2px;float:right;background:#ffffff; border-radius:5px;overflow:hidden;">
-                     <div id="accuratezza" style="font-size:.9em;background:#ffffff;padding:0 5px;overflow:hidden;font-family:Arial !important;color:#3388cc;font-weight:normal">
+                     <div id="accuratezza_1" style="font-size:.9em;background:#ffffff;padding:0 5px;overflow:hidden;font-family:Arial !important;color:#3388cc;font-weight:normal">
                          Acc:
                      </div>
+                     <div id="altezza_1" style="font-size:.9em;background:#ffffff;padding:0 5px;overflow:hidden;font-family:Arial !important;color:#3388cc;font-weight:normal">
+                         H
+                     </div>
+                    
                      
                      
                 </div> 
@@ -126,43 +130,14 @@
     	</div>
         
         
-        <!-- localizeGuardrailPage -->
+        <!-- mapresultGuardrailPage -->
         <div data-role="page" id='mapresultGuardrailPage'>
             <div data-role="header" class="header" data-position="fixed">
-                <a href="#" data-rel="back" class="ui-btn ui-btn-icon-left ui-btn-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-back ui-alt-icon ui-nodisc-icon"></a>
-                <h1>Aquisisci Coordinate</h1>
+                <a data-step="12" href="#" class="ui-btn ui-btn-icon-left ui-btn-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-back ui-alt-icon ui-nodisc-icon prev-step" data-role="button" role="button"></a>
+                <h1>Localizzazione</h1>
             </div>
             <div data-role="main" class="ui-content">
                 <ul data-role="listview" data-inset="false" data-theme="b">
-                    <li data-role="list-divider">
-                        <div>
-                            <img src="img/localizzazione.png" class="ui-li-icon" style="width:2.5em; float:left;">
-                            <h2 style="margin: .65em 0 !important; float:left;"> Localizzazione</h2></div>
-                    </li>
-                    <li id="getCoordinatesPanelPoint" data-icon="refresh">
-                        <a href="#" id="getCoordinatesButtonPoint">
-                            <label id="geoStatusTitle">Ottieni</label>
-                        </a>
-                    </li>
-                    <li>
-                        <input type="hidden" id="latLng" />
-                        <label for="latLng">Latitudine, longitudine e altitudine</label>
-                        <p id="geoStatusText" style="white-space:normal;"></p>
-                    </li>
-
-
-                    <li id="openMapPanel" style="display:none;">
-                        <input type="hidden" id="positionIsCorrect" />
-                        <a href="#" id="openMapPageButton">
-                        <div>
-                                <img src="img/maps.png" class="ui-li-icon" style="width:2.5em; float:left;">
-                                <label>Perfeziona sulla mappa</label>
-                                <p id="correctPositionPanel" style="_font-size:1em;color:#d00;white-space: normal;">
-                                </p>
-                        </div>
-                        </a>
-                    </li>
-                    <li role="listdivider"></li>
                     <li>
                         <label for="comune">Comune</label>
                         <input id="comune_point" placeholder="Comune" />
@@ -176,30 +151,119 @@
                         <input id="street_point" placeholder="Strada o via" />
                     </li>
                     <li>
-                        <label for="streetNumber">Km / Civico</label>
-                        <input id="streetNumber_point" placeholder="Km o numero civico" />
+                        <label for="streetNumber">Km</label>
+                        <input id="streetNumber_point" placeholder="Km" />
                     </li>
                </ul>
             </div>
             <div data-role="footer" class="footer"  data-position="fixed" align="center" style="background:none !important; background-color: #f2f2f2 !important;">
-                <!--<div data-role="controlgroup" data-type="horizontal">-->
-                <a href="#" id="saveButton" class="button-confirm next-step" data-step="3">SALVA</a>
-                <!--<a href="#" id="syncButton" class="button-confirm">SINCRONIZZA</a>-->
-                    <!--<a href="#" id="syncButton" class="ui-btn ui-btn-icon-notext ui-nodisc-icon"  style="display:block; border:none; margin: 0 auto;/* float: right; */background: url('img/sync.png') no-repeat center center;background-size: contain;height: 3em;width: 100%;"></a>
-                    -->
-                <!--</div>-->
+                <a href="#" id="saveButton" class="button-confirm next-step" data-step="12">SALVA</a>
             </div>
     	</div>
+        
+        
         <!-- roadSignStep0Page -->
-        <div data-role="page" id="guardrailStep0Page"></div> 
+        <div data-role="page" id="guardrailStep0Page">
+    
+            <div data-role="header" class="header" data-position="fixed">
+                <a href="#" data-step="0" class="ui-btn ui-btn-icon-left ui-btn-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-back ui-alt-icon ui-nodisc-icon prev-step"></a>
+				<h1>Inquadra QR-Code</h1>
+            </div>
+            <div data-role="main" class="ui-content">
+                <ul data-role="listview" data-inset="false" data-theme="b">
+                    <li data-icon="camera">
+                        <a href="#" id="acquireQrCodePointButton">
+                            <label>Aquisisci da fotocamera</label>
+                        </a>
+                    </li>
+                    <li data-theme="b">
+                        <input type="text" id="qrCode" placeholder="QR code punto" />
+                    </li>
+                </ul>
+            </div>
+            <div data-role="footer" class="footer"  data-position="fixed" align="center" style="background:none !important; background-color: #f2f2f2 !important;">
+                <div style="line-height:25px; color:#0086cc;">1 di 5</div>
+                <a href="#"  class="button-next next-step" data-step="0">AVANTI</a>
+                
+            </div>
+    	</div>    
         <!-- /roadSignStep0Page -->
         
         <!-- roadSignStep1Page -->
-        <div data-role="page" id="guardrailStep1Page"></div>
+        <div data-role="page" id="guardrailStep1Page">
+            <div data-role="header" class="header" data-position="fixed">
+                <a data-step="1" href="#" class="ui-btn-left toolbar-button-back ui-alt-icon ui-nodisc-icon ui-btn ui-icon-toolbar-button ui-btn-icon-notext prev-step" data-role="button" role="button" ></a>
+                
+            </div>
+            
+            <div data-role="main">
+                <div id="map_0"></div>
+            </div>
+            <div data-role="footer" class="footer"  data-position="fixed" align="center" style="background:none !important; background-color: #f2f2f2 !important;">
+                <div style="line-height:25px; color:#0086cc;">2 di 5</div>
+                <a href="#"  class="button-next next-step" data-step="1">AVANTI</a>
+                
+            </div>
+            <div id="gps_control_0" style="z-index:1000;position:absolute;top:10px;right:10px;height:45px;overflow:hidden">
+                <div style="width:95px;float:right;text-align:center;background:#ffffff;padding:12px; border-radius:5px;overflow:hidden;">
+                    <a id="start_gps_0" style="font-size:14px;font-family:Arial !important;color:#3388cc;font-weight:normal">MANUALE</a>
+                </div>
+                 <div style="min-width:90px;margin-right:10px;padding:2px;float:right;background:#ffffff; border-radius:5px;overflow:hidden;">
+                     <div id="latitudine_0" style="font-size:.9em;background:#ffffff;padding:0 5px;overflow:hidden;font-family:Arial !important;color:#3388cc;font-weight:normal">
+                         Lat:
+                     </div>
+                     <div id="longitudine_0" style="font-size:.9em;background:#ffffff;padding:0 5px;overflow:hidden;font-family:Arial !important;color:#3388cc;font-weight:normal">
+                         Lon:
+                     </div>
+                     
+                </div> 
+                <div style="min-width:80px;margin-right:10px;padding:2px;float:right;background:#ffffff; border-radius:5px;overflow:hidden;">
+                     <div id="accuratezza_0" style="font-size:.9em;background:#ffffff;padding:0 5px;overflow:hidden;font-family:Arial !important;color:#3388cc;font-weight:normal">
+                         Acc:
+                     </div>
+                     <div id="altezza_0" style="font-size:.9em;background:#ffffff;padding:0 5px;overflow:hidden;font-family:Arial !important;color:#3388cc;font-weight:normal">
+                         H
+                     </div>
+                    
+                     
+                     
+                </div> 
+            </div>     
+           
+    	</div>    
         <!-- /roadSignStep1Page -->
-     
-        <!-- roadSignStep2Page --> 
         <div data-role="page" id="guardrailStep2Page">
+            <div data-role="header" class="header" data-position="fixed">
+                <a data-step="2" href="#" class="ui-btn ui-btn-icon-left ui-btn-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-back ui-alt-icon ui-nodisc-icon prev-step" data-role="button" role="button"></a>
+                <h1>Localizzazione</h1>
+            </div>
+            <div data-role="main" class="ui-content">
+                <ul data-role="listview" data-inset="false" data-theme="b">
+                    <li>
+                        <label for="comune">Comune</label>
+                        <input id="comune" placeholder="Comune" />
+                    </li>
+                    <li>
+                        <label for="provincia">Provincia</label>
+                        <input id="provincia" placeholder="Provincia" />
+                    </li>
+                    <li>
+                        <label for="street">Strada / Via</label>
+                        <input id="street" placeholder="Strada o via" />
+                    </li>
+                    <li>
+                        <label for="streetNumber">Km</label>
+                        <input id="streetNumber" placeholder="Km" />
+                    </li>
+               </ul>
+            </div>
+            <div data-role="footer" class="footer"  data-position="fixed" align="center" style="background:none !important; background-color: #f2f2f2 !important;">
+                <div style="line-height:25px; color:#0086cc;">3 di 5</div>
+                <a href="#"  class="button-next next-step" data-step="2">AVANTI</a>
+            </div>
+    	</div>    
+        <!-- roadSignStep2Page --> 
+        <div data-role="page" id="guardrailStep3Page">
             <div data-role="header" class="header" data-position="fixed">
                 <a href="#" data-rel="back" class="ui-btn ui-btn-icon-left ui-btn-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-back ui-alt-icon ui-nodisc-icon"></a>
                 <a href="index.html" id="homeButton" rel="external" class="ui-icon-toolbar-button toolbar-button-home ui-btn ui-btn-icon-left ui-nodisc-icon ui-btn-icon-notext">Home</a>
@@ -266,8 +330,8 @@
              
             </div>                         
             <div data-role="footer" class="footer"  data-position="fixed" align="center" style="background:none !important; background-color: #f2f2f2 !important;">
-                <div style="line-height:25px; color:#0086cc;">2 di 3</div>
-                <a href="#" class="button-next next-step" data-step="2">AVANTI</a>
+                <div style="line-height:25px; color:#0086cc;">4 di 5</div>
+                <a href="#" class="button-next next-step" data-step="3">AVANTI</a>
                 
             </div>
         </div>
@@ -277,7 +341,7 @@
         
         <!-- roadSignStep3Page -->
 	
-    	<div data-role="page" id='guardrailStep3Page'>
+    	<div data-role="page" id='guardrailStep4Page'>
             
         </div>
     	<!-- /roadSignStep3Page -->
@@ -288,19 +352,6 @@
         
         <!-- ### DIALOGS ### -->
         
-        <!-- mapPage -->
-        <div data-role="page" data-dialog="true" data-fullscreen="true" id="mapPage">
-             <div data-role="header"  data-position="fixed">
-                <a href="javascript:app.closeMap(false)" class="ui-btn ui-btn-icon-left ui-btn-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-back ui-alt-icon ui-nodisc-icon">Annulla</a>
-				<h1>Mappa</h1>
-                <a href="javascript:app.closeMap(true)" class="ui-btn ui-corner-all ui-icon-check ui-btn-icon-left ui-btn-icon-notext ui-shadow ui-corner-all">Conferma</a>
-			</div>
-            <div data-role="main" class="ui-content">
-                <div id="map" style="height:100%;"></div>
-            </div>
-            <!-- <div data-role="footer" class="footer"  data-position="fixed"></div> -->
-        </div>
-        <!-- /mapPage -->
         
         <!-- listDialog -->
         <div data-role="dialog" id="listDialog">
