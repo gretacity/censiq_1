@@ -170,9 +170,9 @@ var app = {
         //$('a[data-showview]', $page1).on('click', this.showPhotoDialog);
         $('#photoPage a').on('tap', this.hidePhotoDialog);
         //Step 3
-        var $page3 = $('#guardrailStep3Page');
-        $('a[data-addview]', $page3).on('click', this.acquirePhotoSola);
-        $('a[data-removeview]', $page3).on('click', this.removePhotoSola);
+        var $page4 = $('#guardrailStep4Page');
+        $('a[data-addview]', $page4).on('click', this.acquirePhotoSola);
+        $('a[data-removeview]', $page4).on('click', this.removePhotoSola);
         //$('a[data-showview]', $page1).on('click', this.showPhotoDialog);
         
         $('div[data-role="dialog"]').on('create', function() {
