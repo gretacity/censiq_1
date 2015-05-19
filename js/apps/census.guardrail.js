@@ -32,12 +32,13 @@ var app = {
         */
         //page.injector.injectPage('#guardrailStep3Page', '3pictures', {title: 'Guard Rail', footerText: '2 di 4'});
         
-        page.injector.injectPage('#guardrailStep4Page', 'dinamica', {title: 'Guard Rail', footerText: '5 di 5'});
+        //page.injector.injectPage('#guardrailStep4Page', 'dinamica', {title: 'Guard Rail', footerText: '5 di 5'});
         page.injector.injectPage('#summaryPage', 'summary', {continueLink: '#guardrailStep0Page'});
         
         var html = '<option>Classe</option>';
         var guardrailClasse = data.guardrail.getGuardrailClasse();
-        for(var i in guardrailClasse) {
+        for(var i in guardrailClasse) 
+        {
             html += '<option>' + guardrailClasse[i].name + '</option>';
         }
         $('#classe').html(html);
@@ -173,8 +174,97 @@ var app = {
         var $page4 = $('#guardrailStep4Page');
         $('a[data-addview]', $page4).on('click', this.acquirePhotoSola);
         $('a[data-removeview]', $page4).on('click', this.removePhotoSola);
-        //$('a[data-showview]', $page1).on('click', this.showPhotoDialog);
+        $("input[name$='radioGroup']").click(function()
+        {
+            var radio_value =$(this).val();
+            if (radio_value=='0'){
+                $('.chiuso').show();
+                $('.attenuatore').hide();
+                                }
+            if (radio_value=='2'){
+                $('.attenuatore').show();
+                $('.chiuso').hide();
+            }
+            if (radio_value=='1'){
+                $('.chiuso').hide();
+                $('.attenuatore').hide();
+            }
+        });
+        $('.chiuso').hide();
+        $('.attenuatore').hide();
+        $('#alberi').change(function()
+        {
+            if (this.checked)
+            {
+                $('#textAlberi').fadeIn('slow');
+            }
+            else
+            {
+                $('#textAlberi').fadeOut('slow');
+            }
+        });
+        $('#textAlberi').hide();
         
+        $('#pali').change(function()
+        {
+            if (this.checked)
+            {
+                $('#textPali').fadeIn('slow');
+            }
+            else
+            {
+                $('#textPali').fadeOut('slow');
+            }
+        });
+        $('#textPali').hide();
+        $('#portaliSegnaletici').change(function()
+        {
+            if (this.checked)
+            {
+                $('#textPortaliSegnaletici').fadeIn('slow');
+            }
+            else
+            {
+                $('#textPortaliSegnaletici').fadeOut('slow');
+            }
+        });
+        $('#textPortaliSegnaletici').hide();
+        $('#paliIlluminazione').change(function()
+        {
+            if (this.checked)
+            {
+                $('#textPaliIlluminazione').fadeIn('slow');
+            }
+            else
+            {
+                $('#textPaliIlluminazione').fadeOut('slow');
+            }
+        });
+        $('#textPaliIlluminazione').hide();
+        $('#barriereAntirumore').change(function()
+        {
+            if (this.checked)
+            {
+                $('#textBarriereAntirumore').fadeIn('slow');
+            }
+            else
+            {
+                $('#textBarriereAntirumore').fadeOut('slow');
+            }
+        });
+        $('#textBarriereAntirumore').hide();
+        $('#altro').change(function()
+        {
+            if (this.checked)
+            {
+                $('#textAltro').fadeIn('slow');
+            }
+            else
+            {
+                $('#textAltro').fadeOut('slow');
+            }
+        });
+        $('#textAltro').hide();
         $('div[data-role="dialog"]').on('create', function() {
             app.pageOffsetTop = $(this).offset().top;
         });
@@ -218,7 +308,7 @@ var app = {
                         var name = data.shortDescription(obj);
                         var qrCode = obj.qrCode;
                         var dateAdded = Date.parseFromYMDHMS(row.date_added).toDMYHMS();
-                        html += '<li style="padding:0;' + (false ? 'background-color:#f00;' : '') + '">' + 
+                        html += '<li id="row'+obj.id+'" style="padding:0;' + (false ? 'background-color:#f00;' : '') + '">' + 
                                 '<img onclick="app.deleteItems(\''+obj.id+'\')" src="img/delete.png" style="float:right;margin-right:10px; height:32px;width: 32px">'+
                                 '<img onclick="app.closeItems(\''+obj.id+'\')" src="img/close.png" style="float:right;margin-right:10px; height:32px;width: 32px">'+
                                 '<img onclick="app.updateItems(\''+qrCode+'\')" src="img/add_car.png" style="float:right;margin-right:10px; height:32px;width: 32px">'+
@@ -246,7 +336,7 @@ var app = {
                 if(row.entity_type==3)
                 {
                     var obj = data.deserialize(row, row.entity_type);
-
+                    console.log(obj.guardrail.guardrailInfo);
                     if(obj.guardrail.guardrailInfo.inizio!=1)
                     {   
                         var parent=$("#row"+obj.guardrail.guardrailInfo.parent);
@@ -436,57 +526,63 @@ var app = {
         {
             clearInterval(app.ID_GPS);
         }
-        app.census.position.latitude =38.2+Math.random()*0.01;
-        app.census.position.longitude =15.7-Math.random()*0.01;
-        app.census.position.accuracy=Math.random()*10; 
-        app.census.position.altitude=Math.random()*10; 
         
-       
-        
-        
-        var markerPoint = new google.maps.LatLng(app.census.position.latitude,app.census.position.longitude);
-        if(jQuery.mobile.path.getLocation().indexOf('guardrailStep1Page')>0)
+        geoLocation.acquireGeoCoordinates(function(pos)
         {
-            $("#latitudine_0").html('Lat:  '+app.census.position.latitude.toFixed(5));
-            $("#longitudine_0").html('Lon:  '+app.census.position.longitude.toFixed(5));
-            $("#accuratezza_0").html('Acc:  '+app.census.position.accuracy.toFixed(1))+' m';
-            $("#altezza_0").html('H:  '+app.census.position.altitude.toFixed(1))+' m';
-        }
-        else
-        {    
-            $("#latitudine_1").html('Lat:  '+app.census.position.latitude.toFixed(5));
-            $("#longitudine_1").html('Lon:  '+app.census.position.longitude.toFixed(5));
-            $("#accuratezza_1").html('Acc:  '+app.census.position.accuracy.toFixed(1))+' m';
-            $("#altezza_1").html('H:  '+app.census.position.altitude.toFixed(1))+' m';
-        }
-       
+            
+            
+            app.census.position.latitude =pos.latitude;
+            app.census.position.longitude =pos.longitude;
+            app.census.position.accuracy=pos.accuracy; 
+            app.census.position.altitude=pos.altitude;;
+            
+            var markerPoint = new google.maps.LatLng(app.census.position.latitude,app.census.position.longitude);
+            if(jQuery.mobile.path.getLocation().indexOf('guardrailStep1Page')>0)
+            {
+                $("#latitudine_0").html('Lat:  '+app.census.position.latitude.toFixed(5));
+                $("#longitudine_0").html('Lon:  '+app.census.position.longitude.toFixed(5));
+                $("#accuratezza_0").html('Acc:  '+app.census.position.accuracy.toFixed(1))+' m';
+                $("#altezza_0").html('H:  '+app.census.position.altitude.toFixed(1))+' m';
+            }
+            else
+            {    
+                $("#latitudine_1").html('Lat:  '+app.census.position.latitude.toFixed(5));
+                $("#longitudine_1").html('Lon:  '+app.census.position.longitude.toFixed(5));
+                $("#accuratezza_1").html('Acc:  '+app.census.position.accuracy.toFixed(1))+' m';
+                $("#altezza_1").html('H:  '+app.census.position.altitude.toFixed(1))+' m';
+            }
+            if(app._marker==null)
+            {    
+              var marker = new google.maps.Marker({
+                    position: markerPoint,
+                    map: map,
+                    draggable: true,
+                    animation: google.maps.Animation.DROP,
+                    title: app.SELECTED_QRCODE
+                });
+                var infowindow = new google.maps.InfoWindow({content: '<div>' + app.SELECTED_QRCODE + '</div>'});
+                infowindow.open(map, marker);
+            }
+            else
+            {    
+                app._marker.setPosition(markerPoint );
+            }
 
+
+            if(app._marker==null)
+            { 
+                app._marker=marker;
+                map.panTo(markerPoint);
+            }    
+               
+        }, 
+        function(e)
+        {
+
+        });
         
         
-        if(app._marker==null)
-        {    
-          //app._marker.setMap(null);
-          var marker = new google.maps.Marker({
-                position: markerPoint,
-                map: map,
-                draggable: true,
-                animation: google.maps.Animation.DROP,
-                title: app.SELECTED_QRCODE
-            });
-            var infowindow = new google.maps.InfoWindow({content: '<div>' + app.SELECTED_QRCODE + '</div>'});
-            infowindow.open(map, marker);
-        }
-        else
-        {    
-            app._marker.setPosition(markerPoint );
-        }
-        
-      
-        if(app._marker==null)
-        { 
-            app._marker=marker;
-            map.panTo(markerPoint);
-        }
+            
         
         if(app.ACQ_GPS)
         {
@@ -554,7 +650,7 @@ var app = {
                         var obj = data.deserialize(row, row.entity_type);
                         if(obj.guardrail.guardrailInfo.parent== app.SELECTED_QRCODE || obj.qrCode==app.SELECTED_QRCODE)
                         {
-                            var markerPoint = new google.maps.LatLng(obj.position.latitude+i+34.3333333, obj.position.longitude-i+14.534);
+                            var markerPoint = new google.maps.LatLng(obj.position.latitude, obj.position.longitude);
                             if(obj.qrCode==app.SELECTED_QRCODE)
                             {
                                 point=markerPoint;
@@ -589,15 +685,32 @@ var app = {
         app.SELECTED_QRCODE=qrCode;        
     },
 
-    updateItems: function(qrCode){
-           
-            $('#parent','#localizeGuardrailPage').val(qrCode);
-            $.mobile.changePage('#localizeGuardrailPage', {
-                transition: 'slide',
-                reverse: false,
-                changeHash: false
-                });
-        },
+    updateItems: function(qrCode)
+    {
+        data.fetch({status: [data.REC_STATUS_ADDED, data.REC_STATUS_SYNCH_ERROR]}, function(result)
+        {
+            var itemCount = result.rows.length;
+            var seq=2;
+            for(var i = 0; i < itemCount; i++) 
+            {
+                var row = result.rows.item(i);
+                var obj = data.deserialize(row, row.entity_type);
+                if(obj.guardrail.guardrailInfo.parent== qrCode)
+                {
+                    seq++;
+                }
+            
+            }
+            $('#localizeGuardrailPage #sequenza_point').val(seq);
+            
+        });
+        $('#parent','#localizeGuardrailPage').val(qrCode);
+        $.mobile.changePage('#localizeGuardrailPage', {
+            transition: 'slide',
+            reverse: false,
+            changeHash: false
+        });
+    },
         
 
 
@@ -863,6 +976,10 @@ var app = {
             app.census.qrCode = $('#qrCode_point').val();
             //var inizio_point=1;
         }
+        
+        
+        
+        
         //app.census.position.latitude = '';    // Already set
         //app.census.position.longitude = '';   // Already set
         //app.census.position.accuracy = '';    // Already set
@@ -943,12 +1060,18 @@ var app = {
         guardrailInfo.classeAttenuatore=$('#classeAttenuatore').val();
         //guardrailInfo.fine = $('input[type="radio"].guardrail-mark2:checked').val();
         //guardrailInfo.kmFine = $('#kmFine').val();
-        guardrailInfo.nomei = $('#nameIni').val();                                 // nome inizio
+        guardrailInfo.nomei = $('#nameIni').val();           
+        // nome inizio
+        if($('#sequenza_point').val()!='')
+        {    
+            guardrailInfo.sequenza = $('#sequenza_point').val();
+        }
+        else
+        {
+            guardrailInfo.sequenza=1;
+        }    
         
-        
-        
-        
-        //guardrailInfo.sequenzai = $('#SeqIni').val();                              // numero sequenza iniziale
+        //guardrailInfo.sequenza = $('#SeqIni').val();                              // numero sequenza iniziale
         guardrailInfo.chiuso =0;
 
         //guardrailInfo.nomei=$('#nomeIni').val();                              // nome inizio associato
@@ -969,11 +1092,12 @@ r        console.log("GUARD APPS",guardInfo);
         //data.roadSign.updateSupportTables(supportTableData);
         */
         data.save(app.census);
-        
+        $('#sequenza_point', $page).val('');
         
         // Once saved the census, empty fields of all the steps
         var $page = $('#guardrailStep0Page');
         $('input[type="text"]', $page).val('');
+        
         $('input[type="hidden"]', $page).val('');
         $('#geoStatusText', $page).html('Latitudine e longitudine');
         $('#geoStatusTitle', $page).html('Ottieni');

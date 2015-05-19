@@ -36,7 +36,7 @@ guardrail.guardrailInfo = function() {
     this.marking ='';                               // Inizio Tratto
     this.marking2 = '';                             // Fine Tratto
     this.nomei='';                                  //nome inizio
-    this.sequenzai='';                              //numero sequenza
+    this.sequenza='';                              //numero sequenza
     this.nomea='';                                 //nome associato inizio
 };*/
 
@@ -140,7 +140,7 @@ data.guardrail = {
                 parent: entity.guardrail.guardrailInfo.parent,
                 civico_fine:entity.guardrail.guardrailInfo.kmFine,
                 fine: entity.guardrail.guardrailInfo.fine,
-                sequenza: entity.guardrail.guardrailInfo.sequenzai,
+                sequenza: entity.guardrail.guardrailInfo.sequenza,
                 nome_inizio: entity.guardrail.guardrailInfo.nomei,
                 inizio:entity.guardrail.guardrailInfo.inizio,
                 chiuso: entity.guardrail.guardrailInfo.chiuso
@@ -183,7 +183,7 @@ data.guardrail = {
                 for(var i in params.manufacturers) {
                     var row = params.manufacturers[i];
                     var q = "insert or replace into gr_censimento_guardrail (numero_nastri_smontaggio, numero_pali_smontaggio, gruppi_terminali_smontaggio, tipologia_barriera_smontaggio, numero_nastri_montaggio, numero_pali_montaggio, gruppi_terminali_montaggio, tipologia_barriera_montaggio,parent, fine, sequenza) values (?, ?,?, ?,?, ?,?,?, ?, ?, ?,?, ?,?, ?)";
-                    t.executeSql(q, [row.guardrailInfo.nastri, row.guardrailInfo.pali, row.guardrailInfo.terminali,row.guardrailInfo.barriera, row.guardrailInfo.Mnastri,row.guardrailInfo.Mpali, row.guardrailInfo.Mterminali, row.guardrailInfo.Mbarriera,row.guardrailInfo.parent, row.guardrailInfo.fine, row.guardrailInfo.sequenzai ]);
+                    t.executeSql(q, [row.guardrailInfo.nastri, row.guardrailInfo.pali, row.guardrailInfo.terminali,row.guardrailInfo.barriera, row.guardrailInfo.Mnastri,row.guardrailInfo.Mpali, row.guardrailInfo.Mterminali, row.guardrailInfo.Mbarriera,row.guardrailInfo.parent, row.guardrailInfo.fine, row.guardrailInfo.sequenza ]);
                 }
             }
         });

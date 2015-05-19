@@ -62,6 +62,11 @@
                         <label for="parent">Qr Code Inizio </label>
                         <input type="text" id="parent" readonly="readonly"/>
                     </li>
+                     <li>
+                        <!-- <input type="hidden" id="inizio" value="2" /> -->
+                        <label for="parent">Sequenza </label>
+                        <input type="text" id="sequenza_point" readonly="readonly" value=''/>
+                    </li>
                     <li data-role="list-divider">
                         <div>
                             <img src="img/identificazione.png" class="ui-li-icon" style="width:2.5em; float:left;">
@@ -179,6 +184,7 @@
                     <li data-theme="b">
                         <input type="text" id="qrCode" placeholder="QR code punto" />
                     </li>
+                   
                 </ul>
             </div>
             <div data-role="footer" class="footer"  data-position="fixed" align="center" style="background:none !important; background-color: #f2f2f2 !important;">
@@ -339,9 +345,169 @@
         
        
         
-        <!-- roadSignStep3Page -->
-	<div data-role="page" id='guardrailStep4Page'></div>
-    	<!-- /roadSignStep3Page -->
+        <!-- roadSignStep4Page -->
+        <div data-role="page" id='guardrailStep4Page'>
+            <div data-role="header" data-position="fixed">
+				<a href="#" data-step="4" class="prev-step ui-btn ui-btn-icon-left ui-btn-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-back ui-alt-icon ui-nodisc-icon"></a>
+                                <a href="index.html" id="homeButton" rel="external" class="ui-btn ui-btn-icon-right ui-btn-right ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-home ui-alt-icon ui-nodisc-icon">Home</a>
+                                <h1 class="title">Guard Rail </h1>
+                            </div>
+                            <div data-role="main" class="ui-content">
+            
+                    <fieldset data-role="controlgroup1">
+                    <div class="InizioSi">
+                    <label>Etichetta inizio tratta</label>
+                    <input type="text" id="nameIni" placeholder="Nome tratta" required/>
+                    <input type="hidden" id="inizio" value="1"/>
+                    <legend> Cuspide o terminale barriera stradale</legend>
+                    <div data-role="collapsible-set" data-collapsed="true">
+                    <div data-role="collapsible" data-collapsed="true" data-collapsed-icon="carat-r" data-expanded-icon="carat-d">
+                        <h1>Foto generale ubicativa</h1>
+                        <ul data-role="listview" data-theme="b">
+                            <li>
+                                <h4>Foto</h4>
+                                    <div style="text-align:center;">
+                                        <a href="#" data-viewtype="foto0" data-showview style="display:none;">
+                                            <img src="" style="width:100%" />
+                                        </a>
+                                        <a href="#" data-viewtype="foto0" data-removeview class="ui-btn ui-icon-delete ui-btn-icon-left" style="display:none;">rimuovi</a>
+                                        <a href="#" data-viewtype="foto0" data-addview class="ui-btn ui-icon-camera ui-btn-icon-left">acquisisci</a>
+                                    </div>
+                           </li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible" data-collapsed="true" data-collapsed-icon="carat-r" data-expanded-icon="carat-d">
+                        <h1>Continuità strutturale con elemento precendente</h1>
+                        <ul data-role="listview" data-theme="b">
+                            <li>
+                                <h4>Foto</h4>
+                                    <div style="text-align:center;">
+                                        <a href="#" data-viewtype="foto1" data-showview style="display:none;">
+                                            <img src="" style="width:100%" />
+                                        </a>
+                                        <a href="#" data-viewtype="foto1" data-removeview class="ui-btn ui-icon-delete ui-btn-icon-left" style="display:none;">rimuovi</a>
+                                        <a href="#" data-viewtype="foto1" data-addview class="ui-btn ui-icon-camera ui-btn-icon-left">acquisisci</a>
+                                    </div>
+                           </li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible" data-collapsed="true" data-collapsed-icon="carat-r" data-expanded-icon="carat-d">
+                        <h1>Elemento terminale standard (manine)</h1>
+                        <ul data-role="listview" data-theme="b">
+                            <li>
+                                <h4>Foto</h4>
+                                    <div style="text-align:center;">
+                                        <a href="#" data-viewtype="foto2" data-showview style="display:none;">
+                                            <img src="" style="width:100%" />
+                                        </a>
+                                        <a href="#" data-viewtype="foto2" data-removeview class="ui-btn ui-icon-delete ui-btn-icon-left" style="display:none;">rimuovi</a>
+                                        <a href="#" data-viewtype="foto2" data-addview class="ui-btn ui-icon-camera ui-btn-icon-left">acquisisci</a>
+                                    </div>
+                           </li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible" data-collapsed="true" data-collapsed-icon="carat-r" data-expanded-icon="carat-d">
+                        <h1>Elemento terminale non standard</h1>
+                        <ul data-role="listview" data-theme="b">
+                            <li>
+                                <h4>Foto</h4>
+                                    <div style="text-align:center;">
+                                        <a href="#" data-viewtype="foto3" data-showview style="display:none;">
+                                            <img src="" style="width:100%" />
+                                        </a>
+                                        <a href="#" data-viewtype="foto3" data-removeview class="ui-btn ui-icon-delete ui-btn-icon-left" style="display:none;">rimuovi</a>
+                                        <a href="#" data-viewtype="foto3" data-addview class="ui-btn ui-icon-camera ui-btn-icon-left">acquisisci</a>
+                                    </div>
+                           </li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible" data-collapsed="true" data-collapsed-icon="carat-r" data-expanded-icon="carat-d">
+                        <h1>Variazione altimetrica nastro (ricurvo verso il basso)</h1>
+                        <ul data-role="listview" data-theme="b">
+                            <li>
+                                <h4>Foto</h4>
+                                    <div style="text-align:center;">
+                                        <a href="#" data-viewtype="foto4" data-showview style="display:none;">
+                                            <img src="" style="width:100%" />
+                                        </a>
+                                        <a href="#" data-viewtype="foto4" data-removeview class="ui-btn ui-icon-delete ui-btn-icon-left" style="display:none;">rimuovi</a>
+                                        <a href="#" data-viewtype="foto4" data-addview class="ui-btn ui-icon-camera ui-btn-icon-left">acquisisci</a>
+                                    </div>
+                           </li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible" data-collapsed="true" data-collapsed-icon="carat-r" data-expanded-icon="carat-d">
+                        <h1>Variazione planimetrica nastro (ricurvo posteriormente)</h1>
+                        <ul data-role="listview" data-theme="b">
+                            <li>
+                                <h4>Foto</h4>
+                                    <div style="text-align:center;">
+                                        <a href="#" data-viewtype="foto5" data-showview style="display:none;">
+                                            <img src="" style="width:100%" />
+                                        </a>
+                                        <a href="#" data-viewtype="foto5" data-removeview class="ui-btn ui-icon-delete ui-btn-icon-left" style="display:none;">rimuovi</a>
+                                        <a href="#" data-viewtype="foto5" data-addview class="ui-btn ui-icon-camera ui-btn-icon-left">acquisisci</a>
+                                    </div>
+                           </li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible" data-collapsed="true" data-collapsed-icon="carat-r" data-expanded-icon="carat-d">
+                        <h1>Elemento terminale speciale</h1>
+                        <ul data-role="listview" data-theme="b">
+                            <li>
+                                <label for="classeElemento">Classe Elemento</label>
+                                <select id="classeElemento" data-theme="b"></select>
+                                <h4>Foto</h4>
+                                    <div style="text-align:center;">
+                                        <a href="#" data-viewtype="foto6" data-showview style="display:none;">
+                                            <img src="" style="width:100%" />
+                                        </a>
+                                        <a href="#" data-viewtype="foto6" data-removeview class="ui-btn ui-icon-delete ui-btn-icon-left" style="display:none;">rimuovi</a>
+                                        <a href="#" data-viewtype="foto6" data-addview class="ui-btn ui-icon-camera ui-btn-icon-left">acquisisci</a>
+                                    </div>
+                           </li>
+                        </ul>
+                    </div> 
+                    </div>
+                    <legend>Presenza di ostacoli non cedevoli a tergo della carreggiata</legend>
+                    <input type="checkbox" id="alberi"/> <label for="alberi"> Alberi </label>
+                    <div id="textAlberi" class="textAlberi"><input type="text" id="nAlberi" placeholder="n°"/></div>
+                    <input type="checkbox" id="pali"/> <label for="pali"> Pali</label>
+                    <div id="textPali" class="textPali"><input type="text" id="nPali" placeholder="n°"/></div>
+                    <input type="checkbox" id="paliIlluminazione"/> <label for="paliIlluminazione"> Pali illuminazione</label>
+                    <div id="textPaliIlluminazione" class="textPaliIlluminazione"><input type="text" id="nPaliIlluminazione" placeholder="n°"/></div>
+                    <input type="checkbox" id="portaliSegnaletici"/> <label for="portaliSegnaletici"> Portali segnaletici</label>
+                    <div id="textPortaliSegnaletici" class="textPortaliSegnaletici"><input type="text" id="nPortaliSegnaletici" placeholder="n°"/></div>
+                    <input type="checkbox" id="barriereAntirumore"/> <label for="barriereAntirumore"> Barriere antirumore</label>
+                    <div id="textBarriereAntirumore" class="textBarriereAntirumore"><input type="text" id="nBarriereAntirumore" placeholder="n°"/></div>
+                    <input type="checkbox" id="altro"/> <label for="altro"> Altro</label>
+                    <div id="textAltro" class="textAltro"><input type="text" id="nAltro" placeholder="n°"/></div>
+                    <legend>Presenza di by-pass o apertura varchi (principalmente di tipo A e B)</legend>
+                    <input type="radio" name="radioGroup" class="guardrail-mark3" id="aperto" value="1" /> <label for="aperto">Aperto</label>
+                    <input type="radio" name="radioGroup" class="guardrail-mark3" id="chiuso" value="0" /> <label for="chiuso">Chiuso con dispositivo di protezione mobile</label>
+                    <div class="chiuso">
+                        <label for="classeChiuso">Classe</label>
+                        <select id="classeChiuso" data-theme="b"></select>
+                    </div>
+                    <input type="radio" name="radioGroup" class="guardrail-mark3" id="attenuatore" value="2" /> <label for="attenuatore">Presenza di attenuatori d urto di testata</label>
+                    <div class="attenuatore">
+                        <label for="classeAttenuatore">Classe</label>
+                        <select id="classeAttenuatore" data-theme="b"></select>
+                    </div>
+                    </div>
+                </fieldset>
+                   
+            </div>
+            <div data-role="footer" class="footer"  data-position="fixed" align="center" style="background:none !important; background-color: #f2f2f2 !important;">
+            <div style="line-height:25px; color:#0086cc;">5 di 5</div>
+            <a href="#" id="saveButton" class="button-confirm next-step" data-step="4">SALVA</a>
+            </div>   
+            
+            
+            
+            
+        </div>
+    	<!-- /roadSignStep4Page -->
         
         <div data-role="page" id="summaryPage"></div>
         

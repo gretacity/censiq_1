@@ -93,7 +93,7 @@ var geoLocation = {
         var url = 'http://nominatim.openstreetmap.org/reverse?format=json&addressdetails=1&zoom=18&lat=' + params.latitude +'&lon=' + params.longitude;
         
         $.get(url, function(result) {
-            console.log("result",result);
+            
             var retVal = {
                 prov: result.address.county,
                 city: result.address.city,

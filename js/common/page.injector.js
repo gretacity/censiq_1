@@ -264,17 +264,10 @@ var page = {
                             '<div data-role="main" class="ui-content">';
             
             content += '<fieldset data-role="controlgroup1">'+
-                    /* '<legend>Inizio tratto:</legend>'+
-                    '<input type="radio" name="radio-choice-2" class="guardrail-mark" id="radio-choice-21" value="1" /> <label for="radio-choice-21">Si</label>'+
-                    '<input type="radio"  name="radio-choice-2" class="guardrail-mark" id="radio-choice-22" value="0"  /> <label for="radio-choice-22">No</label>'+
-                    //--- 
-            */
                     '<div class="InizioSi">'+
                     '<label>Etichetta inizio tratta</label>'+
                     '<input type="text" id="nameIni" placeholder="Nome tratta" required/>'+
                     '<input type="hidden" id="inizio" value="1" />'+
-                    //'<label>Prog. km inizio tratta</label>'+
-                    //'<input type="text" id="kmInizio" placeholder="inserire nel senso crescente" required/>'+
                     '<legend>Cuspide o terminale barriera stradale</legend>'+
                     '<div data-role="collapsible-set" data-collapsed="true">'+
                     '<div data-role="collapsible" data-collapsed="true" data-collapsed-icon="carat-r" data-expanded-icon="carat-d">'+
@@ -383,8 +376,8 @@ var page = {
                                     '</div>' +
                            '</li>'+
                         '</ul>'+
-                    '</div>'+ //fine collapse
-                    '</div>'+//fine collapse globale
+                    '</div>'+ 
+                    '</div>'+
                     '<legend>Presenza di ostacoli non cedevoli a tergo della carreggiata</legend>'+
                     '<input type="checkbox" id="alberi"/> <label for="alberi"> Alberi </label> '+
                     '<div id="textAlberi" class="textAlberi"><input type="text" id="nAlberi" placeholder="n°"/></div>'+
@@ -410,41 +403,9 @@ var page = {
                         '<label for="classeAttenuatore">Classe</label>'+
                         '<select id="classeAttenuatore" data-theme="b"></select>'+
                     '</div>'+
-                    '</div>';//fine div inizio SI 
-                    /*'<div class="InizioNo">'+
-                    '<label>Sequenza</label>'+
-                    '<input type="number" id="SeqIni" placeholder="numero sequenza"/>'+
-                    '<label>Scegli Guardrail</label>'+
-                    //'<input type="text" id="nomiInizio" placeholder="Nome inizio"/>  </div>'+
-                    '<select id="nomiInizio">'+
-                    '<option value="0">Nome Inizio</option>';
-                    var NameIniziali = data.guardrail.getNomi();
-                    /*console.log("NOME INIZIO",NameIniziali);
-                    for(var i in NameIniziali) {
-                         content += '<option>' + NameIniziali[i].name + '</option>';
-                    }***/
-            //content+='</select>'+
-                    //'</div>'+
+                    '</div>';
                 content+='</fieldset>';
-                    /*'<fieldset data-role="controlgroup2">'+
-                    //---
-                    '<legend>Fine tratto:</legend>'+
-                    '<input type="radio" name="radio-choice-21" class="guardrail-mark2" id="radio-choice-211" value="1" /> <label for="radio-choice-211">Si</label>'+
-                    '<input type="radio" name="radio-choice-21" class="guardrail-mark2" id="radio-choice-221" value="0" /> <label for="radio-choice-221">No</label>'+
-                    '<div class="FineSi">'+
-                    '<label>Prog. km fine tratta</label>'+
-                    '<input type="text" id="kmFine" placeholder="inserire nel senso crescente" required/>'+
-                    '<h4>Foto Finale</h4> '+
-                    //'<input type="hidden" id="chiuso" value="1"/>'+
-                        '<div style="text-align:center;">' +
-                            '<a href="#" data-viewtype="foto7" data-showview style="display:none;">' +
-                                '<img src="" style="width:100%" />' +
-                            '</a>' +
-                            '<a href="#" data-viewtype="foto7" data-removeview class="ui-btn ui-icon-delete ui-btn-icon-left" style="display:none;">rimuovi</a>' +
-                            '<a href="#" data-viewtype="foto7" data-addview class="ui-btn ui-icon-camera ui-btn-icon-left">acquisisci</a>' +
-                        '</div>' +
-                    '</div>'+
-                    '</fieldset>';*/
+                   
             content += '</div>'+
             '<div data-role="footer" class="footer"  data-position="fixed" align="center" style="background:none !important; background-color: #f2f2f2 !important;">'+
             '<div style="line-height:25px; color:#0086cc;">5 di 5</div>'+
