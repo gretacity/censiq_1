@@ -81,7 +81,7 @@ app.acquireGeoCoordinates1 = function(successCallback, errorCallback) {
    geoLocation.acquireGeoCoordinates(
             function(position)
             {
-                helper.alert("OK");
+               
                 app.census.position.latitude = position.coords.latitude;
                 app.census.position.longitude = position.coords.longitude;
                 app.census.position.accuracy = position.coords.accuracy;
@@ -91,7 +91,7 @@ app.acquireGeoCoordinates1 = function(successCallback, errorCallback) {
             function(errorMessage, error) 
             {
                
-                helper.alert(errorMessage);
+               
                 $("#map_0").html(errorMessage);
                 $("#map_1").html(errorMessage);
                

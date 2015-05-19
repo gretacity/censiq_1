@@ -521,10 +521,6 @@ var app = {
     }, 
     readGPS :function()
     {
-        
-        
-        
-        var map=app._map;
         if(app.ID_GPS!=0)
         {
             clearInterval(app.ID_GPS);
@@ -533,7 +529,8 @@ var app = {
             app.acquireGeoCoordinates1(
             function()
             {
-                
+                 helper.alert("OK1");
+                var map=app._map;
                 var markerPoint = new google.maps.LatLng(app.census.position.latitude,app.census.position.longitude);
                 if(jQuery.mobile.path.getLocation().indexOf('guardrailStep1Page')>0)
                 {
@@ -585,17 +582,18 @@ var app = {
                 }
                 if(app.ACQ_GPS)
                 {
-                    app.ID_GPS=setInterval(function(){app.readGPS()},1000);
+                    app.ID_GPS=setInterval(function(){app.readGPS()},5000);
                 }
             }, 
             function(errorMessage)
             {
+                  helper.alert("NOT OK");
                 $("#map_0").html(errorMessage);
                 $("#map_1").html(errorMessage);
                
                 if(app.ACQ_GPS)
                 {
-                    app.ID_GPS=setInterval(function(){app.readGPS()},3000);
+                    app.ID_GPS=setInterval(function(){app.readGPS()},5000);
                 }
                 
             }
