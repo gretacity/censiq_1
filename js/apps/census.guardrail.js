@@ -534,6 +534,7 @@ var app = {
             app.census.position.longitude =pos.coords.longitude;
             app.census.position.accuracy=pos.coords.accuracy; 
             app.census.position.altitude=pos.coords.altitude;
+            
          $("#latitudine_0").html('Lat:  fine');    
             var markerPoint = new google.maps.LatLng(app.census.position.latitude,app.census.position.longitude);
             if(jQuery.mobile.path.getLocation().indexOf('guardrailStep1Page')>0)
@@ -582,7 +583,8 @@ var app = {
         function(e)
         {
             errors.push('GPS inattivo o copertura insufficiente');
-            
+             $("#latitudine_0").html('Lat:  inizio');
+              $("#latitudine_1").html('Lat:  inizio');
             if(app.ACQ_GPS)
             {
                 app.ID_GPS=setInterval(function(){app.readGPS()},3000);
