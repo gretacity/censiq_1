@@ -48,6 +48,8 @@ var geoLocation = {
             // success
             if(successCallback) successCallback(position);
         }, function (error) {
+            
+            
             // error
             // Impossibile recuperare le coordinate geografiche.                                                    
             var errorMessage = '';

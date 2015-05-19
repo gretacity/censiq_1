@@ -529,12 +529,11 @@ var app = {
         
         geoLocation.acquireGeoCoordinates(function(pos)
         {
-            
-            
-            app.census.position.latitude =pos.latitude;
-            app.census.position.longitude =pos.longitude;
-            app.census.position.accuracy=pos.accuracy; 
-            app.census.position.altitude=pos.altitude;;
+            console.log(pos);
+            app.census.position.latitude =pos.coords.latitude;
+            app.census.position.longitude =pos.coords.longitude;
+            app.census.position.accuracy=pos.coords.accuracy; 
+            app.census.position.altitude=pos.coords.altitude;;
             
             var markerPoint = new google.maps.LatLng(app.census.position.latitude,app.census.position.longitude);
             if(jQuery.mobile.path.getLocation().indexOf('guardrailStep1Page')>0)
@@ -573,21 +572,27 @@ var app = {
             { 
                 app._marker=marker;
                 map.panTo(markerPoint);
+            } 
+            if(app.ACQ_GPS)
+            {
+                app.ID_GPS=setInterval(function(){app.readGPS()},1000);
             }    
                
         }, 
         function(e)
         {
-
+            errors.push('GPS inattivo o copertura insufficiente');
+            
+            if(app.ACQ_GPS)
+            {
+                app.ID_GPS=setInterval(function(){app.readGPS()},3000);
+            }    
         });
         
         
             
         
-        if(app.ACQ_GPS)
-        {
-            app.ID_GPS=setInterval(function(){app.readGPS()},1000);
-        }    
+        
     },
 
     showMapPositionPage: function()
