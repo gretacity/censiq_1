@@ -531,10 +531,11 @@ var app = {
         {
             clearInterval(app.ID_GPS);
         }
-             
+        try
+        {
         geoLocation.acquireGeoCoordinates(function(pos)
         {
-         
+            
             app.census.position.latitude =pos.coords.latitude;
             app.census.position.longitude =pos.coords.longitude;
             app.census.position.accuracy=pos.coords.accuracy; 
@@ -596,6 +597,13 @@ var app = {
                 app.ID_GPS=setInterval(function(){app.readGPS()},3000);
             }    
         });
+        }
+        catch(e)
+        {
+            $("#map_0").html(e.message);
+            $("#map_1").html(e.message);
+            
+        }
     },
 
     showMapPositionPage: function()
