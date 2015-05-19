@@ -530,12 +530,14 @@ var app = {
         geoLocation.acquireGeoCoordinates(function(pos)
         {
           $("#latitudine_0").html('Lat:  inizio');
+             $("#latitudine_1").html('Lat:  inizio');
             app.census.position.latitude =pos.coords.latitude;
             app.census.position.longitude =pos.coords.longitude;
             app.census.position.accuracy=pos.coords.accuracy; 
             app.census.position.altitude=pos.coords.altitude;
             
-         $("#latitudine_0").html('Lat:  fine');    
+         $("#latitudine_0").html('Lat:  fine'); 
+            $("#latitudine_1").html('Lat:  fine');
             var markerPoint = new google.maps.LatLng(app.census.position.latitude,app.census.position.longitude);
             if(jQuery.mobile.path.getLocation().indexOf('guardrailStep1Page')>0)
             {
