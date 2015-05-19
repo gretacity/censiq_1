@@ -85,7 +85,6 @@ app.acquireGeoCoordinates1 = function(successCallback, errorCallback) {
                 app.census.position.latitude = position.coords.latitude;
                 app.census.position.longitude = position.coords.longitude;
                 app.census.position.accuracy = position.coords.accuracy;
-                
                 successCallback();
             }, 
             function(errorMessage, error) 

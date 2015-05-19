@@ -888,6 +888,11 @@ var app = {
             }
             else if(step == app.STEP_1)
             {
+                if(app.ID_GPS!=0)
+                {
+                    clearInterval(app.ID_GPS);
+                    app.ID_GPS=0;
+                }
                 $.mobile.changePage('#guardrailStep2Page');
             } 
             else if(step == app.STEP_2) 
@@ -907,11 +912,11 @@ var app = {
             }
             else if(step == app.STEP_11)
             {
-                if(app.ID_GPS!=0)
+               if(app.ID_GPS!=0)
                 {
                     clearInterval(app.ID_GPS);
-                }  
-               
+                    app.ID_GPS=0;
+                }
                 $.mobile.changePage('#mapresultGuardrailPage');
             }
             else
@@ -931,6 +936,7 @@ var app = {
         // Current step
         var step = $(this).attr('data-step');
         
+        
         if(step == app.STEP_0) {
             //$.mobile.changePage('index.html#censusTypePage');
             $.mobile.changePage('census.guardrail.html');
@@ -938,16 +944,20 @@ var app = {
         else if(step == app.STEP_1)
         {
             $.mobile.changePage('#guardrailStep0Page');
+            if(app.ID_GPS!=0)
+            {
+                clearInterval(app.ID_GPS);
+                app.ID_GPS=0;
+            }    
         } 
         else if(step == app.STEP_2)
         {
-         
             $.mobile.changePage('#guardrailStep1Page');
         }
         else if(step == app.STEP_3)
         {
-         
             $.mobile.changePage('#guardrailStep2Page');
+            
         }
         else if(step == app.STEP_4)
         {
@@ -959,13 +969,13 @@ var app = {
         //} else if(step == app.STEP_3) {
             $.mobile.changePage('#ElencoGuardrailPage');
         }
-        else if(step == app.STEP_11) {
-           // $.mobile.changePage('#guardrailStep1Page');
-        //} else if(step == app.STEP_3) {
+        else if(step == app.STEP_11)
+        {
             if(app.ID_GPS!=0)
             {
                 clearInterval(app.ID_GPS);
-            }    
+                app.ID_GPS=0;
+            } 
             $.mobile.changePage('#localizeGuardrailPage');
         }
          else if(step == app.STEP_12) {
