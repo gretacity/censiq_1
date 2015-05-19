@@ -536,11 +536,10 @@ var app = {
             geoLocation.acquireGeoCoordinates(
             function(position)
             {
-              
                 app.census.position.latitude = position.coords.latitude;
                 app.census.position.longitude = position.coords.longitude;
                 app.census.position.accuracy = position.coords.accuracy;
-                app.census.position.altitude = position.coords.altitude;
+                //app.census.position.altitude = position.coords.altitude;
 
                 var markerPoint = new google.maps.LatLng(app.census.position.latitude,app.census.position.longitude);
                 if(jQuery.mobile.path.getLocation().indexOf('guardrailStep1Page')>0)
@@ -550,7 +549,7 @@ var app = {
                     $("#accuratezza_0").html('Acc:  '+app.census.position.accuracy.toFixed(1))+' m';
                     try
                     {
-                        $("#altezza_0").html('H:  '+app.census.position.altitude.toFixed(1))+' m';
+                        //$("#altezza_0").html('H:  '+app.census.position.altitude.toFixed(1))+' m';
                     }
                     catch(e)
                     {}
@@ -563,7 +562,7 @@ var app = {
                     $("#accuratezza_1").html('Acc:  '+app.census.position.accuracy.toFixed(1))+' m';
                     try
                     {
-                        $("#altezza_1").html('H:  '+app.census.position.altitude.toFixed(1))+' m';
+                        //$("#altezza_1").html('H:  '+app.census.position.altitude.toFixed(1))+' m';
                     }
                     catch(e)
                     {}
@@ -595,11 +594,6 @@ var app = {
                 {
                     app.ID_GPS=setInterval(function(){app.readGPS()},1000);
                 }
-               
-               
-                
-               
-                
             }, 
             function(e)
             {
@@ -607,7 +601,7 @@ var app = {
                 app.census.position.latitude = 0;
                 app.census.position.longitude = 0;
                 app.census.position.accuracy = 0;
-                app.census.position.altitude = 0;
+                //app.census.position.altitude = 0;
              
                 var errorMessage = '';
                 switch(error.code) {
