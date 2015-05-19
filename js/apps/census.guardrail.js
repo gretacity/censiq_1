@@ -536,13 +536,13 @@ var app = {
             geoLocation.acquireGeoCoordinates(
             function(pos)
             {
-
+                /*
                 app.census.position.latitude = position.coords.latitude;
                 app.census.position.longitude = position.coords.longitude;
                 app.census.position.accuracy = position.coords.accuracy;
                 app.census.position.altitude = position.coords.altitude;
 
-             $("#latitudine_0").html('Lat:  fine'); 
+                $("#latitudine_0").html('Lat:  fine'); 
                 $("#latitudine_1").html('Lat:  fine');
                 var markerPoint = new google.maps.LatLng(app.census.position.latitude,app.census.position.longitude);
                 if(jQuery.mobile.path.getLocation().indexOf('guardrailStep1Page')>0)
@@ -586,15 +586,16 @@ var app = {
                 {
                     app.ID_GPS=setInterval(function(){app.readGPS()},1000);
                 }    
-
+                */
             }, 
             function(e)
             {
+                /*
                 app.census.position.latitude = 0;
                 app.census.position.longitude = 0;
                 app.census.position.accuracy = 0;
                 app.census.position.altitude = 0;
-
+                */
 
                 var errorMessage = '';
                 switch(error.code) {
