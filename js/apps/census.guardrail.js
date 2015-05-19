@@ -457,8 +457,11 @@ var app = {
     {
         if(app.ID_GPS!=0)
         {
+            helper.alert('a    '+app.ID_GPS)
             clearInterval(app.ID_GPS);
             app.ID_GPS=0;
+            helper.alert('b  '+app.ID_GPS)
+            
             if(jQuery.mobile.path.getLocation().indexOf('guardrailStep1Page')>0)
             {
                 $("#start_gps_0").html("GPS");
@@ -524,6 +527,7 @@ var app = {
         if(app.ID_GPS!=0)
         {
             clearInterval(app.ID_GPS);
+            app.ID_GPS=0;
         }
         
             app.acquireGeoCoordinates1(
