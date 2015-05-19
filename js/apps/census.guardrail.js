@@ -529,68 +529,73 @@ var app = {
             app.acquireGeoCoordinates1(
             function()
             {
-                 helper.alert("OK1");
-                var map=app._map;
-                var markerPoint = new google.maps.LatLng(app.census.position.latitude,app.census.position.longitude);
-                if(jQuery.mobile.path.getLocation().indexOf('guardrailStep1Page')>0)
+                try
                 {
-                    $("#latitudine_0").html('Lat:  '+app.census.position.latitude.toFixed(5));
-                    $("#longitudine_0").html('Lon:  '+app.census.position.longitude.toFixed(5));
-                    $("#accuratezza_0").html('Acc:  '+app.census.position.accuracy.toFixed(1))+' m';
-                    try
+                    var map=app._map;
+                    var markerPoint = new google.maps.LatLng(app.census.position.latitude,app.census.position.longitude);
+                    if(jQuery.mobile.path.getLocation().indexOf('guardrailStep1Page')>0)
                     {
-                        //$("#altezza_0").html('H:  '+app.census.position.altitude.toFixed(1))+' m';
+                        $("#latitudine_0").html('Lat:  '+app.census.position.latitude.toFixed(5));
+                        $("#longitudine_0").html('Lon:  '+app.census.position.longitude.toFixed(5));
+                        $("#accuratezza_0").html('Acc:  '+app.census.position.accuracy.toFixed(1))+' m';
+                        try
+                        {
+                            //$("#altezza_0").html('H:  '+app.census.position.altitude.toFixed(1))+' m';
+                        }
+                        catch(e)
+                        {}
+
                     }
-                    catch(e)
-                    {}
-                    
-                }
-                else
-                {    
-                    $("#latitudine_1").html('Lat:  '+app.census.position.latitude.toFixed(5));
-                    $("#longitudine_1").html('Lon:  '+app.census.position.longitude.toFixed(5));
-                    $("#accuratezza_1").html('Acc:  '+app.census.position.accuracy.toFixed(1))+' m';
-                    try
-                    {
-                        //$("#altezza_1").html('H:  '+app.census.position.altitude.toFixed(1))+' m';
+                    else
+                    {    
+                        $("#latitudine_1").html('Lat:  '+app.census.position.latitude.toFixed(5));
+                        $("#longitudine_1").html('Lon:  '+app.census.position.longitude.toFixed(5));
+                        $("#accuratezza_1").html('Acc:  '+app.census.position.accuracy.toFixed(1))+' m';
+                        try
+                        {
+                            //$("#altezza_1").html('H:  '+app.census.position.altitude.toFixed(1))+' m';
+                        }
+                        catch(e)
+                        {}
                     }
-                    catch(e)
-                    {}
-                }
-                if(app._marker==null)
-                {    
-                  var marker = new google.maps.Marker({
-                        position: markerPoint,
-                        map: map,
-                        draggable: true,
-                        animation: google.maps.Animation.DROP,
-                        title: app.SELECTED_QRCODE
-                    });
-                    var infowindow = new google.maps.InfoWindow({content: '<div>' + app.SELECTED_QRCODE + '</div>'});
-                    infowindow.open(map, marker);
-                }
-                else
-                {    
-                    app._marker.setPosition(markerPoint );
-                }
+                    if(app._marker==null)
+                    {    
+                      var marker = new google.maps.Marker({
+                            position: markerPoint,
+                            map: map,
+                            draggable: true,
+                            animation: google.maps.Animation.DROP,
+                            title: app.SELECTED_QRCODE
+                        });
+                        var infowindow = new google.maps.InfoWindow({content: '<div>' + app.SELECTED_QRCODE + '</div>'});
+                        infowindow.open(map, marker);
+                    }
+                    else
+                    {    
+                        app._marker.setPosition(markerPoint );
+                    }
 
 
-                if(app._marker==null)
-                { 
-                    app._marker=marker;
-                    map.panTo(markerPoint);
+                    if(app._marker==null)
+                    { 
+                        app._marker=marker;
+                        map.panTo(markerPoint);
+                    }
+                    if(app.ACQ_GPS)
+                    {
+                        app.ID_GPS=setInterval(function(){app.readGPS()},5000);
+                    }
                 }
-                if(app.ACQ_GPS)
+                catch(e)
                 {
-                    app.ID_GPS=setInterval(function(){app.readGPS()},5000);
+                    helper.alert(e.message);
                 }
+                
             }, 
             function(errorMessage)
             {
-                  helper.alert("NOT OK");
-                $("#map_0").html(errorMessage);
-                $("#map_1").html(errorMessage);
-               
+                helper.alert(errorMessage);
+              
                 if(app.ACQ_GPS)
                 {
                     app.ID_GPS=setInterval(function(){app.readGPS()},5000);

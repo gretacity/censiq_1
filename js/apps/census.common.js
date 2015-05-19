@@ -91,17 +91,9 @@ app.acquireGeoCoordinates1 = function(successCallback, errorCallback) {
             function(errorMessage, error) 
             {
                
-               
-                $("#map_0").html(errorMessage);
-                $("#map_1").html(errorMessage);
-               
                 app.census.position.latitude = 0;
                 app.census.position.longitude = 0;
                 app.census.position.accuracy = 0;
-             
-             
-               
-                
                 errorCallback(errorMessage);
                 
             }
