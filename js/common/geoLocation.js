@@ -73,7 +73,7 @@ var geoLocation = {
                 // property.
                 case PositionError.TIMEOUT:
                     errorMessage = 'Impossibile recuperare la posizione';
-                    break;
+                break;
             }
             if(errorCallback) errorCallback(errorMessage, error);
         }, options);

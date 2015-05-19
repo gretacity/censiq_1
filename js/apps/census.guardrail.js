@@ -522,8 +522,8 @@ var app = {
     readGPS :function()
     {
         
-        $("#latitudine_0").html('Lat:  inizio');
-        $("#latitudine_1").html('Lat:  inizio');
+        $("#latitudine_0").html(Math.random());
+        $("#latitudine_1").html(Math.random());
         
         
         var map=app._map;
@@ -533,99 +533,101 @@ var app = {
         }
         try
         {
-        geoLocation.acquireGeoCoordinates(function(pos)
-        {
-            
-            app.census.position.latitude = position.coords.latitude;
-            app.census.position.longitude = position.coords.longitude;
-            app.census.position.accuracy = position.coords.accuracy;
-            app.census.position.altitude = position.coords.altitude;
-            
-         $("#latitudine_0").html('Lat:  fine'); 
-            $("#latitudine_1").html('Lat:  fine');
-            var markerPoint = new google.maps.LatLng(app.census.position.latitude,app.census.position.longitude);
-            if(jQuery.mobile.path.getLocation().indexOf('guardrailStep1Page')>0)
+            geoLocation.acquireGeoCoordinates(
+            function(pos)
             {
-                $("#latitudine_0").html('Lat:  '+app.census.position.latitude.toFixed(5));
-                $("#longitudine_0").html('Lon:  '+app.census.position.longitude.toFixed(5));
-                $("#accuratezza_0").html('Acc:  '+app.census.position.accuracy.toFixed(1))+' m';
-                $("#altezza_0").html('H:  '+app.census.position.altitude.toFixed(1))+' m';
-            }
-            else
-            {    
-                $("#latitudine_1").html('Lat:  '+app.census.position.latitude.toFixed(5));
-                $("#longitudine_1").html('Lon:  '+app.census.position.longitude.toFixed(5));
-                $("#accuratezza_1").html('Acc:  '+app.census.position.accuracy.toFixed(1))+' m';
-                $("#altezza_1").html('H:  '+app.census.position.altitude.toFixed(1))+' m';
-            }
-            if(app._marker==null)
-            {    
-              var marker = new google.maps.Marker({
-                    position: markerPoint,
-                    map: map,
-                    draggable: true,
-                    animation: google.maps.Animation.DROP,
-                    title: app.SELECTED_QRCODE
-                });
-                var infowindow = new google.maps.InfoWindow({content: '<div>' + app.SELECTED_QRCODE + '</div>'});
-                infowindow.open(map, marker);
-            }
-            else
-            {    
-                app._marker.setPosition(markerPoint );
-            }
+
+                app.census.position.latitude = position.coords.latitude;
+                app.census.position.longitude = position.coords.longitude;
+                app.census.position.accuracy = position.coords.accuracy;
+                app.census.position.altitude = position.coords.altitude;
+
+             $("#latitudine_0").html('Lat:  fine'); 
+                $("#latitudine_1").html('Lat:  fine');
+                var markerPoint = new google.maps.LatLng(app.census.position.latitude,app.census.position.longitude);
+                if(jQuery.mobile.path.getLocation().indexOf('guardrailStep1Page')>0)
+                {
+                    $("#latitudine_0").html('Lat:  '+app.census.position.latitude.toFixed(5));
+                    $("#longitudine_0").html('Lon:  '+app.census.position.longitude.toFixed(5));
+                    $("#accuratezza_0").html('Acc:  '+app.census.position.accuracy.toFixed(1))+' m';
+                    $("#altezza_0").html('H:  '+app.census.position.altitude.toFixed(1))+' m';
+                }
+                else
+                {    
+                    $("#latitudine_1").html('Lat:  '+app.census.position.latitude.toFixed(5));
+                    $("#longitudine_1").html('Lon:  '+app.census.position.longitude.toFixed(5));
+                    $("#accuratezza_1").html('Acc:  '+app.census.position.accuracy.toFixed(1))+' m';
+                    $("#altezza_1").html('H:  '+app.census.position.altitude.toFixed(1))+' m';
+                }
+                if(app._marker==null)
+                {    
+                  var marker = new google.maps.Marker({
+                        position: markerPoint,
+                        map: map,
+                        draggable: true,
+                        animation: google.maps.Animation.DROP,
+                        title: app.SELECTED_QRCODE
+                    });
+                    var infowindow = new google.maps.InfoWindow({content: '<div>' + app.SELECTED_QRCODE + '</div>'});
+                    infowindow.open(map, marker);
+                }
+                else
+                {    
+                    app._marker.setPosition(markerPoint );
+                }
 
 
-            if(app._marker==null)
-            { 
-                app._marker=marker;
-                map.panTo(markerPoint);
-            } 
-            if(app.ACQ_GPS)
+                if(app._marker==null)
+                { 
+                    app._marker=marker;
+                    map.panTo(markerPoint);
+                } 
+                if(app.ACQ_GPS)
+                {
+                    app.ID_GPS=setInterval(function(){app.readGPS()},1000);
+                }    
+
+            }, 
+            function(e)
             {
-                app.ID_GPS=setInterval(function(){app.readGPS()},1000);
-            }    
-               
-        }, 
-        function(e)
-        {
-            app.census.position.latitude = 0;
-            app.census.position.longitude = 0;
-            app.census.position.accuracy = 0;
-            app.census.position.altitude = 0;
-            
-            
-            var errorMessage = '';
-            switch(error.code) {
-                // Returned when the user does not allow your application to 
-                // retrieve position information.
-                // This is dependent on the platform.
-                case PositionError.PERMISSION_DENIED:
-                    errorMessage = 'Permesso negato';
-                    break;
-                    
-                // Returned when the device was unable to retrieve a position.
-                // In general this means the device has no network connectivity
-                // and/or cannot get a satellite fix.
-                case PositionError.POSITION_UNAVAILABLE:
-                    errorMessage = 'Posizione non disponibile';
-                    break;
-                    
-                // Returned when the device was unable to retrieve a position
-                // within the time specified in the geolocationOptions' timeout
-                // property.
-                case PositionError.TIMEOUT:
-                    errorMessage = 'Impossibile recuperare la posizione';
-                    break;
+                app.census.position.latitude = 0;
+                app.census.position.longitude = 0;
+                app.census.position.accuracy = 0;
+                app.census.position.altitude = 0;
+
+
+                var errorMessage = '';
+                switch(error.code) {
+                    // Returned when the user does not allow your application to 
+                    // retrieve position information.
+                    // This is dependent on the platform.
+                    case PositionError.PERMISSION_DENIED:
+                        errorMessage = 'Permesso negato';
+                        break;
+
+                    // Returned when the device was unable to retrieve a position.
+                    // In general this means the device has no network connectivity
+                    // and/or cannot get a satellite fix.
+                    case PositionError.POSITION_UNAVAILABLE:
+                        errorMessage = 'Posizione non disponibile';
+                        break;
+
+                    // Returned when the device was unable to retrieve a position
+                    // within the time specified in the geolocationOptions' timeout
+                    // property.
+                    case PositionError.TIMEOUT:
+                        errorMessage = 'Impossibile recuperare la posizione';
+                        break;
+                }
+
+                $("#map_0").html(errorMessage);
+                $("#map_1").html(errorMessage);
+                if(app.ACQ_GPS)
+                {
+                    app.ID_GPS=setInterval(function(){app.readGPS()},3000);
+                }    
             }
-            
-            $("#map_0").html(errorMessage);
-            $("#map_1").html(errorMessage);
-            if(app.ACQ_GPS)
-            {
-                app.ID_GPS=setInterval(function(){app.readGPS()},3000);
-            }    
-        });
+            );
         }
         catch(e)
         {
