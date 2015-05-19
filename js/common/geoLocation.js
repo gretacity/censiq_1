@@ -31,7 +31,7 @@ var geoLocation = {
                        enableHighAccuracy: config.GEO_OPTS_HIGH_ACCURACY};
         
         
-        if(config.EMULATE_ON_BROWSER) {
+        if(config.EMULATE_ON_BROWSER && false) {
             //errorCallback('errorino');return;
             if(successCallback) {
                 //var lat = 38.858364, lng = 16.549469, accuracy = 15;

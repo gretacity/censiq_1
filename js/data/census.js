@@ -35,6 +35,7 @@ function Census(entityType) {
         latitude: 0, 
         longitude: 0, 
         accuracy: 0, 
+        altitude: 0, 
         toString: function() {
             return this.latitude + " " + this.longitude;
         }

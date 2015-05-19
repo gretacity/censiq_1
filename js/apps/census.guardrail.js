@@ -536,7 +536,7 @@ var app = {
             geoLocation.acquireGeoCoordinates(
             function(position)
             {
-               /*
+              
                 app.census.position.latitude = position.coords.latitude;
                 app.census.position.longitude = position.coords.longitude;
                 app.census.position.accuracy = position.coords.accuracy;
@@ -548,14 +548,25 @@ var app = {
                     $("#latitudine_0").html('Lat:  '+app.census.position.latitude.toFixed(5));
                     $("#longitudine_0").html('Lon:  '+app.census.position.longitude.toFixed(5));
                     $("#accuratezza_0").html('Acc:  '+app.census.position.accuracy.toFixed(1))+' m';
-                    $("#altezza_0").html('H:  '+app.census.position.altitude.toFixed(1))+' m';
+                    try
+                    {
+                        $("#altezza_0").html('H:  '+app.census.position.altitude.toFixed(1))+' m';
+                    }
+                    catch(e)
+                    {}
+                    
                 }
                 else
                 {    
                     $("#latitudine_1").html('Lat:  '+app.census.position.latitude.toFixed(5));
                     $("#longitudine_1").html('Lon:  '+app.census.position.longitude.toFixed(5));
                     $("#accuratezza_1").html('Acc:  '+app.census.position.accuracy.toFixed(1))+' m';
-                    $("#altezza_1").html('H:  '+app.census.position.altitude.toFixed(1))+' m';
+                    try
+                    {
+                        $("#altezza_1").html('H:  '+app.census.position.altitude.toFixed(1))+' m';
+                    }
+                    catch(e)
+                    {}
                 }
                 if(app._marker==null)
                 {    
@@ -584,7 +595,7 @@ var app = {
                 {
                     app.ID_GPS=setInterval(function(){app.readGPS()},1000);
                 }
-                */
+               
                
                 
                
@@ -592,12 +603,12 @@ var app = {
             }, 
             function(e)
             {
-               /*
+               
                 app.census.position.latitude = 0;
                 app.census.position.longitude = 0;
                 app.census.position.accuracy = 0;
                 app.census.position.altitude = 0;
-               */
+             
                 var errorMessage = '';
                 switch(error.code) {
                     // Returned when the user does not allow your application to 
@@ -624,12 +635,12 @@ var app = {
 
                 $("#map_0").html(errorMessage);
                 $("#map_1").html(errorMessage);
-                /*
+               
                 if(app.ACQ_GPS)
                 {
                     app.ID_GPS=setInterval(function(){app.readGPS()},3000);
                 }
-                */
+                
             }
             );
         }
@@ -639,10 +650,7 @@ var app = {
             $("#map_1").html(e.message);
             
         }
-        if(app.ACQ_GPS)
-        {
-            app.ID_GPS=setInterval(function(){app.readGPS()},1000);
-        }
+        
     },
 
     showMapPositionPage: function()
