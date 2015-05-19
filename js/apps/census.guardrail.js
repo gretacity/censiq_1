@@ -521,13 +521,16 @@ var app = {
     }, 
     readGPS :function()
     {
+        
+        $("#latitudine_0").html('Lat:  inizio');
+        $("#latitudine_1").html('Lat:  inizio');
+        
+        
         var map=app._map;
         if(app.ID_GPS!=0)
         {
             clearInterval(app.ID_GPS);
         }
-        $("#latitudine_0").html('Lat:  inizio');
-        $("#latitudine_1").html('Lat:  inizio');
              
         geoLocation.acquireGeoCoordinates(function(pos)
         {
