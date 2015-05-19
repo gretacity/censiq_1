@@ -536,10 +536,10 @@ var app = {
         geoLocation.acquireGeoCoordinates(function(pos)
         {
             
-            app.census.position.latitude =pos.coords.latitude;
-            app.census.position.longitude =pos.coords.longitude;
-            app.census.position.accuracy=pos.coords.accuracy; 
-            app.census.position.altitude=pos.coords.altitude;
+            app.census.position.latitude = position.coords.latitude;
+            app.census.position.longitude = position.coords.longitude;
+            app.census.position.accuracy = position.coords.accuracy;
+            app.census.position.altitude = position.coords.altitude;
             
          $("#latitudine_0").html('Lat:  fine'); 
             $("#latitudine_1").html('Lat:  fine');
@@ -589,9 +589,38 @@ var app = {
         }, 
         function(e)
         {
-            errors.push('GPS inattivo o copertura insufficiente');
-             $("#latitudine_0").html('Lat:  inizio');
-              $("#latitudine_1").html('Lat:  inizio');
+            app.census.position.latitude = 0;
+            app.census.position.longitude = 0;
+            app.census.position.accuracy = 0;
+            app.census.position.altitude = 0;
+            
+            
+            var errorMessage = '';
+            switch(error.code) {
+                // Returned when the user does not allow your application to 
+                // retrieve position information.
+                // This is dependent on the platform.
+                case PositionError.PERMISSION_DENIED:
+                    errorMessage = 'Permesso negato';
+                    break;
+                    
+                // Returned when the device was unable to retrieve a position.
+                // In general this means the device has no network connectivity
+                // and/or cannot get a satellite fix.
+                case PositionError.POSITION_UNAVAILABLE:
+                    errorMessage = 'Posizione non disponibile';
+                    break;
+                    
+                // Returned when the device was unable to retrieve a position
+                // within the time specified in the geolocationOptions' timeout
+                // property.
+                case PositionError.TIMEOUT:
+                    errorMessage = 'Impossibile recuperare la posizione';
+                    break;
+            }
+            
+            $("#map_0").html(errorMessage);
+            $("#map_1").html(errorMessage);
             if(app.ACQ_GPS)
             {
                 app.ID_GPS=setInterval(function(){app.readGPS()},3000);
