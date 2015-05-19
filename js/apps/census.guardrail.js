@@ -526,11 +526,12 @@ var app = {
         {
             clearInterval(app.ID_GPS);
         }
-        
+        $("#latitudine_0").html('Lat:  inizio');
+        $("#latitudine_1").html('Lat:  inizio');
+             
         geoLocation.acquireGeoCoordinates(function(pos)
         {
-          $("#latitudine_0").html('Lat:  inizio');
-             $("#latitudine_1").html('Lat:  inizio');
+         
             app.census.position.latitude =pos.coords.latitude;
             app.census.position.longitude =pos.coords.longitude;
             app.census.position.accuracy=pos.coords.accuracy; 
@@ -592,11 +593,6 @@ var app = {
                 app.ID_GPS=setInterval(function(){app.readGPS()},3000);
             }    
         });
-        
-        
-            
-        
-        
     },
 
     showMapPositionPage: function()
