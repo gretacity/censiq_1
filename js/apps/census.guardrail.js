@@ -530,7 +530,7 @@ var app = {
             clearInterval(app.ID_GPS);
         }
         
-           app.acquireGeoCoordinates1(
+            app.acquireGeoCoordinates1(
             function()
             {
                 
@@ -590,11 +590,6 @@ var app = {
             }, 
             function(errorMessage)
             {
-               
-               
-             
-                
-
                 $("#map_0").html(errorMessage);
                 $("#map_1").html(errorMessage);
                

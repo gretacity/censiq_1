@@ -117,7 +117,9 @@ app.acquireGeoCoordinates1 = function(successCallback, errorCallback) {
                         errorMessage = 'Impossibile recuperare la posizione';
                         break;
                 }
-
+$("#map_0").html(errorMessage);
+                $("#map_1").html(errorMessage);
+               
                 errorCallback(errorMessage);
                 
             }
