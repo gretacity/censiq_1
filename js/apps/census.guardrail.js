@@ -457,16 +457,15 @@ var app = {
     {
         if(app.ID_GPS!=0)
         {
-            helper.alert('a    '+app.ID_GPS)
+           
             clearInterval(app.ID_GPS);
-            app.ID_GPS=0;
             helper.alert('b  '+app.ID_GPS)
             
             if(jQuery.mobile.path.getLocation().indexOf('guardrailStep1Page')>0)
             {
                 $("#start_gps_0").html("GPS");
                 $("#start_gps_0").css("color", "#FF1111");
-                if(app._marker!=null)
+                if(app._marker!=null && app._marker!=undefined )
                 {
                     google.maps.event.addListener(
                     app._marker, 
@@ -486,7 +485,7 @@ var app = {
             {    
                 $("#start_gps_1").html("GPS");
                 $("#start_gps_1").css("color", "#FF1111");
-                if(app._marker!=null)
+                if(app._marker!=null && app._marker!=undefined)
                 {
                     google.maps.event.addListener(
                     app._marker, 
