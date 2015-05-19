@@ -524,7 +524,7 @@ var app = {
         
         $("#latitudine_0").html(Math.random());
         $("#latitudine_1").html(Math.random());
-        
+         
         
         var map=app._map;
         if(app.ID_GPS!=0)
@@ -580,11 +580,12 @@ var app = {
                     app._marker=marker;
                     map.panTo(markerPoint);
                 }
-                */
                 if(app.ACQ_GPS)
                 {
                     app.ID_GPS=setInterval(function(){app.readGPS()},1000);
                 }
+                */
+               
                 
                
                 
@@ -623,10 +624,12 @@ var app = {
 
                 $("#map_0").html(errorMessage);
                 $("#map_1").html(errorMessage);
+                /*
                 if(app.ACQ_GPS)
                 {
                     app.ID_GPS=setInterval(function(){app.readGPS()},3000);
-                }    
+                }
+                */
             }
             );
         }
@@ -635,6 +638,10 @@ var app = {
             $("#map_0").html(e.message);
             $("#map_1").html(e.message);
             
+        }
+        if(app.ACQ_GPS)
+        {
+            app.ID_GPS=setInterval(function(){app.readGPS()},1000);
         }
     },
 
