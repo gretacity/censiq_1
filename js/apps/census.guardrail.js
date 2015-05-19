@@ -529,12 +529,12 @@ var app = {
         
         geoLocation.acquireGeoCoordinates(function(pos)
         {
-            console.log(pos);
+          $("#latitudine_0").html('Lat:  inizio');
             app.census.position.latitude =pos.coords.latitude;
             app.census.position.longitude =pos.coords.longitude;
             app.census.position.accuracy=pos.coords.accuracy; 
-            app.census.position.altitude=pos.coords.altitude;;
-            
+            app.census.position.altitude=pos.coords.altitude;
+         $("#latitudine_0").html('Lat:  fine');    
             var markerPoint = new google.maps.LatLng(app.census.position.latitude,app.census.position.longitude);
             if(jQuery.mobile.path.getLocation().indexOf('guardrailStep1Page')>0)
             {
