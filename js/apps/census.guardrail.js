@@ -656,7 +656,7 @@ var app = {
             setTimeout( function()
             {
                 var map= app._map;
-                map.setZoom(14);
+                map.setZoom(16);
                 app.readGPS();
 
             }
