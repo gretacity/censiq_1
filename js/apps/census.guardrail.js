@@ -509,8 +509,9 @@ var app = {
                 if(app._marker!=null && app._marker!=undefined )
                 {
                     google.maps.event.clearListeners(app._marker, 'dragend');
-                    app.ID_GPS=setInterval(function(){app.readGPS()},1000);
+                   
                 }
+                app.ID_GPS=setInterval(function(){app.readGPS()},1000);
                 $("#start_gps_0").html("MANUALE");
                 $("#start_gps_0").css("color", "#3388cc");
             }
@@ -519,8 +520,8 @@ var app = {
                 if(app._marker!=null && app._marker!=undefined )
                 {
                     google.maps.event.clearListeners(app._marker, 'dragend');
-                    app.ID_GPS=setInterval(function(){app.readGPS()},1000);
                 }
+                app.ID_GPS=setInterval(function(){app.readGPS()},1000);
                 $("#start_gps_1").html("MANUALE");
                 $("#start_gps_1").css("color", "#3388cc");
             }
@@ -534,7 +535,9 @@ var app = {
             clearInterval(app.ID_GPS);
             app.ID_GPS=0;
         }
-        
+        if(jQuery.mobile.path.getLocation().indexOf('guardrailStep1Page')>0 ||
+           jQuery.mobile.path.getLocation().indexOf('mapLocalizeGuardrailPage')>0     )
+        {
             app.acquireGeoCoordinates1(
             function()
             {
@@ -612,7 +615,7 @@ var app = {
                 
             }
             );
-        
+        }
         
     },
 
