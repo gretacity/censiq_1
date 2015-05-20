@@ -455,11 +455,10 @@ var app = {
     },
     startGPS :function()
     {
-        if(app.ID_GPS!=0)
+        if(app.ACQ_GPS)
         {
            
             clearInterval(app.ID_GPS);
-            app.ID_GPS=0;
             app.ACQ_GPS=false;
             
             
@@ -539,7 +538,7 @@ var app = {
             app.ID_GPS=0;
         }
         if(jQuery.mobile.path.getLocation().indexOf('guardrailStep1Page')>0 ||
-           jQuery.mobile.path.getLocation().indexOf('mapLocalizeGuardrailPage')>0     )
+           jQuery.mobile.path.getLocation().indexOf('mapLocalizeGuardrailPage')>0)
         {
             app.acquireGeoCoordinates1(
             function()
@@ -609,12 +608,13 @@ var app = {
             }, 
             function(errorMessage)
             {
-                helper.alert(errorMessage);
-              
                 if(app.ACQ_GPS)
                 {
                     app.ID_GPS=setInterval(function(){app.readGPS()},5000);
                 }
+                helper.alert(errorMessage);
+              
+               
                 
             }
             );
