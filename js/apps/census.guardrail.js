@@ -15,7 +15,7 @@ var app = {
     STEP_14: 14,
     STEP_15: 15,
     ACQ_GPS:true,
-    ID_GPS:0,    
+    ID_GPS:0,  
     SELECTED_QRCODE: null,
     
     census: new Census(CensusTypes.guardrail),
@@ -460,6 +460,8 @@ var app = {
            
             clearInterval(app.ID_GPS);
             app.ID_GPS=0;
+            app.ACQ_GPS=false;
+            
             
             if(jQuery.mobile.path.getLocation().indexOf('guardrailStep1Page')>0)
             {
@@ -504,6 +506,7 @@ var app = {
         }
         else
         {
+            app.ACQ_GPS=true;
             if(jQuery.mobile.path.getLocation().indexOf('guardrailStep1Page')>0)
             {
                 if(app._marker!=null && app._marker!=undefined )
