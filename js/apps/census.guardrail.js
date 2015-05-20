@@ -622,10 +622,6 @@ var app = {
                     {
                         app.ID_GPS=setInterval(function(){app.readGPS()},5000);
                     }
-                    helper.alert(errorMessage);
-
-
-
                 }
                 );
             }

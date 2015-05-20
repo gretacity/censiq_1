@@ -77,7 +77,7 @@ app.acquireGeoCoordinates = function() {
 },
         
 app.acquireGeoCoordinates1 = function(successCallback, errorCallback) {
-    helper.alert("--");    
+  
    geoLocation.acquireGeoCoordinates(
             function(position)
             {
