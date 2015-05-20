@@ -282,7 +282,6 @@ data.guardrail = {
         data._db.transaction(
                 function (tx, results) {
                     tx.executeSql(str, [], function(tx, rs) { 
-                        console.log("---+++++++++++++");
                         for(var i=0; i<rs.rows.length; i++) {
                             var row = rs.rows.item(i);
                             console.log("ROW",row);

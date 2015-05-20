@@ -26,16 +26,7 @@ var app = {
     pageOffsetTop: 0,
     // Application Constructor
     initialize: function() {
-        // Custom fields used for localization (street , no/km)
-      
-        /* 
-        page.injector.injectPage('#guardrailStep0Page', 'localize', {title: 'Guard Rail', footerText: '1 di 3', additionalContent: additionalContent});
-        */
-        //page.injector.injectPage('#guardrailStep3Page', '3pictures', {title: 'Guard Rail', footerText: '2 di 4'});
-        
-        //page.injector.injectPage('#guardrailStep4Page', 'dinamica', {title: 'Guard Rail', footerText: '5 di 5'});
         page.injector.injectPage('#summaryPage', 'summary', {continueLink: '#guardrailStep0Page'});
-        
         var html = '<option>Classe</option>';
         var guardrailClasse = data.guardrail.getGuardrailClasse();
         for(var i in guardrailClasse) 
@@ -114,14 +105,9 @@ var app = {
         $('#mapGuardrailPage').on('pageshow', this.showMapPage);
         $('#mapLocalizeGuardrailPage').on('pageshow', this.showMapPositionPage);
         $('#guardrailStep1Page').on('pageshow', this.showMapPositionPage);
-        
         $('#mapresultGuardrailPage').on('pageshow',  this.acquireCoords);
         $('#guardrailStep2Page').on('pageshow',  this.acquireCoords);
-        
         $('#acquireQrCodePointButton', $pageAdd).on('click', this.acquireQrCodePoint);
-        //$('#acquireQrCodePointButton', $('#guardrailStep0Page')).on('click', this.acquireQrCode);
-        
-        
         $('#getCoordinatesPanelPoint', $pageAdd).on('click', this.acquireGeoCoordinatesPoint);
         $('#openMapPageButtonPoint', $pageAdd).on('click', function() {
             //helper.maximizeContent();
@@ -147,25 +133,6 @@ var app = {
         // Step 0
         $page0 = $('#guardrailStep0Page');
         $('#acquireQrCodeButton', $page0).on('click', this.acquireQrCode);
-        //$('#getCoordinatesPanel', $page0).on('click', this.acquireGeoCoordinates);
-        
-        /*
-        $('#openMapPageButton', $page0).on('click', function() {
-            //helper.maximizeContent();
-            setTimeout(function() {
-                var success = app.openMap();
-                if(!success) return;
-                $.mobile.changePage('#mapPage', {
-                    transition: 'slide',
-                    reverse: false,
-                    changeHash: false
-                });
-            }, 100);
-        });
-        */
-        // Step1
-        
-        
         var $page1 = $('#guardrailStep1Page');
         $('a[data-addview]', $page1).on('click', this.acquirePhoto);
         $('a[data-removeview]', $page1).on('click', this.removePhoto);
@@ -303,6 +270,7 @@ var app = {
                 {
                     //console.log("ROW",row);
                     var obj = data.deserialize(row, row.entity_type);
+                    console.log(obj.guardrail.guardrailInfo);
                     if(obj.guardrail.guardrailInfo.inizio==1)
                     {    
                         var itemId = 'item' + obj.id;
@@ -310,11 +278,19 @@ var app = {
                         var qrCode = obj.qrCode;
                         var dateAdded = Date.parseFromYMDHMS(row.date_added).toDMYHMS();
                         html += '<li id="row'+obj.id+'" style="padding:0;' + (false ? 'background-color:#f00;' : '') + '">' + 
-                                '<img onclick="app.deleteItems(\''+obj.id+'\')" src="img/delete.png" style="float:right;margin-right:10px; height:32px;width: 32px">'+
-                                '<img onclick="app.closeItems(\''+obj.id+'\')" src="img/close.png" style="float:right;margin-right:10px; height:32px;width: 32px">'+
-                                '<img onclick="app.updateItems(\''+qrCode+'\')" src="img/add_car.png" style="float:right;margin-right:10px; height:32px;width: 32px">'+
+                                '<img onclick="app.deleteItems(\''+obj.id+'\')" src="img/delete.png" style="float:right;margin-right:10px; height:32px;width: 32px">';
+                        if(obj.guardrail.guardrailInfo.chiuso==1)
+                        {
+                                html+='<img id="cls_'+obj.id+'" onclick="app.closeItems(\''+obj.id+'\')" src="img/close.png" style="float:right;margin-right:10px; height:32px;width: 32px">';
+                        }
+                        else
+                        {
+                            html+='<img id="cls_'+obj.id+'" onclick="app.closeItems(\''+obj.id+'\')" src="img/close_red.png" style="float:right;margin-right:10px; height:32px;width: 32px">';
+                        }
+                        
+                        html += '<img onclick="app.updateItems(\''+qrCode+'\')" src="img/add_car.png" style="float:right;margin-right:10px; height:32px;width: 32px">'+
                                 '<img onclick="app.showMap(\''+qrCode+'\')" src="img/world.png" style="float:right;margin-right:10px; height:32px;width: 32px">'+
-                                //'<input type="checkbox" id="' + itemId + '" data-qrCode="'+obj.qrCode+'" data-id="' + obj.id + '"  onchange="app.countItemToGuardrail()" />' + 
+                                
                                 '<label for="' + itemId +'">'+qrCode+'<br>'+obj.guardrail.guardrailInfo.nomei+'<br>Via ' +obj.guardrail.street +' >> '+obj.guardrail.comune  ;
                         if(name != '')
                         {
@@ -337,7 +313,6 @@ var app = {
                 if(row.entity_type==3)
                 {
                     var obj = data.deserialize(row, row.entity_type);
-                    console.log(obj.guardrail.guardrailInfo);
                     if(obj.guardrail.guardrailInfo.inizio!=1)
                     {   
                         var parent=$("#row"+obj.guardrail.guardrailInfo.parent);
@@ -405,6 +380,47 @@ var app = {
     closeItems: function(itemId)
     {
         data.close(itemId);
+        var code='';
+        data.fetch({status: [data.REC_STATUS_ADDED, data.REC_STATUS_SYNCH_ERROR]}, function(result) {
+            //console.log("RESULT SYNC FETCH",result);
+            var itemCount = result.rows.length;
+           
+            for(var i = 0; i < itemCount; i++) 
+            {
+                var row = result.rows.item(i);
+                var obj = data.deserialize(row, row.entity_type);
+                if(obj.id==itemId)
+                {    
+                  code=obj.qrCode;
+                }
+            }
+         });
+        data.fetch({status: [data.REC_STATUS_ADDED, data.REC_STATUS_SYNCH_ERROR]}, function(result) {
+            //console.log("RESULT SYNC FETCH",result);
+            var itemCount = result.rows.length;
+           
+            for(var i = 0; i < itemCount; i++) 
+            {
+                var row = result.rows.item(i);
+                var obj = data.deserialize(row, row.entity_type);
+                if(obj.guardrail.guardrailInfo.parent==code)
+                {    
+                    
+                    data.close(obj.id) 
+                }
+            }
+         });
+         
+         if($("#cls_"+itemId).attr("src")=="img/close.png")
+         {
+             $("#cls_"+itemId).attr("src","img/close_red.png");
+         }
+         else
+         {
+             $("#cls_"+itemId).attr("src","img/close.png");
+         }    
+        
+        
     },
     acquireCoords: function()
     {
@@ -1015,17 +1031,9 @@ var app = {
         if(app.census.qrCode=='' && $('#qrCode_point').val()!='')
         {
             app.census.qrCode = $('#qrCode_point').val();
-            //var inizio_point=1;
+           
         }
-        
-        
-        
-        
-        //app.census.position.latitude = '';    // Already set
-        //app.census.position.longitude = '';   // Already set
-        //app.census.position.accuracy = '';    // Already set
-        app.census.fixedOnMap = $('#positionIsCorrect').val();
-        
+        //app.census.fixedOnMap = $('#positionIsCorrect').val();
         app.census.guardrail.comune = $ ('#comune').val();
         if(app.census.guardrail.comune=='' && $('#comune_point').val()!='')
         {  
@@ -1046,19 +1054,6 @@ var app = {
         {
             app.census.guardrail.streetNumber = $('#streetNumber_point').val(); 
         }
-        
-        // Pictures related to the city asset
-        /* var imageKeys = ['front', 'back', 'perspective'];
-        for(var i in imageKeys) {
-            var k = imageKeys[i];
-            var imageSrc = $('#guardrailStep1Page a[data-viewtype="' + k + '"][data-showview] img').attr('src');
-            if(imageSrc != '') {
-                // Remove this from src attribute:
-                // data:image/jpeg;base64,
-                app.census.pictures[k] = imageSrc.substr(23);
-            }
-        }*/
-        
         var imageKeysGr = ['foto0','foto1', 'foto2', 'foto3','foto4','foto5','foto6'];
         for(var i in imageKeysGr) {
             var k = imageKeysGr[i];
@@ -1069,14 +1064,6 @@ var app = {
                 app.census.pictures[k] = imageSrcGr.substr(23);
             }
         }
-        /*var imageGr=['fotogr'];
-        var imageSrcGr=$('#guardrailStep3Page a[data-viewtype=fotogr][data-showview] img').attr('src');
-        if(imageSrcGr != '') {
-                // Remove this from src attribute:
-                // data:image/jpeg;base64,
-                app.census.pictures['fotogr'] = imageSrcGr.substr(23);
-            }
-        */
         // informazioni guardrail
         var guardrailInfo = new guardrail.guardrailInfo();
         guardrailInfo.classe = $('#classe').val();                                    
@@ -1090,6 +1077,7 @@ var app = {
         guardrailInfo.ancoraggio = $('#ancoraggio').val();                             
         guardrailInfo.classeElemento = $('#classeElemento').val(); 
         guardrailInfo.parent = $('#parent').val();
+        
         guardrailInfo.textAlberi=$('#nAlberi').val();
         guardrailInfo.textPali=$('#nPali').val();
         guardrailInfo.textPaliIlluminazione=$('#nPaliIlluminazione').val();
@@ -1110,14 +1098,18 @@ var app = {
         else
         {
             guardrailInfo.sequenza=1;
+            guardrailInfo.parent=0;
         }    
-        
-        //guardrailInfo.sequenza = $('#SeqIni').val();                              // numero sequenza iniziale
         guardrailInfo.chiuso =0;
-
-        //guardrailInfo.nomei=$('#nomeIni').val();                              // nome inizio associato
-        if(guardrailInfo.parent!=''){
-        guardrailInfo.inizio=0;}else{ guardrailInfo.inizio=1;}
+        if(guardrailInfo.parent!=0)
+        {
+            guardrailInfo.inizio=0;
+            guardrailInfo.chiuso=0;
+        }
+        else
+        { 
+            guardrailInfo.inizio=1;
+        }
         app.census.guardrail.guardrailInfo = guardrailInfo;
         //console.log("RAILINFO APPS",guardrailInfo);
         
@@ -1140,9 +1132,6 @@ r        console.log("GUARD APPS",guardInfo);
         $('input[type="text"]', $page).val('');
         
         $('input[type="hidden"]', $page).val('');
-        $('#geoStatusText', $page).html('Latitudine e longitudine');
-        $('#geoStatusTitle', $page).html('Ottieni');
-        $('#openMapPanel', $page).hide();
         var $page = $('#guardrailStep1Page');
         $('input[type="text"]', $page).val('');
         $('input[type="hidden"]', $page).val('');

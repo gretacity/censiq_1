@@ -292,7 +292,7 @@ helper.alert('Item with ID ' + itemId + "\ncode " + errorCode + ", " + errorMess
         app.countItemToSync();
         $('#itemList').removeClass('ui-disabled');
         $('#progressContainer').hide();
-var message = app.synchronization.synchronizedSuccess + " elementi sincronizzati";
+        var message = app.synchronization.synchronizedSuccess + " elementi sincronizzati";
         if(app.synchronization.synchronizedErrors > 0) {
             message += " e " + app.synchronization.synchronizedErrors + " errori";
         }

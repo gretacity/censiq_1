@@ -618,6 +618,7 @@ var data = {
                 
                 var entity_value = resultSet.rows.item(0); //console.log('NOME COMPLETO',entity_value);
                 $.each(entity_value, function(key, entity_value) {
+                /*
                 var verifyB = entity_value.indexOf('inizio":'); 
                 var subSTRB = entity_value.substring(verifyB+9,entity_value.length-14);
                 //console.log('VALORE INIZIO',subSTRB);
@@ -625,39 +626,35 @@ var data = {
                     helper.alert("Non puoi chiudere un punto iniziale");
                     return;
                 }
+                */
                 var verify = entity_value.indexOf('chiuso":'); //console.log('sub',verify);
-                var subSTR = entity_value.substring(verify+8,entity_value.length-2);
-                //console.log("Valore chiuso",subSTR);
-                if(subSTR==0)stato="confermare";
-                else stato="annullare";
-                helper.confirm('Vuoi '+stato+' la chiusura del percorso?', function(buttonIndex) {
-                     if(buttonIndex == 1) {
-                if(subSTR==0){
+                var subSTR = entity_value.substring(verify+8,verify+9);
+                
+           
+                
+                if(subSTR==0)
+                {
                     var replace= entity_value.replace('chiuso":0','chiuso":1');
                     $('input#item'+entity+' + label').addClass('close');
                     stato="apertura";
-                }else{
+                }
+                else
+                {
                     var replace= entity_value.replace('chiuso":1','chiuso":0');
                     $('input#item'+entity+' + label').removeClass('close');
                     stato="chiusura";
                 }
-                 
-                console.log(replace);
                 var query2 = "update census set entity_value = ? where id = ?";
                 var params2 = [
                     replace,
                     entity
                 ];
-                    
-                    //console.log(params2);
-                    tx.executeSql(query2, params2, function(tx3,stato, resultSet3) {
-                        // TODO ???
-                       // console.log("id " + resultSet3.insertId);
+                tx.executeSql(query2, params2, function(tx3,stato, resultSet3) {
                     }, function(tx, error3) {
                         console.log(error3);
                     });
-                       }
-        }, 'Conferma', ['Si', 'No']);
+               
+       
                  
             });
                 // Update entity
