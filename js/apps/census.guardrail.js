@@ -511,7 +511,7 @@ var app = {
                     google.maps.event.clearListeners(app._marker, 'dragend');
                    
                 }
-                app.ID_GPS=setInterval(function(){app.readGPS()},1000);
+                app.ID_GPS=setInterval(function(){app.readGPS()},5000);
                 $("#start_gps_0").html("MANUALE");
                 $("#start_gps_0").css("color", "#3388cc");
             }
@@ -521,7 +521,7 @@ var app = {
                 {
                     google.maps.event.clearListeners(app._marker, 'dragend');
                 }
-                app.ID_GPS=setInterval(function(){app.readGPS()},1000);
+                app.ID_GPS=setInterval(function(){app.readGPS()},5000);
                 $("#start_gps_1").html("MANUALE");
                 $("#start_gps_1").css("color", "#3388cc");
             }
