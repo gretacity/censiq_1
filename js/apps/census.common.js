@@ -90,9 +90,6 @@ app.acquireGeoCoordinates1 = function(successCallback, errorCallback) {
             function(errorMessage, error) 
             {
                
-                app.census.position.latitude = 0;
-                app.census.position.longitude = 0;
-                app.census.position.accuracy = 0;
                 errorCallback(errorMessage);
                 
             }
