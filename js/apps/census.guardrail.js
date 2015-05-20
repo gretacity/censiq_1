@@ -459,7 +459,7 @@ var app = {
         {
            
             clearInterval(app.ID_GPS);
-            
+            app.ID_GPS=0;
             
             if(jQuery.mobile.path.getLocation().indexOf('guardrailStep1Page')>0)
             {
