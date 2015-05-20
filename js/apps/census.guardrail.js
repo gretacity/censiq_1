@@ -510,9 +510,9 @@ var app = {
                 {
                     google.maps.event.clearListeners(app._marker, 'dragend');
                     app.ID_GPS=setInterval(function(){app.readGPS()},1000);
-                    $("#start_gps_0").html("MANUALE");
-                    $("#start_gps_0").css("color", "#3388cc");
-                }    
+                }
+                $("#start_gps_0").html("MANUALE");
+                $("#start_gps_0").css("color", "#3388cc");
             }
             else
             {
@@ -520,9 +520,9 @@ var app = {
                 {
                     google.maps.event.clearListeners(app._marker, 'dragend');
                     app.ID_GPS=setInterval(function(){app.readGPS()},1000);
-                    $("#start_gps_1").html("MANUALE");
-                    $("#start_gps_1").css("color", "#3388cc");
                 }
+                $("#start_gps_1").html("MANUALE");
+                $("#start_gps_1").css("color", "#3388cc");
             }
         }    
         
