@@ -513,9 +513,15 @@ var app = {
                     google.maps.event.clearListeners(app._marker, 'dragend');
                    
                 }
-                app.ID_GPS=setInterval(function(){app.readGPS()},5000);
                 $("#start_gps_0").html("MANUALE");
                 $("#start_gps_0").css("color", "#3388cc");
+                try
+                {
+                    clearInterval(app.ID_GPS);
+                }
+                catch(e){}
+                app.ID_GPS=setInterval(function(){app.readGPS()},5000);
+                
             }
             else
             {
@@ -523,9 +529,14 @@ var app = {
                 {
                     google.maps.event.clearListeners(app._marker, 'dragend');
                 }
-                app.ID_GPS=setInterval(function(){app.readGPS()},5000);
                 $("#start_gps_1").html("MANUALE");
                 $("#start_gps_1").css("color", "#3388cc");
+                try
+                {
+                    clearInterval(app.ID_GPS);
+                }
+                catch(e){}
+                app.ID_GPS=setInterval(function(){app.readGPS()},5000);
             }
         }    
         
@@ -535,7 +546,7 @@ var app = {
         if(app.ID_GPS!=0)
         {
             clearInterval(app.ID_GPS);
-            app.ID_GPS=0;
+            
         }
         if(jQuery.mobile.path.getLocation().indexOf('guardrailStep1Page')>0 ||
            jQuery.mobile.path.getLocation().indexOf('mapLocalizeGuardrailPage')>0)
@@ -903,11 +914,11 @@ var app = {
             }
             else if(step == app.STEP_1)
             {
-                if(app.ID_GPS!=0)
+                try
                 {
                     clearInterval(app.ID_GPS);
-                    app.ID_GPS=0;
                 }
+                catch(e){}
                 $.mobile.changePage('#guardrailStep2Page');
             } 
             else if(step == app.STEP_2) 
@@ -927,11 +938,11 @@ var app = {
             }
             else if(step == app.STEP_11)
             {
-               if(app.ID_GPS!=0)
+                try
                 {
                     clearInterval(app.ID_GPS);
-                    app.ID_GPS=0;
                 }
+                catch(e){}
                 $.mobile.changePage('#mapresultGuardrailPage');
             }
             else
@@ -962,7 +973,7 @@ var app = {
             if(app.ID_GPS!=0)
             {
                 clearInterval(app.ID_GPS);
-                app.ID_GPS=0;
+                
             }    
         } 
         else if(step == app.STEP_2)
@@ -989,7 +1000,7 @@ var app = {
             if(app.ID_GPS!=0)
             {
                 clearInterval(app.ID_GPS);
-                app.ID_GPS=0;
+                
             } 
             $.mobile.changePage('#localizeGuardrailPage');
         }
