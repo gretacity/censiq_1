@@ -279,20 +279,19 @@ var app = {
                         var name = data.shortDescription(obj);
                         var qrCode = obj.qrCode;
                         var dateAdded = Date.parseFromYMDHMS(row.date_added).toDMYHMS();
-                        html += '<li id="row'+obj.id+'" style="padding:0;' + (false ? 'background-color:#f00;' : '') + '">' + 
-                                '<img onclick="app.deleteItems(\''+obj.id+'\')" src="img/delete.png" style="float:right;margin-right:10px; height:32px;width: 32px">';
+                        html += '<li id="row'+obj.id+'" style="padding:0;' + (false ? 'background-color:#f00;' : '') + '">' ;
                         if(obj.guardrail.guardrailInfo.chiuso==1)
                         {
-                                html+='<img id="cls_'+obj.id+'" onclick="app.closeItems(\''+obj.id+'\')" src="img/close.png" style="float:right;margin-right:10px; height:32px;width: 32px">';
+                                html+='<div id="cls_'+obj.id+'"><img  onclick="app.closeItems(\''+obj.id+'\',0)" src="img/close.png" style="float:right;margin-right:10px; height:32px;width: 32px"></div>';
                         }
                         else
                         {
-                            html+='<img id="cls_'+obj.id+'" onclick="app.closeItems(\''+obj.id+'\')" src="img/close_red.png" style="float:right;margin-right:10px; height:32px;width: 32px">';
+                            html+='<div id="cls_'+obj.id+'"><img onclick="app.deleteItems(\''+obj.id+'\')" src="img/delete.png" style="float:right;margin-right:10px; height:32px;width: 32px">'+
+                                   '<img onclick="app.closeItems(\''+obj.id+'\',1)" src="img/close_red.png" style="float:right;margin-right:10px; height:32px;width: 32px">'+
+                                   '<img onclick="app.updateItems(\''+qrCode+'\')" src="img/add_car.png" style="float:right;margin-right:10px; height:32px;width: 32px"></div>';
                         }
                         
-                        html += '<img onclick="app.updateItems(\''+qrCode+'\')" src="img/add_car.png" style="float:right;margin-right:10px; height:32px;width: 32px">'+
-                                '<img onclick="app.showMap(\''+qrCode+'\')" src="img/world.png" style="float:right;margin-right:10px; height:32px;width: 32px">'+
-                                
+                        html += '<img onclick="app.showMap(\''+qrCode+'\')" src="img/world.png" style="float:right;margin-right:10px; height:32px;width: 32px">'+
                                 '<label for="' + itemId +'">'+qrCode+'<br>'+obj.guardrail.guardrailInfo.nomei+'<br>Via ' +obj.guardrail.street +' >> '+obj.guardrail.comune  ;
                         if(name != '')
                         {
@@ -379,7 +378,7 @@ var app = {
         }
         console.log('Received Event: ' + id);
     },
-    closeItems: function(itemId)
+    closeItems: function(itemId, stato)
     {
         data.close(itemId);
         var code='';
@@ -412,17 +411,21 @@ var app = {
                 }
             }
          });
+        
+        
+        var html='';
+        if(stato==1)
+        {
+                html+='<img  onclick="app.closeItems(\''+itemId+'\',0)" src="img/close.png" style="float:right;margin-right:10px; height:32px;width: 32px">';
+        }
+        else
+        {
+            html+='<img onclick="app.deleteItems(\''+itemId+'\')" src="img/delete.png" style="float:right;margin-right:10px; height:32px;width: 32px">'+
+                   '<img onclick="app.closeItems(\''+itemId+'\',1)" src="img/close_red.png" style="float:right;margin-right:10px; height:32px;width: 32px">'+
+                   '<img onclick="app.updateItems(\''+code+'\')" src="img/add_car.png" style="float:right;margin-right:10px; height:32px;width: 32px">';
+        } 
+        $("#cls_"+itemId).html(html);
          
-         if($("#cls_"+itemId).attr("src")=="img/close.png")
-         {
-             $("#cls_"+itemId).attr("src","img/close_red.png");
-         }
-         else
-         {
-             $("#cls_"+itemId).attr("src","img/close.png");
-         }    
-        
-        
     },
     acquireCoords: function()
     {
