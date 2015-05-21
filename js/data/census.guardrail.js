@@ -28,7 +28,9 @@ guardrail.guardrailInfo = function() {
     this.chiuso=0;
     //this.fine = '';                                 // Fine Tratto
     this.nomei='';                                  //nome inizio
-    this.sequenza='';                              //numero sequenza
+    this.sequenza='';
+    this.portali_segnaletici='';
+    //numero sequenza
 
     //this.nomea='';                                 //nome associato inizio
 };

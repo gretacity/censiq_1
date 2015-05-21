@@ -1107,14 +1107,12 @@ var app = {
         guardrailInfo.textAlberi=$('#nAlberi').val();
         guardrailInfo.textPali=$('#nPali').val();
         guardrailInfo.textPaliIlluminazione=$('#nPaliIlluminazione').val();
-        guardrailInfo.textPortaliSegnaletici=$('nPortaliSegnaletici').val();
+        guardrailInfo.textPortaliSegnaletici=$('#nPortaliSegnaletici').val();
         guardrailInfo.textBarriereAntirumore=$('#nBarriereAntirumore').val();
         guardrailInfo.textAltro=$('#nAltro').val();
         guardrailInfo.radioGroup = $('input[type="radio"].guardrail-mark3:checked').val();
         guardrailInfo.classeChiuso=$('#classeChiuso').val();
         guardrailInfo.classeAttenuatore=$('#classeAttenuatore').val();
-        //guardrailInfo.fine = $('input[type="radio"].guardrail-mark2:checked').val();
-        //guardrailInfo.kmFine = $('#kmFine').val();
         guardrailInfo.nomei = $('#nameIni').val();           
         // nome inizio
         if($('#sequenza_point').val()!='')
@@ -1137,19 +1135,6 @@ var app = {
             guardrailInfo.inizio=1;
         }
         app.census.guardrail.guardrailInfo = guardrailInfo;
-        //console.log("RAILINFO APPS",guardrailInfo);
-        
-        // informazioni tratto
-      /*
-        var guardInfo = new guardrail.guardInfo();
-        
-r        console.log("GUARD APPS",guardInfo);
-        
-        app.census.guardrail.guards.push(guardInfo);
-        // ...and save it
-        // TODO Reenable
-        //data.roadSign.updateSupportTables(supportTableData);
-        */
         data.save(app.census);
         $('#sequenza_point', $page).val('');
         
