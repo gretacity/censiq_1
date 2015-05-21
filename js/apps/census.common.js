@@ -89,7 +89,6 @@ app.acquireGeoCoordinates1 = function(successCallback, errorCallback) {
             }, 
             function(errorMessage, error) 
             {
-               
                 errorCallback(errorMessage);
                 
             }

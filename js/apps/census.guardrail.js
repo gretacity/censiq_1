@@ -272,7 +272,7 @@ var app = {
                 {
                     //console.log("ROW",row);
                     var obj = data.deserialize(row, row.entity_type);
-                    console.log(obj.guardrail.guardrailInfo);
+                    //console.log(obj.guardrail.guardrailInfo);
                     if(obj.guardrail.guardrailInfo.inizio==1)
                     {    
                         var itemId = 'item' + obj.id;
@@ -563,6 +563,7 @@ var app = {
         {
             clearInterval(app.ID_GPS);
         }
+        
         if(jQuery.mobile.path.getLocation().indexOf('guardrailStep1Page')>0 ||
            jQuery.mobile.path.getLocation().indexOf('mapLocalizeGuardrailPage')>0)
         {
@@ -571,35 +572,26 @@ var app = {
                 app.acquireGeoCoordinates1(
                 function()
                 {
+                    if(app.ID_GPS!=0)
+                    {
+                        clearInterval(app.ID_GPS);
+                    }
+                    if(jQuery.mobile.path.getLocation().indexOf('guardrailStep1Page')>0)
+                    {
+                        $("#latitudine_0").html('Lat:  '+app.census.position.latitude.toFixed(5));
+                        $("#longitudine_0").html('Lon:  '+app.census.position.longitude.toFixed(5));
+                        $("#accuratezza_0").html('Acc:  '+app.census.position.accuracy.toFixed(1))+' m';
+                    }
+                    else
+                    {    
+                        $("#latitudine_1").html('Lat:  '+app.census.position.latitude.toFixed(5));
+                        $("#longitudine_1").html('Lon:  '+app.census.position.longitude.toFixed(5));
+                        $("#accuratezza_1").html('Acc:  '+app.census.position.accuracy.toFixed(1))+' m';
+                    }
                     try
                     {
                         var map=app._map;
                         var markerPoint = new google.maps.LatLng(app.census.position.latitude,app.census.position.longitude);
-                        if(jQuery.mobile.path.getLocation().indexOf('guardrailStep1Page')>0)
-                        {
-                            $("#latitudine_0").html('Lat:  '+app.census.position.latitude.toFixed(5));
-                            $("#longitudine_0").html('Lon:  '+app.census.position.longitude.toFixed(5));
-                            $("#accuratezza_0").html('Acc:  '+app.census.position.accuracy.toFixed(1))+' m';
-                            try
-                            {
-                                //$("#altezza_0").html('H:  '+app.census.position.altitude.toFixed(1))+' m';
-                            }
-                            catch(e)
-                            {}
-
-                        }
-                        else
-                        {    
-                            $("#latitudine_1").html('Lat:  '+app.census.position.latitude.toFixed(5));
-                            $("#longitudine_1").html('Lon:  '+app.census.position.longitude.toFixed(5));
-                            $("#accuratezza_1").html('Acc:  '+app.census.position.accuracy.toFixed(1))+' m';
-                            try
-                            {
-                                //$("#altezza_1").html('H:  '+app.census.position.altitude.toFixed(1))+' m';
-                            }
-                            catch(e)
-                            {}
-                        }
                         try
                         {
                         
@@ -619,8 +611,6 @@ var app = {
                             {    
                                 app._marker.setPosition(markerPoint );
                             }
-
-
                             if(app._marker==null)
                             { 
                                 app._marker=marker;
@@ -629,10 +619,10 @@ var app = {
                         }
                         catch(e)
                         {}
-                        
                         if(app.ACQ_GPS)
                         {
                             app.ID_GPS=setInterval(function(){app.readGPS()},5000);
+                           
                         }
                     }
                     catch(e)
@@ -643,9 +633,14 @@ var app = {
                 }, 
                 function(errorMessage)
                 {
+                    if(app.ID_GPS!=0)
+                    {
+                        clearInterval(app.ID_GPS);
+                    }
                     if(app.ACQ_GPS)
                     {
                         app.ID_GPS=setInterval(function(){app.readGPS()},5000);
+                        
                     }
                 }
                 );
@@ -683,34 +678,22 @@ var app = {
             }
             catch(e)
             {}
-            setTimeout( function()
-            {
-
-                app.readGPS();
-
-            }
-            ,300);
+            app.readGPS();
         }
         else
         {
-            setTimeout( function()
-            {
-                if(app.MAP)
-                {    
-                    try
-                    {
-                        google.maps.event.trigger(app._map, 'resize')
-                    }
-                    catch(e)
-                    {
-
-                    }
+            if(app.MAP)
+            {    
+                try
+                {
+                    google.maps.event.trigger(app._map, 'resize')
                 }
-                
-                app.readGPS();
-            },
-            300
-            );
+                catch(e)
+                {
+
+                }
+            }
+            app.readGPS();
         }    
     },
     showMapPage: function()
