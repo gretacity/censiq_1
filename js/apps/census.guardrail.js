@@ -674,17 +674,18 @@ var app = {
                 app.addEvent=false;
                 app.addMarker=false;
                 app.openMap();
-                setTimeout( function()
-                {
-                    var map= app._map;
-                    map.setZoom(16);
-                    app.readGPS();
-
-                }
-                ,300);
+                app._map.setZoom(16);
+                
             }
             catch(e)
             {}
+            setTimeout( function()
+            {
+
+                app.readGPS();
+
+            }
+            ,300);
         }
         else
         {
