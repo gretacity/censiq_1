@@ -659,31 +659,49 @@ var app = {
             var point=null;
             app._map = null;
             app._marker=null;
-            if(jQuery.mobile.path.getLocation().indexOf('guardrailStep1Page')>0)
+            try
             {
-                $('#start_gps_0').on('click', function(){app.startGPS();});
-                app.id_map="map_0";
-            }
-            else
-            {    
-                $('#start_gps_1').on('click', function(){app.startGPS();});
-                app.id_map="map_1";
-            }
-            app.addEvent=false;
-            app.addMarker=false;
-            app.openMap();
-            setTimeout( function()
-            {
-                var map= app._map;
-                map.setZoom(16);
-                app.readGPS();
+                if(jQuery.mobile.path.getLocation().indexOf('guardrailStep1Page')>0)
+                {
+                    $('#start_gps_0').on('click', function(){app.startGPS();});
+                    app.id_map="map_0";
+                }
+                else
+                {    
+                    $('#start_gps_1').on('click', function(){app.startGPS();});
+                    app.id_map="map_1";
+                }
+                app.addEvent=false;
+                app.addMarker=false;
+                app.openMap();
+                setTimeout( function()
+                {
+                    var map= app._map;
+                    map.setZoom(16);
+                    app.readGPS();
 
+                }
+                ,300);
             }
-            ,300);
+            catch(e)
+            {}
         }
         else
         {
-             app.readGPS();
+            setTimeout( function()
+            {
+                try
+                {
+                     google.maps.event.trigger(app._map, 'resize')
+                }
+                catch(e)
+                {
+
+                }
+                app.readGPS();
+            },
+            300
+            );
         }    
     },
     showMapPage: function()
