@@ -663,6 +663,14 @@ var app = {
                 
                 app.addEvent=false;
                 app.addMarker=false;
+                if(jQuery.mobile.path.getLocation().indexOf('guardrailStep1Page')>0)
+                {
+                    app.id_map="map_0";
+                }
+                else
+                {    
+                    app.id_map="map_1";
+                }
                 app.MAP=app.openMap();
                 if(app.MAP)
                 {    
@@ -670,12 +678,10 @@ var app = {
                     if(jQuery.mobile.path.getLocation().indexOf('guardrailStep1Page')>0)
                     {
                         $('#start_gps_0').on('click', function(){app.startGPS();});
-                        app.id_map="map_0";
                     }
                     else
                     {    
                         $('#start_gps_1').on('click', function(){app.startGPS();});
-                        app.id_map="map_1";
                     }
                 }
             }
