@@ -695,14 +695,18 @@ var app = {
         {
             setTimeout( function()
             {
-                try
-                {
-                     google.maps.event.trigger(app._map, 'resize')
-                }
-                catch(e)
-                {
+                if(app.MAP)
+                {    
+                    try
+                    {
+                        google.maps.event.trigger(app._map, 'resize')
+                    }
+                    catch(e)
+                    {
 
+                    }
                 }
+                
                 app.readGPS();
             },
             300
