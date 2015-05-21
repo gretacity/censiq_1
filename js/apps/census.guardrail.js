@@ -598,29 +598,36 @@ var app = {
                             catch(e)
                             {}
                         }
-                        if(app._marker==null)
-                        {    
-                          var marker = new google.maps.Marker({
-                                position: markerPoint,
-                                map: map,
-                                draggable: true,
-                                animation: google.maps.Animation.DROP,
-                                title: app.SELECTED_QRCODE
-                            });
-                            //var infowindow = new google.maps.InfoWindow({content: '<div></div>'});
-                            //infowindow.open(map, marker);
-                        }
-                        else
-                        {    
-                            app._marker.setPosition(markerPoint );
-                        }
+                        try
+                        {
+                        
+                            if(app._marker==null)
+                            {    
+                              var marker = new google.maps.Marker({
+                                    position: markerPoint,
+                                    map: map,
+                                    draggable: true,
+                                    animation: google.maps.Animation.DROP,
+                                    title: app.SELECTED_QRCODE
+                                });
+                                //var infowindow = new google.maps.InfoWindow({content: '<div></div>'});
+                                //infowindow.open(map, marker);
+                            }
+                            else
+                            {    
+                                app._marker.setPosition(markerPoint );
+                            }
 
 
-                        if(app._marker==null)
-                        { 
-                            app._marker=marker;
-                            map.panTo(markerPoint);
+                            if(app._marker==null)
+                            { 
+                                app._marker=marker;
+                                map.panTo(markerPoint);
+                            }
                         }
+                        catch(e)
+                        {}
+                        
                         if(app.ACQ_GPS)
                         {
                             app.ID_GPS=setInterval(function(){app.readGPS()},5000);
