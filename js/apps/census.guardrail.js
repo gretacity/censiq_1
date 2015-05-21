@@ -18,7 +18,7 @@ var app = {
     ID_GPS:0,  
     ACQ:false,
     SELECTED_QRCODE: null,
-    
+    MAP:false,
     census: new Census(CensusTypes.guardrail),
     localizationPageId: 'guardrailStep0Page',
     picturesPageId: 'guardrailStep3Page',
@@ -108,6 +108,7 @@ var app = {
         $('#mapresultGuardrailPage').on('pageshow',  this.acquireCoords);
         $('#guardrailStep2Page').on('pageshow',  this.acquireCoords);
         $('#acquireQrCodePointButton', $pageAdd).on('click', this.acquireQrCodePoint);
+        /*
         $('#getCoordinatesPanelPoint', $pageAdd).on('click', this.acquireGeoCoordinatesPoint);
         $('#openMapPageButtonPoint', $pageAdd).on('click', function() {
             //helper.maximizeContent();
@@ -121,6 +122,7 @@ var app = {
                 });
             }, 100);
         });
+        */
         $('#newButton').on('click', function(){
             $.mobile.changePage('#guardrailStep0Page', {
                 transition: 'slide',
@@ -651,7 +653,6 @@ var app = {
         }
         
     },
-
     showMapPositionPage: function()
     {
         if(!app.ACQ)
@@ -661,21 +662,24 @@ var app = {
             app._marker=null;
             try
             {
-                if(jQuery.mobile.path.getLocation().indexOf('guardrailStep1Page')>0)
-                {
-                    $('#start_gps_0').on('click', function(){app.startGPS();});
-                    app.id_map="map_0";
-                }
-                else
-                {    
-                    $('#start_gps_1').on('click', function(){app.startGPS();});
-                    app.id_map="map_1";
-                }
+                
                 app.addEvent=false;
                 app.addMarker=false;
-                app.openMap();
-                app._map.setZoom(16);
-                
+                app.MAP=app.openMap();
+                if(app.MAP)
+                {    
+                    app._map.setZoom(16);
+                    if(jQuery.mobile.path.getLocation().indexOf('guardrailStep1Page')>0)
+                    {
+                        $('#start_gps_0').on('click', function(){app.startGPS();});
+                        app.id_map="map_0";
+                    }
+                    else
+                    {    
+                        $('#start_gps_1').on('click', function(){app.startGPS();});
+                        app.id_map="map_1";
+                    }
+                }
             }
             catch(e)
             {}
