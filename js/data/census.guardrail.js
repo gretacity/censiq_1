@@ -2,10 +2,11 @@
 guardrail = function() {},
 guardrail.guardrailInfo = function() {
     // Front
-    this.classe = '';                                 
+    this.denominazione_strada='';
+    this.classificazione_classe = '';                                 
     this.spartitraffico = '';                                   
     this.pianoVariabile = 0;                            
-    this.tipologia = '';                              
+    this.tipologia = '';                             
     this.fasce = '';
     this.tipologiaPaletto = '';
     this.sezione = 0;
@@ -30,6 +31,9 @@ guardrail.guardrailInfo = function() {
     this.nomei='';                                  //nome inizio
     this.sequenza='';
     this.portali_segnaletici='';
+    this.portali_segnaletici='';
+    this.tipo_strada=0;
+    this.ubicazione_marcia=0;
     //numero sequenza
 
     //this.nomea='';                                 //nome associato inizio
@@ -120,7 +124,9 @@ data.guardrail = {
                 data_inserimento: entity.dateAdded,
                 //sys_user_id: 0,
                 r_qr_code_id: entity.qrCode,
-                classificazione_tipo: entity.guardrail.guardrailInfo.classe,
+                classificazione_classe: entity.guardrail.guardrailInfo.classificazione_classe,
+                classificazione_tipo: entity.guardrail.guardrailInfo.tipo,
+                denominazione_strada:entity.guardrail.guardrailInfo.denominazione_strada,
                 spartitraffico: entity.guardrail.guardrailInfo.spartitraffico,
                 altezza_piano_viabile: entity.guardrail.guardrailInfo.pianoVariabile,
                 tipologia_barriera: entity.guardrail.guardrailInfo.tipologia,
@@ -145,7 +151,9 @@ data.guardrail = {
                 sequenza: entity.guardrail.guardrailInfo.sequenza,
                 nome_inizio: entity.guardrail.guardrailInfo.nomei,
                 inizio:entity.guardrail.guardrailInfo.inizio,
-                chiuso: entity.guardrail.guardrailInfo.chiuso
+                chiuso: entity.guardrail.guardrailInfo.chiuso,
+                tipo_strada: entity.guardrail.guardrailInfo.tipo_strada,
+                ubicazione_marcia: entity.guardrail.guardrailInfo.ubicazione_marcia
             },
             //gr_censimento_info: [],
             pictures: {
@@ -208,7 +216,7 @@ data.guardrail = {
         return [
             {name: 'Centrale'},
             {name: 'Laterale rilevato'},
-            {name: 'Bordo ponte su opera d\'\'arte'},
+            {name: 'Bordo ponte su opera d\'arte'},
         ];
     },
     

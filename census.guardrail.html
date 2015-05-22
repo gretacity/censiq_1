@@ -249,14 +249,36 @@
                         <label for="provincia">Provincia</label>
                         <input id="provincia" placeholder="Provincia" />
                     </li>
+                     <li>
+                        <label for="street">Tipo strada</label>
+                        <select id="tipo_strada">
+                            <option value="0" >Autostrada</option>
+                            <option value="1" >Raccordo autostradale</option>
+                            <option value="2" >Strada extraurbana principale</option>
+                            <option value="3" >Strada extraurbana secondaria</option>
+                        </select>
+                    </li>
                     <li>
                         <label for="street">Strada / Via</label>
                         <input id="street" placeholder="Strada o via" />
                     </li>
                     <li>
+                        <label for="denominazione_strada">Denominazione</label>
+                        <input id="denominazione_strada" placeholder="denominazione" />
+                    </li>
+                    <li>
                         <label for="streetNumber">Km</label>
                         <input id="streetNumber" placeholder="Km" />
                     </li>
+                    <li>
+                        <label for="ubicazione_marcia">Senso di marcia</label>
+                        <select id="ubicazione_marcia">
+                            <option value="0">Barriera destra</option>
+                            <option value="1">Barriera sinistra</option>
+                            <option value="2">Barriera centrale</option>
+                        </select>
+                    </li>
+                    
                </ul>
             </div>
             <div data-role="footer" class="footer"  data-position="fixed" align="center" style="background:none !important; background-color: #f2f2f2 !important;">
@@ -479,8 +501,8 @@
                     <input type="checkbox" id="altro"/> <label for="altro"> Altro</label>
                     <div id="textAltro" class="textAltro"><input type="text" id="nAltro" placeholder="n°"/></div>
                     <legend>Presenza di by-pass o apertura varchi (principalmente di tipo A e B)</legend>
-                    <input type="radio" name="radioGroup" class="guardrail-mark3" id="aperto" value="1" /> <label for="aperto">Aperto</label>
-                    <input type="radio" name="radioGroup" class="guardrail-mark3" id="chiuso" value="0" /> <label for="chiuso">Chiuso con dispositivo di protezione mobile</label>
+                    <input type="radio" name="radioGroup" class="guardrail-mark3" id="aperto" value="0" checked/> <label for="aperto">Aperto</label>
+                    <input type="radio" name="radioGroup" class="guardrail-mark3" id="chiuso" value="1" /> <label for="chiuso">Chiuso con dispositivo di protezione mobile</label>
                     <div class="chiuso">
                         <label for="classeChiuso">Classe</label>
                         <select id="classeChiuso" data-theme="b"></select>

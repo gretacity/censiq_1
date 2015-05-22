@@ -272,7 +272,7 @@ var app = {
                 {
                     //console.log("ROW",row);
                     var obj = data.deserialize(row, row.entity_type);
-                    //console.log(obj.guardrail.guardrailInfo);
+                    console.log(obj.guardrail.guardrailInfo);
                     if(obj.guardrail.guardrailInfo.inizio==1)
                     {    
                         var itemId = 'item' + obj.id;
@@ -381,9 +381,10 @@ var app = {
     closeItems: function(itemId, stato)
     {
         data.close(itemId);
-        var code='';
+       
         data.fetch({status: [data.REC_STATUS_ADDED, data.REC_STATUS_SYNCH_ERROR]}, function(result) {
             //console.log("RESULT SYNC FETCH",result);
+            var code='';
             var itemCount = result.rows.length;
            
             for(var i = 0; i < itemCount; i++) 
@@ -393,10 +394,11 @@ var app = {
                 if(obj.id==itemId)
                 {    
                   code=obj.qrCode;
+                  
                 }
             }
-         });
-        data.fetch({status: [data.REC_STATUS_ADDED, data.REC_STATUS_SYNCH_ERROR]}, function(result) {
+            
+            data.fetch({status: [data.REC_STATUS_ADDED, data.REC_STATUS_SYNCH_ERROR]}, function(result) {
             //console.log("RESULT SYNC FETCH",result);
             var itemCount = result.rows.length;
            
@@ -410,7 +412,7 @@ var app = {
                     data.close(obj.id) 
                 }
             }
-         });
+        });
         
         
         var html='';
@@ -425,6 +427,11 @@ var app = {
                    '<img onclick="app.updateItems(\''+code+'\')" src="img/add_car.png" style="float:right;margin-right:10px; height:32px;width: 32px">';
         } 
         $("#cls_"+itemId).html(html);
+            
+            
+            
+         });
+        
          
     },
     acquireCoords: function()
@@ -436,7 +443,6 @@ var app = {
         var latlng;
         geoLocation.reverseGeocoding(app.census.position, function(result) 
         {
-           
             if(result)
             {
                 if(jQuery.mobile.path.getLocation().indexOf('guardrailStep2Page')>0)
@@ -487,6 +493,9 @@ var app = {
                 $("#start_gps_0").css("color", "#FF1111");
                 if(app._marker!=null && app._marker!=undefined )
                 {
+                    
+                    app._marker.setOptions({draggable: true});
+                    
                     google.maps.event.addListener(
                     app._marker, 
                     'dragend', 
@@ -507,6 +516,7 @@ var app = {
                 $("#start_gps_1").css("color", "#FF1111");
                 if(app._marker!=null && app._marker!=undefined)
                 {
+                    app._marker.setOptions({draggable: true});
                     google.maps.event.addListener(
                     app._marker, 
                     'dragend', 
@@ -529,6 +539,7 @@ var app = {
             {
                 if(app._marker!=null && app._marker!=undefined )
                 {
+                    app._marker.setOptions({draggable: false});
                     google.maps.event.clearListeners(app._marker, 'dragend');
                    
                 }
@@ -546,6 +557,7 @@ var app = {
             {
                 if(app._marker!=null && app._marker!=undefined )
                 {
+                    app._marker.setOptions({draggable: false});
                     google.maps.event.clearListeners(app._marker, 'dragend');
                 }
                 $("#start_gps_1").html("MANUALE");
@@ -603,7 +615,7 @@ var app = {
                               var marker = new google.maps.Marker({
                                     position: markerPoint,
                                     map: map,
-                                    draggable: true,
+                                    draggable: false,
                                     animation: google.maps.Animation.DROP,
                                     title: app.SELECTED_QRCODE
                                 });
@@ -726,7 +738,7 @@ var app = {
             app.id_map="map";
             app.openMap();
             setTimeout( function(){
-                
+                app._map.setZoom(16);
                 var map = app._map;
                 for(var i = 0; i < itemCount; i++) 
                 {
@@ -749,8 +761,7 @@ var app = {
                                     title: app.SELECTED_QRCODE
                                 });
 
-                            var infowindow = new google.maps.InfoWindow({content: '<div>' + app.SELECTED_QRCODE + '</div>'});
-                            infowindow.open(map, marker);
+                            
 
                         }
                     }
@@ -1092,10 +1103,10 @@ var app = {
         }
         // informazioni guardrail
         var guardrailInfo = new guardrail.guardrailInfo();
-        guardrailInfo.classe = $('#classe').val();                                    
+        guardrailInfo.classificazione_classe = $('#classe').val();  
         guardrailInfo.spartitraffico = $('#spartitraffico').val();                                       
         guardrailInfo.pianoVariabile = $('#pianoVariabile').val();                       
-        guardrailInfo.tipologia = $('#tipologia').val();                               
+        guardrailInfo.tipo = $('#tipologia').val();                               
         guardrailInfo.fasce = $('#fasce').val(); 
         guardrailInfo.tipologiaPaletto = $('#tipologiaPaletto').val();
         guardrailInfo.sezione = $('#sezione').val();                                     
@@ -1103,14 +1114,16 @@ var app = {
         guardrailInfo.ancoraggio = $('#ancoraggio').val();                             
         guardrailInfo.classeElemento = $('#classeElemento').val(); 
         guardrailInfo.parent = $('#parent').val();
-        
+        guardrailInfo.denominazione_strada = $('#denominazione_strada').val();
         guardrailInfo.textAlberi=$('#nAlberi').val();
+        guardrailInfo.tipo_strada=$('#tipo_strada').val();
         guardrailInfo.textPali=$('#nPali').val();
+        guardrailInfo.ubicazione_marcia=$('#ubicazione_marcia').val();
         guardrailInfo.textPaliIlluminazione=$('#nPaliIlluminazione').val();
         guardrailInfo.textPortaliSegnaletici=$('#nPortaliSegnaletici').val();
         guardrailInfo.textBarriereAntirumore=$('#nBarriereAntirumore').val();
         guardrailInfo.textAltro=$('#nAltro').val();
-        guardrailInfo.radioGroup = $('input[type="radio"].guardrail-mark3:checked').val();
+        guardrailInfo.radioGroup =$('input:radio[name=radioGroup]:checked').val();
         guardrailInfo.classeChiuso=$('#classeChiuso').val();
         guardrailInfo.classeAttenuatore=$('#classeAttenuatore').val();
         guardrailInfo.nomei = $('#nameIni').val();           
