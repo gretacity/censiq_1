@@ -272,7 +272,7 @@ var app = {
                 {
                     //console.log("ROW",row);
                     var obj = data.deserialize(row, row.entity_type);
-                    console.log(obj.guardrail.guardrailInfo);
+                    //console.log(obj.guardrail.guardrailInfo);
                     if(obj.guardrail.guardrailInfo.inizio==1)
                     {    
                         var itemId = 'item' + obj.id;
