@@ -25,7 +25,7 @@ var app = {
     initialize: function() 
     {
         // Custom fields used for localization (street , no/km)
-        page.injector.injectPage('#roadSignStep3Page', '3pictures', {title: 'Segnaletica', footerText: '4 di 5'});
+        page.injector.injectPage('#roadSignStep3Page', '3pictures', {title: 'Segnaletica', footerText: '4 di 6',dataStep:'3'});
         page.injector.injectPage('#summaryPage', 'summary', {continueLink: '#roadSignStep0Page'});
         
         // Road Sign shapes
@@ -151,7 +151,11 @@ var app = {
             stepValidCallback();
         }
         else if(stepIndex == app.STEP_4) {
-            // Validate step 3
+            // Validate step 4
+            stepValidCallback();
+        }
+         else if(stepIndex == app.STEP_5) {
+            // Validate step 5
             stepValidCallback();
         }
     },
@@ -182,6 +186,9 @@ var app = {
             } else if(step == app.STEP_3) {
                 $.mobile.changePage('#roadSignStep4Page');
             } else if(step == app.STEP_4) {
+                $.mobile.changePage('#roadSignStep5Page');
+            }
+            else if(step == app.STEP_5) {
                 app.save();
             }
         }, function(errors) {
@@ -213,6 +220,8 @@ var app = {
             $.mobile.changePage('#roadSignStep2Page');
         } else if(step == app.STEP_4) {
             $.mobile.changePage('#roadSignStep3Page');
+        } else if(step == app.STEP_5) {
+            $.mobile.changePage('#roadSignStep4Page');
         }
     },
     
