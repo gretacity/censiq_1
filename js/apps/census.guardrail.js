@@ -108,21 +108,7 @@ var app = {
         $('#mapresultGuardrailPage').on('pageshow',  this.acquireCoords);
         $('#guardrailStep2Page').on('pageshow',  this.acquireCoords);
         $('#acquireQrCodePointButton', $pageAdd).on('click', this.acquireQrCodePoint);
-        /*
-        $('#getCoordinatesPanelPoint', $pageAdd).on('click', this.acquireGeoCoordinatesPoint);
-        $('#openMapPageButtonPoint', $pageAdd).on('click', function() {
-            //helper.maximizeContent();
-            setTimeout(function() {
-                var success = app.openMap();
-                if(!success) return;
-                $.mobile.changePage('#mapPage', {
-                    transition: 'slide',
-                    reverse: false,
-                    changeHash: false
-                });
-            }, 100);
-        });
-        */
+        
         $('#newButton').on('click', function(){
             $.mobile.changePage('#guardrailStep0Page', {
                 transition: 'slide',

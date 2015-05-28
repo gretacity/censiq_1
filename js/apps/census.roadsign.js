@@ -4,36 +4,28 @@ var app = {
     STEP_1: 1,
     STEP_2: 2,
     STEP_3: 3,
+    STEP_4: 4,
+    STEP_5: 5,
+    STEP_6: 6,
+    STEP_7: 7,
+    STEP_8: 8,
+    STEP_9: 9,
+    STEP_10: 10,
+    ACQ_GPS:true,
+    ID_GPS:0,  
+    ACQ:false,
+    SELECTED_QRCODE: null,
+    MAP:false,
 
     census: new Census(CensusTypes.roadSign),
-    
-    localizationPageId: 'roadSignStep0Page',
-    picturesPageId: 'roadSignStep1Page',
-    
+    picturesPageId: 'roadSignStep3Page',
     pageOffsetTop: 0,
     
     // Application Constructor
-    initialize: function() {
+    initialize: function() 
+    {
         // Custom fields used for localization (street , no/km)
-        var additionalContent = '<li role="listdivider">&nbsp;</li>' +
-                                '<li>' +
-                                    '<label for="comune">Comune</label>' +
-                                    '<input id="comune" placeholder="Comune" />' +
-                                '</li>' +
-                                '<li>' +
-                                    '<label for="provincia">Provincia</label>' +
-                                    '<input id="provincia" placeholder="Provincia" />' +
-                                '</li>' +
-                                '<li>' +
-                                    '<label for="street">Strada / Via</label>' +
-                                    '<input id="street" placeholder="Strada o via" />' +
-                                '</li>' +
-                                '<li>' +
-                                    '<label for="streetNumber">Km / Civico</label>' +
-                                    '<input id="streetNumber" placeholder="Km o numero civico" />' +
-                                '</li>';
-        page.injector.injectPage('#roadSignStep0Page', 'localize', {title: 'Segnaletica', footerText: '1 di 3', additionalContent: additionalContent});
-        page.injector.injectPage('#roadSignStep1Page', '3pictures', {title: 'Segnaletica', footerText: '2 di 3'});
+        page.injector.injectPage('#roadSignStep3Page', '3pictures', {title: 'Segnaletica', footerText: '4 di 5'});
         page.injector.injectPage('#summaryPage', 'summary', {continueLink: '#roadSignStep0Page'});
         
         // Road Sign shapes
@@ -56,6 +48,8 @@ var app = {
         this.bindEvents();        
     },
     
+    
+    
     // Bind Event Listeners
     //
     // Bind any events that are required on startup. Common events are:
@@ -63,34 +57,26 @@ var app = {
     bindEvents: function() {
         
         document.addEventListener('deviceready', this.onDeviceReady, false);
+        $('#roadSignStep1Page').on('pageshow', this.showMapPositionPage);
+        $('#roadSignStep2Page').on('pageshow',  this.acquireCoords);
+        
         // Force onDeviceReady if it's a browser
         if(config.EMULATE_ON_BROWSER) this.onDeviceReady();
         $('.prev-step').on('click', this.previousStep);
         $('.next-step').on('click', this.stepCompleted);
         // Step 0
-        $page0 = $('#roadSignStep0Page');
+        var $page0 = $('#roadSignStep0Page');
         $('#acquireQrCodeButton', $page0).on('click', this.acquireQrCode);
-        $('#getCoordinatesPanel', $page0).on('click', this.acquireGeoCoordinates);
-        $('#openMapPageButton', $page0).on('click', function() {
-            //helper.maximizeContent();
-            setTimeout(function() {
-                var success = app.openMap();
-                if(!success) return;
-                $.mobile.changePage('#mapPage', {
-                    transition: 'slide',
-                    reverse: false,
-                    changeHash: false
-                });
-            }, 100);
-        });
-        // Step1
-        var $page1 = $('#roadSignStep1Page');
-        $('a[data-addview]', $page1).on('click', this.acquirePhoto);
-        $('a[data-removeview]', $page1).on('click', this.removePhoto);
+        
+        // Step3
+        var $page3 = $('#roadSignStep3Page');
+        $('a[data-addview]', $page3).on('click', this.acquirePhoto);
+        $('a[data-removeview]', $page3).on('click', this.removePhoto);
         //$('a[data-showview]', $page1).on('click', this.showPhotoDialog);
         $('#photoPage a').on('tap', this.hidePhotoDialog);
-        // Step2
-        var $page2 = $('#roadSignStep2Page');
+        // Step4
+        
+        var $page4 = $('#roadSignStep4Page');
         $('#addRoadSignButton').on('click', app.addRoadSignPanel);
         
         
@@ -150,24 +136,21 @@ var app = {
             if($.trim($('#qrCode').val()) == '') {
                 errors.push('specificare il QR-code');
                 stepNotValidCallback(errors);
-            } else if($.trim($('#latLng').val()) == '') {
-                helper.confirm('La posizione GPS non è stata specificata.\nVuoi procedere comunque?', function(buttonIndex) {
-                    if(buttonIndex == 2) {
-                        stepNotValidCallback();
-                    } else {
-                        stepValidCallback();
-                    }
-                }, 'Localizzazione GPS', ['Si', 'No']);
             } else {
                 stepValidCallback();
             }
         } else if(stepIndex == app.STEP_1) {
+            
             // Validate step 1
             stepValidCallback();
         } else if(stepIndex == app.STEP_2) {
             // Validate step 2
             stepValidCallback();
         } else if(stepIndex == app.STEP_3) {
+            // Validate step 3
+            stepValidCallback();
+        }
+        else if(stepIndex == app.STEP_4) {
             // Validate step 3
             stepValidCallback();
         }
@@ -188,10 +171,17 @@ var app = {
             if(step == app.STEP_0) {
                 $.mobile.changePage('#roadSignStep1Page');
             } else if(step == app.STEP_1) {
+                try
+                {
+                    clearInterval(app.ID_GPS);
+                }
+                catch(e){}
                 $.mobile.changePage('#roadSignStep2Page');
             } else if(step == app.STEP_2) {
                 $.mobile.changePage('#roadSignStep3Page');
             } else if(step == app.STEP_3) {
+                $.mobile.changePage('#roadSignStep4Page');
+            } else if(step == app.STEP_4) {
                 app.save();
             }
         }, function(errors) {
@@ -206,7 +196,13 @@ var app = {
         // Current step
         var step = $(this).attr('data-step');
         
-        if(step == app.STEP_0) {
+        if(step == app.STEP_0)
+        {
+            try
+            {
+                clearInterval(app.ID_GPS);
+            }
+            catch(e){}
             //$.mobile.changePage('index.html#censusTypePage');
             $.mobile.back();
         } else if(step == app.STEP_1) {
@@ -215,6 +211,8 @@ var app = {
             $.mobile.changePage('#roadSignStep1Page');
         } else if(step == app.STEP_3) {
             $.mobile.changePage('#roadSignStep2Page');
+        } else if(step == app.STEP_4) {
+            $.mobile.changePage('#roadSignStep3Page');
         }
     },
     
@@ -257,7 +255,7 @@ var app = {
         var imageKeys = ['front', 'back', 'perspective'];
         for(var i in imageKeys) {
             var k = imageKeys[i];
-            var imageSrc = $('#roadSignStep1Page a[data-viewtype="' + k + '"][data-showview] img').attr('src');
+            var imageSrc = $('#roadSignStep3Page a[data-viewtype="' + k + '"][data-showview] img').attr('src');
             if(imageSrc != '') {
                 // Remove this from src attribute:
                 // data:image/jpeg;base64,
@@ -333,7 +331,7 @@ var app = {
         $('#geoStatusText', $page).html('Latitudine e longitudine');
         $('#geoStatusTitle', $page).html('Ottieni');
         $('#openMapPanel', $page).hide();
-        var $page = $('#roadSignStep1Page');
+        var $page = $('#roadSignStep3Page');
         $('input[type="text"]', $page).val('');
         $('input[type="hidden"]', $page).val('');
         app.removePhoto('front');
@@ -360,8 +358,211 @@ var app = {
     },
     
     
-    
-    
+    /****************************************************************
+     * MAP FUNCTIONS
+     * 
+     * 
+     * 
+     */
+    acquireCoords: function()
+    {
+        app.ACQ=true;
+        var town;
+        var city;
+        var village;
+        var latlng;
+        geoLocation.reverseGeocoding(app.census.position, function(result) 
+        {
+            if(result)
+            {
+                $('#street').val(result.road);
+                $('#provincia').val(result.prov);
+                if (result.village != null ){                
+                    $('#comune').val(result.village);
+                }
+                else if (result.town != null ){                
+                    $(' #comune').val(result.town);
+                }
+                else
+                {    
+                    $('#comune').val(result.city);
+                }
+            }
+        });
+    },
+    startGPS :function()
+    {
+        if(app.ACQ_GPS)
+        {
+           
+            clearInterval(app.ID_GPS);
+            app.ACQ_GPS=false;
+            $("#start_gps_0").html("GPS");
+            $("#start_gps_0").css("color", "#FF1111");
+            if(app._marker!=null && app._marker!=undefined )
+            {
+
+                app._marker.setOptions({draggable: true});
+
+                google.maps.event.addListener(
+                app._marker, 
+                'dragend', 
+                function() {
+                    app._adjustedCoords = app._marker.getPosition();                
+                    app.census.position.latitude =app._marker.getPosition().lat();
+                    app.census.position.longitude =app._marker.getPosition().lng();
+                    $("#latitudine_0").html('Lat:  '+app.census.position.latitude.toFixed(5));
+                    $("#longitudine_0").html('Lon:  '+app.census.position.longitude.toFixed(5));
+                    //page.injector.GeoCoordinatesAcquired(app.census.position);             
+                });
+            }
+        }
+        else
+        {
+            app.ACQ_GPS=true;
+            
+            if(app._marker!=null && app._marker!=undefined )
+            {
+                app._marker.setOptions({draggable: false});
+                google.maps.event.clearListeners(app._marker, 'dragend');
+
+            }
+            $("#start_gps_0").html("MANUALE");
+            $("#start_gps_0").css("color", "#3388cc");
+            try
+            {
+                clearInterval(app.ID_GPS);
+            }
+            catch(e){}
+            app.ID_GPS=setInterval(function(){app.readGPS()},5000);
+                
+            
+        }    
+        
+    }, 
+    readGPS :function()
+    {
+        if(app.ID_GPS!=0)
+        {
+            clearInterval(app.ID_GPS);
+        }
+        
+        if(jQuery.mobile.path.getLocation().indexOf('roadSignStep1Page')>0)
+        {
+            if(app.ACQ_GPS)
+            {    
+                app.acquireGeoCoordinates1(
+                function()
+                {
+                    if(app.ID_GPS!=0)
+                    {
+                        clearInterval(app.ID_GPS);
+                    }
+                    $("#latitudine_0").html('Lat:  '+app.census.position.latitude.toFixed(5));
+                    $("#longitudine_0").html('Lon:  '+app.census.position.longitude.toFixed(5));
+                    $("#accuratezza_0").html('Acc:  '+app.census.position.accuracy.toFixed(1))+' m';
+                    
+                    try
+                    {
+                        var map=app._map;
+                        var markerPoint = new google.maps.LatLng(app.census.position.latitude,app.census.position.longitude);
+                        try
+                        {
+                        
+                            if(app._marker==null)
+                            {    
+                              var marker = new google.maps.Marker({
+                                    position: markerPoint,
+                                    map: map,
+                                    draggable: false,
+                                    animation: google.maps.Animation.DROP,
+                                    title: app.SELECTED_QRCODE
+                                });
+                                //var infowindow = new google.maps.InfoWindow({content: '<div></div>'});
+                                //infowindow.open(map, marker);
+                            }
+                            else
+                            {    
+                                app._marker.setPosition(markerPoint );
+                            }
+                            if(app._marker==null)
+                            { 
+                                app._marker=marker;
+                                map.panTo(markerPoint);
+                            }
+                        }
+                        catch(e)
+                        {}
+                        if(app.ACQ_GPS)
+                        {
+                            app.ID_GPS=setInterval(function(){app.readGPS()},5000);
+                           
+                        }
+                    }
+                    catch(e)
+                    {
+                        helper.alert(e.message);
+                    }
+
+                }, 
+                function(errorMessage)
+                {
+                    if(app.ID_GPS!=0)
+                    {
+                        clearInterval(app.ID_GPS);
+                    }
+                    if(app.ACQ_GPS)
+                    {
+                        app.ID_GPS=setInterval(function(){app.readGPS()},5000);
+                        
+                    }
+                }
+                );
+            }
+        }
+        
+    },
+    showMapPositionPage: function()
+    {
+        if(!app.ACQ)
+        {    
+            var point=null;
+            app._map = null;
+            app._marker=null;
+            try
+            {
+                
+                app.addEvent=false;
+                app.addMarker=false;
+                app.id_map="map_0";
+                app.MAP=app.openMap();
+                if(app.MAP)
+                {    
+                    app._map.setZoom(16);
+                    $('#start_gps_0').on('click', function(){app.startGPS();});
+                    
+                }
+            }
+            catch(e)
+            {}
+            app.readGPS();
+        }
+        else
+        {
+            if(app.MAP)
+            {    
+                try
+                {
+                    google.maps.event.trigger(app._map, 'resize')
+                }
+                catch(e)
+                {
+
+                }
+            }
+            app.readGPS();
+        }    
+    },
     
     
     
