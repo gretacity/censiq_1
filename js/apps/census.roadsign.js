@@ -660,7 +660,7 @@ var app = {
     },
     closeListDialog: function() {
         app._currentRoadSign = null;
-        $.mobile.changePage('#roadSignStep2Page', {
+        $.mobile.changePage('#roadSignStep4Page', {
             reverse: true,
         });
     },
@@ -858,7 +858,7 @@ var app = {
         app._currentRoadSign = null;
         $('#roadSignList').empty().listview("refresh");
         //$.mobile.back();
-        $.mobile.changePage('#roadSignStep2Page', {
+        $.mobile.changePage('#roadSignStep4Page', {
             transition: 'pop',
             reverse: true,
         });
@@ -987,7 +987,7 @@ var app = {
     },
     closeRoadSignManufacturerPanel: function() {
         app._currentRoadSign = null;
-        $.mobile.changePage('#roadSignStep2Page', {
+        $.mobile.changePage('#roadSignStep4Page', {
             transition: 'pop',
             reverse: true,
         });
@@ -1011,7 +1011,7 @@ var app = {
     },
     closeRoadSignInstallerPanel: function() {
         app._currentRoadSign = null;
-        $.mobile.changePage('#roadSignStep2Page', {
+        $.mobile.changePage('#roadSignStep4Page', {
             transition: 'pop',
             reverse: true,
         });
@@ -1032,7 +1032,7 @@ var app = {
     },
     closeRoadSignOwnerPanel: function() {
         app._currentRoadSign = null;
-        $.mobile.changePage('#roadSignStep2Page', {
+        $.mobile.changePage('#roadSignStep4Page', {
             transition: 'pop',
             reverse: true,
         });
@@ -1056,7 +1056,7 @@ var app = {
     },
     closeRoadSignOrdinancePanel: function() {
         app._currentRoadSign = null;
-        $.mobile.changePage('#roadSignStep2Page', {
+        $.mobile.changePage('#roadSignStep4Page', {
             transition: 'pop',
             reverse: true,
         });
