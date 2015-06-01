@@ -180,35 +180,9 @@
         
         <!-- ### DIALOGS ### -->
         
-        <!-- mapPage -->
-        <div data-role="page" _data-dialog="true" _data-fullscreen="true" id="mapPage">
-            <div data-role="header" class="header" data-position="fixed">
-                <a href="javascript:app.closeMap(false)" class="ui-btn ui-btn-icon-left ui-btn-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-back ui-alt-icon ui-nodisc-icon">Annulla</a>
-				<h1>Mappa</h1>
-                <a href="javascript:app.closeMap(true)" class="ui-btn ui-corner-all ui-icon-check ui-btn-icon-left ui-btn-icon-notext ui-shadow ui-corner-all">Conferma</a>
-			</div>
-            <div data-role="main" cclass="ui-content" >
-                <div id="map"></div>
-            </div>
-            <!-- <div data-role="footer" class="footer"  data-position="fixed"></div> -->
-        </div>
-        <!-- /mapPage -->
         
-        <!-- roadSignFinder -->
-        <div data-role="dialog" id="roadSignFinder">
-            <div data-role="header" class="header"><h1>Ricerca segnale</h1></div>
-            <div data-role="main" class="ui-content">
-                <select id="roadSignShapeList" data-theme="b" disabled></select>
-                <input type="search" id="searchRoadSignText" data-theme="b" data-mini="true" placeholder="Nome segnale o codice" />
-                <div data-role="controlgroup" data-type="horizontal" data-theme="b" sstyle="float:right;display:block;">
-                    <a href="javascript:app.closeRoadSignFinder()" class="ui-btn ui-icon-back ui-btn-icon-right" data-mini="true" data-theme="c">Chiudi</a>
-                    <a href="javascript:app.searchRoadSign()" class="ui-btn ui-icon-search ui-btn-icon-right" data-mini="true">Cerca</a>
-                </div>
-                <ul data-role="listview" id="roadSignList" data-inset="true">
-                </ul>
-            </div>
-        </div>
-        <!-- /roadSignFinder -->
+        
+        
         
         
         <!-- listDialog -->
@@ -221,53 +195,6 @@
         <!-- /listDialog -->
         
         
-        <!-- roadSignManufacturerPage -->
-        <div data-role="dialog" id="roadSignManufacturerPage">
-            <div data-role="header" class="header"><h1>Produzione</h1></div>
-            <div data-role="main" _class="ui-content">
-                <ul data-role="listview" data-theme="b">
-                    <li>
-                        <label for="roadSignManufacturerName">Azienda produttrice</label>
-                        <input type="text" id="roadSignManufacturerName" placeholder="Nome azienda" />
-                    </li>
-                    <li>
-                        <label for="roadSignManufacturerNo">Numero autorizzazione</label>
-                        <input type="text" id="roadSignManufacturerNo" placeholder="Autorizzazione azienda" />
-                    </li>
-                    <li>
-                        <label for="roadSignManufacturerYear">Anno produzione</label>
-                        <input type="number" id="roadSignManufacturerYear" placeholder="Anno produzione" />
-                    </li>
-                </ul>
-                <div data-role="controlgroup" data-theme="b" data-type="horizontal" _align="center" style="float:right;display:block;">
-                    <a href="javascript:app.closeRoadSignManufacturerPanel()" class="ui-btn ui-icon-back ui-btn-icon-right" data-mini="true" data-theme="c">Chiudi</a>
-                    <a href="javascript:app.setRoadSignManufacturer()" class="ui-btn ui-icon-check ui-btn-icon-right" data-mini="true">Conferma</a>
-                </div>
-            </div>
-        </div>
-        <!-- /roadSignManufacturerPage -->
-        
-        <!-- roadSignInstallerPage -->
-        <div data-role="dialog" id="roadSignInstallerPage">
-            <div data-role="header" class="header"><h1>Installazione</h1></div>
-            <div data-role="main" _class="ui-content">
-                <ul data-role="listview" data-theme="b">
-                    <li>
-                        <label for="roadSignInstallerName">Azienda installatrice</label>
-                        <input type="text" id="roadSignInstallerName" placeholder="Nome azienda" />
-                    </li>
-                    <li>
-                        <label for="roadSignInstallationDate">Anno installazione</label>
-                        <input type="text" id="roadSignInstallationDate" placeholder="Anno installazione" />
-                    </li>
-                </ul>
-                <div data-role="controlgroup" data-theme="b" data-type="horizontal" _align="center" style="float:right;display:block;">
-                    <a href="javascript:app.closeRoadSignInstallerPanel()" class="ui-btn ui-icon-back ui-btn-icon-right" data-mini="true" data-theme="c">Chiudi</a>
-                    <a href="javascript:app.setRoadSignInstaller()" class="ui-btn ui-icon-check ui-btn-icon-right" data-mini="true">Conferma</a>
-                </div>
-            </div>
-        </div>
-        <!-- /roadSignInstallerPage -->
         
         <!-- roadSignOwnerPage -->
         <div data-role="dialog" id="roadSignOwnerPage">
@@ -275,8 +202,12 @@
             <div data-role="main" _class="ui-content">
                 <ul data-role="listview" data-theme="b">
                     <li>
-                        <label for="roadSignOwnerName">Ente proprietario</label>
-                        <input type="text" id="roadSignOwnerName" placeholder="Nome proprietario" />
+                        <label for="roadSignOwnerName">Nome</label>
+                        <input type="text" id="roadSignOwnerName" placeholder="Nome " />
+                    </li>
+                     <li>
+                        <label for="roadSignOwnerSurname">Cognome</label>
+                        <input type="text" id="roadSignOwnerSurname" placeholder="Cognome " />
                     </li>
                 </ul>
                 <div data-role="controlgroup" data-theme="b" data-type="horizontal" _align="center" style="float:right;display:block;">
