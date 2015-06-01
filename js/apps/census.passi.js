@@ -293,7 +293,7 @@ var app = {
             signInfo.manufacturingYear =  '';     // Anno di produzione
             signInfo.installer = '';                        // Azienda installatrice
             signInfo.installationDate =  '';         // Azienda installatrice
-            signInfo.owner = $('a label.roadsign-owner[data-changed="true"]', $container).html() || '';                                                        // Proprietario
+            signInfo.owner = $('a label.roadsign-owner[data-changed="true"]', $container).html() || '';                                                        // Intestatario
             signInfo.ordinanceNo = $('a label.roadsign-ordinance[data-changed="true"] span.roadsign-ordinance-no', $container).html() || '';                   // Ordinanza numero
             signInfo.ordinanceDate = $('a label.roadsign-ordinance[data-changed="true"] span.roadsign-ordinance-date', $container).html() || '';               // Data dell'ordinanza
             
@@ -700,7 +700,7 @@ var app = {
             $('<li data-theme="b"><textarea class="roadsign-notes" placeholder="Note"></textarea></li>').appendTo($listview).trigger('create');
             
             // OWNER
-            $listview.append('<li><a href="javascript:app.openRoadSignOwnerPanel(' + count + ')">Proprietario <label class="roadsign-owner">Specifica il proprietario</label></a></li>');
+            $listview.append('<li><a href="javascript:app.openRoadSignOwnerPanel(' + count + ')">Intestatario <label class="roadsign-owner">Specifica il proprietario</label></a></li>');
 
             // ORDINANCE
             $listview.append('<li><a href="javascript:app.openRoadSignOrdinancePanel(' + count + ')">Ordinanza <label class="roadsign-ordinance">Specifica l\'ordinanza</label></a></li>');
