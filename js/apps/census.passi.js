@@ -684,11 +684,12 @@ var app = {
             var imageUrl = config.getNativeBaseURL();
             if(imageUrl.substr(-1) != '/') imageUrl += '/';
             imageUrl += config.ROADSIGN_BASE_PATH_ICONS + 392 + '.svg';
- 
+                     imageUrl='/RoadsignIcons/392.svg';
+
             
              // ROADSIGN PICTURE
             $listview.append('<li class="roadsign-sign-li">' +
-                                '<img src="'+imageUrl+'" class="roadsign-picture">' +
+                                '<img src="'+imageUrl+'" >' +
                                 '<input type="hidden" class="roadsign-signid" />' +
                                 '<p class="roadsign-signdescr"></p>' +
                                 '<h1 class="roadsign-signname"></h1>' +
@@ -737,7 +738,7 @@ var app = {
                     if(imageUrl.substr(-1) != '/') imageUrl += '/';
                     imageUrl += config.ROADSIGN_BASE_PATH_ICONS + roadSign.id + '.svg';
                     
-                    imageUrl='/RoadsignIcons/392.svg';
+                    //imageUrl='/RoadsignIcons/392.svg';
                     
                     console.log(app._currentRoadSign);
                     var roadSignPanel = $('div[data-roadsignno="1"]');
