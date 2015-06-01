@@ -688,7 +688,7 @@ var app = {
             
              // ROADSIGN PICTURE
             $listview.append('<li class="roadsign-sign-li">' +
-                                '<img src="img/Segnali/'+imageUrl+'" >' +
+                                '<img src="'+imageUrl+'" class="roadsign-picture">' +
                                 '<input type="hidden" class="roadsign-signid" />' +
                                 '<p class="roadsign-signdescr"></p>' +
                                 '<h1 class="roadsign-signname"></h1>' +
