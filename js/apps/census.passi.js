@@ -684,12 +684,12 @@ var app = {
             var imageUrl = config.getNativeBaseURL();
             if(imageUrl.substr(-1) != '/') imageUrl += '/';
             imageUrl += config.ROADSIGN_BASE_PATH_ICONS + 392 + '.svg';
-                     imageUrl='/RoadsignIcons/392.svg';
+                     //imageUrl='/RoadsignIcons/392.svg';
 
             
              // ROADSIGN PICTURE
             $listview.append('<li class="roadsign-sign-li">' +
-                                '<img src="'+imageUrl+'" >' +
+                                '<img src="'+imageUrl+'" class="roadsign-picture">' +
                                 '<input type="hidden" class="roadsign-signid" />' +
                                 '<p class="roadsign-signdescr"></p>' +
                                 '<h1 class="roadsign-signname"></h1>' +
