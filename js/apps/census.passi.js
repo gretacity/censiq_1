@@ -736,6 +736,9 @@ var app = {
                     var imageUrl = config.getNativeBaseURL();
                     if(imageUrl.substr(-1) != '/') imageUrl += '/';
                     imageUrl += config.ROADSIGN_BASE_PATH_ICONS + roadSign.id + '.svg';
+                    
+                    imageUrl='/RoadsignIcons/392.svg';
+                    
                     console.log(app._currentRoadSign);
                     var roadSignPanel = $('div[data-roadsignno="1"]');
                     $('h1 span', roadSignPanel).html(roadSign.name);
