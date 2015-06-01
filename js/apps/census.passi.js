@@ -683,7 +683,7 @@ var app = {
             
             var imageUrl = config.getNativeBaseURL();
             if(imageUrl.substr(-1) != '/') imageUrl += '/';
-            imageUrl += config.ROADSIGN_BASE_PATH_ICONS + 392 + '.svg';
+            imageUrl += config.ROADSIGN_BASE_PATH_ICONS + '392' + '.svg';
                      //imageUrl='/RoadsignIcons/392.svg';
 
             
