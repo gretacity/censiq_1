@@ -150,14 +150,7 @@
                 <a data-step="4" href="#" class="ui-btn ui-btn-icon-left ui-btn-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-back ui-alt-icon ui-nodisc-icon prev-step" data-role="button" role="button"></a>
                 <a href="index.html" id="homeButton" rel="external" class=" ui-btn-right ui-icon-toolbar-button toolbar-button-home ui-btn ui-btn-icon-left ui-nodisc-icon ui-btn-icon-notext">Home</a>
 				<h1>Segnaletica</h1>
-                                <!--
-				<div style="padding-top:0.2em">
-					<a style="width: 100%; float:right;" href="#" id="addRoadSignButton" class="ui-btn ui-car ui-icon-plus ui-btn-icon-left  ui-nodisc-icon ">						
-						Aggiungi cartello
-						<img src="img/add_car.png" style="max-width: 3em; float: right; width: 2em;">
-					</a>
-				</div> 
-                                -->
+                               
 			</div>
             
 			<div data-role="main" class="ui-content">
@@ -209,6 +202,14 @@
                         <label for="roadSignOwnerSurname">Cognome</label>
                         <input type="text" id="roadSignOwnerSurname" placeholder="Cognome " />
                     </li>
+                     <li>
+                        <label for="proprietario_1">Data di nascita</label>
+                        <input type="date" id="proprietario_1" placeholder="Data di nascita " />
+                    </li>
+                     <li>
+                        <label for="proprietario_2">Codice fiscale</label>
+                        <input type="text" id="proprietario_2" placeholder="Codice fiscale " />
+                    </li>
                 </ul>
                 <div data-role="controlgroup" data-theme="b" data-type="horizontal" _align="center" style="float:right;display:block;">
                     <a href="javascript:app.closeRoadSignOwnerPanel()" class="ui-btn ui-icon-back ui-btn-icon-right" data-mini="true" data-theme="c">Chiudi</a>
@@ -229,6 +230,10 @@
                     <li>
                         <label for="roadSignOrdinanceDate">del</label>
                         <input type="date" id="roadSignOrdinanceDate" data-clear-btn="true" />
+                    </li>
+                     <li>
+                        <label for="data_scadenza">scadenza</label>
+                        <input type="date" id="scadenza" data-clear-btn="true" />
                     </li>
                 </ul>
                 <div data-role="controlgroup" data-theme="b" data-type="horizontal" _align="center" style="float:right;display:block;">

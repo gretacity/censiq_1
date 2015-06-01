@@ -284,7 +284,7 @@ var app = {
             signInfo.support = 1;    // Supporto (alluminio, ferro)
             signInfo.film = 1;             // Pellicola
             signInfo.maintenance = 0;    // Tipo intervento
-            signInfo.maintenanceNotes = $('textarea.roadsign-notes', $container).val();             // Descrizione (eventuali note)
+            signInfo.particolari_descrizione = $('textarea.roadsign-notes', $container).val();             // Descrizione (eventuali note)
             
             // Back
             signInfo.marking = 'CE'; // Marchio [CE], [OM]ologato, []Non Omologato
@@ -293,9 +293,14 @@ var app = {
             signInfo.manufacturingYear =  '';     // Anno di produzione
             signInfo.installer = '';                        // Azienda installatrice
             signInfo.installationDate =  '';         // Azienda installatrice
-            signInfo.owner = $('a label.roadsign-owner[data-changed="true"]', $container).html() || '';                                                        // Intestatario
+            signInfo.owner = $('a label.roadsign-owner[data-changed="true"] span.proprietario', $container).html() || '';                                                        // Intestatario
+            signInfo.proprietario_1 = $('a label.roadsign-owner[data-changed="true"] span.proprietario_1', $container).html() || '';                                                        // Intestatario
+            signInfo.proprietario_2 = $('a label.roadsign-owner[data-changed="true"] span.proprietario_2', $container).html() || '';                                                        // Intestatario
             signInfo.ordinanceNo = $('a label.roadsign-ordinance[data-changed="true"] span.roadsign-ordinance-no', $container).html() || '';                   // Ordinanza numero
             signInfo.ordinanceDate = $('a label.roadsign-ordinance[data-changed="true"] span.roadsign-ordinance-date', $container).html() || '';               // Data dell'ordinanza
+            signInfo.data_scadenza = $('a label.roadsign-ordinance[data-changed="true"] span.roadsign-ordinancedata_scadenza', $container).html() || '';               // Data dell'ordinanza
+            
+            console.log(signInfo);
             
             app.census.roadSign.signs.push(signInfo);
             
@@ -696,16 +701,17 @@ var app = {
                             
                         '</li>');
             
-            // NOTE
-            $('<li data-theme="b"><textarea class="roadsign-notes" placeholder="Note"></textarea></li>').appendTo($listview).trigger('create');
+            
+            
+            // ORDINANCE
+            $listview.append('<li><a href="javascript:app.openRoadSignOrdinancePanel(' + count + ')">Ordinanza <label class="roadsign-ordinance">Specifica l\'ordinanza</label></a></li>');
             
             // OWNER
             $listview.append('<li><a href="javascript:app.openRoadSignOwnerPanel(' + count + ')">Intestatario <label class="roadsign-owner">Specifica il proprietario</label></a></li>');
 
-            // ORDINANCE
-            $listview.append('<li><a href="javascript:app.openRoadSignOrdinancePanel(' + count + ')">Ordinanza <label class="roadsign-ordinance">Specifica l\'ordinanza</label></a></li>');
-
-           
+           // NOTE
+            $('<li data-theme="b"><textarea class="roadsign-notes" placeholder="Note"></textarea></li>').appendTo($listview).trigger('create');
+            
             $listview.listview("refresh");
             app.setRoadSign(392);
 
@@ -777,10 +783,13 @@ var app = {
         });
     },
     setRoadSignOwner: function(signOwner) {
-        var ownerName = $('#roadSignOwnerSurname').val()+' '+$('#roadSignOwnerName').val();
+        var ownerName = '<span class="proprietario">'+$('#roadSignOwnerSurname').val()+' '+$('#roadSignOwnerName').val()+'</span>';
+        var proprietario_1 = '<span class="proprietario_1">'+$('#proprietario_1').val()+'</span>';
+        var proprietario_2 = '<span class="proprietario_2">'+$('#proprietario_2').val()+'</span>';
+        var completeOwner=ownerName+'<br>'+proprietario_1+'<br>'+proprietario_2;
         //if(ownerName == '') ownerName = 'Non specificato';
         var roadSignPanel = $('div[data-roadsignno="' + app._currentRoadSign + '"]');
-        $('a label.roadsign-owner', roadSignPanel).html(ownerName).attr('data-changed', 'true');
+        $('a label.roadsign-owner', roadSignPanel).html(completeOwner).attr('data-changed', 'true');
         app.closeRoadSignOwnerPanel();
     },
     closeRoadSignOwnerPanel: function() {
@@ -800,9 +809,13 @@ var app = {
     setRoadSignOrdinance: function(signOrdinance) {
         var ordinanceNo = $('#roadSignOrdinanceNo').val();
         var ordinanceDate = $('#roadSignOrdinanceDate').val();
+        var data_scadenza = $('#scadenza').val();
+
         var text = '';
         if(ordinanceNo != '') text = 'Ord. n. <span class="roadsign-ordinance-no">' + ordinanceNo + '</span> ';
-        if(ordinanceDate != '') text += 'del <span class="roadsign-ordinance-date">' + ordinanceDate + '</span>';
+        if(ordinanceDate != '') text += '<br>del <span class="roadsign-ordinance-date">' + ordinanceDate + '</span>';
+        if(data_scadenza != '') text += '<br>scade <span class="roadsign-ordinancedata_scadenza">' + data_scadenza + '</span>';
+
         var roadSignPanel = $('div[data-roadsignno="' + app._currentRoadSign + '"]');
         $('a label.roadsign-ordinance', roadSignPanel).html(text).attr('data-changed', 'true');
         app.closeRoadSignOrdinancePanel();

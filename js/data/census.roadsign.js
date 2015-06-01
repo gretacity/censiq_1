@@ -19,6 +19,13 @@ RoadSign.SignInfo = function() {
     this.owner = '';                // Proprietario
     this.ordinanceNo = '';          // Ordinanza numero
     this.ordinanceDate = null;      // Data dell'ordinanza
+    this.data_scadenza = null;      // Scadenza dell'ordinanza
+    this.proprietario_1 = null;      // Agagrafica proprietario per i passi carrabili
+    this.proprietario_2 = null;      // Agagrafica proprietario per i passi carrabili
+    this.proprietario_3 = null;      // Agagrafica proprietario per i passi carrabili
+
+    
+
 }
 RoadSign.PoleInfo = function() {
     this.numberOfPoles = 0;         // Numero di pali
@@ -173,8 +180,12 @@ data.roadSign = {
                 ordinanza_del: sign.ordinanceDate,
                 necessario_intervento_tipo: sign.maintenance,
                 necessario_intervento_descrizione: sign.maintenanceNotes,
-                dimensioni: sign.size
-                //particolari_descrizione: ''
+                dimensioni: sign.size,
+                particolari_descrizione: sign.particolari_descrizione,
+                data_scadenza:sign.data_scadenza,
+                proprietario_1:sign.proprietario_1,
+                proprietario_2:sign.proprietario_2,
+                proprietario_3:sign.proprietario_3
                 //ss_censimento_id: 0
             };
             obj.ss_censimento_cartello.push(entry);
