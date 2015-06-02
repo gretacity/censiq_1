@@ -37,7 +37,7 @@ var config = {
     URL_SYNC_CITYASSET: '/web/index.php?mode=module&p=beni&t=censimenti&s=bn_censimento_edit_web&s_t=new_bene',
     URL_SYNC_ROADSIGN: '/web/index.php?mode=module&p=segnaletica_stradale&t=censimenti&s=ss_censimento_edit_web&s_t=new',
     URL_SYNC_GUARDRAIL: '/web/index.php?mode=module&p=guardrails&t=censimenti&s=gr_censimento_edit_web&s_t=new',
-    
+    URL_PASSO: '/web/getPasso.php',
     GOOGLE_MAPS_API_KEY: "",
     GOOGLE_MAPS_SENSOR: "true",
     GOOGLE_MAPS_ZOOM: 19,

@@ -12,6 +12,28 @@ var services = {
     CODE_INTERNAL_SERVER_ERROR: 500,
     CODE_SERVICE_UNAVAILABLE: 503, 
     
+    getPasso: function(key, successCallback, failCallback) 
+    {
+        var url=config.URL_BASE + config.URL_PASSO+'?code='+key;
+         $.ajax({
+            type : "GET",
+            async: true,
+            url : url,
+            //timeout: 2000,
+            //data: params,
+            dataType: "json",
+            crossDomain: true,
+        }).done(function(result) {
+            if(successCallback) successCallback( result);
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+            failCallback();
+           
+        });
+    },
+
+    
+    
+    
     downloadDataFromServer: function(key, successCallback, failCallback) {
 
         var url = '';

@@ -100,6 +100,7 @@
                         <label for="provincia">Provincia</label>
                         <input id="provincia" placeholder="Provincia" />
                     </li>
+                    <!--
                      <li>
                         <label for="street">Tipo strada</label>
                         <select id="tipo_strada">
@@ -109,6 +110,7 @@
                             <option value="3" >Strada extraurbana secondaria</option>
                         </select>
                     </li>
+                    -->
                     <li>
                         <label for="street">Strada / Via</label>
                         <input id="street" placeholder="Strada o via" />
@@ -149,7 +151,7 @@
     		<div data-role="header" class="header" data-position="fixed">
                 <a data-step="4" href="#" class="ui-btn ui-btn-icon-left ui-btn-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-back ui-alt-icon ui-nodisc-icon prev-step" data-role="button" role="button"></a>
                 <a href="index.html" id="homeButton" rel="external" class=" ui-btn-right ui-icon-toolbar-button toolbar-button-home ui-btn ui-btn-icon-left ui-nodisc-icon ui-btn-icon-notext">Home</a>
-				<h1>Segnaletica</h1>
+				<h1>Ordinanza</h1>
                                
 			</div>
             
@@ -167,9 +169,63 @@
         
        
         
+        
+        
+        <div data-role="page" id="resultPage">
+            <div data-role="header" class="header" data-position="fixed">
+                <h1>PASSO CARRABILE</h1>
+            </div>
+            <div data-role="main" class="ui-content">
+                <ul data-role="listview" data-inset="false" data-theme="b">
+                    <li>
+                        <label for="ordinanza">Ordinanza</label>
+                        <input id="ordinanza" placeholder="" />
+                    </li>
+                     <li>
+                        <label for="scadenza">Scadenza</label>
+                        <input id="scadenza" placeholder="" />
+                    </li>
+                    <li>
+                        <label for="comune">Comune</label>
+                        <input id="comune" placeholder="" />
+                    </li>
+                    
+                    <li>
+                        <label for="street">Strada / Via</label>
+                        <input id="street" placeholder="Strada o via" />
+                    </li>
+                   
+                    <li>
+                        <label for="streetNumber">Civico/ Km</label>
+                        <input id="streetNumber" placeholder="" />
+                    </li>
+                    <li>
+                        <label for="proprietario">Intestata a</label>
+                        <input id="proprietario" placeholder="" />
+                    </li>
+                    <li>
+                        <label for="proprietario_1">Data di nascita</label>
+                        <input id="proprietario_1" placeholder="" />
+                    </li>
+                    <li>
+                        <label for="proprietario_2">Codiice fiscale</label>
+                        <input id="proprietario_2" placeholder="" />
+                    </li>
+                     <li>
+                        <label for="note">Note</label>
+                        <textarea id="note"/></textarea>
+                    </li>
+                    
+                    
+               </ul>
+            </div>
+            <div data-role="footer" class="footer"  data-position="fixed" align="center" style="background:none !important; background-color: #f2f2f2 !important;">
+                <div style="line-height:25px; color:#0086cc;"></div>
+                <a href="#"  class="button-next next-step" data-step="20">CHIUDI</a>
+            </div>
+    	</div> 
+        
         <div data-role="page" id="summaryPage"></div>
-        
-        
         
         <!-- ### DIALOGS ### -->
         
@@ -232,8 +288,8 @@
                         <input type="date" id="roadSignOrdinanceDate" data-clear-btn="true" />
                     </li>
                      <li>
-                        <label for="data_scadenza">scadenza</label>
-                        <input type="date" id="scadenza" data-clear-btn="true" />
+                        <label for="scadenzaData">scadenza</label>
+                        <input type="date" id="scadenzaData" data-clear-btn="true" />
                     </li>
                 </ul>
                 <div data-role="controlgroup" data-theme="b" data-type="horizontal" _align="center" style="float:right;display:block;">

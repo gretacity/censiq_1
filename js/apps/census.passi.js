@@ -11,11 +11,13 @@ var app = {
     STEP_8: 8,
     STEP_9: 9,
     STEP_10: 10,
+    STEP_20:20,
     ACQ_GPS:true,
     ID_GPS:0,  
     ACQ:false,
     SELECTED_QRCODE: null,
     MAP:false,
+    RESULT:null,
 
     census: new Census(CensusTypes.roadSign),
     picturesPageId: 'roadSignStep3Page',
@@ -60,7 +62,8 @@ var app = {
         $('#roadSignStep1Page').on('pageshow', this.showMapPositionPage);
         $('#roadSignStep2Page').on('pageshow',  this.acquireCoords);
         $('#roadSignStep4Page').on('pageshow',  app.addRoadSignPanel);
-        
+        $('#resultPage').on('pageshow',  app.loadResult);
+
         
         
         
@@ -137,11 +140,26 @@ var app = {
         var errors = [];
         if(stepIndex == app.STEP_0) {
             // Validate step 0
-            if($.trim($('#qrCode').val()) == '') {
+            if($.trim($('#qrCode').val()) == '')
+            {
                 errors.push('specificare il QR-code');
                 stepNotValidCallback(errors);
-            } else {
-                stepValidCallback();
+            } 
+            else
+            {
+                services.getPasso($.trim($('#qrCode').val()),
+                function(result)
+                {
+                   
+                   app.showResult(result)
+                   
+                },
+                function(jqXHR, textStatus, errorThrown)
+                {
+                    stepValidCallback(); 
+                }
+                );
+                
             }
         } else if(stepIndex == app.STEP_1) {
             
@@ -162,6 +180,11 @@ var app = {
             // Validate step 5
             stepValidCallback();
         }
+        else if(stepIndex == app.STEP_20) {
+                app.RESULT=null;
+                $.mobile.changePage('#roadSignStep0Page');
+
+            }
     },
     
     
@@ -192,6 +215,7 @@ var app = {
             } else if(step == app.STEP_4) {
                 app.save();
             }
+            
         }, function(errors) {
             // Validation failed: display an error message if there is at least one
             if(Array.isArray(errors) && errors.length > 0) {
@@ -300,7 +324,6 @@ var app = {
             signInfo.ordinanceDate = $('a label.roadsign-ordinance[data-changed="true"] span.roadsign-ordinance-date', $container).html() || '';               // Data dell'ordinanza
             signInfo.data_scadenza = $('a label.roadsign-ordinance[data-changed="true"] span.roadsign-ordinancedata_scadenza', $container).html() || '';               // Data dell'ordinanza
             
-            console.log(signInfo);
             
             app.census.roadSign.signs.push(signInfo);
             
@@ -746,7 +769,6 @@ var app = {
                     
                     //imageUrl='/RoadsignIcons/392.svg';
                     
-                    console.log(app._currentRoadSign);
                     var roadSignPanel = $('div[data-roadsignno="1"]');
                     $('h1 span', roadSignPanel).html(roadSign.name);
                     $('input[type="hidden"].roadsign-signid', roadSignPanel).val(roadSign.id);
@@ -809,7 +831,7 @@ var app = {
     setRoadSignOrdinance: function(signOrdinance) {
         var ordinanceNo = $('#roadSignOrdinanceNo').val();
         var ordinanceDate = $('#roadSignOrdinanceDate').val();
-        var data_scadenza = $('#scadenza').val();
+        var data_scadenza = $('#scadenzaData').val();
 
         var text = '';
         if(ordinanceNo != '') text = 'Ord. n. <span class="roadsign-ordinance-no">' + ordinanceNo + '</span> ';
@@ -826,5 +848,30 @@ var app = {
             transition: 'pop',
             reverse: true,
         });
+    },
+    
+    showResult: function(result)
+    {
+        app.RESULT=result;
+         $.mobile.changePage('#resultPage');
+    },
+    
+    loadResult: function()
+    {
+       var page=$('#resultPage');
+       $('#comune',page).val(app.RESULT.comune)+' ('+app.RESULT.provincia+')';
+       $('#street',page).val(app.RESULT.strada)+ ' '+app.RESULT.denominazione_strada;
+       $('#streetNumber',page).val(app.RESULT.civico);
+       $('#proprietario',page).val(app.RESULT.proprietario);
+       $('#proprietario_1',page).val(app.RESULT.proprietario_1);
+       $('#proprietario_2',page).val(app.RESULT.proprietario_2);
+       $('#ordinanza',page).val('N° '+app.RESULT.ordinanza_numero+ ' del '+app.RESULT.ordinanza_del);
+       $('#scadenza',page).val(app.RESULT.data_scadenza);
+       $('#note',page).val(app.RESULT.particolari_descrizione);
+
+
+
+
     }
+    
 };
