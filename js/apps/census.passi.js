@@ -584,7 +584,7 @@ var app = {
                         app._map.setZoom(16);
                         
                         $('#start_gps_0').on('click', function(){app.startGPS();});
-                        $('#start_gps_0').fadeIn(100);
+                        $('#btn_start_gps_0').fadeIn(100);
                     }
                 }
                 else
