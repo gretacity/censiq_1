@@ -147,18 +147,25 @@ var app = {
             } 
             else
             {
-                services.getPasso($.trim($('#qrCode').val()),
-                function(result)
-                {
-                   
-                   app.showResult(result)
-                   
-                },
-                function(jqXHR, textStatus, errorThrown)
+                if(helper.isOnline() && typeof(google) != 'undefined')
+                {     
+                    services.getPasso($.trim($('#qrCode').val()),
+                    function(result)
+                    {
+
+                       app.showResult(result)
+
+                    },
+                    function(jqXHR, textStatus, errorThrown)
+                    {
+                        stepValidCallback(); 
+                    }
+                    );
+                }
+                else
                 {
                     stepValidCallback(); 
-                }
-                );
+                }    
                 
             }
         } else if(stepIndex == app.STEP_1) {
