@@ -177,21 +177,25 @@ var app = {
             {
                 errors.push('specificare Comune');
                 stepNotValidCallback(errors);
+                return false;
             }
             if($.trim($('#provincia','#roadSignStep2Page').val()) == '')
             {
                 errors.push('specificare Provincia');
                 stepNotValidCallback(errors);
+                return false;
             }
             if($.trim($('#street','#roadSignStep2Page').val()) == '')
             {
                 errors.push('specificare Strada/Via');
                 stepNotValidCallback(errors);
+                return false;
             }
             if($.trim($('#streetNumber','#roadSignStep2Page').val()) == '')
             {
                 errors.push('specificare Civico/Km');
                 stepNotValidCallback(errors);
+                return false;
             }
             stepValidCallback();
             
