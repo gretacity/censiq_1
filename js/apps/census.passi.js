@@ -172,8 +172,30 @@ var app = {
             // Validate step 1
             stepValidCallback();
         } else if(stepIndex == app.STEP_2) {
-            // Validate step 2
+            
+            if($.trim($('#comune','#roadSignStep2Page').val()) == '')
+            {
+                errors.push('specificare Comune');
+                stepNotValidCallback(errors);
+            }
+            if($.trim($('#provincia','#roadSignStep2Page').val()) == '')
+            {
+                errors.push('specificare Provincia');
+                stepNotValidCallback(errors);
+            }
+            if($.trim($('#street','#roadSignStep2Page').val()) == '')
+            {
+                errors.push('specificare Strada/Via');
+                stepNotValidCallback(errors);
+            }
+            if($.trim($('#streetNumber','#roadSignStep2Page').val()) == '')
+            {
+                errors.push('specificare Civico/Km');
+                stepNotValidCallback(errors);
+            }
             stepValidCallback();
+            
+            
         } else if(stepIndex == app.STEP_3) {
             // Validate step 3
             stepValidCallback();
@@ -215,7 +237,7 @@ var app = {
                 catch(e){}
                 $.mobile.changePage('#roadSignStep2Page');
             } else if(step == app.STEP_2) {
-                $.mobile.changePage('#roadSignStep3Page');
+                 $.mobile.changePage('#roadSignStep3Page');
             } else if(step == app.STEP_3) {
                 $.mobile.changePage('#roadSignStep4Page');
             } else if(step == app.STEP_4) {
@@ -532,7 +554,7 @@ var app = {
                             }
                             else
                             {
-                                var txt = '<div style="padding:20px 5px;margin:20px 5px">Lat: '+app.census.position.latitude.toFixed(7)+'<br>'+
+                                var txt = '<div style="padding:20px;margin:20px">Lat: '+app.census.position.latitude.toFixed(7)+'<br>'+
                                         'Lon: '+app.census.position.longitude.toFixed(7)+'<br>'+
                                         '<span style="color:#FF1111" >Acc: '+app.census.position.accuracy.toFixed(1)+'</span></div>';
                                     $('#map_0').html(txt);    
@@ -595,7 +617,7 @@ var app = {
                 }
                 else
                 {
-                     $('#map_0').html('<div style="padding:20px 5px">Il servizio mappe non è al momento disponibile<br><br>Attendi per la lettura delle coordinate GPS</div>');
+                     $('#map_0').html('<div style="padding:20px">Il servizio mappe non è al momento disponibile<br><br>Attendi per la lettura delle coordinate GPS</div>');
                 }    
             }
             catch(e)

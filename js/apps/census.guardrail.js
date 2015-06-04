@@ -831,16 +831,17 @@ var app = {
         } 
         else if(stepIndex == app.STEP_2)
         {
-           if($.trim($('#comune').val()) == '')
+            if($.trim($('#comune').val()) == '')
             {
                 errors.push('specificare Comune');
                 stepNotValidCallback(errors);
-             
+                return false;
             }
             else if($.trim($('#provincia').val()) == '')
             {
                 errors.push('specificare Provincia');
                 stepNotValidCallback(errors);
+                return false;
              
             }
             
@@ -848,12 +849,14 @@ var app = {
             {
                 errors.push('specificare Strada');
                 stepNotValidCallback(errors);
+                return false;
              
             } 
             else if($.trim($('#streetNumber').val()) == '')
             {
                 errors.push('specificare Km');
                 stepNotValidCallback(errors);
+                return false;
              
             } 
             else 

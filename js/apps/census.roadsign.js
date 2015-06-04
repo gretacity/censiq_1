@@ -144,7 +144,26 @@ var app = {
             // Validate step 1
             stepValidCallback();
         } else if(stepIndex == app.STEP_2) {
-            // Validate step 2
+            if($.trim($('#comune','#roadSignStep2Page').val()) == '')
+            {
+                errors.push('specificare Comune');
+                stepNotValidCallback(errors);
+            }
+            if($.trim($('#provincia','#roadSignStep2Page').val()) == '')
+            {
+                errors.push('specificare Provincia');
+                stepNotValidCallback(errors);
+            }
+            if($.trim($('#street','#roadSignStep2Page').val()) == '')
+            {
+                errors.push('specificare Strada/Via');
+                stepNotValidCallback(errors);
+            }
+            if($.trim($('#streetNumber','#roadSignStep2Page').val()) == '')
+            {
+                errors.push('specificare Civico/Km');
+                stepNotValidCallback(errors);
+            }
             stepValidCallback();
         } else if(stepIndex == app.STEP_3) {
             // Validate step 3
