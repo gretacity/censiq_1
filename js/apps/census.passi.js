@@ -532,10 +532,10 @@ var app = {
                             }
                             else
                             {
-                                var txt = '<div style="padding:20px 5px">Lat: '+app.census.position.latitude.toFixed(7)+'<br>'+
+                                var txt = '<div style="padding:20px 5px;margin:20px 5px">Lat: '+app.census.position.latitude.toFixed(7)+'<br>'+
                                         'Lon: '+app.census.position.longitude.toFixed(7)+'<br>'+
                                         '<span style="color:#FF1111" >Acc: '+app.census.position.accuracy.toFixed(1)+'</span></div>';
-                                    $('#map_0').html($('#map_0').html()+txt);    
+                                    $('#map_0').html(txt);    
                             }
                         }
                         catch(e)
@@ -590,12 +590,12 @@ var app = {
                         app._map.setZoom(16);
                         
                         $('#start_gps_0').on('click', function(){app.startGPS();});
-                        $('#btn_start_gps_0').fadeIn(100);
+                        $('#btn_gps_control_0').fadeIn(100);
                     }
                 }
                 else
                 {
-                     $('#map_0').html('<div style="padding:20px 5px">Il servizio mappe non è al momento disponibile<br> Attendi per la lettura delle coordinate GPS</div>');
+                     $('#map_0').html('<div style="padding:20px 5px">Il servizio mappe non è al momento disponibile<br><br>Attendi per la lettura delle coordinate GPS</div>');
                 }    
             }
             catch(e)
