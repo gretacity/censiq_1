@@ -152,7 +152,6 @@ var app = {
                     services.getPasso($.trim($('#qrCode').val()),
                     function(result)
                     {
-
                        app.showResult(result)
 
                     },
