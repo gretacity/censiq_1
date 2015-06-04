@@ -554,7 +554,7 @@ var app = {
                             }
                             else
                             {
-                                var txt = '<div style="padding:20px;margin:20px">Lat: '+app.census.position.latitude.toFixed(7)+'<br>'+
+                                var txt = '<div style="padding:20px;margin:20px !important">Lat: '+app.census.position.latitude.toFixed(7)+'<br>'+
                                         'Lon: '+app.census.position.longitude.toFixed(7)+'<br>'+
                                         '<span style="color:#FF1111" >Acc: '+app.census.position.accuracy.toFixed(1)+'</span></div>';
                                     $('#map_0').html(txt);    
@@ -617,7 +617,7 @@ var app = {
                 }
                 else
                 {
-                     $('#map_0').html('<div style="padding:20px">Il servizio mappe non è al momento disponibile<br><br>Attendi per la lettura delle coordinate GPS</div>');
+                     $('#map_0').html('<div style="padding:20px;margin:20px !important">Il servizio mappe non è al momento disponibile<br><br>Attendi per la lettura delle coordinate GPS</div>');
                 }    
             }
             catch(e)
