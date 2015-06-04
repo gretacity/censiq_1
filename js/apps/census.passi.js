@@ -532,10 +532,10 @@ var app = {
                             }
                             else
                             {
-                                var txt = 'Lat: '+app.census.position.latitude.toFixed(7)+'<br>'+
+                                var txt = '<div style="padding:20px 5px">Lat: '+app.census.position.latitude.toFixed(7)+'<br>'+
                                         'Lon: '+app.census.position.longitude.toFixed(7)+'<br>'+
-                                        '<span style="color:#FF1111" >Acc: '+app.census.position.accuracy.toFixed(1)+'</span><br>';
-                                        
+                                        '<span style="color:#FF1111" >Acc: '+app.census.position.accuracy.toFixed(1)+'</span></div>';
+                                    $('#map_0').html($('#map_0').html()+txt);    
                             }
                         }
                         catch(e)
@@ -595,7 +595,7 @@ var app = {
                 }
                 else
                 {
-                     $('#map_0').html('Il servizio mappe non è al momento disponibile<br> Attendi per la lettura delle coordinate GPS');
+                     $('#map_0').html('<div style="padding:20px 5px">Il servizio mappe non è al momento disponibile<br> Attendi per la lettura delle coordinate GPS</div>');
                 }    
             }
             catch(e)
