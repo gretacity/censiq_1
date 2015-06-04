@@ -544,6 +544,7 @@ var app = {
                     {
                         helper.alert(e.message);
                     }
+                    $("#btnCoord").fadeIn(100);
 
                 }, 
                 function(errorMessage)
@@ -581,13 +582,14 @@ var app = {
                     if(app.MAP)
                     {    
                         app._map.setZoom(16);
+                        
                         $('#start_gps_0').on('click', function(){app.startGPS();});
-
+                        $('#start_gps_0').fadeIn(100);
                     }
                 }
                 else
                 {
-                     $('#map_0').html('Il servizio mappe non è al momento disponibile');
+                     $('#map_0').html('Il servizio mappe non è al momento disponibile<br> Attendi per la lettura delle coordinate GPS');
                 }    
             }
             catch(e)
