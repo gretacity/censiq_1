@@ -147,7 +147,7 @@ var app = {
             } 
             else
             {
-                if(helper.isOnline() && typeof(google) != 'undefined')
+                if( typeof(google) != 'undefined')
                 {     
                     services.getPasso($.trim($('#qrCode').val()),
                     function(result)
@@ -395,7 +395,7 @@ var app = {
      */
     acquireCoords: function()
     {
-        if(helper.isOnline() && typeof(google) != 'undefined')
+        if( typeof(google) != 'undefined')
         {    
         
             app.ACQ=true;
@@ -432,7 +432,7 @@ var app = {
             app.ACQ_GPS=false;
             $("#start_gps_0").html("GPS");
             $("#start_gps_0").css("color", "#FF1111");
-            if(helper.isOnline() && typeof(google) != 'undefined')
+            if( typeof(google) != 'undefined')
             {    
                 if(app._marker!=null && app._marker!=undefined )
                 {
@@ -456,7 +456,7 @@ var app = {
         else
         {
             app.ACQ_GPS=true;
-            if(helper.isOnline() && typeof(google) != 'undefined')
+            if( typeof(google) != 'undefined')
             {    
                 if(app._marker!=null && app._marker!=undefined )
                 {
@@ -505,7 +505,7 @@ var app = {
                         var map=app._map;
                         try
                         {
-                            if(helper.isOnline() && typeof(google) != 'undefined')
+                            if( typeof(google) != 'undefined')
                             {     
                                 var markerPoint = new google.maps.LatLng(app.census.position.latitude,app.census.position.longitude);
                                 if(app._marker==null)
@@ -582,7 +582,7 @@ var app = {
                 app.addEvent=false;
                 app.addMarker=false;
                 app.id_map="map_0";
-                if(helper.isOnline() && typeof(google) != 'undefined')
+                if( typeof(google) != 'undefined')
                 {    
                     app.MAP=app.openMap();
                     if(app.MAP)
