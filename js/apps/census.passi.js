@@ -608,9 +608,12 @@ var app = {
                 app.addEvent=false;
                 app.addMarker=false;
                 app.id_map="map_0";
+              
                 if( typeof(google) != 'undefined')
-                {    
+                {   
+                    
                     app.MAP=app.openMap();
+                    
                     if(app.MAP)
                     {    
                         app._map.setZoom(16);

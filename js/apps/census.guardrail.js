@@ -276,9 +276,11 @@ var app = {
                                    '<img onclick="app.closeItems(\''+obj.id+'\',1)" src="img/close_red.png" style="float:right;margin-right:10px; height:32px;width: 32px">'+
                                    '<img onclick="app.updateItems(\''+qrCode+'\')" src="img/add_car.png" style="float:right;margin-right:10px; height:32px;width: 32px"></div>';
                         }
-                        
-                        html += '<img onclick="app.showMap(\''+qrCode+'\')" src="img/world.png" style="float:right;margin-right:10px; height:32px;width: 32px">'+
-                                '<label for="' + itemId +'">'+qrCode+'<br>'+obj.guardrail.guardrailInfo.nomei+'<br>Via ' +obj.guardrail.street +' >> '+obj.guardrail.comune  ;
+                        if( typeof(google) != 'undefined')
+                        {  
+                            html += '<img onclick="app.showMap(\''+qrCode+'\')" src="img/world.png" style="float:right;margin-right:10px; height:32px;width: 32px">';
+                        }
+                        html += '<label for="' + itemId +'">'+qrCode+'<br>'+obj.guardrail.guardrailInfo.nomei+'<br>Via ' +obj.guardrail.street +' >> '+obj.guardrail.comune;  
                         if(name != '')
                         {
                             html += '<br />' + name;
@@ -376,11 +378,14 @@ var app = {
             for(var i = 0; i < itemCount; i++) 
             {
                 var row = result.rows.item(i);
-                var obj = data.deserialize(row, row.entity_type);
-                if(obj.id==itemId)
-                {    
-                  code=obj.qrCode;
-                  
+                if(row.entity_type==3)
+                {
+                    var obj = data.deserialize(row, row.entity_type);
+                    if(obj.id==itemId)
+                    {    
+                      code=obj.qrCode;
+
+                    }
                 }
             }
             
@@ -391,11 +396,14 @@ var app = {
             for(var i = 0; i < itemCount; i++) 
             {
                 var row = result.rows.item(i);
-                var obj = data.deserialize(row, row.entity_type);
-                if(obj.guardrail.guardrailInfo.parent==code)
-                {    
-                    
-                    data.close(obj.id) 
+                if(row.entity_type==3)
+                {
+                    var obj = data.deserialize(row, row.entity_type);
+                    if(obj.guardrail.guardrailInfo.parent==code)
+                    {    
+
+                        data.close(obj.id) 
+                    }
                 }
             }
         });
@@ -422,47 +430,50 @@ var app = {
     },
     acquireCoords: function()
     {
-        app.ACQ=true;
-        var town;
-        var city;
-        var village;
-        var latlng;
-        geoLocation.reverseGeocoding(app.census.position, function(result) 
-        {
-            if(result)
+        if( typeof(google) != 'undefined')
+        { 
+            app.ACQ=true;
+            var town;
+            var city;
+            var village;
+            var latlng;
+            geoLocation.reverseGeocoding(app.census.position, function(result) 
             {
-                if(jQuery.mobile.path.getLocation().indexOf('guardrailStep2Page')>0)
+                if(result)
                 {
-                    $('#street').val(result.road);
-                    $('#provincia').val(result.prov);
-                    if (result.village != null ){                
-                        $('#comune').val(result.village);
-                    }
-                    else if (result.town != null ){                
-                        $(' #comune').val(result.town);
-                    }
-                    else
-                    {    
-                        $('#comune').val(result.city);
-                    }
-                }
-                else
-                {    
-                    $('#street_point').val(result.road);
-                    $('#provincia_point').val(result.prov);
-                    if (result.village != null ){                
-                        $('#comune_point').val(result.village);
-                    }
-                    else if (result.town != null ){                
-                        $(' #comune_point').val(result.town);
+                    if(jQuery.mobile.path.getLocation().indexOf('guardrailStep2Page')>0)
+                    {
+                        $('#street').val(result.road);
+                        $('#provincia').val(result.prov);
+                        if (result.village != null ){                
+                            $('#comune').val(result.village);
+                        }
+                        else if (result.town != null ){                
+                            $(' #comune').val(result.town);
+                        }
+                        else
+                        {    
+                            $('#comune').val(result.city);
+                        }
                     }
                     else
                     {    
-                        $('#comune_point').val(result.city);
+                        $('#street_point').val(result.road);
+                        $('#provincia_point').val(result.prov);
+                        if (result.village != null ){                
+                            $('#comune_point').val(result.village);
+                        }
+                        else if (result.town != null ){                
+                            $(' #comune_point').val(result.town);
+                        }
+                        else
+                        {    
+                            $('#comune_point').val(result.city);
+                        }
                     }
                 }
-            }
-        });
+            });
+        }
     },
     startGPS :function()
     {
@@ -477,45 +488,49 @@ var app = {
             {
                 $("#start_gps_0").html("GPS");
                 $("#start_gps_0").css("color", "#FF1111");
-                if(app._marker!=null && app._marker!=undefined )
-                {
-                    
-                    app._marker.setOptions({draggable: true});
-                    
-                    google.maps.event.addListener(
-                    app._marker, 
-                    'dragend', 
-                    function() {
-                        app._adjustedCoords = app._marker.getPosition();                
-                        app.census.position.latitude =app._marker.getPosition().lat();
-                        app.census.position.longitude =app._marker.getPosition().lng();
-                        $("#latitudine_0").html('Lat:  '+app.census.position.latitude.toFixed(5));
-                        $("#longitudine_0").html('Lon:  '+app.census.position.longitude.toFixed(5));
-                        //page.injector.GeoCoordinatesAcquired(app.census.position);             
-                    });
+                if( typeof(google) != 'undefined')
+                { 
+                    if(app._marker!=null && app._marker!=undefined )
+                    {
+
+                        app._marker.setOptions({draggable: true});
+
+                        google.maps.event.addListener(
+                        app._marker, 
+                        'dragend', 
+                        function() {
+                            app._adjustedCoords = app._marker.getPosition();                
+                            app.census.position.latitude =app._marker.getPosition().lat();
+                            app.census.position.longitude =app._marker.getPosition().lng();
+                            $("#latitudine_0").html('Lat:  '+app.census.position.latitude.toFixed(5));
+                            $("#longitudine_0").html('Lon:  '+app.census.position.longitude.toFixed(5));
+                            //page.injector.GeoCoordinatesAcquired(app.census.position);             
+                        });
+                    }
                 }
-                
             }
             else
             {    
                 $("#start_gps_1").html("GPS");
                 $("#start_gps_1").css("color", "#FF1111");
-                if(app._marker!=null && app._marker!=undefined)
-                {
-                    app._marker.setOptions({draggable: true});
-                    google.maps.event.addListener(
-                    app._marker, 
-                    'dragend', 
-                    function() {
-                        app._adjustedCoords = app._marker.getPosition();                
-                        app.census.position.latitude =app._marker.getPosition().lat();
-                        app.census.position.longitude =app._marker.getPosition().lng();
-                        $("#latitudine_1").html('Lat:  '+app.census.position.latitude.toFixed(5));
-                        $("#longitudine_1").html('Lon:  '+app.census.position.longitude.toFixed(5));
-                        //page.injector.GeoCoordinatesAcquired(app.census.position);             
-                    });
+                if( typeof(google) != 'undefined')
+                { 
+                    if(app._marker!=null && app._marker!=undefined)
+                    {
+                        app._marker.setOptions({draggable: true});
+                        google.maps.event.addListener(
+                        app._marker, 
+                        'dragend', 
+                        function() {
+                            app._adjustedCoords = app._marker.getPosition();                
+                            app.census.position.latitude =app._marker.getPosition().lat();
+                            app.census.position.longitude =app._marker.getPosition().lng();
+                            $("#latitudine_1").html('Lat:  '+app.census.position.latitude.toFixed(5));
+                            $("#longitudine_1").html('Lon:  '+app.census.position.longitude.toFixed(5));
+                            //page.injector.GeoCoordinatesAcquired(app.census.position);             
+                        });
+                    }
                 }
-                
             }    
         }
         else
@@ -523,11 +538,14 @@ var app = {
             app.ACQ_GPS=true;
             if(jQuery.mobile.path.getLocation().indexOf('guardrailStep1Page')>0)
             {
-                if(app._marker!=null && app._marker!=undefined )
-                {
-                    app._marker.setOptions({draggable: false});
-                    google.maps.event.clearListeners(app._marker, 'dragend');
-                   
+                if( typeof(google) != 'undefined')
+                { 
+                    if(app._marker!=null && app._marker!=undefined )
+                    {
+                        app._marker.setOptions({draggable: false});
+                        google.maps.event.clearListeners(app._marker, 'dragend');
+
+                    }
                 }
                 $("#start_gps_0").html("MANUALE");
                 $("#start_gps_0").css("color", "#3388cc");
@@ -541,10 +559,13 @@ var app = {
             }
             else
             {
-                if(app._marker!=null && app._marker!=undefined )
-                {
-                    app._marker.setOptions({draggable: false});
-                    google.maps.event.clearListeners(app._marker, 'dragend');
+                if( typeof(google) != 'undefined')
+                { 
+                    if(app._marker!=null && app._marker!=undefined )
+                    {
+                        app._marker.setOptions({draggable: false});
+                        google.maps.event.clearListeners(app._marker, 'dragend');
+                    }
                 }
                 $("#start_gps_1").html("MANUALE");
                 $("#start_gps_1").css("color", "#3388cc");
@@ -592,34 +613,45 @@ var app = {
                     try
                     {
                         var map=app._map;
-                        var markerPoint = new google.maps.LatLng(app.census.position.latitude,app.census.position.longitude);
-                        try
+                        if( typeof(google) != 'undefined')
                         {
-                        
-                            if(app._marker==null)
-                            {    
-                              var marker = new google.maps.Marker({
-                                    position: markerPoint,
-                                    map: map,
-                                    draggable: false,
-                                    animation: google.maps.Animation.DROP,
-                                    title: app.SELECTED_QRCODE
-                                });
-                                //var infowindow = new google.maps.InfoWindow({content: '<div></div>'});
-                                //infowindow.open(map, marker);
+                            var markerPoint = new google.maps.LatLng(app.census.position.latitude,app.census.position.longitude);
+                            try
+                            {
+
+                                if(app._marker==null)
+                                {    
+                                  var marker = new google.maps.Marker({
+                                        position: markerPoint,
+                                        map: map,
+                                        draggable: false,
+                                        animation: google.maps.Animation.DROP,
+                                        title: app.SELECTED_QRCODE
+                                    });
+                                    //var infowindow = new google.maps.InfoWindow({content: '<div></div>'});
+                                    //infowindow.open(map, marker);
+                                }
+                                else
+                                {    
+                                    app._marker.setPosition(markerPoint );
+                                }
+                                if(app._marker==null)
+                                { 
+                                    app._marker=marker;
+                                    map.panTo(markerPoint);
+                                }
                             }
-                            else
-                            {    
-                                app._marker.setPosition(markerPoint );
-                            }
-                            if(app._marker==null)
-                            { 
-                                app._marker=marker;
-                                map.panTo(markerPoint);
-                            }
+                            catch(e)
+                            {}
                         }
-                        catch(e)
-                        {}
+                        else
+                        {
+                            var txt = '<div style="padding:20px;margin:20px !important">Lat: '+app.census.position.latitude.toFixed(7)+'<br>'+
+                                    'Lon: '+app.census.position.longitude.toFixed(7)+'<br>'+
+                                    '<span style="color:#FF1111" >Acc: '+app.census.position.accuracy.toFixed(1)+'</span></div>';
+                                $('#'+app.id_map).html(txt);    
+                        }
+                        
                         if(app.ACQ_GPS)
                         {
                             app.ID_GPS=setInterval(function(){app.readGPS()},5000);
@@ -669,19 +701,32 @@ var app = {
                 {    
                     app.id_map="map_1";
                 }
-                app.MAP=app.openMap();
-                if(app.MAP)
-                {    
-                    app._map.setZoom(16);
-                    if(jQuery.mobile.path.getLocation().indexOf('guardrailStep1Page')>0)
-                    {
-                        $('#start_gps_0').on('click', function(){app.startGPS();});
-                    }
-                    else
+                console.log(app.id_map);
+                if( typeof(google) != 'undefined')
+                {
+                   
+                    app.MAP=app.openMap();
+                    console.log(app.MAP);
+                    if(app.MAP)
                     {    
-                        $('#start_gps_1').on('click', function(){app.startGPS();});
+                        app._map.setZoom(16);
+                        if(jQuery.mobile.path.getLocation().indexOf('guardrailStep1Page')>0)
+                        {
+                            $('#start_gps_0').on('click', function(){app.startGPS();});
+                            $('#btn_gps_control_0').fadeIn(100);
+                        }
+                        else
+                        {    
+                            $('#start_gps_1').on('click', function(){app.startGPS();});
+                            $('#btn_gps_control_1').fadeIn(100);
+                        }
                     }
                 }
+                else
+                {
+                     $('#'+app.id_map).html('<div style="padding:20px;margin:20px !important">Il servizio mappe non è al momento disponibile<br><br>Attendi per la lettura delle coordinate GPS</div>');
+                }   
+                
             }
             catch(e)
             {}
@@ -776,12 +821,17 @@ var app = {
             var seq=2;
             for(var i = 0; i < itemCount; i++) 
             {
+                  
                 var row = result.rows.item(i);
-                var obj = data.deserialize(row, row.entity_type);
-                if(obj.guardrail.guardrailInfo.parent== qrCode)
-                {
-                    seq++;
-                }
+                if(row.entity_type==3)
+                { 
+                    console.log(result.rows.item(i));
+                    var obj = data.deserialize(row, row.entity_type);
+                    if(obj.guardrail.guardrailInfo.parent== qrCode)
+                    {
+                        seq++;
+                    }
+                }    
             
             }
             $('#localizeGuardrailPage #sequenza_point').val(seq);
