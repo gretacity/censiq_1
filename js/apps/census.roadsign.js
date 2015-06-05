@@ -502,6 +502,7 @@ var app = {
                     $("#latitudine_0").html('Lat:  '+app.census.position.latitude.toFixed(5));
                     $("#longitudine_0").html('Lon:  '+app.census.position.longitude.toFixed(5));
                     $("#accuratezza_0").html('Acc:  '+app.census.position.accuracy.toFixed(1))+' m';
+                    $("#btnCoord").fadeIn(100);
                     
                     try
                     {
