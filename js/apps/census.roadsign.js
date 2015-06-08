@@ -451,6 +451,7 @@ var app = {
                         app.census.position.longitude =app._marker.getPosition().lng();
                         $("#latitudine_0").html('Lat:  '+app.census.position.latitude.toFixed(5));
                         $("#longitudine_0").html('Lon:  '+app.census.position.longitude.toFixed(5));
+                        $("#btnCoord").fadeIn(100);
                         //page.injector.GeoCoordinatesAcquired(app.census.position);             
                     });
                 }
@@ -502,7 +503,7 @@ var app = {
                     $("#latitudine_0").html('Lat:  '+app.census.position.latitude.toFixed(5));
                     $("#longitudine_0").html('Lon:  '+app.census.position.longitude.toFixed(5));
                     $("#accuratezza_0").html('Acc:  '+app.census.position.accuracy.toFixed(1))+' m';
-                    $("#btnCoord").fadeIn(100);
+                   
                     
                     try
                     {

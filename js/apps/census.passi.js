@@ -474,6 +474,7 @@ var app = {
                         app.census.position.longitude =app._marker.getPosition().lng();
                         $("#latitudine_0").html('Lat:  '+app.census.position.latitude.toFixed(5));
                         $("#longitudine_0").html('Lon:  '+app.census.position.longitude.toFixed(5));
+                        $("#btnCoord").fadeIn(100);
                         //page.injector.GeoCoordinatesAcquired(app.census.position);             
                     });
                 }
