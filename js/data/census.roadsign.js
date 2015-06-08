@@ -56,6 +56,9 @@ Census.prototype.roadSign.comune = '';
 Census.prototype.roadSign.provincia = '';
 Census.prototype.roadSign.street = '';
 Census.prototype.roadSign.streetNumber = '';
+Census.prototype.roadSign.itinerario_internazionale = '';
+Census.prototype.roadSign.denominazione_strada = '';
+Census.prototype.roadSign.tipo_strada = '';
 Census.prototype.roadSign.signs = [];       // Array of RoadSign.SignInfo objects
 Census.prototype.roadSign.poleInfo = new RoadSign.PoleInfo();
 
@@ -76,6 +79,9 @@ data.roadSign = {
             provincia: entity.roadSign.provincia,
             street: entity.roadSign.street,
             streetNumber: entity.roadSign.streetNumber,
+            itinerario_internazionale:entity.roadSign.itinerario_internazionale,
+            denominazione_strada:entity.roadSign.denominazione_strada,
+            tipo_strada:entity.roadSign.tipo_strada,
             signs: entity.roadSign.signs,
             poleInfo: entity.roadSign.poleInfo
         };
@@ -103,6 +109,9 @@ data.roadSign = {
         census.roadSign.provincia = tmp.provincia;
         census.roadSign.street = tmp.street;
         census.roadSign.streetNumber = tmp.streetNumber;
+        census.roadSign.itinerario_internazionale = tmp.itinerario_internazionale;
+        census.roadSign.tipo_strada = tmp.tipo_strada;
+        census.roadSign.denominazione_strada = tmp.denominazione_strada;
         census.roadSign.signs = tmp.signs;
         census.roadSign.poleInfo = tmp.poleInfo;
 //console.log(census);
@@ -139,6 +148,9 @@ data.roadSign = {
                 comune :entity.roadSign.comune,
                 provincia :entity.roadSign.provincia,
                 strada: entity.roadSign.street,
+                tipo_strada:entity.roadSign.tipo_strada,
+                itinerario_internazionale:entity.roadSign.itinerario_internazionale,
+                denominazione_strada:entity.roadSign.denominazione_strada,
                 civico: entity.roadSign.streetNumber
             },
             ss_censimento_cartello: [],

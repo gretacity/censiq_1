@@ -282,6 +282,8 @@ var app = {
         app.census.roadSign.provincia = $ ('#provincia').val();
         app.census.roadSign.street = $('#street').val();
         app.census.roadSign.streetNumber = $('#streetNumber').val();
+        app.census.roadSign.denominazione_strada = $('#denominazione_strada').val();
+        app.census.roadSign.tipo_strada = $('#tipo_strada').val();
         
         // Pictures related to the city asset
         var imageKeys = ['front', 'back', 'perspective'];
