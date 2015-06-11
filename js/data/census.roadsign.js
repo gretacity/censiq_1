@@ -57,8 +57,34 @@ Census.prototype.roadSign.provincia = '';
 Census.prototype.roadSign.street = '';
 Census.prototype.roadSign.streetNumber = '';
 Census.prototype.roadSign.itinerario_internazionale = '';
+Census.prototype.roadSign.distanza = '';
 Census.prototype.roadSign.denominazione_strada = '';
 Census.prototype.roadSign.tipo_strada = '';
+
+Census.prototype.roadSign.ditta_installatrice = '';
+Census.prototype.roadSign.data_installazione = '';
+Census.prototype.roadSign.installatore = '';
+Census.prototype.roadSign.ditta_produttrice = '';
+Census.prototype.roadSign.ordinanza_numero = '';
+Census.prototype.roadSign.ordinanza_del = '';
+Census.prototype.roadSign.ordinanza_dismissione = '';
+Census.prototype.roadSign.dismissione_del = '';
+Census.prototype.roadSign.note = '';
+Census.prototype.roadSign.accuratezza = '';
+Census.prototype.roadSign.distanza_pos = '';
+Census.prototype.roadSign.cippo = '';
+Census.prototype.roadSign.tipo_impianto = '';
+Census.prototype.roadSign.altro_tipo_impianto = '';
+Census.prototype.roadSign.tipo_supporto = '';
+Census.prototype.roadSign.altro_tipo_supporto = '';
+Census.prototype.roadSign.materiale_supporto = '';
+Census.prototype.roadSign.sezione = '';
+Census.prototype.roadSign.altezza_supporto = '';
+Census.prototype.roadSign.distanza_ciglio = '';
+Census.prototype.roadSign.stato_conservazione = '';
+Census.prototype.roadSign.disposizione_segnali = '';
+Census.prototype.roadSign.id_supporto = '';
+
 Census.prototype.roadSign.signs = [];       // Array of RoadSign.SignInfo objects
 Census.prototype.roadSign.poleInfo = new RoadSign.PoleInfo();
 
@@ -82,6 +108,31 @@ data.roadSign = {
             itinerario_internazionale:entity.roadSign.itinerario_internazionale,
             denominazione_strada:entity.roadSign.denominazione_strada,
             tipo_strada:entity.roadSign.tipo_strada,
+            distanza:entity.roadSign.distanza,
+            ditta_installatrice:entity.roadSign.ditta_installatrice,
+            data_installazione:entity.roadSign.data_installazione,
+            installatore:entity.roadSign.installatore,
+            ditta_produttrice:entity.roadSign.ditta_produttrice,
+            ordinanza_numero:entity.roadSign.ordinanza_numero,
+            ordinanza_del:entity.roadSign.ordinanza_del,
+            ordinanza_disnmissione:entity.roadSign.ordinanza_disnmissione,
+            disnmissione_del:entity.roadSign.disnmissione_del,
+            note:entity.roadSign.note,
+            accuratezza:entity.roadSign.accuratezza,
+            posizione:entity.roadSign.posizione,
+            distanza_pos:entity.roadSign.distanza_pos,
+            cippo:entity.roadSign.cippo,
+            tipo_impianto:entity.roadSign.tipo_impianto,
+            altro_tipo_impianto:entity.roadSign.altro_tipo_impianto,
+            tipo_supporto:entity.roadSign.tipo_supporto,
+            altro_tipo_supporto:entity.roadSign.altro_tipo_supporto,
+            materiale_supporto:entity.roadSign.materiale_supporto,
+            sezione:entity.roadSign.sezione,
+            altezza_supporto:entity.roadSign.altezza_supporto,
+            distanza_ciglio:entity.roadSign.distanza_ciglio,
+            stato_conservazione:entity.roadSign.stato_conservazione,
+            disposizione_segnali:entity.roadSign.disposizione_segnali,
+            id_segnali:entity.roadSign.id_segnali,
             signs: entity.roadSign.signs,
             poleInfo: entity.roadSign.poleInfo
         };
@@ -111,7 +162,34 @@ data.roadSign = {
         census.roadSign.streetNumber = tmp.streetNumber;
         census.roadSign.itinerario_internazionale = tmp.itinerario_internazionale;
         census.roadSign.tipo_strada = tmp.tipo_strada;
+        census.roadSign.distanza = tmp.distanza;
         census.roadSign.denominazione_strada = tmp.denominazione_strada;
+        census.roadSign.ditta_installatrice = tmp.ditta_installatrice;
+        census.roadSign.data_installazione = tmp.data_installazione;
+        census.roadSign.installatore = tmp.installatore;
+        census.roadSign.ditta_produttrice = tmp.ditta_produttrice;
+        census.roadSign.ordinanza_numero = tmp.ordinanza_numero;
+        census.roadSign.ordinanza_del = tmp.ordinanza_del;
+        census.roadSign.ordinanza_dismissione = tmp.ordinanza_dismissione;
+        census.roadSign.dismissione_del = tmp.dismissione_del;
+        census.roadSign.note = tmp.note;
+        census.roadSign.accuratezza = tmp.accuratezza;
+        census.roadSign.posizione = tmp.posizione;
+        census.roadSign.distanza_pos = tmp.distanza_pos;
+        census.roadSign.cippo = tmp.cippo;
+        census.roadSign.tipo_impianto = tmp.tipo_impianto;
+        census.roadSign.altro_tipo_impianto = tmp.altro_tipo_impianto;
+        census.roadSign.tipo_supporto = tmp.tipo_supporto;
+        census.roadSign.altro_tipo_supporto = tmp.altro_tipo_supporto;
+        census.roadSign.materiale_supporto = tmp.materiale_supporto;
+        census.roadSign.sezione = tmp.sezione;
+        census.roadSign.altezza_supporto = tmp.altezza_supporto;
+        census.roadSign.distanza_ciglio = tmp.distanza_ciglio;
+        census.roadSign.stato_conservazione = tmp.stato_conservazione;
+        census.roadSign.disposizione_segnali = tmp.disposizione_segnali;
+        census.roadSign.id_supporto = tmp.id_supporto;
+        
+        
         census.roadSign.signs = tmp.signs;
         census.roadSign.poleInfo = tmp.poleInfo;
 //console.log(census);
@@ -151,7 +229,8 @@ data.roadSign = {
                 tipo_strada:entity.roadSign.tipo_strada,
                 itinerario_internazionale:entity.roadSign.itinerario_internazionale,
                 denominazione_strada:entity.roadSign.denominazione_strada,
-                civico: entity.roadSign.streetNumber
+                civico: entity.roadSign.streetNumber,
+                distanza :entity.roadSign.distanza
             },
             ss_censimento_cartello: [],
             pictures: {

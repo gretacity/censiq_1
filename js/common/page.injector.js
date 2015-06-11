@@ -158,7 +158,7 @@ var page = {
             }
             
             var content =   '<div data-role="header" data-position="fixed">' +
-                                '<a href="#" data-rel="back" class="ui-btn ui-btn-icon-left ui-btn-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-back ui-alt-icon ui-nodisc-icon"></a>' +
+                                '<a data-step="'+dataStep+'" href="#" class="ui-btn ui-btn-icon-left ui-btn-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-back ui-alt-icon ui-nodisc-icon prev-step"></a>' +
                                 '<a href="index.html" id="homeButton" rel="external" class="ui-btn ui-btn-icon-right ui-btn-right ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-home ui-alt-icon ui-nodisc-icon">Home</a>' +
                                 '<h1 class="title">' + title + '</h1>' +
                             '</div>' +
