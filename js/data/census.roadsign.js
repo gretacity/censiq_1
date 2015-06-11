@@ -70,7 +70,6 @@ Census.prototype.roadSign.ordinanza_del = '';
 Census.prototype.roadSign.ordinanza_dismissione = '';
 Census.prototype.roadSign.dismissione_del = '';
 Census.prototype.roadSign.note = '';
-Census.prototype.roadSign.accuratezza = '';
 Census.prototype.roadSign.distanza_pos = '';
 Census.prototype.roadSign.cippo = '';
 Census.prototype.roadSign.tipo_impianto = '';
@@ -118,7 +117,6 @@ data.roadSign = {
             ordinanza_disnmissione:entity.roadSign.ordinanza_disnmissione,
             disnmissione_del:entity.roadSign.disnmissione_del,
             note:entity.roadSign.note,
-            accuratezza:entity.roadSign.accuratezza,
             posizione:entity.roadSign.posizione,
             distanza_pos:entity.roadSign.distanza_pos,
             cippo:entity.roadSign.cippo,
@@ -173,7 +171,6 @@ data.roadSign = {
         census.roadSign.ordinanza_dismissione = tmp.ordinanza_dismissione;
         census.roadSign.dismissione_del = tmp.dismissione_del;
         census.roadSign.note = tmp.note;
-        census.roadSign.accuratezza = tmp.accuratezza;
         census.roadSign.posizione = tmp.posizione;
         census.roadSign.distanza_pos = tmp.distanza_pos;
         census.roadSign.cippo = tmp.cippo;
@@ -230,7 +227,30 @@ data.roadSign = {
                 itinerario_internazionale:entity.roadSign.itinerario_internazionale,
                 denominazione_strada:entity.roadSign.denominazione_strada,
                 civico: entity.roadSign.streetNumber,
-                distanza :entity.roadSign.distanza
+                distanza :entity.roadSign.distanza,
+                ditta_installatrice :entity.roadSign.ditta_installatrice,
+                data_installazione :entity.roadSign.data_installazione,
+                installatore :entity.roadSign.installatore,
+                ditta_produttrice :entity.roadSign.ditta_produttrice,
+                ordinanza_numero :entity.roadSign.ordinanza_numero,
+                ordinanza_del :entity.roadSign.ordinanza_del,
+                ordinanza_dismissione :entity.roadSign.ordinanza_dismissione,
+                dismissione_del :entity.roadSign.dismissione_del,
+                note :entity.roadSign.note,
+                posizione :entity.roadSign.posizione,
+                distanza_pos :entity.roadSign.distanza_pos,
+                cippo :entity.roadSign.cippo,
+                tipo_impianto :entity.roadSign.tipo_impianto,
+                altro_tipo_impianto :entity.roadSign.altro_tipo_impianto,
+                tipo_supporto :entity.roadSign.tipo_supporto,
+                altro_tipo_supporto :entity.roadSign.altro_tipo_supporto,
+                materiale_supporto :entity.roadSign.materiale_supporto,
+                sezione :entity.roadSign.sezione,
+                altezza_supporto :entity.roadSign.altezza_supporto,
+                distanza_ciglio :entity.roadSign.distanza_ciglio,
+                stato_conservazione :entity.roadSign.stato_conservazione,
+                disposizione_segnali :entity.roadSign.disposizione_segnali,
+                id_supporto :entity.roadSign.id_supporto
             },
             ss_censimento_cartello: [],
             pictures: {

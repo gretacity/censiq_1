@@ -307,7 +307,7 @@ var app = {
         app.census.roadSign.ordinanza_dismissione = $('#ordinanza_dismissione').val();
         app.census.roadSign.dismissione_del = $('#dismissione_del').val();
         app.census.roadSign.note = $('#note').val();
-        app.census.roadSign.accuratezza = $('#accuratezza').val();
+        
         app.census.roadSign.posizione = $('#posizione').val();
         app.census.roadSign.distanza_pos = $('#distanza_pos').val();
         app.census.roadSign.cippo = $('#cippo').val();
@@ -322,6 +322,7 @@ var app = {
         app.census.roadSign.stato_conservazione = $('#stato_conservazione').val();
         app.census.roadSign.disposizione_segnali = $('#disposizione_segnali').val();
         app.census.roadSign.id_supporto = $('#id_supporto').val();
+        
         
         
         // Pictures related to the city asset
