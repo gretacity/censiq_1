@@ -82,7 +82,6 @@ Census.prototype.roadSign.altezza_supporto = '';
 Census.prototype.roadSign.distanza_ciglio = '';
 Census.prototype.roadSign.stato_conservazione = '';
 Census.prototype.roadSign.disposizione_segnali = '';
-Census.prototype.roadSign.id_supporto = '';
 
 Census.prototype.roadSign.signs = [];       // Array of RoadSign.SignInfo objects
 Census.prototype.roadSign.poleInfo = new RoadSign.PoleInfo();
@@ -184,7 +183,7 @@ data.roadSign = {
         census.roadSign.distanza_ciglio = tmp.distanza_ciglio;
         census.roadSign.stato_conservazione = tmp.stato_conservazione;
         census.roadSign.disposizione_segnali = tmp.disposizione_segnali;
-        census.roadSign.id_supporto = tmp.id_supporto;
+       
         
         
         census.roadSign.signs = tmp.signs;
@@ -250,7 +249,7 @@ data.roadSign = {
                 distanza_ciglio :entity.roadSign.distanza_ciglio,
                 stato_conservazione :entity.roadSign.stato_conservazione,
                 disposizione_segnali :entity.roadSign.disposizione_segnali,
-                id_supporto :entity.roadSign.id_supporto
+              
             },
             ss_censimento_cartello: [],
             pictures: {

@@ -321,7 +321,7 @@ var app = {
         app.census.roadSign.distanza_ciglio = $('#distanza_ciglio').val();
         app.census.roadSign.stato_conservazione = $('#stato_conservazione').val();
         app.census.roadSign.disposizione_segnali = $('#disposizione_segnali').val();
-        app.census.roadSign.id_supporto = $('#id_supporto').val();
+    
         
         
         
