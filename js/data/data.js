@@ -182,7 +182,7 @@ var data = {
     
     updateData: function(key, downloadedData) {
         
-        if(data._db == null) this.open();
+                 if(data._db == null) this.open();
         
         data._db.transaction(function(tx) {
             switch(key) {
