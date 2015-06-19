@@ -199,13 +199,13 @@ var data = {
                 case data.DATA_ROADSIGN:
                     // Truncate table
                     tx.executeSql("delete from rs_roadsign");
-                    var q = "insert into rs_roadsign (id, code, figure, name, category, icon) values (?, ?, ?, ?, ?, ?)";
+                    var q = "insert into rs_roadsign (id, code, figure, name, category, icon,formato,dimensione ) values (?, ?, ?, ?, ?, ?, ?, ?)";
                     var tots = downloadedData.length;
                     var success = 0, fail = 0;
                     var nativeBaseUrlSaved = false;
                     for(var i in downloadedData) {
                         var row = downloadedData[i];
-                        tx.executeSql(q, [row.id, row.codice, row.figura, row.nome, row.categoria, row.icona],
+                        tx.executeSql(q, [row.id, row.codice, row.figura, row.nome, row.categoria, row.icona, row.formato, row.categoria],
                                      function(tx, result) {
                                          success++;
                                          if((success + fail) == tots) {
