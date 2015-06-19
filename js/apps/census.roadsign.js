@@ -897,7 +897,7 @@ var app = {
                 
                 //var roadSign = app._allRoadSigns[i];
                 var roadSign = result.item(i);
-                
+                console.log(result.item(i));
                 foundRoadSigns.push(roadSign);
                 
                 // Append to results
@@ -909,7 +909,7 @@ var app = {
                 html += '<li><a href="javascript:app.setRoadSign(' + roadSign.id + ')">' +
                             '<img src="' + imageUrl + '" class="roadsign-picture" />' + 
                             '<h1>' + roadSign.name + '</h1>' +
-                            '<p>codice: ' + roadSign.code + '<br />' + roadSign.figure + '</p>' +
+                            '<p>codice: ' + roadSign.code + '<br />' + roadSign.figure +' '+ roadSign.formato+ '</p>' +
                         '</a></li>';
                 if(++found == MAX_RESULTS) {
                     html += '<li>Altri risultati omessi per brevità</li>';

@@ -74,9 +74,12 @@ var data = {
     
     
     emptyTables: function() {
+        
+        
+        
         if(data._db == null) this.open();
         data._db.transaction(function(tx) {
-            console.log('Dropping tables');
+         
             tx.executeSql("drop table pictures");
             tx.executeSql("drop table census");
             tx.executeSql("drop table rs_films");
