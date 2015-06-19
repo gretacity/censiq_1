@@ -205,7 +205,7 @@ var data = {
                     var nativeBaseUrlSaved = false;
                     for(var i in downloadedData) {
                         var row = downloadedData[i];
-                        tx.executeSql(q, [row.id, row.codice, row.figura, row.nome, row.categoria, row.icona, row.formato, row.categoria],
+                        tx.executeSql(q, [row.id, row.codice, row.figura, row.nome, row.categoria, row.icona, row.formato, row.dimensione],
                                      function(tx, result) {
                                          success++;
                                          if((success + fail) == tots) {
