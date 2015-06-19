@@ -110,7 +110,7 @@ var data = {
                     tx.executeSql("create table if not exists rs_films (id integer not null primary key, name text)");
                     tx.executeSql("create table if not exists rs_roadsign (id integer not null primary key, " +
                                                                           "code text, figure text, name text, " +
-                                                                          "category text, icon text)");
+                                                                          "category text, icon text, formato text, dimensione text )");
                     tx.executeSql("create table if not exists rs_shapes (id integer not null primary key, name text)");
                     tx.executeSql("create table if not exists rs_supports (id integer not null primary key, name text)");
                     tx.executeSql("create table if not exists rs_sizes (id integer not null primary key, name text, size text)");
