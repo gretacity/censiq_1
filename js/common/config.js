@@ -61,8 +61,8 @@ var config = {
     CAMERA_ALLOW_EDIT: false,
     
     
-    ROADSIGN_BASE_PATH_ICONS: '/img/Segnali/',
-    //ROADSIGN_BASE_PATH_ICONS: 'RoadsignIcons/',
+    //ROADSIGN_BASE_PATH_ICONS: 'img/Segnali/',
+    ROADSIGN_BASE_PATH_ICONS: 'RoadsignIcons/',
     
     
     USE_WIFI_ONLY_KEY: 'censinq_usewifi',
