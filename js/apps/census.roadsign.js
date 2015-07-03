@@ -312,6 +312,13 @@ var app = {
         else if(step == app.STEP_6) {
             $.mobile.changePage('#roadSignStep5Page');
         }
+        else if(step == app.STEP_10) {
+             $.mobile.changePage('#ElencoRoadsignPage', {
+               transition: 'slide',
+               reverse: false,
+               changeHash: false
+           });
+        }    
     },
     updateCode: function()
     {
