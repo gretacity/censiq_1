@@ -265,7 +265,7 @@ var app = {
                         var name = data.shortDescription(obj);
                         var qrCode = obj.qrCode;
                         var dateAdded = Date.parseFromYMDHMS(row.date_added).toDMYHMS();
-                        html += '<li id="row'+obj.id+'" style="padding:0;' + (false ? 'background-color:#f00;' : '') + '">' ;
+                        html += '<li id="row'+obj.id+'" style="padding:0;">' ;
                         if(obj.guardrail.guardrailInfo.chiuso==1)
                         {
                                 html+='<div id="cls_'+obj.id+'"><img  onclick="app.closeItems(\''+obj.id+'\',0)" src="img/close.png" style="float:right;margin-right:10px; height:32px;width: 32px"></div>';

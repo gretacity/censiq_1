@@ -56,6 +56,13 @@ var app = {
     bindEvents: function() {
         
         document.addEventListener('deviceready', this.onDeviceReady, false);
+        $('#newButton').on('click', function(){
+            $.mobile.changePage('#roadSignStep0Page', {
+                transition: 'slide',
+                reverse: false,
+                changeHash: false
+                });
+        });
         $('#roadSignStep1Page').on('pageshow', this.showMapPositionPage);
         $('#roadSignStep2Page').on('pageshow',  this.acquireCoords);
         
@@ -93,6 +100,85 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        data.fetch({status: [data.REC_STATUS_ADDED, data.REC_STATUS_SYNCH_ERROR]}, function(result) {
+            //console.log("RESULT SYNC FETCH",result);
+            var itemCount = result.rows.length;
+            var html = '';
+            
+            for(var i = 0; i < itemCount; i++) 
+            {
+                var row = result.rows.item(i);
+                if(row.entity_type==2 )
+                {
+                    //console.log("ROW",row);
+                    var obj = data.deserialize(row, row.entity_type);
+                    var itemId = 'item' + obj.id;
+                    var qrCode = obj.qrCode;
+                    var dateAdded = Date.parseFromYMDHMS(row.date_added).toDMYHMS();
+                    html += '<li id="row'+obj.id+'" style="padding:0;">';
+                    html+='<div id="cls_'+obj.id+'">'+
+                            '<img  onclick="app.closeItems(\''+obj.id+'\',0)" src="img/update.png" style="float:right;margin-right:10px; height:32px;width: 32px">'+
+                            '</div>';
+                    html+='<div style="margin-right:5px;overflow:hidden;float:left">'+
+                            '<img class="img'+obj.roadSign.signs[0].roadSignId+'"  style="width:50px;height:50px;">'+
+                            '</div>';
+                    html += '<div style="overflow:hidden;float:left"><b>'+qrCode+'</b><br>';
+                    html += obj.roadSign.street+' '+obj.roadSign.streetNumber+' '+obj.roadSign.comune+'<br>';
+                            '</div></li>';
+                    for(var j=0;j<obj.roadSign.signs.length;j++)
+                    {    
+                       
+                        params = { id: obj.roadSign.signs[j].roadSignId}; 
+                        data.roadSign.getRoadSigns(params, function(result)
+                        {
+                            
+                            var imageUrl = config.ROADSIGN_BASE_PATH_ICONS + result[0].icon;
+                            $(".img"+result[0].id).attr("src",imageUrl);
+                        });
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    }
+                }
+            }
+            
+            $('#itemList').html(html);
+        });
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         $('#qrCode').val(config.QR_CODE_TEST);
         // For Android devices
         document.addEventListener("backbutton", function(e) {

@@ -467,11 +467,19 @@ data.roadSign = {
                             "code = " + params.search : 
                             "name like '%" + params.search.replace(/'/g, "''") + "%'");
         }
-         if(params.type != '0') {
+        if(params.type && params.type != '0') {
             // if it is a number perform the seach in the code field,
             // in the name otherwise
             filterArray.push( 
                             "category = " + params.type
+                            );
+        }
+        
+        if(params.id ) {
+            // if it is a number perform the seach in the code field,
+            // in the name otherwise
+            filterArray.push( 
+                            "id = " + params.id
                             );
         }
         
@@ -481,5 +489,9 @@ data.roadSign = {
         });
        
        
-    }
+    },
+    
+    
+ 
+    
 };
