@@ -237,7 +237,6 @@ var data = {
                     tx.executeSql("delete from rs_types");
                     var q = "insert into rs_types (id, nome) values (?, ?)";
                     for(var i in downloadedData) {
-                        console.log(i);
                         var row = downloadedData[i];
                         tx.executeSql(q, [row.id, row.nome]);
                     }
@@ -306,6 +305,7 @@ var data = {
         };
         
         var updateRoadSignImageItem = function(id, content, completedCallback) {
+            
             //console.log('Processing row with ID ' + id);
             if((content || '') == '') {
                 //console.log('No content for row with ID ' + id);

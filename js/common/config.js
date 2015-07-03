@@ -61,7 +61,7 @@ var config = {
     CAMERA_ALLOW_EDIT: false,
     
     
-    ROADSIGN_BASE_PATH_ICONS: 'img/Segnali/',
+    ROADSIGN_BASE_PATH_ICONS: '/img/Segnali/',
     //ROADSIGN_BASE_PATH_ICONS: 'RoadsignIcons/',
     
     
