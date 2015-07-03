@@ -44,8 +44,7 @@ var data = {
     DATA_SHAPES: 3,     // Forme        ss_forma (id, nome, ss_dimensione_id)
     DATA_SUPPORTS: 4,   // Supporti     ss_supporto (id, nome)
     DATA_SIZES: 5,      // Dimensioni   ss_dimensione
-
-    
+    DATA_TYPES: 6,      // tipologia segnali   ss_segnaletica_tipologia
    // DATA_GUARDRAIL:6,       //gr_censimento
     //DATA_GUARDRAIL_INFO:7, // gr_censimento_guardrail (numero_nastri,mumero_pali, gruppi_terminali etc etc)
     
@@ -87,6 +86,7 @@ var data = {
             tx.executeSql("drop table rs_shapes");
             tx.executeSql("drop table rs_supports");
             tx.executeSql("drop table rs_sizes");
+            tx.executeSql("drop table rs_types");
             tx.executeSql("drop table gr_censimento_guardrail");
             tx.executeSql("drop table gr_censimento_info");
             console.log('Table dropped');
@@ -101,19 +101,27 @@ var data = {
         // Database versioning check
         var dbVer = data._db.version;
         var updateRequired = false;
-        if(dbVer < config.DB_SCHEMA)  {
+        if(dbVer < config.DB_SCHEMA )  {
+         
             // Upgranding database to version defined in config.DB_SCHEMA
             updateRequired = true;
+           data.emptyTables();
             data._db.changeVersion(data._db.version, config.DB_SCHEMA, function() {
                 data._db.transaction(function(tx) {
+                    
+                  
                     // Transactions
                     tx.executeSql("create table if not exists rs_films (id integer not null primary key, name text)");
                     tx.executeSql("create table if not exists rs_roadsign (id integer not null primary key, " +
                                                                           "code text, figure text, name text, " +
-                                                                          "category text, icon text, formato text, dimensione text )");
+                                                                          "category text, icon text )");
                     tx.executeSql("create table if not exists rs_shapes (id integer not null primary key, name text)");
                     tx.executeSql("create table if not exists rs_supports (id integer not null primary key, name text)");
-                    tx.executeSql("create table if not exists rs_sizes (id integer not null primary key, name text, size text)");
+                    tx.executeSql("create table if not exists rs_sizes (id integer not null primary key, name text, size text, id_segnale text)");
+                    tx.executeSql("create table if not exists rs_types (id integer not null primary key, nome text)");
+
+                    
+                    
                     tx.executeSql("create table if not exists census (id integer not null primary key autoincrement, " +
                                                                         "date_added text, qr_code text, " +
                                                                         "lat real, lng real, accuracy integer, " +
@@ -123,14 +131,6 @@ var data = {
                     tx.executeSql("create table if not exists pictures (id integer not null primary key autoincrement, " + 
                                                                         "census_id integer, picture_key text, " +
                                                                         "data blob)");
-                    //tx.executeSql("create table if not exists gr_censimento_guardrail (id integer not null primary key autoincrement, " );
-                    /*tx.executeSql("create table if not exists gr_censimento_guardrail (id integer not null primary key autoincrement, " +
-                                                                                        "parent text, fine int, sequenza int, nome_inizio text"+
-                                                                                        "numero_nastri_smontaggio int, numero_pali_smontaggio int,"+
-                                                                                        "gruppi_terminali_smontaggio text, tipologia_barriera_smontaggio text,"+
-                                                                                        "numero_nastri_montaggio int, numero_pali_montaggio int,"+
-                                                                                        "gruppi_terminali_montaggio text, tipologia_barriera_montaggio text, id_inizio integer autoincrement)"); */
-                    // Other support tables used by roadsign census
                     tx.executeSql("create table if not exists rs_manufacturers (name text primary key, auth_no text)");
                     tx.executeSql("create table if not exists rs_installers (name text primary key)");
                     tx.executeSql("create table if not exists rs_owners (name text primary key)");
@@ -155,6 +155,7 @@ var data = {
             {'key': data.DATA_SIZES, 'name': 'roadsign.sizes.txt'},
             {'key': data.DATA_SUPPORTS, 'name': 'roadsign.supports.txt'},
             {'key': data.DATA_ROADSIGN, 'name': 'roadsign.roadsigns.txt'},
+            {'key': data.DATA_TYPES, 'name': 'roadsign.types.txt'},
             //{'key': data.DATA_GUARDRAIL, 'name': 'guardrail.censimento.txt'},
             //{'key': data.DATA_GUARDRAIL_INFO, 'name': 'guardrail.info.txt'}
         ];
@@ -199,13 +200,13 @@ var data = {
                 case data.DATA_ROADSIGN:
                     // Truncate table
                     tx.executeSql("delete from rs_roadsign");
-                    var q = "insert into rs_roadsign (id, code, figure, name, category, icon,formato,dimensione ) values (?, ?, ?, ?, ?, ?, ?, ?)";
+                    var q = "insert into rs_roadsign (id, code, figure, name, category, icon ) values (?, ?, ?, ?, ?, ?)";
                     var tots = downloadedData.length;
                     var success = 0, fail = 0;
                     var nativeBaseUrlSaved = false;
                     for(var i in downloadedData) {
                         var row = downloadedData[i];
-                        tx.executeSql(q, [row.id, row.codice, row.figura, row.nome, row.categoria, row.icona, row.formato, row.dimensione],
+                        tx.executeSql(q, [row.id, row.codice, row.figura, row.nome, row.ss_segnaletica_tipologia_id, row.icona],
                                      function(tx, result) {
                                          success++;
                                          if((success + fail) == tots) {
@@ -231,13 +232,26 @@ var data = {
                     }
                     break;
                     
+                 case data.DATA_TYPES:
+                    // Truncate table
+                    tx.executeSql("delete from rs_types");
+                    var q = "insert into rs_types (id, nome) values (?, ?)";
+                    for(var i in downloadedData) {
+                        console.log(i);
+                        var row = downloadedData[i];
+                        tx.executeSql(q, [row.id, row.nome]);
+                    }
+                    break;
+                
                 case data.DATA_SIZES:
                     // Truncate table
-                    tx.executeSql("delete from rs_sizes");
-                    var q = "insert into rs_sizes (id, name, size) values (?, ?, ?)";
+                   
+                    //tx.executeSql("delete from rs_sizes");
+                    var q = "insert into rs_sizes (id, name, size,id_segnale) values (?, ?, ?, ?)";
                     for(var i in downloadedData) {
                         var row = downloadedData[i];
-                        tx.executeSql(q, [row.id, row.nome, (row.formato || '')]);
+                      
+                        tx.executeSql(q, [row.id, row.nome, (row.formato || ''),row.id_segnale]);
                     }
                     break;
 
@@ -393,6 +407,9 @@ var data = {
             case data.DATA_SUPPORTS:
                 tableName = "rs_supports";
                 break;
+            case data.DATA_TYPES:
+                tableName = "rs_types";
+                break;    
            /* case data.DATA_GUARDRAIL:
                 tableName = "gr_censimento_guardrail";
                 break;

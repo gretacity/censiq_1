@@ -295,7 +295,8 @@ data.roadSign = {
                 data_scadenza:sign.data_scadenza,
                 proprietario_1:sign.proprietario_1,
                 proprietario_2:sign.proprietario_2,
-                proprietario_3:sign.proprietario_3
+                proprietario_3:sign.proprietario_3,
+              
                 //ss_censimento_id: 0
             };
             obj.ss_censimento_cartello.push(entry);
@@ -372,23 +373,18 @@ data.roadSign = {
     },
     
     // ss_dimensione (is empty on data server!)
-    getRoadSignSizes: function(completeCallback) {
-        // cm
-        /*return [
-            {size: '40'},
-            {size: '60'},
-            {size: '90'},
-            {size: '120'},
-            {size: '40x60'},
-            {size: '60x90'},
-            {size: '90x135'}
-        ];*/
-        data.lookupTable({key: data.DATA_SIZES}, function(result) {
+    getRoadSignSizes: function(params,completeCallback) {
+            /*var filterArray = [];
+            filterArray.push( "id_segnale = " + params.search );
+            var filter = filterArray.join(' and ');
+            */
+            var filter=" id_segnale = " + params.search;
+            data.lookupTable({key: data.DATA_SIZES, filter: filter}, function(result) {
             completeCallback(result);
         });
     },
     
-    getRoadSignTypes: function() {
+    getRoadSignType: function() {
         return [
             "Monofacciale",
             "Bifacciale"
@@ -402,6 +398,15 @@ data.roadSign = {
         });
     },
     
+    // ss_segnaletica_tipologia
+    
+    getRoadSignTypes: function(completedCallback) {
+        data.lookupTable({key: data.DATA_TYPES}, function(result) {
+           
+            completedCallback(result);
+            
+        });
+    },
     // ss_pellicola
     getRoadSignFilms: function(completedCallback) {
         data.lookupTable({key: data.DATA_FILMS}, function(result) {
@@ -462,9 +467,19 @@ data.roadSign = {
                             "code = " + params.search : 
                             "name like '%" + params.search.replace(/'/g, "''") + "%'");
         }
+         if(params.type != '0') {
+            // if it is a number perform the seach in the code field,
+            // in the name otherwise
+            filterArray.push( 
+                            "category = " + params.type
+                            );
+        }
+        
         var filter = filterArray.join(' and ');
         data.lookupTable({key: data.DATA_ROADSIGN, filter: filter}, function(result) {
             completedCallback(result);
         });
+       
+       
     }
 };

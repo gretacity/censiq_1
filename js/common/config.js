@@ -6,7 +6,7 @@ var config = {
     API_V: "1.0",
     
     DB_FILENAME: "censiq",          // Database file name
-    DB_SCHEMA: "1.0",               // Version of database schema
+    DB_SCHEMA: "2.5",               // Version of database schema
     DB_NAME: "CensiQ",              // Display name of the database
     DB_SIZE: 1024 * 1024 * 50,      // Size in bytes: 1024 * 1024 * 1 equal to 1MB
     
@@ -30,6 +30,9 @@ var config = {
     URL_BASE: 'http://www.gretacity.com',
     URL_LOGIN: '/web/index.php?mode=module&p=login&t=login_app&s=app_login',
     URL_DATA_ROADSIGN: '/web/index.php?p=segnaletica_stradale&s=export&s_t=ss_segnale&mode=module',
+    URL_DATA_TYPES: '/web/index.php?p=segnaletica_stradale&s=export&s_t=ss_segnaletica_tipologia&mode=module',
+    
+    
     URL_DATA_FILMS: '/web/index.php?p=segnaletica_stradale&s=export&s_t=ss_pellicola&mode=module',
     URL_DATA_SHAPES: '/web/index.php?p=segnaletica_stradale&s=export&s_t=ss_forma&mode=module',
     URL_DATA_SIZES: '/web/index.php?p=segnaletica_stradale&s=export&s_t=ss_dimensione&mode=module',

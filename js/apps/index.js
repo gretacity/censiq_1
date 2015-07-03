@@ -179,6 +179,8 @@ console.log('Failed to create roadsign icons directory', e);
         $('#updateNowButton', $page).addClass('ui-disabled').html('Aggiornamento...');
         // Prepare queue
         app.queue = [
+            {key: data.DATA_TYPES,     // Tipologie
+             state: 0},
             {key: data.DATA_SHAPES,     // Forme
              state: 0},
             {key: data.DATA_FILMS,      // Pellicole

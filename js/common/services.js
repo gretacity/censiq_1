@@ -53,6 +53,10 @@ var services = {
             case data.DATA_SUPPORTS:// Supporti
                 url = config.URL_BASE + config.URL_DATA_SUPPORTS;
                 break;
+            case data.DATA_TYPES:// Supporti
+                url = config.URL_BASE + config.URL_DATA_TYPES;
+                break;    
+                
         }
         // Set session id
         url += '&session_id=' + auth.getSessionId() +

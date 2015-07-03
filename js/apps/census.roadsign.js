@@ -16,7 +16,6 @@ var app = {
     ACQ:false,
     SELECTED_QRCODE: null,
     MAP:false,
-
     census: new Census(CensusTypes.roadSign),
     picturesPageId: 'roadSignStep3Page',
     pageOffsetTop: 0,
@@ -791,10 +790,17 @@ var app = {
         $roadSignPanel.trigger("create");
         
         $listview = $('ul', $roadSignPanel);
-        
+        $listview.append('<li class="roadsign-sign-li">' +
+                            '<a href="javascript:app.openRoadSignTypes(' + count + ')">' +
+                                '<!--img src="img/Segnali/cod_1.svg" /-->' +
+                                '<input type="hidden" id="roadsign-signtypeid" value="0" />' +
+                                '<p class="roadsign-type"></p>' +
+                                '<h1 class="roadsign-signtypename">Seleziona il tipo di segnale</h1>' +
+                            '</a>' +
+                        '</li>');
         // ROADSIGN PICTURE
         $listview.append('<li class="roadsign-sign-li">' +
-                            '<a href="javascript:app.openRoadSignFinder(' + count + ')">' +
+                            '<a disabled="true" href="javascript:app.openRoadSignFinder(' + count + ')">' +
                                 '<!--img src="img/Segnali/cod_1.svg" /-->' +
                                 '<input type="hidden" class="roadsign-signid" />' +
                                 '<p class="roadsign-signdescr"></p>' +
@@ -858,11 +864,20 @@ var app = {
      *  Functions related to roadsigns search
      */
     openRoadSignFinder: function(signIndex) {
-        app._currentRoadSign = signIndex;
-        $.mobile.changePage('#roadSignFinder', {
-            transition: 'pop'
-        });
-        $("#searchRoadSignText").val('').focus();
+        var roadSignPanel = $('div[data-roadsignno="' + signIndex + '"]');
+        
+        if($('#roadsign-signtypeid',roadSignPanel).val()!=0 )
+        {    
+            app._currentRoadSign = signIndex;
+            $.mobile.changePage('#roadSignFinder', {
+                transition: 'pop'
+            });
+            $("#searchRoadSignText").val('').focus();
+        }
+        else
+        {
+           helper.alert('Seleziona il tipo di segnale',null,'Cerca segnale');
+        }    
     },
     searchRoadSign: function() {
         
@@ -882,10 +897,26 @@ var app = {
         
         $.mobile.loading('show');
         
+            
+        
         var params = {
             search: searchText,
-            shape: searchShape
+            shape: searchShape,
+            type:0
         };
+        
+        var roadSignPanel = $('div[data-roadsignno="' + app._currentRoadSign + '"]');
+        $('#roadsign-signtypeid',roadSignPanel).val()!=0
+        if($('#roadsign-signtypeid',roadSignPanel).val()!=0 )
+        {
+            params = {
+             search: searchText,
+             shape: searchShape,
+             type:$('#roadsign-signtypeid',roadSignPanel).val()
+            }; 
+        }
+        
+        
         data.roadSign.getRoadSigns(params, function(result) {
             
             var lenght = result.length;
@@ -966,16 +997,29 @@ var app = {
      *  the ListDialog
      */
     openRoadSignSizePanel: function(signIndex) {
-        data.roadSign.getRoadSignSizes(function(result) {
-            app.openListDialog({
-                roadSignIndex: signIndex,
-                title: 'Formato del segnale',
-                rows: result, //data.roadSign.getRoadSignSizes(),
-                textFieldName: 'name',
-                hrefFields: ['id', 'name'],
-                hrefFormat: 'javascript:app.setRoadSignSize({0}, \'{1}\')'
+        
+        var roadSignPanel = $('div[data-roadsignno="' + signIndex + '"]');
+        if($('.roadsign-signid',roadSignPanel).val()!='' )
+        {    
+            var params = {
+             search: $('.roadsign-signid',roadSignPanel).val()
+            }; 
+            
+            data.roadSign.getRoadSignSizes(params,function(result) {
+                app.openListDialog({
+                    roadSignIndex: signIndex,
+                    title: 'Formato del segnale',
+                    rows: result, //data.roadSign.getRoadSignSizes(),
+                    textFieldName: 'size',
+                    hrefFields: ['id', 'size'],
+                    hrefFormat: 'javascript:app.setRoadSignSize({0}, \'{1}\')'
+                });
             });
-        });
+        }
+         else
+        {
+           helper.alert('Seleziona il segnale ',null,'Dimensione');
+        }        
     },
     setRoadSignSize: function(signSizeId, signSize) {
         var roadSignPanel = $('div[data-roadsignno="' + app._currentRoadSign + '"]');
@@ -987,12 +1031,15 @@ var app = {
         app.openListDialog({
             roadSignIndex: signIndex,
             title: 'Tipologia del segnale',
-            rows: data.roadSign.getRoadSignTypes(),
+            rows: data.roadSign.getRoadSignType(),
             textFieldName: '',
             hrefFields: [],
             hrefFormat: 'javascript:app.setRoadSignType(\'{0}\')'
         });
     },
+    
+    
+    
     setRoadSignType: function(signType) {
         var roadSignPanel = $('div[data-roadsignno="' + app._currentRoadSign + '"]');
         $('a label.roadsign-type', roadSignPanel).html(signType).attr('data-changed', 'true');
@@ -1017,7 +1064,27 @@ var app = {
         $('a label.roadsign-support', roadSignPanel).attr('data-supportid', signSupportId).html(signSupport);
         app.closeListDialog();
     },
-
+    openRoadSignTypes: function(signIndex)
+    {
+        data.roadSign.getRoadSignTypes(function(result) {
+            app.openListDialog({
+                roadSignIndex: signIndex,
+                title: 'Tipo segnale',
+                rows: result,
+                textFieldName: 'nome',
+                hrefFields: ['id', 'nome'],
+                hrefFormat: 'javascript:app.setRoadSignTypes({0}, \'{1}\')'
+            });
+        });
+    },
+    
+    
+    setRoadSignTypes: function(typeid, typename) {
+        var roadSignPanel = $('div[data-roadsignno="' + app._currentRoadSign + '"]');
+        $('#roadsign-signtypeid', roadSignPanel).val(typeid);
+        $('.roadsign-signtypename', roadSignPanel).html(typename);
+        app.closeListDialog();
+    },
     openRoadSignFilmPanel: function(signIndex) {
         data.roadSign.getRoadSignFilms(function(result) {
             app.openListDialog({
@@ -1035,7 +1102,6 @@ var app = {
         $('a label.roadsign-film', roadSignPanel).attr('data-filmid', signFilmId).html(signFilm);
         app.closeListDialog();
     },
-
     openRoadSignMaintenancePanel: function(signIndex) {
         app.openListDialog({
             roadSignIndex: signIndex,
