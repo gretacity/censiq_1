@@ -56,6 +56,7 @@ var app = {
     bindEvents: function() {
         
         document.addEventListener('deviceready', this.onDeviceReady, false);
+        $('#ElencoRoadsignPage').on('pageshow', this.loadElenco);
         $('#newButton').on('click', function(){
             $.mobile.changePage('#roadSignStep0Page', {
                 transition: 'slide',
@@ -63,6 +64,7 @@ var app = {
                 changeHash: false
                 });
         });
+        $('#acquireQrCodePointButton', $("#localizeroadSignPage")).on('click', this.acquireQrCodePoint);
         $('#roadSignStep1Page').on('pageshow', this.showMapPositionPage);
         $('#roadSignStep2Page').on('pageshow',  this.acquireCoords);
         
@@ -100,20 +102,26 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        data.fetch({status: [data.REC_STATUS_ADDED, data.REC_STATUS_SYNCH_ERROR]}, function(result) {
-            //console.log("RESULT SYNC FETCH",result);
+        $('#qrCode').val(config.QR_CODE_TEST);
+        // For Android devices
+        document.addEventListener("backbutton", function(e) {
+            e.preventDefault();
+            //window.location.href = 'index.html';
+        }, false);
+        // Load external scripts only if the wifi connection is available
+        if(helper.isOnline()) {
+            if(typeof(google) == "undefined") {
+                geoLocation.loadGoogleMapsScript('app.mapLoaded');
+            }
+        }
+    },
+    loadElenco: function()
+    {
+        console.log("qui");
+        data.fetch({status: [data.REC_STATUS_ADDED, data.REC_STATUS_SYNCH_ERROR]}, function(result)
+        {
             var itemCount = result.rows.length;
             var html = '';
-            
             for(var i = 0; i < itemCount; i++) 
             {
                 var row = result.rows.item(i);
@@ -126,7 +134,7 @@ var app = {
                     var dateAdded = Date.parseFromYMDHMS(row.date_added).toDMYHMS();
                     html += '<li id="row'+obj.id+'" style="padding:0;">';
                     html+='<div id="cls_'+obj.id+'">'+
-                            '<img  onclick="app.closeItems(\''+obj.id+'\',0)" src="img/update.png" style="float:right;margin-right:10px; height:32px;width: 32px">'+
+                            '<img  onclick="app.updateItems(\''+qrCode+'\')" src="img/update.png" style="float:right;margin-right:10px; height:32px;width: 32px">'+
                             '</div>';
                     html+='<div style="margin-right:5px;overflow:hidden;float:left">'+
                             '<img class="img'+obj.roadSign.signs[0].roadSignId+'"  style="width:50px;height:50px;">'+
@@ -144,55 +152,13 @@ var app = {
                             var imageUrl = config.ROADSIGN_BASE_PATH_ICONS + result[0].icon;
                             $(".img"+result[0].id).attr("src",imageUrl);
                         });
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
                     }
                 }
             }
-            
             $('#itemList').html(html);
         });
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        $('#qrCode').val(config.QR_CODE_TEST);
-        // For Android devices
-        document.addEventListener("backbutton", function(e) {
-            e.preventDefault();
-            //window.location.href = 'index.html';
-        }, false);
-        // Load external scripts only if the wifi connection is available
-        if(helper.isOnline()) {
-            if(typeof(google) == "undefined") {
-                geoLocation.loadGoogleMapsScript('app.mapLoaded');
-            }
-        }
+          
     },
-    
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         var parentElement = document.getElementById(id);
@@ -206,14 +172,16 @@ var app = {
         console.log('Received Event: ' + id);
     },
     
-    
-    
-
-    
-    
-    
-    
-
+    updateItems: function(qrCode)
+    {
+        $('#curr_qrcode','#localizeroadSignPage').val(qrCode);
+        $('#qrCode_point','#localizeroadSignPage').val('');
+        $.mobile.changePage('#localizeroadSignPage', {
+            transition: 'slide',
+            reverse: false,
+            changeHash: false
+        });
+    },
     validateStep: function(stepIndex, stepValidCallback, stepNotValidCallback) {
         var errors = [];
         if(stepIndex == app.STEP_0) {
@@ -270,12 +238,11 @@ var app = {
             // Validate step 5
             stepValidCallback();
         }
+        else if(stepIndex == app.STEP_10) {
+                this.updateCode();
+        }
     },
-    
-    
-    stepStarted: function() {
-        //
-    },
+    stepStarted: function() {},
     stepCompleted: function() {
         
         // Current step
@@ -307,6 +274,8 @@ var app = {
             else if(step == app.STEP_6) {
                 app.save();
             }
+             
+            console.log(step);
         }, function(errors) {
             // Validation failed: display an error message if there is at least one
             if(Array.isArray(errors) && errors.length > 0) {
@@ -327,7 +296,7 @@ var app = {
             }
             catch(e){}
             //$.mobile.changePage('index.html#censusTypePage');
-            $.mobile.back();
+             $.mobile.changePage('#ElencoRoadsignPage');
         } else if(step == app.STEP_1) {
             $.mobile.changePage('#roadSignStep0Page');
         } else if(step == app.STEP_2) {
@@ -344,21 +313,36 @@ var app = {
             $.mobile.changePage('#roadSignStep5Page');
         }
     },
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
+    updateCode: function()
+    {
+        if($('#qrCode_point','#localizeroadSignPage').val()!='')
+        {
+            data.fetch({status: [data.REC_STATUS_ADDED, data.REC_STATUS_SYNCH_ERROR]}, function(result)
+            {
+                var itemCount = result.rows.length;
+                for(var i = 0; i < itemCount; i++) 
+                {
+                    var row = result.rows.item(i);
+                    var obj = data.deserialize(row, row.entity_type);
+                    if(obj.qrCode==$('#curr_qrcode','#localizeroadSignPage').val())
+                    {
+                        
+                        var new_code=$('#qrCode_point','#localizeroadSignPage').val();
+                        //console.log(row.id+'--------'+ new_code);
+                        console.log(obj);
+                        console.log(row);
+                        data.updateQrCode(row.id, new_code);
+                        return;
+                    }
+                }
+            });
+        }
+        $.mobile.changePage('#ElencoRoadsignPage', {
+               transition: 'slide',
+               reverse: false,
+               changeHash: false
+           });
+    },
     save: function() {
         
         // Form is valid, proceed with saving.
@@ -474,17 +458,12 @@ var app = {
         poleInfo.poleUpwindNumberOfSingleSidedBrackets = $('#totUpwindBrackets').val(); // Numero staffe monofacciali usate per i pali controvento
         poleInfo.poleUpwindNumberOfDoubleSidedBrackets = $('#totUpwindBrackets2').val();// Numero staffe bifacciali usate per i pali controvento
         poleInfo.poleUpwindNumberOfUpwindBrackets = $('#totUpwindBrackets3').val();     // Numero staffe controvento usate per i pali controvento
-//console.log(poleInfo);
+//      console.log(poleInfo);
         app.census.roadSign.poleInfo = poleInfo;
-        
-        
-        
         // ...and save it
         // TODO Reenable
         //data.roadSign.updateSupportTables(supportTableData);
         data.save(app.census);
-        
-        
         // Once saved the census, empty fields of all the steps
         var $page = $('#roadSignStep0Page');
         $('input[type="text"]', $page).val('');

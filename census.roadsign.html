@@ -36,6 +36,43 @@
     	</div>
         <!-- /elencoRoadsignPage -->
         
+        
+        
+        
+         <!-- localizeroadSignPage -->
+        <div data-role="page" id='localizeroadSignPage'>
+            <div data-role="header" class="header" data-position="fixed">
+                <a href="#" data-step="10" class="ui-btn ui-btn-icon-left ui-btn-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-back ui-alt-icon ui-nodisc-icon prev-step"></a>
+				<h1>Inquadra QR-Code</h1>
+            </div>
+            <div data-role="main" class="ui-content">
+                <ul data-role="listview" data-inset="false" data-theme="b">
+                    <li>
+                        <!-- <input type="hidden" id="inizio" value="2" /> -->
+                        <label for="parent">Qr-Code Corrente</label>
+                        <input type="text" id="curr_qrcode" readonly="readonly"/>
+                    </li>
+                    <li data-icon="camera">
+                        <a href="#" id="acquireQrCodePointButton">
+                            <label>Aquisisci da fotocamera</label>
+                        </a>
+                    </li>
+                    <li data-theme="b">
+                        <input type="text" id="qrCode_point" placeholder="Nuovo QR-Code" />
+                    </li>
+                </ul>
+            </div>
+            <div data-role="footer" class="footer"  data-position="fixed" align="center" style="background:none !important; background-color: #f2f2f2 !important;">
+                <div style="line-height:25px; color:#0086cc;">1</div>
+                <a href="#"  class="button-next next-step" data-step="10">Modifica</a>
+                
+            </div>
+    	</div>
+      
+        
+        
+        
+        
         <!-- roadSignStep0Page -->
         <div data-role="page" id="roadSignStep0Page">
             <div data-role="header" class="header" data-position="fixed">
@@ -68,10 +105,8 @@
         <div data-role="page" id="roadSignStep1Page">
             <div data-role="header" class="header" data-position="fixed">
                 <a data-step="1" href="#" class="ui-btn-left toolbar-button-back ui-alt-icon ui-nodisc-icon ui-btn ui-icon-toolbar-button ui-btn-icon-notext prev-step" data-role="button" role="button" ></a>
-                
             </div>
-            
-             <div data-role="main">
+            <div data-role="main">
                 <div id="map_0" style="background:#dedede;text-align:center;font-size:1.3em;font-family:Arial !important;font-weight:bold;color:#888888">
                     
                 </div>

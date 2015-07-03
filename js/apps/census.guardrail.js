@@ -805,7 +805,6 @@ var app = {
                 },900);
         }); 
     },
-
     showMap :function(qrCode)
     {
       
@@ -816,7 +815,6 @@ var app = {
                 });
         app.SELECTED_QRCODE=qrCode;        
     },
-
     updateItems: function(qrCode)
     {
         data.fetch({status: [data.REC_STATUS_ADDED, data.REC_STATUS_SYNCH_ERROR]}, function(result)
@@ -848,7 +846,6 @@ var app = {
             changeHash: false
         });
     },
-    
     deleteItems: function(itemId) {
         helper.confirm('Eliminare in modo definitivo gli elementi selezionati?', function(buttonIndex) {
             if(buttonIndex == 1) {
@@ -864,7 +861,6 @@ var app = {
             }
         }, 'Conferma eliminazione', ['Si', 'No']);
     },
-    
     validateStep: function(stepIndex, stepValidCallback, stepNotValidCallback) {
         var errors = [];
         if(stepIndex == app.STEP_0)
@@ -989,7 +985,6 @@ var app = {
             
         }
     },
-    
     stepStarted: function() {
     },
            

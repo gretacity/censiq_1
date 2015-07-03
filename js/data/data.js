@@ -691,7 +691,29 @@ var data = {
             tx.executeSql("update from census set status = ?, sync_error = ? where id = ?", 
                           [newStatus, errorMessage, entityId]);
         });
-    }
+    },
     
+    updateQrCode: function(id, qrcode) {
+        
+        console.log(id+'   '+qrcode)
+        if(data._db == null) data.open();
+        data._db.transaction(function(tx) {
+            tx.executeSql("update census set qr_code = ? where id = ?;", 
+                          [qrcode,id]);
+                          
+                          
+        },this.myTransactionErrorCallback,this.myTransactionSuccessCallback);
+    },
+    
+    myTransactionErrorCallback:function (error)
+    {
+        console.log( arguments);
+    },
+ 
+    myTransactionSuccessCallback: function()
+    {
+        console.log("OK");
+    }
+  
     
 };
