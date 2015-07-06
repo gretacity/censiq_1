@@ -117,7 +117,7 @@ var app = {
     },
     loadElenco: function()
     {
-        console.log("qui");
+        
         data.fetch({status: [data.REC_STATUS_ADDED, data.REC_STATUS_SYNCH_ERROR]}, function(result)
         {
             var itemCount = result.rows.length;
@@ -148,9 +148,11 @@ var app = {
                         params = { id: obj.roadSign.signs[j].roadSignId}; 
                         data.roadSign.getRoadSigns(params, function(result)
                         {
-                            
                             var imageUrl = config.ROADSIGN_BASE_PATH_ICONS + result[0].icon;
+                            helper.alert(imageUrl);
+                            
                             $(".img"+result[0].id).attr("src",imageUrl);
+                            
                         });
                     }
                 }
