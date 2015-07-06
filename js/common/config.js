@@ -112,6 +112,7 @@ var config = {
 
 // Set the EMULATE_ON_BROWSER property
 config.EMULATE_ON_BROWSER = (typeof(cordova) == 'undefined');
+config.EMULATE_ON_BROWSER = true;
 if(config.EMULATE_ON_BROWSER) {
     // If cordova is not found, this object must be defined anyway
     PositionError = {PERMISSION_DENIED: 1,
@@ -123,7 +124,7 @@ if(config.EMULATE_ON_BROWSER) {
     LocalFileSystem.PERSISTENT = window.PERSISTENT;
     LocalFileSystem.TEMPORARY = window.TEMPORARY;*/
 }
-config.EMULATE_ON_BROWSER = false;
+
 
 
 if(config.RUNNING_MODE == config.MODE_DEBUG) {

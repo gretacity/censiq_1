@@ -143,9 +143,6 @@ var app = {
                     html += obj.roadSign.street+' '+obj.roadSign.streetNumber+' '+obj.roadSign.comune+'<br>';
                             '</div></li>';
                     
-                    var pos = nativeBaseUrl.indexOf(config.ROADSIGN_BASE_PATH_ICONS);
-                                nativeBaseUrl = nativeBaseUrl.substr(0, pos);
-                                config.setNativeBaseURL(nativeBaseUrl);
                     for(var j=0;j<obj.roadSign.signs.length;j++)
                     {    
                         
@@ -153,7 +150,7 @@ var app = {
                         params = { id: obj.roadSign.signs[j].roadSignId}; 
                         data.roadSign.getRoadSigns(params, function(result)
                         {
-                            var imageUrl =pos+ config.ROADSIGN_BASE_PATH_ICONS + result[0].icon;
+                            var imageUrl =config.getNativeBaseURL()+ config.ROADSIGN_BASE_PATH_ICONS + result[0].icon;
                            
                             
                             $(".img"+result[0].id).attr("src",imageUrl);
