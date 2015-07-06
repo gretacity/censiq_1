@@ -227,7 +227,7 @@ console.log('Failed to create roadsign icons directory', e);
         
         data.updateData(key, downloadedData);
         if(key == data.DATA_ROADSIGN) {
-            console.log(downloadedData);
+            
             if(app.fs == null ) {
                 console.log('WARNING: the underlying system doesn\'t support file system feature');
             } else {
