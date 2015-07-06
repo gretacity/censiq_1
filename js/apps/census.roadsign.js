@@ -142,7 +142,7 @@ var app = {
                     html += '<div style="overflow:hidden;float:left"><b>'+qrCode+'</b><br>';
                     html += obj.roadSign.street+' '+obj.roadSign.streetNumber+' '+obj.roadSign.comune+'<br>';
                             '</div></li>';
-                    
+                    helper.alert(obj.roadSign.signs.length);
                     for(var j=0;j<obj.roadSign.signs.length;j++)
                     {    
                         
@@ -151,8 +151,6 @@ var app = {
                         {
                             helper.alert(result.length);
                             helper.alert(result);
-                            
-                            helper.alert(result[0].id);
                             helper.alert(result[0].id);
                             try
                             {
