@@ -153,12 +153,12 @@ var app = {
                             helper.alert("result "+result);
                             try
                             {
-                                helper.alert("id "+result.item[0]);
-                            helper.alert("id "+result.item[0].id);
+                                helper.alert("id "+result.item(0));
+                            helper.alert("id "+result.item(0).id);
                             
-                                var imageUrl =config.getNativeBaseURL()+ config.ROADSIGN_BASE_PATH_ICONS + result.item[0].icon;
+                                var imageUrl =config.getNativeBaseURL()+ config.ROADSIGN_BASE_PATH_ICONS + result.item(0).icon;
                                 helper.alert(imageUrl);
-                                $(".img"+result.item[0].id).attr("src",imageUrl);
+                                $(".img"+result.item(0).id).attr("src",imageUrl);
                             }
                             catch(e)
                             {
