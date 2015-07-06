@@ -149,13 +149,20 @@ var app = {
                         params = { id: obj.roadSign.signs[j].roadSignId}; 
                         data.roadSign.getRoadSigns(params, function(result)
                         {
-                            helper.alert("*****************");   
-                        
-                            var imageUrl =config.getNativeBaseURL()+ config.ROADSIGN_BASE_PATH_ICONS + result[0].icon;
-                           
-                            helper.alert(imageUrl);
-                            
-                            $(".img"+result[0].id).attr("src",imageUrl);
+                            try
+                            {
+                                helper.alert("*****************");   
+
+                                var imageUrl =config.getNativeBaseURL()+ config.ROADSIGN_BASE_PATH_ICONS + result[0].icon;
+
+                                helper.alert(imageUrl);
+
+                                $(".img"+result[0].id).attr("src",imageUrl);
+                            }
+                            catch(e)
+                            {
+                                helper.alert(e.message);
+                            }
                             
                         });
                     }
