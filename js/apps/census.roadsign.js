@@ -152,7 +152,7 @@ var app = {
                             try
                             {
                                 var imageUrl =config.getNativeBaseURL()+ config.ROADSIGN_BASE_PATH_ICONS + result.item(0).icon;
-                                helper.alert(imageUrl);
+                               
                                 $(".img"+result.item(0).id).attr("src",imageUrl);
                             }
                             catch(e)
@@ -1009,14 +1009,13 @@ var app = {
                 
                 //var roadSign = app._allRoadSigns[i];
                 var roadSign = result.item(i);
-                console.log(result.item(i));
                 foundRoadSigns.push(roadSign);
                 
                 // Append to results
                 //var imageUrl = (roadSign.icon != '') ? config.ROADSIGN_BASE_PATH_ICONS + roadSign.icon : '';
                 var imageUrl = config.getNativeBaseURL();
                 if(imageUrl.substr(-1) != '/') imageUrl += '/';
-                imageUrl += config.ROADSIGN_BASE_PATH_ICONS + roadSign.icon + '.svg';
+                imageUrl += config.ROADSIGN_BASE_PATH_ICONS + roadSign.icon;
                 
                 html += '<li><a href="javascript:app.setRoadSign(' + roadSign.id + ')">' +
                             '<img src="' + imageUrl + '" class="roadsign-picture" />' + 
@@ -1052,7 +1051,7 @@ var app = {
             //var imageUrl = config.ROADSIGN_BASE_PATH_ICONS + roadSign.icon;
             var imageUrl = config.getNativeBaseURL();
             if(imageUrl.substr(-1) != '/') imageUrl += '/';
-            imageUrl += config.ROADSIGN_BASE_PATH_ICONS + roadSign.id + '.svg';
+            imageUrl += config.ROADSIGN_BASE_PATH_ICONS + roadSign.id;
             var roadSignPanel = $('div[data-roadsignno="' + app._currentRoadSign + '"]');
             $('h1 img', roadSignPanel).attr('src', imageUrl);
             $('h1 span', roadSignPanel).html(roadSign.name);
