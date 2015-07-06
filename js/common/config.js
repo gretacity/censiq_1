@@ -112,7 +112,7 @@ var config = {
 
 // Set the EMULATE_ON_BROWSER property
 config.EMULATE_ON_BROWSER = (typeof(cordova) == 'undefined');
-//config.EMULATE_ON_BROWSER = true;
+config.EMULATE_ON_BROWSER = false;
 if(config.EMULATE_ON_BROWSER) {
     // If cordova is not found, this object must be defined anyway
     PositionError = {PERMISSION_DENIED: 1,
