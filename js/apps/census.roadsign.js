@@ -152,6 +152,7 @@ var app = {
                         {
                             var imageUrl =config.getNativeBaseURL()+ config.ROADSIGN_BASE_PATH_ICONS + result[0].icon;
                            
+                            helper.alert(imageUrl);
                             
                             $(".img"+result[0].id).attr("src",imageUrl);
                             
