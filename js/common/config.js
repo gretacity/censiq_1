@@ -123,7 +123,7 @@ if(config.EMULATE_ON_BROWSER) {
     LocalFileSystem.PERSISTENT = window.PERSISTENT;
     LocalFileSystem.TEMPORARY = window.TEMPORARY;*/
 }
-//config.EMULATE_ON_BROWSER = true;
+config.EMULATE_ON_BROWSER = false;
 
 
 if(config.RUNNING_MODE == config.MODE_DEBUG) {

@@ -101,11 +101,10 @@ var data = {
         // Database versioning check
         var dbVer = data._db.version;
         var updateRequired = false;
-        if(dbVer < config.DB_SCHEMA )  {
-         
+        if(dbVer < config.DB_SCHEMA || true )  {
             // Upgranding database to version defined in config.DB_SCHEMA
             updateRequired = true;
-           data.emptyTables();
+            data.emptyTables();
             data._db.changeVersion(data._db.version, config.DB_SCHEMA, function() {
                 data._db.transaction(function(tx) {
                     
@@ -144,6 +143,7 @@ var data = {
             });
         } else if(dbVer == config.DB_SCHEMA) {
             // Database is updated to the latest version
+           
             if(successCallback != null) successCallback();
         }
     },
@@ -167,6 +167,7 @@ var data = {
                 dataType: 'json'
             }).done(function(result) {
                 //console.log('success', result);
+               
                 data.updateData(prefetched[i].key, result);
                 if(prefetched[i].key == data.DATA_ROADSIGN) {
                     // For roadsigns also save images
@@ -183,7 +184,7 @@ var data = {
     
     updateData: function(key, downloadedData) {
         
-                 if(data._db == null) this.open();
+        if(data._db == null) this.open();
         
         data._db.transaction(function(tx) {
             switch(key) {
@@ -245,7 +246,7 @@ var data = {
                 case data.DATA_SIZES:
                     // Truncate table
                    
-                    //tx.executeSql("delete from rs_sizes");
+                    tx.executeSql("delete from rs_sizes");
                     var q = "insert into rs_sizes (id, name, size,id_segnale) values (?, ?, ?, ?)";
                     for(var i in downloadedData) {
                         var row = downloadedData[i];
@@ -298,6 +299,7 @@ var data = {
             if(++i < length) {
                 // Process first item in the queue
                 var item = downloadedData[i];
+                console.log(downloadedData[i]);
                 updateRoadSignImageItem(item.icona, item.svg, getItemFromQueue);
                 //console.log('Retrieved row with ID ' + item.id);
             }
@@ -313,7 +315,7 @@ var data = {
                 return;
             }
             
-            var imageFilename = config.ROADSIGN_BASE_PATH_ICONS + id + '.svg';
+            var imageFilename = config.ROADSIGN_BASE_PATH_ICONS + id ;
             
             fs.root.getFile(
                 imageFilename, 
