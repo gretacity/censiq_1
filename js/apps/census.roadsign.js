@@ -151,13 +151,13 @@ var app = {
                         {
                             helper.alert("length "+result.length);
                             helper.alert("result "+result);
-                            helper.alert("id "+result.id);
-                            helper.alert("id "+result[0].id);
+                            //helper.alert("id "+result.id);
+                            helper.alert("id "+result.item[0].id);
                             try
                             {
-                                var imageUrl =config.getNativeBaseURL()+ config.ROADSIGN_BASE_PATH_ICONS + result[0].icon;
+                                var imageUrl =config.getNativeBaseURL()+ config.ROADSIGN_BASE_PATH_ICONS + result.item[0].icon;
                                 helper.alert(imageUrl);
-                                $(".img"+result[0].id).attr("src",imageUrl);
+                                $(".img"+result.item[0].id).attr("src",imageUrl);
                             }
                             catch(e)
                             {
