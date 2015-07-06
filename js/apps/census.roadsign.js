@@ -151,10 +151,11 @@ var app = {
                         {
                             helper.alert("length "+result.length);
                             helper.alert("result "+result);
-                            //helper.alert("id "+result.id);
-                            helper.alert("id "+result.item[0].id);
                             try
                             {
+                                helper.alert("id "+result.item[0]);
+                            helper.alert("id "+result.item[0].id);
+                            
                                 var imageUrl =config.getNativeBaseURL()+ config.ROADSIGN_BASE_PATH_ICONS + result.item[0].icon;
                                 helper.alert(imageUrl);
                                 $(".img"+result.item[0].id).attr("src",imageUrl);
