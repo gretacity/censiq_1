@@ -424,9 +424,8 @@ var app = {
         
         // Loop into roadsigns
         $('#roadSignContainer div[data-roadsignno]').each(function() {
-            
             var $container = $(this);
-            
+            app.census.roadSign.signs=Array();
             var signInfo = new RoadSign.SignInfo();
             
             // Front
@@ -480,6 +479,10 @@ var app = {
         // TODO Reenable
         //data.roadSign.updateSupportTables(supportTableData);
         data.save(app.census);
+        
+        
+        
+        
         // Once saved the census, empty fields of all the steps
         var $page = $('#roadSignStep0Page');
         $('input[type="text"]', $page).val('');
