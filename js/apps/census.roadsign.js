@@ -149,13 +149,8 @@ var app = {
                         params = { id: obj.roadSign.signs[j].roadSignId}; 
                         data.roadSign.getRoadSigns(params, function(result)
                         {
-                            helper.alert("length "+result.length);
-                            helper.alert("result "+result);
                             try
                             {
-                                helper.alert("id "+result.item(0));
-                            helper.alert("id "+result.item(0).id);
-                            
                                 var imageUrl =config.getNativeBaseURL()+ config.ROADSIGN_BASE_PATH_ICONS + result.item(0).icon;
                                 helper.alert(imageUrl);
                                 $(".img"+result.item(0).id).attr("src",imageUrl);
@@ -1021,7 +1016,7 @@ var app = {
                 //var imageUrl = (roadSign.icon != '') ? config.ROADSIGN_BASE_PATH_ICONS + roadSign.icon : '';
                 var imageUrl = config.getNativeBaseURL();
                 if(imageUrl.substr(-1) != '/') imageUrl += '/';
-                imageUrl += config.ROADSIGN_BASE_PATH_ICONS + roadSign.id + '.svg';
+                imageUrl += config.ROADSIGN_BASE_PATH_ICONS + roadSign.icon + '.svg';
                 
                 html += '<li><a href="javascript:app.setRoadSign(' + roadSign.id + ')">' +
                             '<img src="' + imageUrl + '" class="roadsign-picture" />' + 
