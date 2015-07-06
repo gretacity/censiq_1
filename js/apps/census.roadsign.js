@@ -146,10 +146,11 @@ var app = {
                     for(var j=0;j<obj.roadSign.signs.length;j++)
                     {    
                         
-                        helper.alert("-------------");   
                         params = { id: obj.roadSign.signs[j].roadSignId}; 
                         data.roadSign.getRoadSigns(params, function(result)
                         {
+                            helper.alert("*****************");   
+                        
                             var imageUrl =config.getNativeBaseURL()+ config.ROADSIGN_BASE_PATH_ICONS + result[0].icon;
                            
                             helper.alert(imageUrl);

@@ -104,11 +104,8 @@ var config = {
         return (window.localStorage.getItem(config.NATIVE_BASE_URL_KEY) || '');
     },
     setNativeBaseURL: function(url) {
-        helper.alert("+++++++++");
+       
         window.localStorage.setItem(config.NATIVE_BASE_URL_KEY, url);
-        helper.alert("****************");
-        helper.alert(window.localStorage.getItem(config.NATIVE_BASE_URL_KEY));
-        helper.alert("----------");
     }
     
 };
