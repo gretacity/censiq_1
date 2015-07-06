@@ -142,14 +142,19 @@ var app = {
                     html += '<div style="overflow:hidden;float:left"><b>'+qrCode+'</b><br>';
                     html += obj.roadSign.street+' '+obj.roadSign.streetNumber+' '+obj.roadSign.comune+'<br>';
                             '</div></li>';
+                    
+                    var pos = nativeBaseUrl.indexOf(config.ROADSIGN_BASE_PATH_ICONS);
+                                nativeBaseUrl = nativeBaseUrl.substr(0, pos);
+                                config.setNativeBaseURL(nativeBaseUrl);
                     for(var j=0;j<obj.roadSign.signs.length;j++)
                     {    
+                        
                        
                         params = { id: obj.roadSign.signs[j].roadSignId}; 
                         data.roadSign.getRoadSigns(params, function(result)
                         {
-                            var imageUrl = config.ROADSIGN_BASE_PATH_ICONS + result[0].icon;
-                            helper.alert(imageUrl);
+                            var imageUrl =pos+ config.ROADSIGN_BASE_PATH_ICONS + result[0].icon;
+                           
                             
                             $(".img"+result[0].id).attr("src",imageUrl);
                             

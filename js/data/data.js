@@ -336,7 +336,7 @@ var data = {
                                 var pos = nativeBaseUrl.indexOf(config.ROADSIGN_BASE_PATH_ICONS);
                                 nativeBaseUrl = nativeBaseUrl.substr(0, pos);
                                 config.setNativeBaseURL(nativeBaseUrl);
-                                helper.alert(nativeBaseUrl);
+                                
                             }
                             
                             completedCallback();
