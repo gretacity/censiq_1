@@ -150,7 +150,10 @@ var app = {
                         data.roadSign.getRoadSigns(params, function(result)
                         {
                             helper.alert(result.length);
+                            helper.alert(result);
                             
+                            helper.alert(result[0].id);
+                            helper.alert(result[0].id);
                             try
                             {
                                 var imageUrl =config.getNativeBaseURL()+ config.ROADSIGN_BASE_PATH_ICONS + result[0].icon;
