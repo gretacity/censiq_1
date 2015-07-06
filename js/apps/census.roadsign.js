@@ -1051,7 +1051,7 @@ var app = {
             //var imageUrl = config.ROADSIGN_BASE_PATH_ICONS + roadSign.icon;
             var imageUrl = config.getNativeBaseURL();
             if(imageUrl.substr(-1) != '/') imageUrl += '/';
-            imageUrl += config.ROADSIGN_BASE_PATH_ICONS + roadSign.id;
+            imageUrl += config.ROADSIGN_BASE_PATH_ICONS + roadSign.icon;
             var roadSignPanel = $('div[data-roadsignno="' + app._currentRoadSign + '"]');
             $('h1 img', roadSignPanel).attr('src', imageUrl);
             $('h1 span', roadSignPanel).html(roadSign.name);
