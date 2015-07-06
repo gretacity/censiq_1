@@ -29,7 +29,7 @@ var config = {
     
     URL_BASE: 'http://www.gretacity.com',
     URL_LOGIN: '/web/index.php?mode=module&p=login&t=login_app&s=app_login',
-    URL_DATA_ROADSIGN: '/web/index.php?p=segnaletica_stradale&s=export&s_t=ss_segnale&mode=module',
+    URL_DATA_ROADSIGN: '/web/index.php?p=segnaletica_stradale&s=export&s_t=ss_segnale_new&mode=module',
     URL_DATA_TYPES: '/web/index.php?p=segnaletica_stradale&s=export&s_t=ss_segnaletica_tipologia&mode=module',
     
     
