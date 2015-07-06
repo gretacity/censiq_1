@@ -298,7 +298,7 @@ var data = {
             if(++i < length) {
                 // Process first item in the queue
                 var item = downloadedData[i];
-                updateRoadSignImageItem(item.id, item.svg, getItemFromQueue);
+                updateRoadSignImageItem(item.icona, item.svg, getItemFromQueue);
                 //console.log('Retrieved row with ID ' + item.id);
             }
             // else completed
