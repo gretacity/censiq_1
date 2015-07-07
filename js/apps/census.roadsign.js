@@ -154,6 +154,9 @@ var app = {
                                 var imageUrl =config.getNativeBaseURL()+ config.ROADSIGN_BASE_PATH_ICONS + result.item(0).icon;
                                
                                 $(".img"+result.item(0).id).attr("src",imageUrl);
+                                $(".img"+result.item(0).id).css("width","50px");
+                                $(".img"+result.item(0).id).css("height","50px");
+                                
                             }
                             catch(e)
                             {
