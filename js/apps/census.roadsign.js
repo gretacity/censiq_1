@@ -271,7 +271,7 @@ var app = {
                 
                 $.mobile.changePage('#roadSignStep3Page');
             } else if(step == app.STEP_3) {
-                $.mobile.changePage('#roadSignStep4Page');
+                $.mobile.changePage('#roadSignStep5Page');
             } else if(step == app.STEP_4) {
                 $.mobile.changePage('#roadSignStep5Page');
             }
@@ -314,7 +314,7 @@ var app = {
         } else if(step == app.STEP_4) {
             $.mobile.changePage('#roadSignStep3Page');
         } else if(step == app.STEP_5) {
-            $.mobile.changePage('#roadSignStep4Page');
+            $.mobile.changePage('#roadSignStep3Page');
         }
         else if(step == app.STEP_6) {
             $.mobile.changePage('#roadSignStep5Page');
@@ -785,7 +785,10 @@ var app = {
         var isSQLResulSetRowList = (typeof(params.rows.item) != 'undefined');
         
         var rowCount = params.rows.length;
-        
+        if(params.title=='Tipo segnale')
+        {
+            html+='<li><a href="javascript:app.setRoadSignTypes(0, \'Nessuna selezione\')">Nessuna selezione</a></li>';
+        }    
         for(var i = 0; i < rowCount; i++) {
             
             var r = params.rows[i];
@@ -954,6 +957,15 @@ var app = {
     openRoadSignFinder: function(signIndex) {
         var roadSignPanel = $('div[data-roadsignno="' + signIndex + '"]');
         
+            
+        app._currentRoadSign = signIndex;
+        $.mobile.changePage('#roadSignFinder', {
+            transition: 'pop'
+        });
+        $("#searchRoadSignText").val('').focus();
+        
+        
+        /*
         if($('#roadsign-signtypeid',roadSignPanel).val()!=0 )
         {    
             app._currentRoadSign = signIndex;
@@ -965,7 +977,8 @@ var app = {
         else
         {
            helper.alert('Seleziona il tipo di segnale',null,'Cerca segnale');
-        }    
+        }
+        */
     },
     searchRoadSign: function() {
         
@@ -1154,6 +1167,9 @@ var app = {
     openRoadSignTypes: function(signIndex)
     {
         data.roadSign.getRoadSignTypes(function(result) {
+            
+           
+            
             app.openListDialog({
                 roadSignIndex: signIndex,
                 title: 'Tipo segnale',
@@ -1167,6 +1183,8 @@ var app = {
     
     
     setRoadSignTypes: function(typeid, typename) {
+        
+        
         var roadSignPanel = $('div[data-roadsignno="' + app._currentRoadSign + '"]');
         $('#roadsign-signtypeid', roadSignPanel).val(typeid);
         $('.roadsign-signtypename', roadSignPanel).html(typename);

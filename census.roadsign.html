@@ -208,185 +208,7 @@
         
        
         
-    	<!-- roadSignStep4Page -->
-	
-    	<div data-role="page" id='roadSignStep4Page'>
-            
-    		<div data-role="header" class="header" data-position="fixed">
-                <a data-step="4" href="#" class="ui-btn ui-btn-icon-left ui-btn-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-back ui-alt-icon ui-nodisc-icon prev-step" data-role="button" role="button"></a>
-                <a href="index.html" id="homeButton" rel="external" class=" ui-btn-right ui-icon-toolbar-button toolbar-button-home ui-btn ui-btn-icon-left ui-nodisc-icon ui-btn-icon-notext">Home</a>
-				<h1>Segnaletica</h1>
-				
-			</div>
-            
-                <div data-role="main" class="ui-content">
-                    <div data-role="collapsible-set" data-collapsed="true">
-                    <div data-role="collapsible" data-collapsed="true" 
-                         data-collapsed-icon="carat-r" data-expanded-icon="carat-d">
-                        <h1>
-                            Dati anagrafici dell'impianto
-                        </h1>
-                        <ul data-role="listview" data-theme="b">
-                            <li>
-                                <label for="ditta_installatrice">Ditta installatrice</label>
-                                <input type="text" id="ditta_installatrice"  />
-                            </li>
-                            <li>
-                                <label for="data_installazione">Data installazione</label>
-                                <input type="date" id="data_installazione"  />
-                            </li>
-                            <li>
-                                <label for="installatore">Installatore</label>
-                                <input type="text" id="installatore"  />
-                            </li>
-                            <li>
-                                <label for="ditta_produttrice">Ditta fornitrice</label>
-                                <input type="text" id="ditta_produttrice" />
-                            </li>
-                            
-                            <li>
-                                <label for="ordinanza_numero">N° ordinanza</label>
-                                <input type="text" id="ordinanza_numero"/>
-                            </li>
-                            <li>
-                                <label for="ordinanza_del">Data ordinanza</label>
-                                <input type="date" id="ordinanza_del"/>
-                            </li>
-                             <li>
-                                <label for="ordinanza_dismissione">N° ordinanza dismissione</label>
-                                <input type="text" id="ordinanza_dismissione"/>
-                            </li>
-                            <li>
-                                <label for="dismissione_del">Data ordinanza dismissione</label>
-                                <input type="date" id="dismissione_del"/>
-                            </li>
-                             <li>
-                                <label for="note">Note</label>
-                                <textarea id="dismissione_del"/></textarea>
-                            </li>
-                            
-                        </ul>
-                    </div>
-                    
-                    <div data-role="collapsible" data-collapsed="true" 
-                         data-collapsed-icon="carat-r" data-expanded-icon="carat-d">
-                        <h1>
-                            Caratteristiche tecniche dell'impianto
-                        </h1>
-                        <ul data-role="listview" data-theme="b">
-                            <li>
-                                <label for="posizione">Posizione dell'impianto</label>
-                                 <select id="posizione" >
-                                    <option value="" >Non rilevato</option>
-                                    <option value="Destra" >Destra</option>
-                                    <option value="Sinistra" >Sinistra</option>
-                                    <option value="Centrale" >Centrale</option>
-                                    <option value="Entrambi i lati" >Entrambi i lati</option>
-                                </select>
-                            </li>
-                            <li>
-                                <label for="distanza_pos">Distanza </label>
-                                <input type="number" id="distanza_pos" placeholder="m"/> 
-                            </li>
-                            <li>
-                                <label for="cippo">Cippo riferimento </label>
-                                <input type="number" id="cippo" placeholder="Km"/> 
-                            </li>
-                            <li>
-                                <label for="tipo_impianto">Tipo impianto</label>
-                                <select id="tipo_impianto">
-                                    <option value="" >Altro</option>
-                                    <option value="Semplice" >Semplice</option>
-                                    <option value="Composto" >Composto</option>
-                                    <option value="Segnale variabile" >Segnale variabile</option>
-                                </select>
-                            </li>
-                            <li>
-                                <label for="altro_tipo_impianto">Specificare altro </label>
-                                <input type="text" id="altro_tipo_impianto"/> 
-                            </li>
-                            <li>
-                                <label for="tipo_supporto">Tipo supporto</label>
-                                <select id="tipo_impianto">
-                                    <option value="" >Altro</option>
-                                    <option value="Palo" >Palo</option>
-                                    <option value="Portale" >Portale</option>
-                                    <option value="Bandiera" >Bandiera</option>
-                                    <option value="Farfalla" >Farfalla</option>
-                                </select>
-                            </li>
-                            <li>
-                                <label for="altro_tipo_supporto">Specificare altro supporto</label>
-                                <input type="text" id="altro_tipo_supporto"/> 
-                            </li>
-                          
-                            <li>
-                                <label for="materiale_supporto">Materiale supporto</label>
-                                <select id="materiale_supporto">
-                                    <option value="" >Altro</option>
-                                    <option value="Acciaio verniciato" >Acciaio verniciato</option>
-                                    <option value="Acciaio zincato" >Acciaio zincato</option>
-                                    <option value="Alluminio" >Alluminio</option>
-                                </select>
-                            </li>
-                            <li>
-                                <label for="sezione">Sezione</label>
-                                <select id="sezione">
-                                    <option value="" >Non specificato</option>
-                                    <option value="Rotonda" >Rotonda</option>
-                                    <option value="Sezione quadrata" >Sezione quadrata</option>
-                                    <option value="Sezione IPE" >Sezione IPE</option>
-                                    <option value="Sezione ad U 100mm" >Sezione ad U 100mm</option>
-                                    <option value="Sezione tipo IPE/NP" >Sezione tipo IPE/NP</option>
-                                </select>
-                            </li>
-                            <li>
-                                <label for="altezza_supporto">Altezza supporto</label>
-                                <input type="text" id="altezza_supporto" /> 
-                            </li>
-                            <li>
-                                <label for="stato_conservazione">Stato di conservazione del supporto</label>
-                                <select id="stato_conservazione">
-                                    <option value="Buono" >Buono</option>
-                                    <option value="Discreto" >Discreto</option>
-                                    <option value="Mediocre" >Mediocre</option>
-                                    <option value="Scadente" >Scadente</option>
-                                    <option value="Da sostituire" >Da sostituire</option>
-
-                                </select>
-                            </li>
-                            <li>
-                                <label for="disposizione_segnali">Disposizione segnali</label>
-                                <select id="disposizione_segnali">
-                                    <option value="Trasversali orientamento diretto" >Trasversali orientamento diretto</option>
-                                    <option value="Longitudinali con orientamento diretto" >Longitudinali con orientamento diretto</option>
-                                    <option value="Trasversali con orientamento marcia" >Trasversali con orientamento marcia</option>
-                                    <option value="Longitudinali con orientamento marcia" >Longitudinali con orientamento marcia</option>
-                                    <option value="Sui due lati trasversali paralleli tra loro" >Sui due lati trasversali paralleli tra loro</option>
-                                    <option value="Sui due lati longitudinali paralleli tra loro" >Sui due lati longitudinali paralleli tra loro</option>
-                                    <option value="Sui due lati perpendicolari tra loro (1)" >Sui due lati perpendicolari tra loro (1)</option>
-                                    <option value="Sui due lati perpendicolari tra loro (2)" >Sui due lati perpendicolari tra loro (2)</option>
-                                    <option value="Sui due lati perpendicolari tra loro (3)" >Sui due lati perpendicolari tra loro (3)</option>
-                                    <option value="Segnali sui tre lati (1)" >Segnali sui tre lati (1)</option>
-                                    <option value="Segnali sui tre lati (2)" >Segnali sui tre lati (2)</option>
-                                    <option value="Segnali sui tre lati (3)" >Segnali sui tre lati (3)</option>
-                                    <option value="Segnali sui tre lati (4)" >Segnali sui tre lati (4)</option>
-                                    <option value="Segnali sui quattro lati" >Segnali sui quattro lati</option>
-                                </select>
-                            </li>
-                           
-                            
-                        </ul>                        
-                    </div>                    
-                </div>
-
-                </div>
-            <div data-role="footer" class="footer"  data-position="fixed" align="center" style="background:none !important; background-color: #f2f2f2 !important;">
-                <div style="line-height:25px;  color:#0086cc;">5 di 7</div>
-                <a href="#" class="button-next next-step" data-step="4">AVANTI</a>
-            </div>
-    	</div>
-    	<!-- /roadSignStep4Page -->
+    	
         <!-- roadSignStep5Page -->
 	
     	<div data-role="page" id='roadSignStep5Page'>
@@ -422,9 +244,165 @@
                 <a href="index.html" id="homeButton" rel="external" class="ui-icon-toolbar-button toolbar-button-home ui-btn ui-btn-icon-left ui-nodisc-icon ui-btn-icon-notext">Home</a>
 				<h1>Segnaletica</h1>
             </div>
-            <div data-role="main" class="ui-content">                
-                <div data-role="collapsible-set" data-collapsed="true">
-                    <div data-role="collapsible" data-collapsed="true" 
+             <div data-role="main" class="ui-content">
+                    <div data-role="collapsible-set" data-collapsed="true">
+                        <div data-role="collapsible" data-collapsed="true" 
+                             data-collapsed-icon="carat-r" data-expanded-icon="carat-d">
+                            <h1>
+                                Dati anagrafici dell'impianto
+                            </h1>
+                            <ul data-role="listview" data-theme="b">
+                                <li>
+                                    <label for="ditta_installatrice">Ditta installatrice</label>
+                                    <input type="text" id="ditta_installatrice"  />
+                                </li>
+                                <li>
+                                    <label for="data_installazione">Data installazione</label>
+                                    <input type="date" id="data_installazione"  />
+                                </li>
+                                <li>
+                                    <label for="installatore">Installatore</label>
+                                    <input type="text" id="installatore"  />
+                                </li>
+                                <li>
+                                    <label for="ditta_produttrice">Ditta fornitrice</label>
+                                    <input type="text" id="ditta_produttrice" />
+                                </li>
+
+                                <li>
+                                    <label for="ordinanza_numero">N° ordinanza</label>
+                                    <input type="text" id="ordinanza_numero"/>
+                                </li>
+                                <li>
+                                    <label for="ordinanza_del">Data ordinanza</label>
+                                    <input type="date" id="ordinanza_del"/>
+                                </li>
+                                 <li>
+                                    <label for="ordinanza_dismissione">N° ordinanza dismissione</label>
+                                    <input type="text" id="ordinanza_dismissione"/>
+                                </li>
+                                <li>
+                                    <label for="dismissione_del">Data ordinanza dismissione</label>
+                                    <input type="date" id="dismissione_del"/>
+                                </li>
+                                 <li>
+                                    <label for="note">Note</label>
+                                    <textarea id="dismissione_del"/></textarea>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div data-role="collapsible" data-collapsed="true" 
+                             data-collapsed-icon="carat-r" data-expanded-icon="carat-d">
+                            <h1>
+                                Caratteristiche tecniche dell'impianto
+                            </h1>
+                            <ul data-role="listview" data-theme="b">
+                                <li>
+                                    <label for="posizione">Posizione dell'impianto</label>
+                                     <select id="posizione" >
+                                        <option value="" >Non rilevato</option>
+                                        <option value="Destra" >Destra</option>
+                                        <option value="Sinistra" >Sinistra</option>
+                                        <option value="Centrale" >Centrale</option>
+                                        <option value="Entrambi i lati" >Entrambi i lati</option>
+                                    </select>
+                                </li>
+                                <li>
+                                    <label for="distanza_pos">Distanza </label>
+                                    <input type="number" id="distanza_pos" placeholder="m"/> 
+                                </li>
+                                <li>
+                                    <label for="cippo">Cippo riferimento </label>
+                                    <input type="number" id="cippo" placeholder="Km"/> 
+                                </li>
+                                <li>
+                                    <label for="tipo_impianto">Tipo impianto</label>
+                                    <select id="tipo_impianto">
+                                        <option value="" >Altro</option>
+                                        <option value="Semplice" >Semplice</option>
+                                        <option value="Composto" >Composto</option>
+                                        <option value="Segnale variabile" >Segnale variabile</option>
+                                    </select>
+                                </li>
+                                <li>
+                                    <label for="altro_tipo_impianto">Specificare altro </label>
+                                    <input type="text" id="altro_tipo_impianto"/> 
+                                </li>
+                                <li>
+                                    <label for="tipo_supporto">Tipo supporto</label>
+                                    <select id="tipo_impianto">
+                                        <option value="" >Altro</option>
+                                        <option value="Palo" >Palo</option>
+                                        <option value="Portale" >Portale</option>
+                                        <option value="Bandiera" >Bandiera</option>
+                                        <option value="Farfalla" >Farfalla</option>
+                                    </select>
+                                </li>
+                                <li>
+                                    <label for="altro_tipo_supporto">Specificare altro supporto</label>
+                                    <input type="text" id="altro_tipo_supporto"/> 
+                                </li>
+
+                                <li>
+                                    <label for="materiale_supporto">Materiale supporto</label>
+                                    <select id="materiale_supporto">
+                                        <option value="" >Altro</option>
+                                        <option value="Acciaio verniciato" >Acciaio verniciato</option>
+                                        <option value="Acciaio zincato" >Acciaio zincato</option>
+                                        <option value="Alluminio" >Alluminio</option>
+                                    </select>
+                                </li>
+                                <li>
+                                    <label for="sezione">Sezione</label>
+                                    <select id="sezione">
+                                        <option value="" >Non specificato</option>
+                                        <option value="Rotonda" >Rotonda</option>
+                                        <option value="Sezione quadrata" >Sezione quadrata</option>
+                                        <option value="Sezione IPE" >Sezione IPE</option>
+                                        <option value="Sezione ad U 100mm" >Sezione ad U 100mm</option>
+                                        <option value="Sezione tipo IPE/NP" >Sezione tipo IPE/NP</option>
+                                    </select>
+                                </li>
+                                <li>
+                                    <label for="altezza_supporto">Altezza supporto</label>
+                                    <input type="text" id="altezza_supporto" /> 
+                                </li>
+                                <li>
+                                    <label for="stato_conservazione">Stato di conservazione del supporto</label>
+                                    <select id="stato_conservazione">
+                                        <option value="Buono" >Buono</option>
+                                        <option value="Discreto" >Discreto</option>
+                                        <option value="Mediocre" >Mediocre</option>
+                                        <option value="Scadente" >Scadente</option>
+                                        <option value="Da sostituire" >Da sostituire</option>
+
+                                    </select>
+                                </li>
+                                <li>
+                                    <label for="disposizione_segnali">Disposizione segnali</label>
+                                    <select id="disposizione_segnali">
+                                        <option value="Trasversali orientamento diretto" >Trasversali orientamento diretto</option>
+                                        <option value="Longitudinali con orientamento diretto" >Longitudinali con orientamento diretto</option>
+                                        <option value="Trasversali con orientamento marcia" >Trasversali con orientamento marcia</option>
+                                        <option value="Longitudinali con orientamento marcia" >Longitudinali con orientamento marcia</option>
+                                        <option value="Sui due lati trasversali paralleli tra loro" >Sui due lati trasversali paralleli tra loro</option>
+                                        <option value="Sui due lati longitudinali paralleli tra loro" >Sui due lati longitudinali paralleli tra loro</option>
+                                        <option value="Sui due lati perpendicolari tra loro (1)" >Sui due lati perpendicolari tra loro (1)</option>
+                                        <option value="Sui due lati perpendicolari tra loro (2)" >Sui due lati perpendicolari tra loro (2)</option>
+                                        <option value="Sui due lati perpendicolari tra loro (3)" >Sui due lati perpendicolari tra loro (3)</option>
+                                        <option value="Segnali sui tre lati (1)" >Segnali sui tre lati (1)</option>
+                                        <option value="Segnali sui tre lati (2)" >Segnali sui tre lati (2)</option>
+                                        <option value="Segnali sui tre lati (3)" >Segnali sui tre lati (3)</option>
+                                        <option value="Segnali sui tre lati (4)" >Segnali sui tre lati (4)</option>
+                                        <option value="Segnali sui quattro lati" >Segnali sui quattro lati</option>
+                                    </select>
+                                </li>
+
+
+                            </ul>                        
+                        </div>      
+                        <div data-role="collapsible" data-collapsed="true" 
                          data-collapsed-icon="carat-r" data-expanded-icon="carat-d">
                         <h1>
                             Pali e staffe
@@ -452,8 +430,7 @@
                             </li>
                         </ul>
                     </div>
-                    
-                    <div data-role="collapsible" data-collapsed="true" 
+                        <div data-role="collapsible" data-collapsed="true" 
                          data-collapsed-icon="carat-r" data-expanded-icon="carat-d">
                         <h1>
                             Pali e staffe controvento
@@ -484,9 +461,9 @@
                                 <input type="number" id="totUpwindBrackets3" min="0" />
                             </li>
                         </ul>                        
-                    </div>                    
+                    </div>    
+                    </div>
                 </div>
-            </div>
             <div data-role="footer" class="footer"  data-position="fixed" align="center" style="background:none !important; background-color: #f2f2f2 !important;">
                 <div style="line-height:25px; color:#0086cc;">7 di 7</div>
                 <a href="#" id="saveButton" class="button-confirm next-step" data-step="6">SALVA</a>
