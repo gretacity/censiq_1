@@ -227,12 +227,7 @@ var app = {
                 stepNotValidCallback(errors);
                 return false;
             }
-            if($.trim($('#streetNumber','#roadSignStep2Page').val()) == '')
-            {
-                errors.push('specificare Civico/Km');
-                stepNotValidCallback(errors);
-                return false;
-            }
+           
             stepValidCallback();
         } else if(stepIndex == app.STEP_3) {
             // Validate step 3
@@ -287,7 +282,7 @@ var app = {
                 app.save();
             }
              
-            console.log(step);
+            
         }, function(errors) {
             // Validation failed: display an error message if there is at least one
             if(Array.isArray(errors) && errors.length > 0) {
@@ -426,9 +421,10 @@ var app = {
         }
         
         // Loop into roadsigns
+         app.census.roadSign.signs=Array();
         $('#roadSignContainer div[data-roadsignno]').each(function() {
             var $container = $(this);
-            app.census.roadSign.signs=Array();
+           
             var signInfo = new RoadSign.SignInfo();
             
             // Front
@@ -451,7 +447,7 @@ var app = {
             signInfo.ordinanceNo = $('a label.roadsign-ordinance[data-changed="true"] span.roadsign-ordinance-no', $container).html() || '';                   // Ordinanza numero
             signInfo.ordinanceDate = $('a label.roadsign-ordinance[data-changed="true"] span.roadsign-ordinance-date', $container).html() || '';               // Data dell'ordinanza
             
-            app.census.roadSign.signs.push(signInfo);
+           
             
             // TODO Review
             // Add entries to the supportTableData object
@@ -461,6 +457,11 @@ var app = {
                 supportTableData.installers.push({'name': signInfo.installer});
             if((signInfo.owner || '') != '')
                 supportTableData.owners.push({'name': signInfo.owner});
+            
+            
+             app.census.roadSign.signs.push(signInfo);
+             
+             console.log(app.census.roadSign.signs);
         });
 
         // Add pole and brackets informations
