@@ -1071,14 +1071,18 @@ var app = {
                 var r = result[i];
                 if(r.id==category)
                 {
+                    alert("--"+rsn+"--");
                     var roadSignPanel = $('div[data-roadsignno="' + rsn + '"]');
                     $('#roadsign-signtypeid', roadSignPanel).val(r.id);
                     $('.roadsign-signtypename', roadSignPanel).html(r.nome);
-                    console.log("OK "+r.id+" "+r.nome);
                     break;
                 }    
             }    
         });
+        
+        
+        
+        
         var roadSign = null;
         for(var i in app._allRoadSigns) {
             if(app._allRoadSigns[i].id == signId) {
