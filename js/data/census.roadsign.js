@@ -402,9 +402,7 @@ data.roadSign = {
     
     getRoadSignTypes: function(completedCallback) {
         data.lookupTable({key: data.DATA_TYPES}, function(result) {
-           
-            completedCallback(result);
-            
+        completedCallback(result);
         });
     },
     // ss_pellicola
