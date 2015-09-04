@@ -23,6 +23,7 @@ var app = {
     // Application Constructor
     initialize: function() 
     {
+       
         // Custom fields used for localization (street , no/km)
         page.injector.injectPage('#roadSignStep3Page', '3pictures', {title: 'Segnaletica', footerText: '4 di 7',dataStep:'3'});
         page.injector.injectPage('#summaryPage', 'summary', {continueLink: '#roadSignStep0Page'});
@@ -88,11 +89,44 @@ var app = {
         $('#addRoadSignButton').on('click', app.addRoadSignPanel);
         
         
+         $('#roadSignStep6Page').on('pageshow', function(){
+             
+           
+            if($('#data_installazione').val()=='')
+            {    
+                console.log('++++++++++++++++++++++++++');
+                var now = new Date();
+                var day = ("0" + now.getDate()).slice(-2);
+                var month = ("0" + (now.getMonth() + 1)).slice(-2);
+                var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+                $('#data_installazione').val(today);
+                
+            }    
+        });
+        
+        
+        
         $('div[data-role="dialog"]').on('create', function() {
             app.pageOffsetTop = $(this).offset().top;
         });
         $('div[data-role="dialog"]').on('pagehide', function() {
             $.mobile.silentScroll(app.pageOffsetTop);
+        });
+        
+        $('#roadSignManufacturerPage').on('pageshow', function(){
+            if($('#roadSignManufacturerYear').val()=='')
+            {    
+                 var d= new Date();
+                $('#roadSignManufacturerYear').val(now.getFullYear());
+            }    
+        });
+        
+        $('#roadSignInstallerPage').on('pageshow', function(){
+            if($('#roadSignInstallationDate').val()=='')
+            {    
+                 var d= new Date();
+                $('#roadSignInstallationDate').val(now.getFullYear());
+            }    
         });
     },
     
@@ -358,7 +392,7 @@ var app = {
            });
     },
     save: function() {
-        
+        var d= new Date();
         // Form is valid, proceed with saving.
         // Disable save button
         $('#saveButton').addClass('ui-disabled');
@@ -440,7 +474,7 @@ var app = {
             signInfo.marking = $('input[type="radio"].roadsign-mark:checked', $container).val();                                    // Marchio [CE], [OM]ologato, []Non Omologato
             signInfo.manufacturer = $('a label.roadsign-manufacturer[data-changed="true"] span.roadsign-manufacturer-name', $container).html() || '';          // Ditta produttrice
             signInfo.manufacturerNo = $('a label.roadsign-manufacturer[data-changed="true"] span.roadsign-manufacturer-no', $container).html() || '';          // Numero autorizzazione ditta produttrice
-            signInfo.manufacturingYear = $('a label.roadsign-manufacturer[data-changed="true"] span.roadsign-manufacturer-year', $container).html() || '';     // Anno di produzione
+            signInfo.manufacturingYear = $('a label.roadsign-manufacturer[data-changed="true"] span.roadsign-manufacturer-year', $container).html() || now.getFullYear();     // Anno di produzione
             signInfo.installer = $('a label.roadsign-installer[data-changed="true"] span.roadsign-installer', $container).html() || '';                        // Azienda installatrice
             signInfo.installationDate = $('a label.roadsign-installer[data-changed="true"] span.roadsign-installation-date', $container).html() || '';         // Azienda installatrice
             signInfo.owner = $('a label.roadsign-owner[data-changed="true"]', $container).html() || '';                                                        // Proprietario
@@ -870,7 +904,7 @@ var app = {
     _roadSignCounter: 0,    // Counter increased each time a new panel is added
     _currentRoadSign: null, // Current roadsign in editing
     addRoadSignPanel: function() {
-        
+      
         var count = ++app._roadSignCounter;
         
         var $roadSignPanel = $('<div data-roadsignno="' + count + '" data-inset="false" data-role="collapsible" data-collapsed="true" data-collapsed-icon="carat-r" data-expanded-icon="carat-d" data-theme="b">' +
@@ -881,6 +915,9 @@ var app = {
                                     '<ul data-role="listview"></ul>' +
                                 '</div>');
         $('#roadSignContainer').append($roadSignPanel);
+        
+        
+        
         $roadSignPanel.collapsible({collapsed: false});
         $roadSignPanel.trigger("create");
         
@@ -942,7 +979,6 @@ var app = {
                         '</li>');
         
         $listview.listview("refresh");
-        
         $('#startMessage').hide();
     },
     removeRoadSignPanel: function(index) {
@@ -967,23 +1003,8 @@ var app = {
             transition: 'pop'
         });
         $("#searchRoadSignText").val('').focus();
-        
-        
-        /*
-        if($('#roadsign-signtypeid',roadSignPanel).val()!=0 )
-        {    
-            app._currentRoadSign = signIndex;
-            $.mobile.changePage('#roadSignFinder', {
-                transition: 'pop'
-            });
-            $("#searchRoadSignText").val('').focus();
-        }
-        else
-        {
-           helper.alert('Seleziona il tipo di segnale',null,'Cerca segnale');
-        }
-        */
     },
+    
     searchRoadSign: function() {
         
         var MAX_RESULTS = 20;
@@ -1061,6 +1082,7 @@ var app = {
             }
         });
     },
+    
     setRoadSign:function(signId, category) {
         var rsn=app._currentRoadSign;
         data.roadSign.getRoadSignTypes(function(result)
@@ -1071,19 +1093,13 @@ var app = {
                 var r = result[i];
                 if(r.id==category)
                 {
-                  
                     var roadSignPanel = $('div[data-roadsignno="' + rsn + '"]');
                     $('#roadsign-signtypeid', roadSignPanel).val(r.id);
                     $('.roadsign-signtypename', roadSignPanel).html(r.nome);
-                   
                     break;
                 }    
             }    
         });
-        
-        
-        
-        
         var roadSign = null;
         for(var i in app._allRoadSigns) {
             if(app._allRoadSigns[i].id == signId) {
@@ -1258,6 +1274,7 @@ var app = {
         $.mobile.changePage('#roadSignManufacturerPage', {
             transition: 'pop'
         });
+        
     },
     setRoadSignManufacturer: function(signManufacturer) {
         //
