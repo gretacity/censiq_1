@@ -25,7 +25,7 @@ var app = {
     {
        
         // Custom fields used for localization (street , no/km)
-        page.injector.injectPage('#roadSignStep3Page', '3pictures', {title: 'Segnaletica', footerText: '4 di 7',dataStep:'3'});
+        page.injector.injectPage('#roadSignStep3Page', '3pictures', {title: 'Segnaletica', footerText: '4 di 6',dataStep:'3'});
         page.injector.injectPage('#summaryPage', 'summary', {continueLink: '#roadSignStep0Page'});
         
         // Road Sign shapes
@@ -89,7 +89,7 @@ var app = {
         $('#addRoadSignButton').on('click', app.addRoadSignPanel);
         
         
-         $('#roadSignStep6Page').on('pageshow', function(){
+         $('#roadSignStep4Page').on('pageshow', function(){
              
            
             if($('#data_installazione').val()=='')
@@ -117,16 +117,30 @@ var app = {
             if($('#roadSignManufacturerYear').val()=='')
             {    
                  var d= new Date();
-                $('#roadSignManufacturerYear').val(now.getFullYear());
-            }    
+                $('#roadSignManufacturerYear').val(d.getFullYear());
+            }
+            if($('#ditta_produttrice').val()!='')
+            {
+                
+            }    $('#roadSignManufacturerName').val($('#ditta_produttrice').val());
+            
+            
+           
         });
         
         $('#roadSignInstallerPage').on('pageshow', function(){
             if($('#roadSignInstallationDate').val()=='')
             {    
-                 var d= new Date();
-                $('#roadSignInstallationDate').val(now.getFullYear());
-            }    
+                var d= new Date();
+                $('#roadSignInstallationDate').val(d.getFullYear());
+            }
+            
+            if($('#ditta_installatrice').val()!='')
+            {
+                
+            }    $('#roadSignInstallerName').val($('#ditta_installatrice').val());
+            
+            
         });
     },
     
@@ -305,14 +319,11 @@ var app = {
                 
                 $.mobile.changePage('#roadSignStep3Page');
             } else if(step == app.STEP_3) {
-                $.mobile.changePage('#roadSignStep5Page');
+                $.mobile.changePage('#roadSignStep4Page');
             } else if(step == app.STEP_4) {
                 $.mobile.changePage('#roadSignStep5Page');
             }
             else if(step == app.STEP_5) {
-                $.mobile.changePage('#roadSignStep6Page');
-            }
-            else if(step == app.STEP_6) {
                 app.save();
             }
              
@@ -348,7 +359,7 @@ var app = {
         } else if(step == app.STEP_4) {
             $.mobile.changePage('#roadSignStep3Page');
         } else if(step == app.STEP_5) {
-            $.mobile.changePage('#roadSignStep3Page');
+            $.mobile.changePage('#roadSignStep4Page');
         }
         else if(step == app.STEP_6) {
             $.mobile.changePage('#roadSignStep5Page');
@@ -474,7 +485,7 @@ var app = {
             signInfo.marking = $('input[type="radio"].roadsign-mark:checked', $container).val();                                    // Marchio [CE], [OM]ologato, []Non Omologato
             signInfo.manufacturer = $('a label.roadsign-manufacturer[data-changed="true"] span.roadsign-manufacturer-name', $container).html() || '';          // Ditta produttrice
             signInfo.manufacturerNo = $('a label.roadsign-manufacturer[data-changed="true"] span.roadsign-manufacturer-no', $container).html() || '';          // Numero autorizzazione ditta produttrice
-            signInfo.manufacturingYear = $('a label.roadsign-manufacturer[data-changed="true"] span.roadsign-manufacturer-year', $container).html() || now.getFullYear();     // Anno di produzione
+            signInfo.manufacturingYear = $('a label.roadsign-manufacturer[data-changed="true"] span.roadsign-manufacturer-year', $container).html() || d.getFullYear();     // Anno di produzione
             signInfo.installer = $('a label.roadsign-installer[data-changed="true"] span.roadsign-installer', $container).html() || '';                        // Azienda installatrice
             signInfo.installationDate = $('a label.roadsign-installer[data-changed="true"] span.roadsign-installation-date', $container).html() || '';         // Azienda installatrice
             signInfo.owner = $('a label.roadsign-owner[data-changed="true"]', $container).html() || '';                                                        // Proprietario
