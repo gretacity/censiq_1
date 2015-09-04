@@ -1075,7 +1075,7 @@ var app = {
                     var roadSignPanel = $('div[data-roadsignno="' + rsn + '"]');
                     $('#roadsign-signtypeid', roadSignPanel).val(r.id);
                     $('.roadsign-signtypename', roadSignPanel).html(r.nome);
-                      window.alert("--"+rsn+"--");
+                   
                     break;
                 }    
             }    
