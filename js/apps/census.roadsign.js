@@ -1071,10 +1071,11 @@ var app = {
                 var r = result[i];
                 if(r.id==category)
                 {
-                    alert("--"+rsn+"--");
+                  
                     var roadSignPanel = $('div[data-roadsignno="' + rsn + '"]');
                     $('#roadsign-signtypeid', roadSignPanel).val(r.id);
                     $('.roadsign-signtypename', roadSignPanel).html(r.nome);
+                      window.alert("--"+rsn+"--");
                     break;
                 }    
             }    
