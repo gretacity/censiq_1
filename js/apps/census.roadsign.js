@@ -184,9 +184,18 @@ var app = {
                     html+='<div id="cls_'+obj.id+'">'+
                             '<img  onclick="app.updateItems(\''+qrCode+'\')" src="img/update.png" style="float:right;margin-right:10px; height:32px;width: 32px">'+
                             '</div>';
+                    if(obj.roadSign.signs.lenght>0)
+                    {
                     html+='<div style="margin-right:5px;overflow:hidden;float:left">'+
                             '<img class="img'+obj.roadSign.signs[0].roadSignId+'"  style="width:50px;height:50px;">'+
                             '</div>';
+                    }
+                    else
+                    {
+                        html+='<div style="margin-right:5px;overflow:hidden;float:left;width:50px;height:50px;">'+
+                            
+                            '</div>';
+                    }    
                     html += '<div style="overflow:hidden;float:left"><b>'+qrCode+'</b><br>';
                     html += obj.roadSign.street+' '+obj.roadSign.streetNumber+' '+obj.roadSign.comune+'<br>';
                             '</div></li>';
