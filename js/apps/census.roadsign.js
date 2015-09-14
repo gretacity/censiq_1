@@ -569,7 +569,7 @@ var app = {
         $('#qrCode').val(config.QR_CODE_TEST);
         
         // Move to the last page of the wizard
-        $.mobile.changePage('#summaryPage', {
+        $.mobile.changePage('#ElencoRoadsignPage', {
             transition: 'slide'
         });
     },
@@ -1389,4 +1389,4 @@ var app = {
             reverse: true,
         });
     }
-};
+}; 
