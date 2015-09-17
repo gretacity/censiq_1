@@ -120,18 +120,18 @@
                     <div data-role="main" class="ui-content" >
                         
                         
-                        <div style="width:50%;float:left;overflow:hidden">
+                        <div style="width:40%;float:left;overflow:hidden">
                             <div>
-                                <a style="height:32px;width: 100%; float:right;" href="#" class="ui-btn ui-car ui-icon-plus ui-btn-icon-left  ui-nodisc-icon ">						
+                                <a style="line-height:32px;height:32px;width: 100%; float:right;" href="#" class="ui-btn ui-car ui-icon-plus ui-btn-icon-left  ui-nodisc-icon ">						
                                         Supporto
                                 </a>
                             </div>  
                             <div>
-                                  <ul data-role="listview" data-inset="false" data-theme="b" style="margin:-8px 1em;">
+                                  <ul data-role="listview" data-inset="false" data-theme="b">
                                     <li style="border-bottom:0 !important">
 
                                             <select name="oldpole">
-                                                <option value="0">Rimozione e sostituzione</option>
+                                                <option value="0">Sostituzione</option>
                                                 <option value="1">Rimozione</option>
                                                 <option value="2">Riutilizzo</option>
                                             </select>
@@ -139,9 +139,8 @@
                                     </li>
                                 </ul>       
                             </div>  
-                            
                             <div>
-                                <a style="height:32px;width: 100%; float:right;" href="#" class="ui-btn ui-car ui-icon-plus ui-btn-icon-left  ui-nodisc-icon ">						
+                                <a style="line-height:32px;height:32px;width: 100%; float:right;" href="#" class="ui-btn ui-car ui-icon-plus ui-btn-icon-left  ui-nodisc-icon ">						
                                         Foto
                                 </a>
                             </div>
@@ -149,7 +148,7 @@
 
                                 <ul data-role="listview" data-inset="false" data-theme="b">
                                         <li data-role="list-divider">
-                                            <h4>Vista Frontale</h4>
+                                            <h4>Foto 1</h4>
                                         </li>
                                         <li>
                                             <div style="text-align:center;padding:0;">
@@ -161,7 +160,7 @@
                                             </div>
                                         </li>
                                         <li data-role="list-divider">
-                                            <h4>Vista Retro</h4>
+                                            <h4>Foto 2</h4>
                                         </li>
                                         <li>
                                             <div style="text-align:center;">
@@ -173,7 +172,7 @@
                                             </div>
                                         </li>
                                         <li data-role="list-divider">
-                                            <h4>Vista Prospettiva</h4>
+                                            <h4>Foto 3</h4>
                                         </li>
                                         <li>
                                             <div style="text-align:center;">
@@ -190,14 +189,22 @@
 
                             </div>
                         </div>
-                        <div style="width:50%;float:left;overflow:hidden;" >
+                        <div style="width:60%;float:left;overflow:hidden;" >
                             <div style="overflow:hidden">
-                                    <a style="width: 100%; float:right;" href="#" id="addRoadSignButton" class="ui-btn ui-car ui-icon-plus ui-btn-icon-left  ui-nodisc-icon ">						
-                                            Aggiungi cartello
+                                    <a style="height:32px;line-height:32px;width: 100%; float:right;" href="#" id="addRoadSignButton" class="ui-btn ui-car ui-icon-plus ui-btn-icon-left  ui-nodisc-icon ">						
+                                            Cartelli
                                             <img src="img/add_car.png" style="max-width: 3em; float: right; width: 2em;">
                                     </a>
                             </div>
-                            <div id="roadSignContainer" data-role="collapsible-set" data-collapsed="true" data-theme="b"></div>
+                            <div id="roadSignContainer" data-role="collapsible-set" data-collapsed="true" data-theme="b">
+                                <div id="exp" style="text-align:center" style="margin-top:2em">
+                                   
+                                    <a style="height:32px;line-height:32px;border:0;text-decoration: none;" href="#" id="addRoadSignButtonBIG"><img src="img/add_car.png" ></a>
+                                    <br>
+                                    
+                                    Aggiungi
+                                </div>
+                            </div>
                         </div>    
                 </div>
             <div data-role="footer" class="footer"  data-position="fixed" align="center" style="background:none !important; background-color: #f2f2f2 !important;">

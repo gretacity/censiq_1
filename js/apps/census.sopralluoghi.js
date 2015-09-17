@@ -64,6 +64,7 @@ var app = {
         
         var $page3 = $('#foto');
         $('#addRoadSignButton').on('click', app.addRoadSignPanel);
+        $('#addRoadSignButtonBIG').on('click', app.addRoadSignPanel);
         
         $('div[data-role="dialog"]').on('create', function() {
             app.pageOffsetTop = $(this).offset().top;
@@ -828,6 +829,9 @@ var app = {
     _roadSignCounter: 0,    // Counter increased each time a new panel is added
     _currentRoadSign: null, // Current roadsign in editing
     addRoadSignPanel: function() {
+        
+        
+        $("#exp").remove();
       
         var count = ++app._roadSignCounter;
         
@@ -853,7 +857,7 @@ var app = {
                                 '<!--img src="img/Segnali/cod_1.svg" /-->' +
                                 '<input type="hidden" id="roadsign-signtypeid" value="0" />' +
                                 '<p class="roadsign-type"></p>' +
-                                '<h1 class="roadsign-signtypename">Seleziona il tipo di segnale</h1>' +
+                                '<h1 class="roadsign-signtypename">Tipologia</h1>' +
                             '</a>' +
                         '</li>');
         // ROADSIGN PICTURE
@@ -862,17 +866,17 @@ var app = {
                                 '<!--img src="img/Segnali/cod_1.svg" /-->' +
                                 '<input type="hidden" class="roadsign-signid" />' +
                                 '<p class="roadsign-signdescr"></p>' +
-                                '<h1 class="roadsign-signname">Tocca per selezionare un segnale</h1>' +
+                                '<h1 class="roadsign-signname">Figura</h1>' +
                             '</a>' +
                         '</li>');
         // SIZE
-        $listview.append('<li><a href="javascript:app.openRoadSignSizePanel(' + count + ')">Dimensione <label class="roadsign-size">Specifica la dimensione</label></a></li>');
+        $listview.append('<li><a href="javascript:app.openRoadSignSizePanel(' + count + ')">Dimensione</a></li>');
         // TYPE
-        $listview.append('<li><a href="javascript:app.openRoadSignTypePanel(' + count + ')">Tipologia <label class="roadsign-type">Specifica la tipologia</label></a></li>');
+        $listview.append('<li><a href="javascript:app.openRoadSignTypePanel(' + count + ')">Tipologia</a></li>');
         // SUPPORT
-        $listview.append('<li><a href="javascript:app.openRoadSignSupportPanel(' + count + ')">Supporto <label class="roadsign-support">Specifica il supporto</label></a></li>');
+        $listview.append('<li><a href="javascript:app.openRoadSignSupportPanel(' + count + ')">Supporto </a></li>');
         // FILM
-        $listview.append('<li><a href="javascript:app.openRoadSignFilmPanel(' + count + ')">Pellicola <label class="roadsign-film">Specifica la pellicola</label></a></li>');
+        $listview.append('<li><a href="javascript:app.openRoadSignFilmPanel(' + count + ')">Pellicola</a></li>');
         // NOTE
         $('<li data-theme="b"><a href="#" class="textarea"><textarea class="roadsign-notes" placeholder="Note"></textarea></a></li>').appendTo($listview).trigger('create');
         // REMOVE BUTTON

@@ -65,3 +65,9 @@ a.textarea:after
     border-top: 0!important;
     border-bottom: 0 !important;
 }
+
+#sopralluoghiStep3Page .ui-btn
+{
+    font-size:14px;
+    
+}
