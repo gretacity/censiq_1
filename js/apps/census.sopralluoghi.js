@@ -16,8 +16,8 @@ var app = {
     ACQ:false,
     SELECTED_QRCODE: null,
     MAP:false,
-    census: new Census(CensusTypes.roadSign),
-    picturesPageId: 'roadSignStep3Page',
+    census: new Census(CensusTypes.sopralluoghi),
+    picturesPageId: 'foto',
     pageOffsetTop: 0,
     
     // Application Constructor
@@ -25,23 +25,12 @@ var app = {
     {
        
         // Custom fields used for localization (street , no/km)
-        page.injector.injectPage('#roadSignStep3Page', '3pictures', {title: 'Segnaletica', footerText: '4 di 6',dataStep:'3'});
-        page.injector.injectPage('#summaryPage', 'summary', {continueLink: '#roadSignStep0Page'});
+        //page.injector.injectPage('#summaryPage', 'summary', {continueLink: '#sopralluoghiStep0Page'});
         
         // Road Sign shapes
-        var html = '<option>Qualsiasi forma</option>';
-        var roadSignShapes = data.roadSign.getRoadSignShapes();
-        for(var i in roadSignShapes) {
-            html += '<option>' + roadSignShapes[i].name + '</option>';
-        }
-        $('#roadSignShapeList').html(html);
         
-        // Bracket diameters
-        html = '<option></option>';
-        var bracketDiameters = data.roadSign.getBracketDiameters();
-        for(var i in bracketDiameters) {
-            html += '<option>' + bracketDiameters[i] + '</option>';
-        }
+        var html='';
+        
         $('#poleDiameter').html(html);
         $('#upwindPoleDiameter').html(html);
         
@@ -57,53 +46,24 @@ var app = {
     bindEvents: function() {
         
         document.addEventListener('deviceready', this.onDeviceReady, false);
-        $('#ElencoRoadsignPage').on('pageshow', this.loadElenco);
+        $('#ElencoSopralluoghiPage').on('pageshow', this.loadElenco);
         $('#newButton').on('click', function(){
-            $.mobile.changePage('#roadSignStep0Page', {
+            $.mobile.changePage('#sopralluoghiStep1Page', {
                 transition: 'slide',
                 reverse: false,
                 changeHash: false
                 });
         });
-        $('#acquireQrCodePointButton', $("#localizeroadSignPage")).on('click', this.acquireQrCodePoint);
-        $('#roadSignStep1Page').on('pageshow', this.showMapPositionPage);
-        $('#roadSignStep2Page').on('pageshow',  this.acquireCoords);
+        $('#sopralluoghiStep1Page').on('pageshow', this.showMapPositionPage);
+        $('#sopralluoghiStep2Page').on('pageshow',  this.acquireCoords);
         
         // Force onDeviceReady if it's a browser
         if(config.EMULATE_ON_BROWSER) this.onDeviceReady();
         $('.prev-step').on('click', this.previousStep);
         $('.next-step').on('click', this.stepCompleted);
-        // Step 0
-        var $page0 = $('#roadSignStep0Page');
-        $('#acquireQrCodeButton', $page0).on('click', this.acquireQrCode);
         
-        // Step3
-        var $page3 = $('#roadSignStep3Page');
-        $('a[data-addview]', $page3).on('click', this.acquirePhoto);
-        $('a[data-removeview]', $page3).on('click', this.removePhoto);
-        //$('a[data-showview]', $page1).on('click', this.showPhotoDialog);
-        $('#photoPage a').on('tap', this.hidePhotoDialog);
-        // Step4
-        
-        var $page5 = $('#roadSignStep5Page');
+        var $page3 = $('#foto');
         $('#addRoadSignButton').on('click', app.addRoadSignPanel);
-        
-        
-         $('#roadSignStep4Page').on('pageshow', function(){
-             
-           
-            if($('#data_installazione').val()=='')
-            {    
-                var now = new Date();
-                var day = ("0" + now.getDate()).slice(-2);
-                var month = ("0" + (now.getMonth() + 1)).slice(-2);
-                var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
-                $('#data_installazione').val(today);
-                
-            }    
-        });
-        
-        
         
         $('div[data-role="dialog"]').on('create', function() {
             app.pageOffsetTop = $(this).offset().top;
@@ -112,45 +72,10 @@ var app = {
             $.mobile.silentScroll(app.pageOffsetTop);
         });
         
-        $('#roadSignManufacturerPage').on('pageshow', function(){
-            if($('#roadSignManufacturerYear').val()=='')
-            {    
-                 var d= new Date();
-                $('#roadSignManufacturerYear').val(d.getFullYear());
-            }
-            if($('#ditta_produttrice').val()!='')
-            {
-                
-            }    $('#roadSignManufacturerName').val($('#ditta_produttrice').val());
-            
-            
-           
-        });
         
-        $('#roadSignInstallerPage').on('pageshow', function(){
-            if($('#roadSignInstallationDate').val()=='')
-            {    
-                var d= new Date();
-                $('#roadSignInstallationDate').val(d.getFullYear());
-            }
-            
-            if($('#ditta_installatrice').val()!='')
-            {
-                
-            }    $('#roadSignInstallerName').val($('#ditta_installatrice').val());
-            
-            
-        });
     },
-    
-    // deviceready Event Handler
-    //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
-        $('#qrCode').val(config.QR_CODE_TEST);
-        // For Android devices
         document.addEventListener("backbutton", function(e) {
             e.preventDefault();
             //window.location.href = 'index.html';
@@ -172,7 +97,7 @@ var app = {
             for(var i = 0; i < itemCount; i++) 
             {
                 var row = result.rows.item(i);
-                if(row.entity_type==2 )
+                if(row.entity_type==4 )
                 {
                     //console.log("ROW",row);
                     var obj = data.deserialize(row, row.entity_type);
@@ -265,19 +190,19 @@ var app = {
             // Validate step 1
             stepValidCallback();
         } else if(stepIndex == app.STEP_2) {
-            if($.trim($('#comune','#roadSignStep2Page').val()) == '')
+            if($.trim($('#comune','#sopralluoghiStep2Page').val()) == '')
             {
                 errors.push('specificare Comune');
                 stepNotValidCallback(errors);
                 return false;
             }
-            if($.trim($('#provincia','#roadSignStep2Page').val()) == '')
+            if($.trim($('#provincia','#sopralluoghiStep2Page').val()) == '')
             {
                 errors.push('specificare Provincia');
                 stepNotValidCallback(errors);
                 return false;
             }
-            if($.trim($('#street','#roadSignStep2Page').val()) == '')
+            if($.trim($('#street','#sopralluoghiStep2Page').val()) == '')
             {
                 errors.push('specificare Strada/Via');
                 stepNotValidCallback(errors);
@@ -306,32 +231,31 @@ var app = {
         }
     },
     stepStarted: function() {},
-    stepCompleted: function() {
-        
+    stepCompleted: function()
+    {
         // Current step
         var step = $(this).attr('data-step');
-        
         // Valitate step once completed
-        app.validateStep(step, function() {
-            // Success: move forward
-            if(step == app.STEP_0) {
-                $.mobile.changePage('#roadSignStep1Page');
-            } else if(step == app.STEP_1) {
+        app.validateStep(step, function() 
+        {
+           // Success: move forward
+           if(step == app.STEP_1)
+           {
                 try
                 {
                     clearInterval(app.ID_GPS);
                 }
                 catch(e){}
-                $.mobile.changePage('#roadSignStep2Page');
-            } else if(step == app.STEP_2) {
+                $.mobile.changePage('#sopralluoghiStep2Page');
+            } 
+            else if(step == app.STEP_2)
+            {
                 
-                $.mobile.changePage('#roadSignStep3Page');
-            } else if(step == app.STEP_3) {
-                $.mobile.changePage('#roadSignStep4Page');
-            } else if(step == app.STEP_4) {
-                $.mobile.changePage('#roadSignStep5Page');
-            }
-            else if(step == app.STEP_5) {
+                $.mobile.changePage('#sopralluoghiStep3Page');
+            } 
+           
+            else if(step == app.STEP_3)
+            {
                 app.save();
             }
              
@@ -348,37 +272,12 @@ var app = {
         // Current step
         var step = $(this).attr('data-step');
         
-        if(step == app.STEP_0)
-        {
-            try
-            {
-                clearInterval(app.ID_GPS);
-            }
-            catch(e){}
-            //$.mobile.changePage('index.html#censusTypePage');
-             $.mobile.changePage('#ElencoRoadsignPage');
-        } else if(step == app.STEP_1) {
-            $.mobile.changePage('#roadSignStep0Page');
-        } else if(step == app.STEP_2) {
-            $.mobile.changePage('#roadSignStep1Page');
+         if(step == app.STEP_2) {
+            $.mobile.changePage('#sopralluoghiStep1Page');
         } else if(step == app.STEP_3) {
             
-            $.mobile.changePage('#roadSignStep2Page');
-        } else if(step == app.STEP_4) {
-            $.mobile.changePage('#roadSignStep3Page');
-        } else if(step == app.STEP_5) {
-            $.mobile.changePage('#roadSignStep4Page');
-        }
-        else if(step == app.STEP_6) {
-            $.mobile.changePage('#roadSignStep5Page');
-        }
-        else if(step == app.STEP_10) {
-             $.mobile.changePage('#ElencoRoadsignPage', {
-               transition: 'slide',
-               reverse: false,
-               changeHash: false
-           });
-        }    
+            $.mobile.changePage('#sopralluoghiStep2Page');
+        }  
     },
     updateCode: function()
     {
@@ -404,7 +303,7 @@ var app = {
                 }
             });
         }
-        $.mobile.changePage('#ElencoRoadsignPage', {
+        $.mobile.changePage('#ElencoSopralluoghiPage', {
                transition: 'slide',
                reverse: false,
                changeHash: false
@@ -465,7 +364,7 @@ var app = {
         var imageKeys = ['front', 'back', 'perspective'];
         for(var i in imageKeys) {
             var k = imageKeys[i];
-            var imageSrc = $('#roadSignStep3Page a[data-viewtype="' + k + '"][data-showview] img').attr('src');
+            var imageSrc = $('#sopralluoghiStep3Page a[data-viewtype="' + k + '"][data-showview] img').attr('src');
             if(imageSrc != '') {
                 // Remove this from src attribute:
                 // data:image/jpeg;base64,
@@ -541,22 +440,22 @@ var app = {
         
         
         // Once saved the census, empty fields of all the steps
-        var $page = $('#roadSignStep0Page');
+        var $page = $('#sopralluoghiStep0Page');
         $('input[type="text"]', $page).val('');
         $('input[type="hidden"]', $page).val('');
         $('#geoStatusText', $page).html('Latitudine e longitudine');
         $('#geoStatusTitle', $page).html('Ottieni');
         $('#openMapPanel', $page).hide();
-        var $page = $('#roadSignStep3Page');
+        var $page = $('#sopralluoghiStep3Page');
         $('input[type="text"]', $page).val('');
         $('input[type="hidden"]', $page).val('');
         app.removePhoto('front');
         app.removePhoto('back');
         app.removePhoto('perspective');
-        var $page = $('#roadSignStep2Page');
+        var $page = $('#sopralluoghiStep2Page');
         $('#roadSignContainer', $page).empty();
         $('#startMessage', $page).show();
-        var $page = $('#roadSignStep3Page');
+        var $page = $('#sopralluoghiStep3Page');
         $('input[type="text"]', $page).val('');
         $('input[type="hidden"]', $page).val('');
         $('textarea', $page).val('');
@@ -568,7 +467,7 @@ var app = {
         $('#qrCode').val(config.QR_CODE_TEST);
         
         // Move to the last page of the wizard
-        $.mobile.changePage('#ElencoRoadsignPage', {
+        $.mobile.changePage('#ElencoSopralluoghiPage', {
             transition: 'slide'
         });
     },
@@ -673,8 +572,11 @@ var app = {
         {
             clearInterval(app.ID_GPS);
         }
+       
+        //if(jQuery.mobile.path.getLocation().indexOf('sopralluoghiStep1Page')>0)
         
-        if(jQuery.mobile.path.getLocation().indexOf('roadSignStep1Page')>0)
+     
+        if($('#map_0').length>0)
         {
             if(app.ACQ_GPS)
             {    
@@ -789,7 +691,10 @@ var app = {
                 }    
             }
             catch(e)
-            {}
+            {
+                  
+                
+            }
             app.readGPS();
         }
         else
@@ -802,10 +707,10 @@ var app = {
                 }
                 catch(e)
                 {
-
+                    console.log(e);
                 }
             }
-            app.readGPS();
+            
         }    
     },
     
@@ -903,7 +808,7 @@ var app = {
     },
     closeListDialog: function() {
         app._currentRoadSign = null;
-        $.mobile.changePage('#roadSignStep5Page', {
+        $.mobile.changePage('#sopralluoghiStep5Page', {
             reverse: true,
         });
     },
@@ -917,7 +822,7 @@ var app = {
     
     
     /***************************************************************
-     *  ROADSIGN PANEL
+     *  CENSIMENTI
      */
     _allRoadSigns: null,    // Used to perform search
     _roadSignCounter: 0,    // Counter increased each time a new panel is added
@@ -929,7 +834,7 @@ var app = {
         var $roadSignPanel = $('<div data-roadsignno="' + count + '" data-inset="false" data-role="collapsible" data-collapsed="true" data-collapsed-icon="carat-r" data-expanded-icon="carat-d" data-theme="b">' +
                                     '<h1>' +
                                         '<img src="" style="height:40px" class="roadsign-picture" /> ' +
-                                        '<span>Nuovo Cartello</span>' +
+                                        '<span>Nuovo Cartello </span>' +
                                     '</h1>' +
                                     '<ul data-role="listview"></ul>' +
                                 '</div>');
@@ -966,39 +871,8 @@ var app = {
         $listview.append('<li><a href="javascript:app.openRoadSignSupportPanel(' + count + ')">Supporto <label class="roadsign-support">Specifica il supporto</label></a></li>');
         // FILM
         $listview.append('<li><a href="javascript:app.openRoadSignFilmPanel(' + count + ')">Pellicola <label class="roadsign-film">Specifica la pellicola</label></a></li>');
-        // MAINTENANCE
-        $listview.append('<li><a href="javascript:app.openRoadSignMaintenancePanel(' + count + ')">Manutenzione <label class="roadsign-maintenance">Specifica la manutenzione</label></a></li>');
         // NOTE
-        
-        
-        
         $('<li data-theme="b"><a href="#" class="textarea"><textarea class="roadsign-notes" placeholder="Note"></textarea></a></li>').appendTo($listview).trigger('create');
-        
-        
-        
-        
-        // MARKING
-        $('<li data-theme="b">' + 
-         '<input type="radio" id="roadSignMarking1_' + count + '" name="signmarking_' + count + '" class="roadsign-mark" value="' + RoadSign.CE_MARK + '" />' +
-         '<label for="roadSignMarking1_' + count + '">Marchio CE</label>' +
-         '<input type="radio" id="roadSignMarking2_' + count + '" name="signmarking_' + count + '" class="roadsign-mark" value="' + RoadSign.APPROVED_MARK + '" />' +
-         '<label for="roadSignMarking2_' + count + '">Omologato</label>' +
-         '<input type="radio" id="roadSignMarking3_' + count + '" name="signmarking_' + count + '" class="roadsign-mark" value="' + RoadSign.NO_MARK + '" checked />' +
-         '<label for="roadSignMarking3_' + count + '">Non omologato</label>' +
-         '</li>').appendTo($listview).trigger('create');
-        
-        // MANUFACTURER
-        $listview.append('<li><a href="javascript:app.openRoadSignManufacturerPanel(' + count + ')">Produttore <label class="roadsign-manufacturer">Specifica l\'azienda produttrice</label></a></li>');
-        
-        // INSTALLER
-        $listview.append('<li><a href="javascript:app.openRoadSignInstallerPanel(' + count + ')">Installatore <label class="roadsign-installer">Specifica la ditta installatrice</label></a></li>');
-        
-        // OWNER
-        $listview.append('<li><a href="javascript:app.openRoadSignOwnerPanel(' + count + ')">Proprietario <label class="roadsign-owner">Specifica l\'ente proprietario</label></a></li>');
-        
-        // ORDINANCE
-        $listview.append('<li><a href="javascript:app.openRoadSignOrdinancePanel(' + count + ')">Ordinanza <label class="roadsign-ordinance">Specifica l\'ordinanza</label></a></li>');
-        
         // REMOVE BUTTON
         $listview.append('<li data-role="list-divider" data-theme="b">' +
                             '<a href="javascript:app.removeRoadSignPanel(' + app._roadSignCounter + ')" class="ui-btn ui-icon-delete ui-btn-icon-right">Rimuovi cartello</a>' +
@@ -1151,7 +1025,7 @@ var app = {
         app._currentRoadSign = null;
         $('#roadSignList').empty().listview("refresh");
         //$.mobile.back();
-        $.mobile.changePage('#roadSignStep5Page', {
+        $.mobile.changePage('#sopralluoghiStep5Page', {
             transition: 'pop',
             reverse: true,
         });
@@ -1321,7 +1195,7 @@ var app = {
     },
     closeRoadSignManufacturerPanel: function() {
         app._currentRoadSign = null;
-        $.mobile.changePage('#roadSignStep5Page', {
+        $.mobile.changePage('#sopralluoghiStep5Page', {
             transition: 'pop',
             reverse: true,
         });
@@ -1345,7 +1219,7 @@ var app = {
     },
     closeRoadSignInstallerPanel: function() {
         app._currentRoadSign = null;
-        $.mobile.changePage('#roadSignStep5Page', {
+        $.mobile.changePage('#sopralluoghiStep5Page', {
             transition: 'pop',
             reverse: true,
         });
@@ -1366,7 +1240,7 @@ var app = {
     },
     closeRoadSignOwnerPanel: function() {
         app._currentRoadSign = null;
-        $.mobile.changePage('#roadSignStep5Page', {
+        $.mobile.changePage('#sopralluoghiStep5Page', {
             transition: 'pop',
             reverse: true,
         });
@@ -1390,7 +1264,7 @@ var app = {
     },
     closeRoadSignOrdinancePanel: function() {
         app._currentRoadSign = null;
-        $.mobile.changePage('#roadSignStep5Page', {
+        $.mobile.changePage('#sopralluoghiStep5Page', {
             transition: 'pop',
             reverse: true,
         });

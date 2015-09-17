@@ -50,3 +50,18 @@ li.button
     overflow: hidden !important;
     margin-bottom: 10px !important;
 }
+
+
+a.textarea:after
+{
+    background-image: none !important;
+    display:none;
+}
+
+#sopralluoghiStep3Page .ui-collapsible-set,
+#sopralluoghiStep3Page .ui-collapsible:not(.ui-collapsible-inset), 
+#sopralluoghiStep3Page .ui-collapsible-heading .ui-btn
+{
+    border-top: 0!important;
+    border-bottom: 0 !important;
+}

@@ -15,7 +15,13 @@ var data = {
                 //console.log("Guardrail-data",data);
                 handler = data.guardrail;
                 //console.log("Guardrail-Handler",handler);
-                break;
+            break;
+            case CensusTypes.sopralluoghi:
+                //console.log("Guardrail-data",data);
+                handler = data.sopralluoghi;
+                //console.log("Guardrail-Handler",handler);
+            break;
+            
             default:
                 throw 'Entity type not allowed';
                 return;
@@ -28,6 +34,9 @@ var data = {
     },
     
     deserialize: function(serialized, entityType) {
+        
+        console.log(entityType);
+        
         return data._getEntityHandler(entityType).deserialize(serialized);
     },
     
@@ -89,6 +98,15 @@ var data = {
             tx.executeSql("drop table rs_types");
             tx.executeSql("drop table gr_censimento_guardrail");
             tx.executeSql("drop table gr_censimento_info");
+            
+            
+            
+            
+            tx.executeSql("drop table sp_sopralluoghi_info");
+            tx.executeSql("drop table sp_sopralluoghi_cartello");
+        
+            
+            
             console.log('Table dropped');
         });
     },
@@ -133,6 +151,9 @@ var data = {
                     tx.executeSql("create table if not exists rs_manufacturers (name text primary key, auth_no text)");
                     tx.executeSql("create table if not exists rs_installers (name text primary key)");
                     tx.executeSql("create table if not exists rs_owners (name text primary key)");
+                    
+                    
+                    
                  }, 
                  function(error) {
                     if(errorCallback != null) errorCallback(error);

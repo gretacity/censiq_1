@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>CensiQ</title>
+        <!--
+        <link rel="stylesheet" href="js/jquery.mobile-1.4.2/jquery.mobile-1.4.2.min.css" >
+        -->
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/themes/q.min.css" />
+        <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
+        <link rel="stylesheet" href="js/jquery.mobile-1.4.2/jquery.mobile.structure-1.4.2.min.css" />
+        <style>
+            .roadsign-picture {
+                background:url('img/roadsign.png') center no-repeat;
+            }
+        </style>
+    </head>
+    <body>
+         <!-- elencoSopralluoghiPage -->
+        <div data-role="page" id='ElencoSopralluoghiPage'>
+            <div data-role="header" class="header" data-position="fixed">
+                <a href="index.html#censusTypePage" data-transition="slide" data-direction="reverse" id="homeButton" rel="external" class="ui-btn ui-btn-icon-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-home ui-alt-icon ui-nodisc-icon">Home</a>
+		<h1>Segnali censiti</h1>
+            </div>
+            <div style="overflow:hidden;margin-top: 10px; width: 95% !important; margin: 10px auto !important">
+                <img id="newButton" src="img/add_car.png" class="" style="height: 44px;width: 44px;vertical-align:middle">
+                Nuovo punto
+            </div>
+            <div data-role="main">
+                <ul class="mainlist" id="itemList" ></ul>
+            </div>
+            <div data-role="footer" class="footer ui-footer ui-bar-inherit ui-footer-fixed slideup ui-fixed-hidden" data-position="fixed" role="contentinfo"></div>
+    	</div>
+        <!-- /elencoSopralluoghiPage -->
+        
+        <!-- sopralluoghiStep1Page -->
+        <div data-role="page" id="sopralluoghiStep1Page">
+            <div data-role="header" class="header" data-position="fixed">
+                <a data-step="1" href="#" class="ui-btn-left toolbar-button-back ui-alt-icon ui-nodisc-icon ui-btn ui-icon-toolbar-button ui-btn-icon-notext prev-step" data-role="button" role="button" ></a>
+            </div>
+            <div data-role="main">
+                <div id="map_0" style="background:#dedede;text-align:center;font-size:1.3em;font-family:Arial !important;font-weight:bold;color:#888888">
+                    
+                </div>
+            </div>
+            <div data-role="footer" class="footer"  data-position="fixed" align="center" style="background:none !important; background-color: #f2f2f2 !important;">
+                <div style="line-height:25px; color:#0086cc;">1 di 3</div>
+                <a href="#" id="btnCoord" style="display:none" class="button-next next-step" data-step="1">AVANTI</a>                
+            </div>
+            <div  style="z-index:1000;position:absolute;top:10px;right:10px;height:45px;overflow:hidden">
+
+                <div id="btn_gps_control_0" style="display:none;width:80px;float:right;text-align:center;background:#ffffff;padding: 12px 6px;; border-radius:5px;overflow:hidden;">
+                    <a id="start_gps_0" style="font-size:1em;font-family:Arial !important;color:#3388cc;font-weight:normal">MANUALE</a>
+                </div>
+                 <div style="min-width:90px;margin-right:10px;padding:5px 2px;float:right;background:#ffffff; border-radius:5px;overflow:hidden;">
+                     <div id="latitudine_0" style="font-size:.8em;background:#ffffff;padding:0 5px;overflow:hidden;font-family:Arial !important;color:#3388cc;font-weight:normal">
+                         Lat:
+                     </div>
+                     <div id="longitudine_0" style="font-size:.8em;background:#ffffff;padding:0 5px;overflow:hidden;font-family:Arial !important;color:#3388cc;font-weight:normal">
+                         Lon:
+                     </div>
+                     
+                </div> 
+                <div style="min-width:80px;margin-right:10px;padding:5px 2px;float:right;background:#ffffff; border-radius:5px;overflow:hidden;">
+                     <div id="accuratezza_0" style="font-size:.8em;background:#ffffff;padding:0 5px;overflow:hidden;font-family:Arial !important;color:#3388cc;font-weight:normal">
+                         Acc:
+                     </div>
+                </div> 
+            </div>    
+        </div>
+        <!-- /sopralluoghiStep1Page -->
+        <!-- sopralluoghiStep2Page -->
+        <div data-role="page" id="sopralluoghiStep2Page">
+            <div data-role="header" class="header" data-position="fixed">
+                <a data-step="2" href="#" class="ui-btn ui-btn-icon-left ui-btn-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-back ui-alt-icon ui-nodisc-icon prev-step" data-role="button" role="button"></a>
+                <h1>Localizzazione</h1>
+            </div>
+            <div data-role="main" class="ui-content">
+                <ul data-role="listview" data-inset="false" data-theme="b">
+                    <li>
+                        <label for="comune">Comune</label>
+                        <input id="comune" placeholder="Comune" />
+                    </li>
+                    <li>
+                        <label for="provincia">Provincia</label>
+                        <input id="provincia" placeholder="Provincia" />
+                    </li>
+                    
+                    <li>
+                        <label for="street">Strada / Via</label>
+                        <input id="street" placeholder="Strada o via" />
+                    </li>
+                     <li>
+                        <label for="street">Note</label>
+                        <textarea id="note" placeholder="Note" /></textarea>
+                    </li>
+               </ul>
+            </div>
+            <div data-role="footer" class="footer"  data-position="fixed" align="center" style="background:none !important; background-color: #f2f2f2 !important;">
+                <div style="line-height:25px; color:#0086cc;">2 di 3</div>
+                <a href="#"  class="button-next next-step" data-step="2">AVANTI</a>
+            </div>
+    	</div> 
+        <!-- /sopralluoghiStep2Page -->
+        <!-- sopralluoghiStep3Page -->
+	
+    	<div data-role="page" id='sopralluoghiStep3Page' style="background:#FFFFFF">
+            
+    		<div data-role="header" class="header" data-position="fixed">
+                <a data-step="3" href="#" class="ui-btn ui-btn-icon-left ui-btn-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-back ui-alt-icon ui-nodisc-icon prev-step" data-role="button" role="button"></a>
+                <a href="index.html" id="homeButton" rel="external" class=" ui-btn-right ui-icon-toolbar-button toolbar-button-home ui-btn ui-btn-icon-left ui-nodisc-icon ui-btn-icon-notext">Home</a>
+                            <h1>Segnaletica</h1>
+                            
+
+                    </div>
+            
+                    <div data-role="main" class="ui-content" >
+                        
+                        
+                        
+                        <div style="padding-top:0.2em; width:33%;float:left;overflow:hidden">
+                                 <a style="height:32px;width: 100%; float:right;" href="#" class="ui-btn ui-car ui-icon-plus ui-btn-icon-left  ui-nodisc-icon ">						
+                                         Supporto
+                                 </a>
+                         </div>  
+                        <div style="padding-top:0.2em;width:33%; float:left;overflow:hidden">
+                                 <a style="width: 100%; float:right;" href="#" id="addRoadSignButton" class="ui-btn ui-car ui-icon-plus ui-btn-icon-left  ui-nodisc-icon ">						
+                                         Aggiungi cartello
+                                         <img src="img/add_car.png" style="max-width: 3em; float: right; width: 2em;">
+                                 </a>
+                        </div>
+                        <div style="padding-top:0.2em; width:33%;float:left;overflow:hidden">
+                                <a style="height:32px;width: 100%; float:right;" href="#" class="ui-btn ui-car ui-icon-plus ui-btn-icon-left  ui-nodisc-icon ">						
+                                        Foto
+                                </a>
+                        </div>
+                        <div style="width:33%;float:left;overflow:hidden;">
+                              <ul data-role="listview" data-inset="false" data-theme="b" style="margin:-8px 1em">
+                                <li>
+
+                                        <select name="oldpole">
+                                            <option value="0">Rimozione e sostituzione</option>
+                                            <option value="1">Rimozione</option>
+                                            <option value="2">Riutilizzo</option>
+                                        </select>
+
+                                </li>
+                            </ul>       
+                        </div>  
+                        <div style="width:33%;float:left;overflow:hidden" id="roadSignContainer" data-role="collapsible-set" data-collapsed="true" data-theme="b"></div>
+                        <div style="width:33%;float:left;overflow:hidden" id="foto">
+                            
+                            <ul data-role="listview" data-inset="false" data-theme="b" style="margin:-8px 1em">
+                                    <li data-role="list-divider">
+                                        <h4>Vista Frontale</h4>
+                                    </li>
+                                    <li>
+                                        <div style="text-align:center;padding:0;">
+                                            <a href="#" data-viewtype="front" data-showview style="display:none;">
+                                                <img src="" style="width:100%" />
+                                            </a>
+                                            <a href="#" data-viewtype="front" data-removeview class="ui-btn ui-icon-delete ui-btn-icon-left" style="display:none;">rimuovi</a>
+                                            <a href="#" data-viewtype="front" data-addview    class="ui-btn ui-icon-camera ui-btn-icon-left">acquisisci</a>
+                                        </div>
+                                    </li>
+                                    <li data-role="list-divider">
+                                        <h4>Vista Retro</h4>
+                                    </li>
+                                    <li>
+                                        <div style="text-align:center;">
+                                            <a href="#" data-viewtype="back" data-showview style="display:none;">
+                                                <img src="" style="width:100%" />
+                                            </a>
+                                            <a href="#" data-viewtype="back" data-removeview class="ui-btn ui-icon-delete ui-btn-icon-left" style="display:none;">rimuovi</a>
+                                            <a href="#" data-viewtype="back" data-addview    class="ui-btn ui-icon-camera ui-btn-icon-left">acquisisci</a>
+                                        </div>
+                                    </li>
+                                    <li data-role="list-divider">
+                                        <h4>Vista Prospettiva</h4>
+                                    </li>
+                                    <li>
+                                        <div style="text-align:center;">
+                                            <a href="#" data-viewtype="perspective" data-showview style="display:none;">
+                                                <img src="" style="width:100%" />
+                                            </a>
+                                            <a href="#" data-viewtype="perspective" data-removeview class="ui-btn ui-icon-delete ui-btn-icon-left" style="display:none;">rimuovi</a>
+                                            <a href="#" data-viewtype="perspective" data-addview    class="ui-btn ui-icon-camera ui-btn-icon-left">acquisisci</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            
+                            
+                            
+                        </div>
+                </div>
+            <div data-role="footer" class="footer"  data-position="fixed" align="center" style="background:none !important; background-color: #f2f2f2 !important;">
+                <div style="line-height:25px; color:#0086cc;">3 di 3</div>
+                <a href="#" id="saveButton" class="button-confirm next-step" data-step="3">SALVA</a>
+            </div>
+            
+    	</div>
+    	<!-- /sopralluoghiStep3Page -->
+        
+       
+        
+        
+       
+        
+        
+        
+        <!-- ### DIALOGS ### -->
+        
+        
+        
+        <!-- roadSignFinder -->
+        <div data-role="dialog" id="roadSignFinder">
+            <div data-role="header" class="header"><h1>Ricerca segnale</h1></div>
+            <div data-role="main" class="ui-content">
+                <select id="roadSignShapeList" data-theme="b" disabled></select>
+                <input type="search" id="searchRoadSignText" data-theme="b" data-mini="true" placeholder="Nome segnale o codice" />
+                <div data-role="controlgroup" data-type="horizontal" data-theme="b" sstyle="float:right;display:block;">
+                    <a href="javascript:app.closeRoadSignFinder()" class="ui-btn ui-icon-back ui-btn-icon-right" data-mini="true" data-theme="c">Chiudi</a>
+                    <a href="javascript:app.searchRoadSign()" class="ui-btn ui-icon-search ui-btn-icon-right" data-mini="true">Cerca</a>
+                </div>
+                <ul data-role="listview" id="roadSignList" data-inset="true">
+                </ul>
+            </div>
+        </div>
+        <!-- /roadSignFinder -->
+        
+        
+        <!-- listDialog -->
+        <div data-role="dialog" id="listDialog">
+            <div data-role="header" class="header"><h1 class="title"></h1></div>
+            <div data-role="main" class="ui-content">
+                <ul data-role="listview" data-inset="true"></ul>
+            </div>
+        </div>
+        <!-- /listDialog -->
+        
+        
+     
+        
+      
+       
+        
+        <script src="phonegap.js"></script>
+        <script src="js/jquery-2.1.0.min.js"></script>
+        <script src="js/jquery.mobile-1.4.2/jquery.mobile-1.4.2.min.js"></script>
+        <script src="js/common/page.injector.js"></script>
+        <script src="js/common/config.js"></script>
+        <script src="js/common/helper.js"></script>
+        <script src="js/common/barcodeReader.js"></script>
+        <script src="js/common/geoLocation.js"></script>
+        <script src="js/common/camera.js"></script>
+        <script src="js/common/auth.js"></script>
+        <script src="js/common/services.js"></script>
+        <script src="js/data/data.js"></script>
+        <script src="js/data/census.js"></script>
+        <script src="js/data/census.sopralluoghi.js"></script>
+        <script src="js/apps/census.sopralluoghi.js"></script>
+        <script src="js/apps/census.common.js"></script>
+        <script>
+            app.initialize();
+        </script>
+    </body>
+</html>

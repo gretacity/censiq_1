@@ -2,7 +2,8 @@ var CensusTypes = {
     undefinedType: 0,
     cityAsset: 1,
     roadSign: 2,
-    guardrail: 3
+    guardrail: 3,
+    sopralluoghi: 4
 };
 
 var CensusTypeNames = [];
@@ -10,6 +11,7 @@ CensusTypeNames[CensusTypes.undefinedType]  = "";
 CensusTypeNames[CensusTypes.cityAsset]      = "Bene comunale";
 CensusTypeNames[CensusTypes.roadSign]       = "Segnaletica stradale";
 CensusTypeNames[CensusTypes.guardrail]      = "Guard Rail";
+CensusTypeNames[CensusTypes.sopralluoghi]   = "sopralluoghi";
 
 
 function Census(entityType) {
@@ -21,10 +23,9 @@ function Census(entityType) {
     if((entityType != CensusTypes.undefinedType) && 
        (entityType != CensusTypes.cityAsset) &&
        (entityType != CensusTypes.roadSign) &&
-       (entityType != CensusTypes.guardrail)) {
+       (entityType != CensusTypes.guardrail) &&
+       (entityType != CensusTypes.sopralluoghi)) {
         // Throw an exception?
-        
-        
         entityType = CensusTypes.undefinedType;
     }
     this.entityType = (entityType == null ? CensusTypes.undefinedType : entityType);
