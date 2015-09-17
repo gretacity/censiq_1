@@ -839,7 +839,7 @@ var app = {
         
         var $roadSignPanel = $('<div data-roadsignno="' + count + '" data-inset="false" data-role="collapsible" data-collapsed="true" data-collapsed-icon="carat-r" data-expanded-icon="carat-d" data-theme="b">' +
                                     '<h1>' +
-                                        '<img src="" style="height:40px" class="roadsign-picture" /> ' +
+                                        '<img src="" class="roadsign-picture" /> ' +
                                         '<span>Nuovo Cartello </span>' +
                                     '</h1>' +
                                     '<ul data-role="listview"></ul>' +
@@ -856,8 +856,7 @@ var app = {
                             '<a href="javascript:app.openRoadSignTypes(' + count + ')">' +
                                 '<!--img src="img/Segnali/cod_1.svg" /-->' +
                                 '<input type="hidden" id="roadsign-signtypeid" value="0" />' +
-                                '<p class="roadsign-type"></p>' +
-                                '<h1 class="roadsign-signtypename">Tipologia</h1>' +
+                                'Tipologia' +
                             '</a>' +
                         '</li>');
         // ROADSIGN PICTURE
@@ -865,8 +864,7 @@ var app = {
                             '<a disabled="true" href="javascript:app.openRoadSignFinder(' + count + ')">' +
                                 '<!--img src="img/Segnali/cod_1.svg" /-->' +
                                 '<input type="hidden" class="roadsign-signid" />' +
-                                '<p class="roadsign-signdescr"></p>' +
-                                '<h1 class="roadsign-signname">Figura</h1>' +
+                                'Figura' +
                             '</a>' +
                         '</li>');
         // SIZE
@@ -880,7 +878,7 @@ var app = {
         // NOTE
         $('<li data-theme="b"><a href="#" class="textarea"><textarea class="roadsign-notes" placeholder="Note"></textarea></a></li>').appendTo($listview).trigger('create');
         // REMOVE BUTTON
-        $listview.append('<li data-role="list-divider" data-theme="b">' +
+        $listview.append('<li data-theme="b">' +
                             '<a href="javascript:app.removeRoadSignPanel(' + app._roadSignCounter + ')" class="ui-btn ui-icon-delete ui-btn-icon-right">Rimuovi cartello</a>' +
                         '</li>');
         

@@ -58,6 +58,17 @@ a.textarea:after
     display:none;
 }
 
+#sopralluoghiStep3Page ul li
+{
+    margin-bottom:2px;
+}
+
+#sopralluoghiStep3Page ul li a
+{
+    padding: .7em 1em;
+}
+
+
 #sopralluoghiStep3Page .ui-collapsible-set,
 #sopralluoghiStep3Page .ui-collapsible:not(.ui-collapsible-inset), 
 #sopralluoghiStep3Page .ui-collapsible-heading .ui-btn
@@ -69,5 +80,24 @@ a.textarea:after
 #sopralluoghiStep3Page .ui-btn
 {
     font-size:14px;
-    
+    line-height: 14px;
+}
+
+
+#sopralluoghiStep3Page #roadSignContainer .ui-collapsible
+{
+    margin: 0 10px 10px 20px;
+    border-radius: 10px;
+    border: 1px solid #cdcdcd;
+    box-shadow: 2px 2px 5px #cdcdcd;
+}
+
+#supporto_div
+{
+    overflow:hidden;
+    margin: 0 10px 10px 0;
+    padding:10px 5px 0 5px;
+    border-radius: 10px;
+    border: 1px solid #cdcdcd;
+    box-shadow: 2px 2px 5px #cdcdcd;
 }

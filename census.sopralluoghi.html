@@ -125,70 +125,75 @@
                                 <a style="line-height:32px;height:32px;width: 100%; float:right;" href="#" class="ui-btn ui-car ui-icon-plus ui-btn-icon-left  ui-nodisc-icon ">						
                                         Supporto
                                 </a>
-                            </div>  
-                            <div>
-                                  <ul data-role="listview" data-inset="false" data-theme="b">
-                                    <li style="border-bottom:0 !important">
-
-                                            <select name="oldpole">
-                                                <option value="0">Sostituzione</option>
-                                                <option value="1">Rimozione</option>
-                                                <option value="2">Riutilizzo</option>
-                                            </select>
-
-                                    </li>
-                                </ul>       
-                            </div>  
-                            <!--
-                            <div>
-                                <a style="line-height:32px;height:32px;width: 100%; float:right;" href="#" class="ui-btn ui-car ui-icon-plus ui-btn-icon-left  ui-nodisc-icon ">						
-                                        Foto
-                                </a>
                             </div>
-                            -->
-                            <div id="foto">
-
-                                <ul data-role="listview" data-inset="false" data-theme="b">
-                                        <li data-role="list-divider">
-                                            <h4>Foto 1</h4>
-                                        </li>
-                                        <li>
+                            <div  id="supporto_div">
+                                <div>
+                                     <ul data-role="listview" data-inset="false" data-theme="b">
+                                        <li style="border-bottom:0 !important">
+                                            <label>Supporto</label>
                                             <div style="text-align:center;padding:0;">
-                                                <a href="#" data-viewtype="front" data-showview style="display:none;">
-                                                    <img src="" style="width:100%" />
-                                                </a>
-                                                <a href="#" data-viewtype="front" data-removeview class="ui-btn ui-icon-delete ui-btn-icon-left" style="display:none;">rimuovi</a>
-                                                <a href="#" data-viewtype="front" data-addview    class="ui-btn ui-icon-camera ui-btn-icon-left">acquisisci</a>
-                                            </div>
+                                                <select name="oldpole">
+                                                    <option value="0">Sostituzione</option>
+                                                    <option value="1">Rimozione</option>
+                                                    <option value="2">Riutilizzo</option>
+                                                </select>
+                                            </div>    
+
                                         </li>
-                                        <li data-role="list-divider">
-                                            <h4>Foto 2</h4>
+                                        <li style="border-bottom:0 !important">
+                                            <label>Sezione</label>
+                                            <div style="text-align:center;padding:0;">
+                                                <input type="text" name="diametro_palo">
+                                            </div>    
                                         </li>
-                                        <li>
-                                            <div style="text-align:center;">
-                                                <a href="#" data-viewtype="back" data-showview style="display:none;">
-                                                    <img src="" style="width:100%" />
-                                                </a>
-                                                <a href="#" data-viewtype="back" data-removeview class="ui-btn ui-icon-delete ui-btn-icon-left" style="display:none;">rimuovi</a>
-                                                <a href="#" data-viewtype="back" data-addview    class="ui-btn ui-icon-camera ui-btn-icon-left">acquisisci</a>
-                                            </div>
+                                         <li style="border-bottom:0 !important">
+                                            <label>Altezza</label>
+                                            <div style="text-align:center;padding:0;">
+                                                <input type="text" name="altezza_palo">
+                                            </div>    
                                         </li>
-                                        <li data-role="list-divider">
-                                            <h4>Foto 3</h4>
-                                        </li>
-                                        <li>
-                                            <div style="text-align:center;">
-                                                <a href="#" data-viewtype="perspective" data-showview style="display:none;">
-                                                    <img src="" style="width:100%" />
-                                                </a>
-                                                <a href="#" data-viewtype="perspective" data-removeview class="ui-btn ui-icon-delete ui-btn-icon-left" style="display:none;">rimuovi</a>
-                                                <a href="#" data-viewtype="perspective" data-addview    class="ui-btn ui-icon-camera ui-btn-icon-left">acquisisci</a>
-                                            </div>
-                                        </li>
-                                    </ul>
+                                    </ul>       
+                                </div>  
+                                <div id="foto">
+
+                                    <ul data-role="listview" data-inset="false" data-theme="b">
+
+                                            <li>
+                                            <label>Foto 1</label>
+                                                <div style="text-align:center;padding:0;">
+                                                    <a href="#" data-viewtype="front" data-showview style="display:none;">
+                                                        <img src="" style="width:100%" />
+                                                    </a>
+                                                    <a href="#" data-viewtype="front" data-removeview class="ui-btn ui-icon-delete ui-btn-icon-left" style="display:none;">rimuovi</a>
+                                                    <a href="#" data-viewtype="front" data-addview    class="ui-btn ui-icon-camera ui-btn-icon-left">acquisisci</a>
+                                                </div>
+                                            </li>
+
+                                            <li>
+                                                <label>Foto 2</label>
+                                                <div style="text-align:center;">
+                                                    <a href="#" data-viewtype="back" data-showview style="display:none;">
+                                                        <img src="" style="width:100%" />
+                                                    </a>
+                                                    <a href="#" data-viewtype="back" data-removeview class="ui-btn ui-icon-delete ui-btn-icon-left" style="display:none;">rimuovi</a>
+                                                    <a href="#" data-viewtype="back" data-addview    class="ui-btn ui-icon-camera ui-btn-icon-left">acquisisci</a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <label>Foto 3</label>
+                                                <div style="text-align:center;">
+                                                    <a href="#" data-viewtype="perspective" data-showview style="display:none;">
+                                                        <img src="" style="width:100%" />
+                                                    </a>
+                                                    <a href="#" data-viewtype="perspective" data-removeview class="ui-btn ui-icon-delete ui-btn-icon-left" style="display:none;">rimuovi</a>
+                                                    <a href="#" data-viewtype="perspective" data-addview    class="ui-btn ui-icon-camera ui-btn-icon-left">acquisisci</a>
+                                                </div>
+                                            </li>
+                                        </ul>
 
 
 
+                                </div>
                             </div>
                         </div>
                         <div style="width:60%;float:left;overflow:hidden;" >
