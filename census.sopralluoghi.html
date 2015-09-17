@@ -128,35 +128,47 @@
                             </div>
                             <div  id="supporto_div">
                                 <div>
-                                     <ul data-role="listview" data-inset="false" data-theme="b">
+                                     <ul data-role="listview" data-inset="false" data-theme="b" style="margin-bottom: 12px">
                                         <li style="border-bottom:0 !important">
                                             <label>Supporto</label>
                                             <div style="text-align:center;padding:0;">
-                                                <select name="oldpole">
+                                                
+                                                <select name="oldpole" id="oldpole">
+                                                     <option value="1">Rimozione</option>
                                                     <option value="0">Sostituzione</option>
-                                                    <option value="1">Rimozione</option>
                                                     <option value="2">Riutilizzo</option>
                                                 </select>
                                             </div>    
 
                                         </li>
-                                        <li style="border-bottom:0 !important">
-                                            <label>Sezione</label>
+                                    </ul>
+                                    <ul data-role="listview" data-inset="false" data-theme="b" id="info_pole_div" style="height:0;" >        
+                                         <li style="border-bottom:0 !important">
+                                            <label>Numero pali</label>
                                             <div style="text-align:center;padding:0;">
-                                                <input type="text" name="diametro_palo">
+                                                <input type="text" name="numberOfPoles" value="1">
                                             </div>    
                                         </li>
                                          <li style="border-bottom:0 !important">
                                             <label>Altezza</label>
                                             <div style="text-align:center;padding:0;">
-                                                <input type="text" name="altezza_palo">
+                                                <input type="text" name="poleHeight">
+                                            </div>    
+                                        </li>
+                                        <li style="border-bottom:0 !important">
+                                            <label>Sezione</label>
+                                            <div style="text-align:center;padding:0;">
+                                                 <select name="poleDiameter">
+                                                    <option value="60">60 mm</option>
+                                                    <option value="40">40 mm</option>
+                                                </select>
                                             </div>    
                                         </li>
                                     </ul>       
                                 </div>  
                                 <div id="foto">
 
-                                    <ul data-role="listview" data-inset="false" data-theme="b">
+                                    <ul data-role="listview" data-inset="false" data-theme="b" id="foto">        
 
                                             <li>
                                             <label>Foto 1</label>
