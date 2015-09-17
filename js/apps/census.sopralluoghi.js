@@ -128,7 +128,7 @@ var app = {
                     {    
                         
                         params = { id: obj.roadSign.signs[j].roadSignId}; 
-                        data.roadSign.getRoadSigns(params, function(result)
+                        data.sopralluoghi.getRoadSigns(params, function(result)
                         {
                             try
                             {
@@ -433,7 +433,7 @@ var app = {
         app.census.roadSign.poleInfo = poleInfo;
         // ...and save it
         // TODO Reenable
-        //data.roadSign.updateSupportTables(supportTableData);
+        //data.sopralluoghi.updateSupportTables(supportTableData);
         data.save(app.census);
         
         
@@ -808,7 +808,7 @@ var app = {
     },
     closeListDialog: function() {
         app._currentRoadSign = null;
-        $.mobile.changePage('#sopralluoghiStep5Page', {
+        $.mobile.changePage('#sopralluoghiStep3Page', {
             reverse: true,
         });
     },
@@ -830,6 +830,8 @@ var app = {
     addRoadSignPanel: function() {
       
         var count = ++app._roadSignCounter;
+        
+       
         
         var $roadSignPanel = $('<div data-roadsignno="' + count + '" data-inset="false" data-role="collapsible" data-collapsed="true" data-collapsed-icon="carat-r" data-expanded-icon="carat-d" data-theme="b">' +
                                     '<h1>' +
@@ -943,7 +945,9 @@ var app = {
         }
         
         
-        data.roadSign.getRoadSigns(params, function(result) {
+        data.sopralluoghi.getRoadSigns(params, function(result) {
+            
+            console.log(result.length);
             
             var lenght = result.length;
             
@@ -985,7 +989,7 @@ var app = {
     
     setRoadSign:function(signId, category) {
         var rsn=app._currentRoadSign;
-        data.roadSign.getRoadSignTypes(function(result)
+        data.sopralluoghi.getRoadSignTypes(function(result)
         {
             var rowCount = result.length;
             for(var i = 0; i < rowCount; i++)
@@ -1025,7 +1029,7 @@ var app = {
         app._currentRoadSign = null;
         $('#roadSignList').empty().listview("refresh");
         //$.mobile.back();
-        $.mobile.changePage('#sopralluoghiStep5Page', {
+        $.mobile.changePage('#sopralluoghiStep3Page', {
             transition: 'pop',
             reverse: true,
         });
@@ -1045,11 +1049,11 @@ var app = {
              search: $('.roadsign-signid',roadSignPanel).val()
             }; 
             
-            data.roadSign.getRoadSignSizes(params,function(result) {
+            data.sopralluoghi.getRoadSignSizes(params,function(result) {
                 app.openListDialog({
                     roadSignIndex: signIndex,
                     title: 'Formato del segnale',
-                    rows: result, //data.roadSign.getRoadSignSizes(),
+                    rows: result, //data.sopralluoghi.getRoadSignSizes(),
                     textFieldName: 'size',
                     hrefFields: ['id', 'size'],
                     hrefFormat: 'javascript:app.setRoadSignSize({0}, \'{1}\')'
@@ -1071,7 +1075,7 @@ var app = {
         app.openListDialog({
             roadSignIndex: signIndex,
             title: 'Tipologia del segnale',
-            rows: data.roadSign.getRoadSignType(),
+            rows: data.sopralluoghi.getRoadSignType(),
             textFieldName: '',
             hrefFields: [],
             hrefFormat: 'javascript:app.setRoadSignType(\'{0}\')'
@@ -1088,7 +1092,7 @@ var app = {
     
     openRoadSignSupportPanel: function(signIndex) {
         // Changed: now use the async pattern
-        data.roadSign.getRoadSignSupports(function(result) {
+        data.sopralluoghi.getRoadSignSupports(function(result) {
             app.openListDialog({
                 roadSignIndex: signIndex,
                 title: 'Tipo Supporto',
@@ -1106,7 +1110,7 @@ var app = {
     },
     openRoadSignTypes: function(signIndex)
     {
-        data.roadSign.getRoadSignTypes(function(result) {
+        data.sopralluoghi.getRoadSignTypes(function(result) {
             
            
             
@@ -1131,7 +1135,7 @@ var app = {
         app.closeListDialog();
     },
     openRoadSignFilmPanel: function(signIndex) {
-        data.roadSign.getRoadSignFilms(function(result) {
+        data.sopralluoghi.getRoadSignFilms(function(result) {
             app.openListDialog({
                 roadSignIndex: signIndex,
                 title: 'Tipo Pellicola',
@@ -1151,7 +1155,7 @@ var app = {
         app.openListDialog({
             roadSignIndex: signIndex,
             title: 'Manutenzione',
-            rows: data.roadSign.getRoadSignMaintenances(),
+            rows: data.sopralluoghi.getRoadSignMaintenances(),
             textFieldName: 'name',
             hrefFields: ['id', 'name'],
             hrefFormat: 'javascript:app.setRoadSignMaintenance({0},\'{1}\')'

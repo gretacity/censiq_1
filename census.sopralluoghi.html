@@ -120,81 +120,85 @@
                     <div data-role="main" class="ui-content" >
                         
                         
-                        
-                        <div style="padding-top:0.2em; width:33%;float:left;overflow:hidden">
-                                 <a style="height:32px;width: 100%; float:right;" href="#" class="ui-btn ui-car ui-icon-plus ui-btn-icon-left  ui-nodisc-icon ">						
-                                         Supporto
-                                 </a>
-                         </div>  
-                        <div style="padding-top:0.2em;width:33%; float:left;overflow:hidden">
-                                 <a style="width: 100%; float:right;" href="#" id="addRoadSignButton" class="ui-btn ui-car ui-icon-plus ui-btn-icon-left  ui-nodisc-icon ">						
-                                         Aggiungi cartello
-                                         <img src="img/add_car.png" style="max-width: 3em; float: right; width: 2em;">
-                                 </a>
-                        </div>
-                        <div style="padding-top:0.2em; width:33%;float:left;overflow:hidden">
+                        <div style="width:50%;float:left;overflow:hidden">
+                            <div>
+                                <a style="height:32px;width: 100%; float:right;" href="#" class="ui-btn ui-car ui-icon-plus ui-btn-icon-left  ui-nodisc-icon ">						
+                                        Supporto
+                                </a>
+                            </div>  
+                            <div>
+                                  <ul data-role="listview" data-inset="false" data-theme="b" style="margin:-8px 1em;">
+                                    <li style="border-bottom:0 !important">
+
+                                            <select name="oldpole">
+                                                <option value="0">Rimozione e sostituzione</option>
+                                                <option value="1">Rimozione</option>
+                                                <option value="2">Riutilizzo</option>
+                                            </select>
+
+                                    </li>
+                                </ul>       
+                            </div>  
+                            
+                            <div>
                                 <a style="height:32px;width: 100%; float:right;" href="#" class="ui-btn ui-car ui-icon-plus ui-btn-icon-left  ui-nodisc-icon ">						
                                         Foto
                                 </a>
-                        </div>
-                        <div style="width:33%;float:left;overflow:hidden;">
-                              <ul data-role="listview" data-inset="false" data-theme="b" style="margin:-8px 1em">
-                                <li>
+                            </div>
+                            <div id="foto">
 
-                                        <select name="oldpole">
-                                            <option value="0">Rimozione e sostituzione</option>
-                                            <option value="1">Rimozione</option>
-                                            <option value="2">Riutilizzo</option>
-                                        </select>
+                                <ul data-role="listview" data-inset="false" data-theme="b">
+                                        <li data-role="list-divider">
+                                            <h4>Vista Frontale</h4>
+                                        </li>
+                                        <li>
+                                            <div style="text-align:center;padding:0;">
+                                                <a href="#" data-viewtype="front" data-showview style="display:none;">
+                                                    <img src="" style="width:100%" />
+                                                </a>
+                                                <a href="#" data-viewtype="front" data-removeview class="ui-btn ui-icon-delete ui-btn-icon-left" style="display:none;">rimuovi</a>
+                                                <a href="#" data-viewtype="front" data-addview    class="ui-btn ui-icon-camera ui-btn-icon-left">acquisisci</a>
+                                            </div>
+                                        </li>
+                                        <li data-role="list-divider">
+                                            <h4>Vista Retro</h4>
+                                        </li>
+                                        <li>
+                                            <div style="text-align:center;">
+                                                <a href="#" data-viewtype="back" data-showview style="display:none;">
+                                                    <img src="" style="width:100%" />
+                                                </a>
+                                                <a href="#" data-viewtype="back" data-removeview class="ui-btn ui-icon-delete ui-btn-icon-left" style="display:none;">rimuovi</a>
+                                                <a href="#" data-viewtype="back" data-addview    class="ui-btn ui-icon-camera ui-btn-icon-left">acquisisci</a>
+                                            </div>
+                                        </li>
+                                        <li data-role="list-divider">
+                                            <h4>Vista Prospettiva</h4>
+                                        </li>
+                                        <li>
+                                            <div style="text-align:center;">
+                                                <a href="#" data-viewtype="perspective" data-showview style="display:none;">
+                                                    <img src="" style="width:100%" />
+                                                </a>
+                                                <a href="#" data-viewtype="perspective" data-removeview class="ui-btn ui-icon-delete ui-btn-icon-left" style="display:none;">rimuovi</a>
+                                                <a href="#" data-viewtype="perspective" data-addview    class="ui-btn ui-icon-camera ui-btn-icon-left">acquisisci</a>
+                                            </div>
+                                        </li>
+                                    </ul>
 
-                                </li>
-                            </ul>       
-                        </div>  
-                        <div style="width:33%;float:left;overflow:hidden" id="roadSignContainer" data-role="collapsible-set" data-collapsed="true" data-theme="b"></div>
-                        <div style="width:33%;float:left;overflow:hidden" id="foto">
-                            
-                            <ul data-role="listview" data-inset="false" data-theme="b" style="margin:-8px 1em">
-                                    <li data-role="list-divider">
-                                        <h4>Vista Frontale</h4>
-                                    </li>
-                                    <li>
-                                        <div style="text-align:center;padding:0;">
-                                            <a href="#" data-viewtype="front" data-showview style="display:none;">
-                                                <img src="" style="width:100%" />
-                                            </a>
-                                            <a href="#" data-viewtype="front" data-removeview class="ui-btn ui-icon-delete ui-btn-icon-left" style="display:none;">rimuovi</a>
-                                            <a href="#" data-viewtype="front" data-addview    class="ui-btn ui-icon-camera ui-btn-icon-left">acquisisci</a>
-                                        </div>
-                                    </li>
-                                    <li data-role="list-divider">
-                                        <h4>Vista Retro</h4>
-                                    </li>
-                                    <li>
-                                        <div style="text-align:center;">
-                                            <a href="#" data-viewtype="back" data-showview style="display:none;">
-                                                <img src="" style="width:100%" />
-                                            </a>
-                                            <a href="#" data-viewtype="back" data-removeview class="ui-btn ui-icon-delete ui-btn-icon-left" style="display:none;">rimuovi</a>
-                                            <a href="#" data-viewtype="back" data-addview    class="ui-btn ui-icon-camera ui-btn-icon-left">acquisisci</a>
-                                        </div>
-                                    </li>
-                                    <li data-role="list-divider">
-                                        <h4>Vista Prospettiva</h4>
-                                    </li>
-                                    <li>
-                                        <div style="text-align:center;">
-                                            <a href="#" data-viewtype="perspective" data-showview style="display:none;">
-                                                <img src="" style="width:100%" />
-                                            </a>
-                                            <a href="#" data-viewtype="perspective" data-removeview class="ui-btn ui-icon-delete ui-btn-icon-left" style="display:none;">rimuovi</a>
-                                            <a href="#" data-viewtype="perspective" data-addview    class="ui-btn ui-icon-camera ui-btn-icon-left">acquisisci</a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            
-                            
-                            
+
+
+                            </div>
                         </div>
+                        <div style="width:50%;float:left;overflow:hidden;" >
+                            <div style="overflow:hidden">
+                                    <a style="width: 100%; float:right;" href="#" id="addRoadSignButton" class="ui-btn ui-car ui-icon-plus ui-btn-icon-left  ui-nodisc-icon ">						
+                                            Aggiungi cartello
+                                            <img src="img/add_car.png" style="max-width: 3em; float: right; width: 2em;">
+                                    </a>
+                            </div>
+                            <div id="roadSignContainer" data-role="collapsible-set" data-collapsed="true" data-theme="b"></div>
+                        </div>    
                 </div>
             <div data-role="footer" class="footer"  data-position="fixed" align="center" style="background:none !important; background-color: #f2f2f2 !important;">
                 <div style="line-height:25px; color:#0086cc;">3 di 3</div>
