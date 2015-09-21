@@ -19,6 +19,7 @@ var app = {
     census: new Census(CensusTypes.sopralluoghi),
     picturesPageId: 'foto',
     pageOffsetTop: 0,
+    ADDRESS_ACQ: 0,
     
     // Application Constructor
     initialize: function() 
@@ -42,40 +43,26 @@ var app = {
                 });
         });
         $('#sopralluoghiStep1Page').on('pageshow', this.showMapPositionPage);
-        $('#sopralluoghiStep2Page').on('pageshow',  this.acquireCoords);
-        
+        //$('#sopralluoghiStep2Page').on('pageshow',  this.acquireCoords);
         // Force onDeviceReady if it's a browser
         if(config.EMULATE_ON_BROWSER) this.onDeviceReady();
         $('.prev-step').on('click', this.previousStep);
         $('.next-step').on('click', this.stepCompleted);
         
-        
-        
         var $page3 = $('#foto');
-        
-        
         $('a[data-addview]', $page3).on('click', this.acquirePhoto);
         $('a[data-removeview]', $page3).on('click', this.removePhoto);
         $('#photoPage a').on('tap', this.hidePhotoDialog);
-        
-        
         //$('#addRoadSignButton').on('click', app.addRoadSignPanel);
         $('#addRoadSignButtonBIG').on('click', app.addRoadSignPanel);
-        
-        $('#remRoadSignButtonBIG').on('click', app.addRoadSignPanel);
-        
-        
+        $('#addRoadSignButtonPanel').on('click', app.nuovoCartello);
         $('#oldpole_p').on('change', app.showOlPoleInfo);
-        
-        
         $('div[data-role="dialog"]').on('create', function() {
             app.pageOffsetTop = $(this).offset().top;
         });
         $('div[data-role="dialog"]').on('pagehide', function() {
             $.mobile.silentScroll(app.pageOffsetTop);
         });
-        
-        
     },
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
@@ -179,38 +166,39 @@ var app = {
     },
     validateStep: function(stepIndex, stepValidCallback, stepNotValidCallback) {
         var errors = [];
-        if(stepIndex == app.STEP_0) {
-            // Validate step 0
-            if($.trim($('#qrCode').val()) == '') {
-                errors.push('specificare il QR-code');
-                stepNotValidCallback(errors);
-            } else {
-                stepValidCallback();
-            }
-        } else if(stepIndex == app.STEP_1) {
-            
-            // Validate step 1
-            stepValidCallback();
+        if(stepIndex == app.STEP_1) {
+            if(app.ADDRESS_ACQ==0)
+            {
+                
+                console.log("-----------------");
+                this.acquireCoords();
+                app.ADDRESS_ACQ=1;
+                $("#localizzazione").fadeIn(500);
+            }    
+            else
+            {   
+                if($.trim($('#comune','#sopralluoghiStep1Page').val()) == '')
+                {
+                    errors.push('specificare Comune');
+                    stepNotValidCallback(errors);
+                    return false;
+                }
+                if($.trim($('#provincia','#sopralluoghiStep1Page').val()) == '')
+                {
+                    errors.push('specificare Provincia');
+                    stepNotValidCallback(errors);
+                    return false;
+                }
+                if($.trim($('#street','#sopralluoghiStep1Page').val()) == '')
+                {
+                    errors.push('specificare Strada/Via');
+                    stepNotValidCallback(errors);
+                    return false;
+                }
+                $("localizzazione").fadeOut(500,stepValidCallback());
+                
+            }    
         } else if(stepIndex == app.STEP_2) {
-            if($.trim($('#comune','#sopralluoghiStep2Page').val()) == '')
-            {
-                errors.push('specificare Comune');
-                stepNotValidCallback(errors);
-                return false;
-            }
-            if($.trim($('#provincia','#sopralluoghiStep2Page').val()) == '')
-            {
-                errors.push('specificare Provincia');
-                stepNotValidCallback(errors);
-                return false;
-            }
-            if($.trim($('#street','#sopralluoghiStep2Page').val()) == '')
-            {
-                errors.push('specificare Strada/Via');
-                stepNotValidCallback(errors);
-                return false;
-            }
-           
             stepValidCallback();
         } else if(stepIndex == app.STEP_3) {
             // Validate step 3
@@ -248,7 +236,10 @@ var app = {
                     clearInterval(app.ID_GPS);
                 }
                 catch(e){}
-                $.mobile.changePage('#sopralluoghiStep2Page');
+               
+                //$.mobile.changePage('#sopralluoghiStep2Page');
+                //app.openRoadSignFinder();
+                app.addRoadSignPanel(); 
             } 
             else if(step == app.STEP_2)
             {
@@ -367,6 +358,8 @@ var app = {
         poleInfo.numberOfPoles = $('#numberOfPoles').val();                                  // Numero di pali
         poleInfo.poleDiameter = $('#poleDiameter').val();                               // Diametro dei pali
         poleInfo.poleHeight = $('#poleHeight').val();                                   // Altezza dei pali
+        poleInfo.old_signs_number=$('#old_signs_number').val();
+        
         
         app.census.sopralluoghi.poleInfo = poleInfo;
         // ...and save it
@@ -582,6 +575,7 @@ var app = {
     },
     showMapPositionPage: function()
     {
+        app.ADDRESS_ACQ=0;
         if(!app.ACQ)
         {    
             var point=null;
@@ -1113,7 +1107,23 @@ var app = {
 
         //app.closeRoadSignFinder();
     },
-    closeRoadSignFinder: function() {
+    
+    
+    
+    nuovoCartello: function()
+    {
+        //app.closeRoadSignFinder();
+        //app.addRoadSignPanel();
+        app._allRoadSigns = null;
+        app._currentRoadSign = null;
+        $('#roadSignList').empty().listview("refresh");
+         app.addRoadSignPanel(); 
+    },
+    
+    
+    
+    
+    saveRoadSign: function() {
         $("#oldpole").val($("#oldpole_p").val());
         $("#numberOfPoles_p").val($("#numberOfPoles_p").val());
         $("#poleHeight").val($("#poleHeight_p").val());
@@ -1122,11 +1132,19 @@ var app = {
         app._allRoadSigns = null;
         app._currentRoadSign = null;
         $('#roadSignList').empty().listview("refresh");
+        $.mobile.changePage('#sopralluoghiStep2Page');
+        
+    },
+    
+    
+    closeRoadSignFinder: function() {
+        //$.mobile.changePage('#sopralluoghiStep2Page');
+        app._allRoadSigns = null;
+        app._currentRoadSign = null;
+        $('#roadSignList').empty().listview("refresh");
         //$.mobile.back();
-        $.mobile.changePage('#sopralluoghiStep3Page', {
-            transition: 'pop',
-            reverse: true,
-        });
+        $.mobile.changePage('#sopralluoghiStep2Page');
+        
     },
     
     
@@ -1351,7 +1369,7 @@ var app = {
     
     showOlPoleInfo: function() {
         var val=$("#oldpole_p").val();
-        if(val==0)
+        if(val==0 || val=="1")
         {
             $('#info_pole_div').css("height","auto");
         }

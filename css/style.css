@@ -58,33 +58,33 @@ a.textarea:after
     display:none;
 }
 
-#sopralluoghiStep3Page ul li
+#sopralluoghiStep2Page ul li
 {
     margin-bottom:2px;
 }
 
-#sopralluoghiStep3Page ul li a
+#sopralluoghiStep2Page ul li a
 {
     padding: .7em 1em;
 }
 
 
-#sopralluoghiStep3Page .ui-collapsible-set,
-#sopralluoghiStep3Page .ui-collapsible:not(.ui-collapsible-inset), 
-#sopralluoghiStep3Page .ui-collapsible-heading .ui-btn
+#sopralluoghiStep2Page .ui-collapsible-set,
+#sopralluoghiStep2Page .ui-collapsible:not(.ui-collapsible-inset), 
+#sopralluoghiStep2Page .ui-collapsible-heading .ui-btn
 {
     border-top: 0!important;
     border-bottom: 0 !important;
 }
 
-#sopralluoghiStep3Page .ui-btn
+#sopralluoghiStep2Page .ui-btn
 {
     font-size:14px;
     line-height: 14px;
 }
 
 
-#sopralluoghiStep3Page #roadSignContainer .ui-collapsible
+#sopralluoghiStep2Page #roadSignContainer .ui-collapsible
 {
     margin: 0 10px 10px 20px;
     border-radius: 10px;

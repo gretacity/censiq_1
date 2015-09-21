@@ -25,8 +25,7 @@ Sopralluoghi.PoleInfo = function() {
     this.poleUpwindNumberOfDoubleSidedBrackets = 0; // Numero staffe bifacciali usate per i pali controvento
     this.poleUpwindNumberOfUpwindBrackets = 0;      // Numero staffe controvento usate per i pali controvento
     this.oldPole = 0                //0:riutilizzare; 1:rimuovere; 2:sostituire ;
-    
-    
+    this.old_signs_number='';
 }
 
 // Extends Census class
@@ -108,6 +107,7 @@ data.sopralluoghi = {
                 numero_staffe_bifacciali_controvento: entity.sopralluoghi.poleInfo.poleUpwindNumberOfDoubleSidedBrackets,
                 numero_staffe_controvento: entity.sopralluoghi.poleInfo.poleUpwindNumberOfUpwindBrackets,
                 old_pole:entity.sopralluoghi.poleInfo.oldPole,
+                old_signs_number:entity.sopralluoghi.poleInfo.old_signs_number,
                 
                 comune :entity.sopralluoghi.comune,
                 provincia :entity.sopralluoghi.provincia,

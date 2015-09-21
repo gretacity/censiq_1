@@ -41,8 +41,34 @@
             <div data-role="header" class="header" data-position="fixed">
                 <a data-step="1" href="#" class="ui-btn-left toolbar-button-back ui-alt-icon ui-nodisc-icon ui-btn ui-icon-toolbar-button ui-btn-icon-notext prev-step" data-role="button" role="button" ></a>
             </div>
-            <div data-role="main">
+            <div data-role="main" style="position:relative">
                 <div id="map_0" style="background:#dedede;text-align:center;font-size:1.3em;font-family:Arial !important;font-weight:bold;color:#888888">
+                    
+                </div>
+                <div id="localizzazione" style="position:absolute; bottom:0;width:100%;display:none">
+                    
+                    <ul data-role="listview" data-inset="false" data-theme="b" style="width:100%;background-color:#FFFFFF;overflow:hidden">
+                        <li style="float:left">
+                            <label for="comune">Comune</label>
+                            <input id="comune" placeholder="Comune" />
+                        </li>
+                        <li style="float:left">
+                            <label for="provincia">Provincia</label>
+                            <input id="provincia" placeholder="Provincia" />
+                        </li>
+
+                        <li style="float:left">
+                            <label for="street">Strada / Via</label>
+                            <input id="street" placeholder="Strada o via" />
+                        </li>
+                        <!--
+                         <li>
+                            <label for="street">Note</label>
+                            <textarea id="note" placeholder="Note" /></textarea>
+                        </li>
+                        -->
+                   </ul>
+                    
                     
                 </div>
             </div>
@@ -73,7 +99,60 @@
         </div>
         <!-- /sopralluoghiStep1Page -->
         <!-- sopralluoghiStep2Page -->
-        <div data-role="page" id="sopralluoghiStep2Page">
+        
+        <!-- /sopralluoghiStep2Page -->
+        <!-- sopralluoghiStep3Page -->
+	
+    	<div data-role="page" id='sopralluoghiStep2Page' style="background:#FFFFFF">
+                <input type="hidden" name="oldpole" id="oldpole" value="-1">
+                <input type="hidden" name="numberOfPoles" id="numberOfPoles" value="1">
+                <input type="hidden" name="poleHeight" id="poleHeight" value="0">
+                <input type="hidden" name="poleDiameter" id="poleDiameter" value="0">
+    		<div data-role="header" class="header" data-position="fixed">
+                <a data-step="3" href="#" class="ui-btn ui-btn-icon-left ui-btn-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-back ui-alt-icon ui-nodisc-icon prev-step" data-role="button" role="button"></a>
+                <a href="index.html" id="homeButton" rel="external" class=" ui-btn-right ui-icon-toolbar-button toolbar-button-home ui-btn ui-btn-icon-left ui-nodisc-icon ui-btn-icon-notext">Home</a>
+                            <h1>Segnaletica</h1>
+                            
+
+                    </div>
+            
+                    <div data-role="main" class="ui-content" >
+                        
+                        <div style="width:100%;overflow:hidden;" >
+                            <!--
+                            <div style="overflow:hidden">
+                                    <a style="height:32px;line-height:32px;width: 100%; float:right;" href="#"  class="ui-btn ui-car ui-icon-plus ui-btn-icon-left  ui-nodisc-icon ">						
+                                            Cartelli
+                                            
+                                    </a>
+                            </div>
+                            -->
+                            <div style="width:20%; float:left;overflow:hidden;">
+                                 <div style="text-align:center;margin-top:2em">
+                                   
+                                    <a style="height:32px;line-height:32px;border:0;text-decoration: none;" href="#" id="addRoadSignButtonBIG"><img src="img/add_car.png" ></a>
+                                    <br>
+                                    
+                                    Nuovo cartello
+                                    <br>
+                                </div>
+                               
+                            
+                            </div>
+                            <div id="roadSignContainer" data-role="collapsible-set" data-collapsed="true" data-theme="b" style="width:80%;float:left;overflow:hidden">
+                               
+                            </div>
+                        </div>    
+                </div>
+            <div data-role="footer" class="footer"  data-position="fixed" align="center" style="background:none !important; background-color: #f2f2f2 !important;">
+                <div style="line-height:25px; color:#0086cc;">3 di 3</div>
+                <a href="#" id="saveButton" class="button-confirm next-step" data-step="3">SALVA</a>
+            </div>
+            
+    	</div>
+    	<!-- /sopralluoghiStep3Page -->
+        <!--
+       <div data-role="page" id="sopralluoghiStep3Page">
             <div data-role="header" class="header" data-position="fixed">
                 <a data-step="2" href="#" class="ui-btn ui-btn-icon-left ui-btn-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-back ui-alt-icon ui-nodisc-icon prev-step" data-role="button" role="button"></a>
                 <h1>Localizzazione</h1>
@@ -104,66 +183,7 @@
                 <a href="#"  class="button-next next-step" data-step="2">AVANTI</a>
             </div>
     	</div> 
-        <!-- /sopralluoghiStep2Page -->
-        <!-- sopralluoghiStep3Page -->
-	
-    	<div data-role="page" id='sopralluoghiStep3Page' style="background:#FFFFFF">
-                <input type="hidden" name="oldpole" id="oldpole" value="-1">
-                <input type="hidden" name="numberOfPoles" id="numberOfPoles" value="1">
-                <input type="hidden" name="poleHeight" id="poleHeight" value="0">
-                <input type="hidden" name="poleDiameter" id="poleDiameter" value="0">
-    		<div data-role="header" class="header" data-position="fixed">
-                <a data-step="3" href="#" class="ui-btn ui-btn-icon-left ui-btn-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-back ui-alt-icon ui-nodisc-icon prev-step" data-role="button" role="button"></a>
-                <a href="index.html" id="homeButton" rel="external" class=" ui-btn-right ui-icon-toolbar-button toolbar-button-home ui-btn ui-btn-icon-left ui-nodisc-icon ui-btn-icon-notext">Home</a>
-                            <h1>Segnaletica</h1>
-                            
-
-                    </div>
-            
-                    <div data-role="main" class="ui-content" >
-                        
-                        <div style="width:100%;overflow:hidden;" >
-                            <!--
-                            <div style="overflow:hidden">
-                                    <a style="height:32px;line-height:32px;width: 100%; float:right;" href="#"  class="ui-btn ui-car ui-icon-plus ui-btn-icon-left  ui-nodisc-icon ">						
-                                            Cartelli
-                                            
-                                    </a>
-                            </div>
-                            -->
-                            <div style="width:20%; float:left;overflow:hidden;">
-                                 <div style="text-align:center;margin-top:2em">
-                                   
-                                    <a style="height:32px;line-height:32px;border:0;text-decoration: none;" href="#" id="addRoadSignButtonBIG"><img src="img/add_car.png" ></a>
-                                    <br>
-                                    
-                                    Aggiungi
-                                    <br>
-                                </div>
-                                <div style="text-align:center;margin-top:2em;">
-                                   
-                                    <a style="height:32px;line-height:32px;border:0;text-decoration: none;" href="#" id="remRoadSignButtonBIG"><img src="img/delete.png" ></a>
-                                    <br>
-                                    
-                                    Rimuovi
-                                </div>
-                            
-                            </div>
-                            <div id="roadSignContainer" data-role="collapsible-set" data-collapsed="true" data-theme="b" style="width:80%;float:left;overflow:hidden">
-                               
-                            </div>
-                        </div>    
-                </div>
-            <div data-role="footer" class="footer"  data-position="fixed" align="center" style="background:none !important; background-color: #f2f2f2 !important;">
-                <div style="line-height:25px; color:#0086cc;">3 di 3</div>
-                <a href="#" id="saveButton" class="button-confirm next-step" data-step="3">SALVA</a>
-            </div>
-            
-    	</div>
-    	<!-- /sopralluoghiStep3Page -->
-        
-       
-        
+        -->
         
        
         
@@ -185,10 +205,16 @@
                 <div>
                     <input type="search" id="searchRoadSignText" data-theme="b" data-mini="true" placeholder="Nome segnale o codice" />
                 </div>
-                <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="display:block;">
+                <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="display:block;width:100%;">
+                    
                     <a href="javascript:app.closeRoadSignFinder()" class="ui-btn ui-icon-back ui-btn-icon-right" data-mini="true" data-theme="c">Chiudi</a>
                     <a href="javascript:app.searchRoadSign()" class="ui-btn ui-icon-search ui-btn-icon-right" data-mini="true">Cerca</a>
+                    
+                    <a href="#" id="addRoadSignButtonPanel" class="ui-btn ui-icon-plus ui-btn-icon-right" data-mini="true" style="float:right">Nuovo</a>
+                
                 </div>
+                <ul data-role="listview" id="roadSignList" data-inset="true">
+                </ul>
                 <div style="overflow:hidden;">
                     <div style="width:50%;overflow:hidden;float:left">
                         <h3> Materiale </h3>
@@ -225,7 +251,7 @@
 
                                 </li>
                                 <li style="border-bottom:0 !important">
-                                    <ul data-role="listview" data-inset="false" data-theme="b" id="info_pole_div" style="height:0;margin-top:1em" >        
+                                    <ul data-role="listview" data-inset="false" data-theme="b" id="info_pole_div">        
                                  <li style="border-bottom:0 !important">
                                     <label>Numero pali</label>
                                     <div style="text-align:center;padding:0;">
@@ -247,6 +273,16 @@
                                         </select>
                                     </div>    
                                 </li>
+                                <li style="border-bottom:0 !important">
+                                    <label>Cartelli</label>
+                                    <div style="text-align:center;padding:0;">
+                                        <input type="text" name="old_signs_number">
+                                    </div>    
+                                </li>
+                                
+                                
+                                
+                                
                             </ul>
 
                             </li>
@@ -291,13 +327,11 @@
                         </ul>
                     </div>    
                 </div>
-                
+                <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="display:block;float:right;">
+                    <a href="javascript:app.saveRoadSign()" class="ui-btn ui-icon-edit ui-btn-icon-right" data-mini="true">Salva</a>
+                </div>
                 
                
-                
-                
-                <ul data-role="listview" id="roadSignList" data-inset="true">
-                </ul>
             </div>
         </div>
         <!-- /roadSignFinder -->
