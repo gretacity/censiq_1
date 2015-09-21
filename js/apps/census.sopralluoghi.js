@@ -1200,7 +1200,7 @@ var app = {
                 rows: result,
                 textFieldName: 'name',
                 hrefFields: ['id', 'name'],
-                hrefFormat: 'javascript:app.setRoadSignSupport({0}, \'{1}\')'
+                hrefFormat: 'javascript:app.setRoadSignSupportPanel({0}, \'{1}\')'
             };
             
             
@@ -1312,6 +1312,11 @@ var app = {
         var roadSignPanel = $('div[data-roadsignno="' + app._currentRoadSign + '"]');
         $('a label.roadsign-support', roadSignPanel).attr('data-supportid', signSupportId).html(signSupport);
         app.closeListDialog();
+    },
+    setRoadSignSupportPanel: function(signSupportId, signSupport) {
+        var roadSignPanel = $('div[data-roadsignno="' + app._currentRoadSign + '"]');
+        $('a label.roadsign-support', roadSignPanel).attr('data-supportid', signSupportId).html(signSupport);
+        
     },
     openRoadSignTypes: function(signIndex)
     {
