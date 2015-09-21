@@ -112,25 +112,27 @@ a.textarea:after
     background:none !important;
 }
 
-#supporto_dialogs h1 a.alert_sup
+#supporto_dialogs h1 a.alert_sup, .itm_selected
 {
    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffc8c8+50,ffc8c8+50,ff0000+51 */
-background: rgb(255,200,200); /* Old browsers */
-background: -moz-linear-gradient(top,  rgba(255,200,200,1) 50%, rgba(255,200,200,1) 50%, rgba(255,0,0,1) 51%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,rgba(255,200,200,1)), color-stop(50%,rgba(255,200,200,1)), color-stop(51%,rgba(255,0,0,1))); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top,  rgba(255,200,200,1) 50%,rgba(255,200,200,1) 50%,rgba(255,0,0,1) 51%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top,  rgba(255,200,200,1) 50%,rgba(255,200,200,1) 50%,rgba(255,0,0,1) 51%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top,  rgba(255,200,200,1) 50%,rgba(255,200,200,1) 50%,rgba(255,0,0,1) 51%); /* IE10+ */
-background: linear-gradient(to bottom,  rgba(255,200,200,1) 50%,rgba(255,200,200,1) 50%,rgba(255,0,0,1) 51%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffc8c8', endColorstr='#ff0000',GradientType=0 ); /* IE6-9 */
-color: rgba(100, 100, 100, 0.53);
-text-shadow: 0 1px 0 #444444;
-border-radius:20px;
-margin:0 15px;
+background: rgb(255,200,200) !important; /* Old browsers */
+background: -moz-linear-gradient(top,  rgba(255,200,200,1) 50%, rgba(255,200,200,1) 50%, rgba(255,0,0,1) 51%) !important; /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,rgba(255,200,200,1)), color-stop(50%,rgba(255,200,200,1)), color-stop(51%,rgba(255,0,0,1))) !important; /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(255,200,200,1) 50%,rgba(255,200,200,1) 50%,rgba(255,0,0,1) 51%) !important; /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(255,200,200,1) 50%,rgba(255,200,200,1) 50%,rgba(255,0,0,1) 51%) !important; /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(255,200,200,1) 50%,rgba(255,200,200,1) 50%,rgba(255,0,0,1) 51%) !important; /* IE10+ */
+background: linear-gradient(to bottom,  rgba(255,200,200,1) 50%,rgba(255,200,200,1) 50%,rgba(255,0,0,1) 51%) !important; /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffc8c8', endColorstr='#ff0000',GradientType=0 ) !important; /* IE6-9 */
+color: rgba(100, 100, 100, 0.53) !important;
+text-shadow: 0 1px 0 #444444 !important;
+border-radius:20px !important;
+margin:0 15px !important;
 }
 
 
-#materiale_supporto li a, #dimensioni_segnale li a
+#materiale_supporto li a, #dimensioni_segnale li a,#pellicola_segnale li a
 {
     border:0 !important;
+    border-radius:20px !important;
+margin:0 15px !important;
 }

@@ -813,7 +813,7 @@ var app = {
                         '<img src="img/noPhoto.png" style="width:70%; margin:0 auto">'+
                     '</h3>'+
                     '<span>Ricerca segnale per nome o codice</span>');
-        $("#dimensioni_segnale").html('');    
+        $("#dimensioni_segnale ul").html(' <li>Specificare segnale</li>');    
         
         var roadSignPanel = $('div[data-roadsignno="' + signIndex + '"]');
         
@@ -834,12 +834,88 @@ var app = {
         }    
         $("#searchRoadSignText").val('').focus();
         
+        
+         data.sopralluoghi.getRoadSignFilms(function(result) {
+            var params={
+                rows: result,
+                textFieldName: 'name',
+                hrefFields: ['id', 'name'],
+                hrefFormat: 'javascript:app.setRoadSignFilmPanel({0}, \'{1}\')'
+            };
+            
+            
+            
+                var $dialog = $('#pellicola_segnale');
+                var $listview = $('ul',$dialog );
+                //$listview.appendTo($dialog);
+      
+                var html = '';
+                // (params.rows.constructor.name == 'SQLResultSetRowList')
+                var isSQLResulSetRowList = (typeof(params.rows.item) != 'undefined');
+                var rowCount = params.rows.length;
+                for(var i = 0; i < rowCount; i++)
+                {
+                    var r = params.rows[i];
+                    var refVals = [];
+                    for(var j in params.hrefFields)
+                    {
+                        var val = '';
+                        if(isSQLResulSetRowList) {
+                            val = eval('params.rows.item(i).' + params.hrefFields[j]);
+                        } else {
+                            val = eval('r.' + params.hrefFields[j]);
+                        }
+                        refVals.push(val);
+                    }
+
+                    if(refVals.length == 0) {
+                        refVals[0] = r;
+                    }
+
+                    // Set ref
+                    var ref = null;
+                    if((params.hrefFormat || '') == '') {
+                        // In this case always takes first element of refVals
+                        ref = refVals[0];
+                    } else {
+                        // params.hrefFormat.replace('{0}', refVal.replace('\'', '\\\''));
+                        ref = params.hrefFormat;
+                        for(var j in refVals) {
+                            var val = refVals[j];
+                            if(typeof(refVals[j]) == 'string') {
+                                val = val.replace('\'', '\\\'');
+                            }
+                            ref = ref.replace('{' + j + '}', val);
+                        }
+                    }
+
+                    //var text = (params.textFieldName == '') ? r : eval('r.' + params.textFieldName);
+                    var text = '';
+                    if(params.textFieldName == '') {
+                        text = r;
+                    } else if(isSQLResulSetRowList) {
+                        text = eval('params.rows.item(i).' + params.textFieldName);
+                    } else {
+                        text = eval('r.' + params.textFieldName);
+                    }
+
+                    html += '<li><a href="' + ref + '" id="fl'+r.id+'">' + text + '</a></li>';
+                }
+                $listview.html(html);
+                $listview.listview();
+                //$listview.trigger("create");
+                $listview.listview("refresh");
+            
+            
+        });
+        
+        
         data.sopralluoghi.getRoadSignSupports(function(result) {
             var params={
                 rows: result,
                 textFieldName: 'name',
                 hrefFields: ['id', 'name'],
-                hrefFormat: 'javascript:app.setRoadSignSupport({0}, \'{1}\')'
+                hrefFormat: 'javascript:app.setRoadSignSupportPanel({0}, \'{1}\')'
             };
             
             
@@ -898,7 +974,7 @@ var app = {
                         text = eval('r.' + params.textFieldName);
                     }
 
-                    html += '<li><a href="' + ref + '">' + text + '</a></li>';
+                    html += '<li><a href="' + ref + '" id="sp'+r.id+'">' + text + '</a></li>';
                 }
                 $listview.html(html);
                 $listview.listview();
@@ -1130,7 +1206,7 @@ var app = {
                         '<img src="img/noPhoto.png" style="width:70%; margin:0 auto">'+
                     '</h3>'+
                     '<span>Ricerca segnale per nome o codice</span>');
-        $("#dimensioni_segnale").html('');    
+        $("#dimensioni_segnale ul").html(' <li>Specificare segnale</li>');    
         
         app.addRoadSignPanel(); 
     },
@@ -1192,82 +1268,18 @@ var app = {
            helper.alert('Seleziona il segnale ',null,'Dimensione');
         }        
     },
+    
     setRoadSignSizeDialog: function(signSizeId, signSize) {
         var roadSignPanel = $('div[data-roadsignno="' + app._currentRoadSign + '"]');
         $('a label.roadsign-size', roadSignPanel).attr('data-sizeid', signSizeId).html(signSize);
-         data.sopralluoghi.getRoadSignSupports(function(result) {
-            var params={
-                rows: result,
-                textFieldName: 'name',
-                hrefFields: ['id', 'name'],
-                hrefFormat: 'javascript:app.setRoadSignSupportPanel({0}, \'{1}\')'
-            };
-            
-            
-            
-                var $dialog = $('#materiale_supporto');
-                var $listview = $('ul',$dialog );
-                //$listview.appendTo($dialog);
-      
-                var html = '';
-                // (params.rows.constructor.name == 'SQLResultSetRowList')
-                var isSQLResulSetRowList = (typeof(params.rows.item) != 'undefined');
-                var rowCount = params.rows.length;
-                for(var i = 0; i < rowCount; i++)
-                {
-                    var r = params.rows[i];
-                    var refVals = [];
-                    for(var j in params.hrefFields)
-                    {
-                        var val = '';
-                        if(isSQLResulSetRowList) {
-                            val = eval('params.rows.item(i).' + params.hrefFields[j]);
-                        } else {
-                            val = eval('r.' + params.hrefFields[j]);
-                        }
-                        refVals.push(val);
-                    }
-
-                    if(refVals.length == 0) {
-                        refVals[0] = r;
-                    }
-
-                    // Set ref
-                    var ref = null;
-                    if((params.hrefFormat || '') == '') {
-                        // In this case always takes first element of refVals
-                        ref = refVals[0];
-                    } else {
-                        // params.hrefFormat.replace('{0}', refVal.replace('\'', '\\\''));
-                        ref = params.hrefFormat;
-                        for(var j in refVals) {
-                            var val = refVals[j];
-                            if(typeof(refVals[j]) == 'string') {
-                                val = val.replace('\'', '\\\'');
-                            }
-                            ref = ref.replace('{' + j + '}', val);
-                        }
-                    }
-
-                    //var text = (params.textFieldName == '') ? r : eval('r.' + params.textFieldName);
-                    var text = '';
-                    if(params.textFieldName == '') {
-                        text = r;
-                    } else if(isSQLResulSetRowList) {
-                        text = eval('params.rows.item(i).' + params.textFieldName);
-                    } else {
-                        text = eval('r.' + params.textFieldName);
-                    }
-
-                    html += '<li><a href="' + ref + '">' + text + '</a></li>';
-                }
-                $listview.html(html);
-                $listview.listview();
-                //$listview.trigger("create");
-                $listview.listview("refresh");
-            
-            
-        });
+         $("#dimensioni_segnale a").removeClass("itm_selected");
+        $("#sz"+signSupportId).addClass("itm_selected");
+        
+        
+        
+        
+        
+         
         
         
         
@@ -1314,10 +1326,15 @@ var app = {
         app.closeListDialog();
     },
     setRoadSignSupportPanel: function(signSupportId, signSupport) {
+        
+        
         var roadSignPanel = $('div[data-roadsignno="' + app._currentRoadSign + '"]');
         $('a label.roadsign-support', roadSignPanel).attr('data-supportid', signSupportId).html(signSupport);
+        $("#materiale_supporto a").removeClass("itm_selected");
+        $("#sp"+signSupportId).addClass("itm_selected");
         
     },
+    
     openRoadSignTypes: function(signIndex)
     {
         data.sopralluoghi.getRoadSignTypes(function(result) {
@@ -1385,6 +1402,13 @@ var app = {
         var roadSignPanel = $('div[data-roadsignno="' + app._currentRoadSign + '"]');
         $('a label.roadsign-film', roadSignPanel).attr('data-filmid', signFilmId).html(signFilm);
         app.closeListDialog();
+    },
+     setRoadSignFilmPanel: function(signFilmId, signFilm) {
+        var roadSignPanel = $('div[data-roadsignno="' + app._currentRoadSign + '"]');
+        $('a label.roadsign-film', roadSignPanel).attr('data-filmid', signFilmId).html(signFilm);
+        $("#pellicola_segnale a").removeClass("itm_selected");
+        $("#fl"+signFilmId).addClass("itm_selected");
+        
     },
     
     showOlPoleInfo: function() {
