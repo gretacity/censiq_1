@@ -63,4 +63,3 @@ queue.start(function(item) {
 });
 // TODO Testing data.hope()
 
-console.log(queue);

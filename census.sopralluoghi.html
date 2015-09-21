@@ -108,7 +108,10 @@
         <!-- sopralluoghiStep3Page -->
 	
     	<div data-role="page" id='sopralluoghiStep3Page' style="background:#FFFFFF">
-            
+                <input type="hidden" name="oldpole" id="oldpole" value="-1">
+                <input type="hidden" name="numberOfPoles" id="numberOfPoles" value="1">
+                <input type="hidden" name="poleHeight" id="poleHeight" value="0">
+                <input type="hidden" name="poleDiameter" id="poleDiameter" value="0">
     		<div data-role="header" class="header" data-position="fixed">
                 <a data-step="3" href="#" class="ui-btn ui-btn-icon-left ui-btn-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-back ui-alt-icon ui-nodisc-icon prev-step" data-role="button" role="button"></a>
                 <a href="index.html" id="homeButton" rel="external" class=" ui-btn-right ui-icon-toolbar-button toolbar-button-home ui-btn ui-btn-icon-left ui-nodisc-icon ui-btn-icon-notext">Home</a>
@@ -119,110 +122,35 @@
             
                     <div data-role="main" class="ui-content" >
                         
-                        
-                        <div style="width:40%;float:left;overflow:hidden">
-                            <div>
-                                <a style="line-height:32px;height:32px;width: 100%; float:right;" href="#" class="ui-btn ui-car ui-icon-plus ui-btn-icon-left  ui-nodisc-icon ">						
-                                        Supporto
-                                </a>
-                            </div>
-                            <div  id="supporto_div">
-                                <div>
-                                     <ul data-role="listview" data-inset="false" data-theme="b" style="margin-bottom: 12px">
-                                        <li style="border-bottom:0 !important">
-                                            <label>Supporto</label>
-                                            <div style="text-align:center;padding:0;">
-                                                
-                                                <select name="oldpole" id="oldpole">
-                                                     <option value="1">Rimozione</option>
-                                                    <option value="0">Sostituzione</option>
-                                                    <option value="2">Riutilizzo</option>
-                                                </select>
-                                            </div>    
-
-                                        </li>
-                                    </ul>
-                                    <ul data-role="listview" data-inset="false" data-theme="b" id="info_pole_div" style="height:0;" >        
-                                         <li style="border-bottom:0 !important">
-                                            <label>Numero pali</label>
-                                            <div style="text-align:center;padding:0;">
-                                                <input type="text" name="numberOfPoles" value="1">
-                                            </div>    
-                                        </li>
-                                         <li style="border-bottom:0 !important">
-                                            <label>Altezza</label>
-                                            <div style="text-align:center;padding:0;">
-                                                <input type="text" name="poleHeight">
-                                            </div>    
-                                        </li>
-                                        <li style="border-bottom:0 !important">
-                                            <label>Sezione</label>
-                                            <div style="text-align:center;padding:0;">
-                                                 <select name="poleDiameter">
-                                                    <option value="60">60 mm</option>
-                                                    <option value="40">40 mm</option>
-                                                </select>
-                                            </div>    
-                                        </li>
-                                    </ul>       
-                                </div>  
-                                <div id="foto">
-
-                                    <ul data-role="listview" data-inset="false" data-theme="b" id="foto">        
-
-                                            <li>
-                                            <label>Foto 1</label>
-                                                <div style="text-align:center;padding:0;">
-                                                    <a href="#" data-viewtype="front" data-showview style="display:none;">
-                                                        <img src="" style="width:100%" />
-                                                    </a>
-                                                    <a href="#" data-viewtype="front" data-removeview class="ui-btn ui-icon-delete ui-btn-icon-left" style="display:none;">rimuovi</a>
-                                                    <a href="#" data-viewtype="front" data-addview    class="ui-btn ui-icon-camera ui-btn-icon-left">acquisisci</a>
-                                                </div>
-                                            </li>
-
-                                            <li>
-                                                <label>Foto 2</label>
-                                                <div style="text-align:center;">
-                                                    <a href="#" data-viewtype="back" data-showview style="display:none;">
-                                                        <img src="" style="width:100%" />
-                                                    </a>
-                                                    <a href="#" data-viewtype="back" data-removeview class="ui-btn ui-icon-delete ui-btn-icon-left" style="display:none;">rimuovi</a>
-                                                    <a href="#" data-viewtype="back" data-addview    class="ui-btn ui-icon-camera ui-btn-icon-left">acquisisci</a>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <label>Foto 3</label>
-                                                <div style="text-align:center;">
-                                                    <a href="#" data-viewtype="perspective" data-showview style="display:none;">
-                                                        <img src="" style="width:100%" />
-                                                    </a>
-                                                    <a href="#" data-viewtype="perspective" data-removeview class="ui-btn ui-icon-delete ui-btn-icon-left" style="display:none;">rimuovi</a>
-                                                    <a href="#" data-viewtype="perspective" data-addview    class="ui-btn ui-icon-camera ui-btn-icon-left">acquisisci</a>
-                                                </div>
-                                            </li>
-                                        </ul>
-
-
-
-                                </div>
-                            </div>
-                        </div>
-                        <div style="width:60%;float:left;overflow:hidden;" >
+                        <div style="width:100%;overflow:hidden;" >
+                            <!--
                             <div style="overflow:hidden">
-                                    <a style="height:32px;line-height:32px;width: 100%; float:right;" href="#" id="addRoadSignButton" class="ui-btn ui-car ui-icon-plus ui-btn-icon-left  ui-nodisc-icon ">						
+                                    <a style="height:32px;line-height:32px;width: 100%; float:right;" href="#"  class="ui-btn ui-car ui-icon-plus ui-btn-icon-left  ui-nodisc-icon ">						
                                             Cartelli
-                                            <img src="img/add_car.png" style="max-width: 3em; float: right; width: 2em;">
+                                            
                                     </a>
                             </div>
-                            <div id="roadSignContainer" data-role="collapsible-set" data-collapsed="true" data-theme="b">
-                                <div id="exp" style="text-align:center" style="margin-top:2em">
+                            -->
+                            <div style="width:20%; float:left;overflow:hidden;">
+                                 <div style="text-align:center;margin-top:2em">
                                    
                                     <a style="height:32px;line-height:32px;border:0;text-decoration: none;" href="#" id="addRoadSignButtonBIG"><img src="img/add_car.png" ></a>
                                     <br>
                                     
                                     Aggiungi
+                                    <br>
                                 </div>
+                                <div style="text-align:center;margin-top:2em;">
+                                   
+                                    <a style="height:32px;line-height:32px;border:0;text-decoration: none;" href="#" id="remRoadSignButtonBIG"><img src="img/delete.png" ></a>
+                                    <br>
+                                    
+                                    Rimuovi
+                                </div>
+                            
+                            </div>
+                            <div id="roadSignContainer" data-role="collapsible-set" data-collapsed="true" data-theme="b" style="width:80%;float:left;overflow:hidden">
+                               
                             </div>
                         </div>    
                 </div>
@@ -244,17 +172,130 @@
         <!-- ### DIALOGS ### -->
         
         
-        
         <!-- roadSignFinder -->
         <div data-role="dialog" id="roadSignFinder">
             <div data-role="header" class="header"><h1>Ricerca segnale</h1></div>
             <div data-role="main" class="ui-content">
-                <select id="roadSignShapeList" data-theme="b" disabled></select>
-                <input type="search" id="searchRoadSignText" data-theme="b" data-mini="true" placeholder="Nome segnale o codice" />
-                <div data-role="controlgroup" data-type="horizontal" data-theme="b" sstyle="float:right;display:block;">
+                <div id="img_segnale" style="text-align:center">
+                    <h3>
+                        <img src="img/noPhoto.png" style="width:70%; margin:0 auto">
+                    </h3>
+                    <span>Ricerca segnale per nome o codice</span>
+                </div>
+                <div>
+                    <input type="search" id="searchRoadSignText" data-theme="b" data-mini="true" placeholder="Nome segnale o codice" />
+                </div>
+                <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="display:block;">
                     <a href="javascript:app.closeRoadSignFinder()" class="ui-btn ui-icon-back ui-btn-icon-right" data-mini="true" data-theme="c">Chiudi</a>
                     <a href="javascript:app.searchRoadSign()" class="ui-btn ui-icon-search ui-btn-icon-right" data-mini="true">Cerca</a>
                 </div>
+                <div style="overflow:hidden;">
+                    <div style="width:50%;overflow:hidden;float:left">
+                        <h3> Materiale </h3>
+                    </div>
+                    <div style="width:50%;overflow:hidden;float:left">
+                        <h3> Supporto </h3>
+                    </div>
+                    <div id="materiale_supporto" style="width:50%;overflow:hidden;float:left">
+                       <ul data-role="listview" class="ui-listview ui-group-theme-b" style="margin:0!important">
+                       </ul>
+                    </div>
+                    <div id="dimensioni_segnale" style="width:50%;overflow:hidden;float:left">
+                        <ul data-role="listview" class="ui-listview ui-group-theme-b" style="margin:0!important">
+                           
+                        </ul>
+                    </div>
+                </div>    
+                <div id="supporto_dialogs" style="margin:10px 0">
+                    <div id="a_sp_dialog" data-inset="false" data-role="collapsible" data-collapsed="true" data-collapsed-icon="carat-r" data-expanded-icon="carat-d" data-theme="b">
+                        <h1 class="ui-collapsible-heading">
+                                <span id="supp_title">Specificare esistente</span>
+                        </h1>    
+                        <ul data-role="listview" class="ui-listview ui-group-theme-b">
+                                <li style="border-bottom:0 !important">
+                                    <label>Intervento</label>
+                                    <div style="text-align:center;padding:0;">
+
+                                        <select name="oldpole_p" id="oldpole_p">
+                                             <option value="1">Rimozione</option>
+                                            <option value="0">Sostituzione</option>
+                                            <option value="2">Riutilizzo</option>
+                                        </select>
+                                    </div>    
+
+                                </li>
+                                <li style="border-bottom:0 !important">
+                                    <ul data-role="listview" data-inset="false" data-theme="b" id="info_pole_div" style="height:0;margin-top:1em" >        
+                                 <li style="border-bottom:0 !important">
+                                    <label>Numero pali</label>
+                                    <div style="text-align:center;padding:0;">
+                                        <input type="text" name="numberOfPoles_p" value="1">
+                                    </div>    
+                                </li>
+                                 <li style="border-bottom:0 !important">
+                                    <label>Altezza</label>
+                                    <div style="text-align:center;padding:0;">
+                                        <input type="text" name="poleHeight_p">
+                                    </div>    
+                                </li>
+                                <li style="border-bottom:0 !important">
+                                    <label>Sezione</label>
+                                    <div style="text-align:center;padding:0;">
+                                         <select name="poleDiameter_p">
+                                            <option value="60">60 mm</option>
+                                            <option value="40">40 mm</option>
+                                        </select>
+                                    </div>    
+                                </li>
+                            </ul>
+
+                            </li>
+                            <li style="border-bottom:0 !important">
+                                    <div id="foto">
+                                        <ul data-role="listview" data-inset="false" data-theme="b" id="foto" style="margin-top:1em">        
+                                                <li>
+                                                <label>Foto 1</label>
+                                                    <div style="text-align:center;padding:0;">
+                                                        <a href="#" data-viewtype="front" data-showview style="display:none;">
+                                                            <img src="" style="width:100%" />
+                                                        </a>
+                                                        <a href="#" data-viewtype="front" data-removeview class="ui-btn ui-icon-delete ui-btn-icon-left" style="display:none;">rimuovi</a>
+                                                        <a href="#" data-viewtype="front" data-addview    class="ui-btn ui-icon-camera ui-btn-icon-left">acquisisci</a>
+                                                    </div>
+                                                </li>
+                                               
+                                                <li>
+                                                    <label>Foto 2</label>
+                                                    <div style="text-align:center;">
+                                                        <a href="#" data-viewtype="back" data-showview style="display:none;">
+                                                            <img src="" style="width:100%" />
+                                                        </a>
+                                                        <a href="#" data-viewtype="back" data-removeview class="ui-btn ui-icon-delete ui-btn-icon-left" style="display:none;">rimuovi</a>
+                                                        <a href="#" data-viewtype="back" data-addview    class="ui-btn ui-icon-camera ui-btn-icon-left">acquisisci</a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <label>Foto 3</label>
+                                                    <div style="text-align:center;">
+                                                        <a href="#" data-viewtype="perspective" data-showview style="display:none;">
+                                                            <img src="" style="width:100%" />
+                                                        </a>
+                                                        <a href="#" data-viewtype="perspective" data-removeview class="ui-btn ui-icon-delete ui-btn-icon-left" style="display:none;">rimuovi</a>
+                                                        <a href="#" data-viewtype="perspective" data-addview    class="ui-btn ui-icon-camera ui-btn-icon-left">acquisisci</a>
+                                                    </div>
+                                                </li>
+                                              
+                                            </ul>
+                                    </div>
+                                </li>
+                        </ul>
+                    </div>    
+                </div>
+                
+                
+               
+                
+                
                 <ul data-role="listview" id="roadSignList" data-inset="true">
                 </ul>
             </div>

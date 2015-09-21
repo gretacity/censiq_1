@@ -229,17 +229,11 @@ var app = {
         var itemId = app.synchronization.queue[0];
         
         console.log('syncronizing item ' + itemId);
-        
-// Simulate Synchronization: duration 5 secs
-/*setTimeout(function() {
-    app.syncSuccess(itemId);
-    //alert('Synchronizing item with id ' + itemId);
-}, 5000);*/
-        
         services.uploadEntity(itemId, app.syncSuccess, app.syncError);
     },
     
-    syncSuccess: function(itemId, responseText) {
+    syncSuccess: function(itemId, responseText) 
+    {
 
         console.log('synchronized item ' + itemId);
         

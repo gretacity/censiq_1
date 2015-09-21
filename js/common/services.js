@@ -112,6 +112,10 @@ return;*/
                     handler = data.guardrail;
                     url = config.URL_BASE + config.URL_SYNC_GUARDRAIL;
                     break;
+                case CensusTypes.sopralluoghi:
+                    handler = data.sopralluoghi;
+                    url = config.URL_BASE + config.URL_SYNC_SOPRALLUOGHI;
+                break;    
                 default:
                     failCallback('Entity type not allowed');
                     return;

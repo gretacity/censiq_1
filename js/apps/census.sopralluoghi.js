@@ -23,22 +23,9 @@ var app = {
     // Application Constructor
     initialize: function() 
     {
-       
-        // Custom fields used for localization (street , no/km)
-        //page.injector.injectPage('#summaryPage', 'summary', {continueLink: '#sopralluoghiStep0Page'});
-        
-        // Road Sign shapes
-        
-        var html='';
-        
-        $('#poleDiameter').html(html);
-        $('#upwindPoleDiameter').html(html);
-        
-        this.bindEvents();        
+       this.bindEvents();        
     },
-    
-    
-    
+     
     // Bind Event Listeners
     //
     // Bind any events that are required on startup. Common events are:
@@ -65,9 +52,20 @@ var app = {
         
         
         var $page3 = $('#foto');
-        $('#addRoadSignButton').on('click', app.addRoadSignPanel);
+        
+        
+        $('a[data-addview]', $page3).on('click', this.acquirePhoto);
+        $('a[data-removeview]', $page3).on('click', this.removePhoto);
+        $('#photoPage a').on('tap', this.hidePhotoDialog);
+        
+        
+        //$('#addRoadSignButton').on('click', app.addRoadSignPanel);
         $('#addRoadSignButtonBIG').on('click', app.addRoadSignPanel);
-        $('#oldpole').on('change', app.showOlPoleInfo);
+        
+        $('#remRoadSignButtonBIG').on('click', app.addRoadSignPanel);
+        
+        
+        $('#oldpole_p').on('change', app.showOlPoleInfo);
         
         
         $('div[data-role="dialog"]').on('create', function() {
@@ -113,7 +111,7 @@ var app = {
                     html+='<div id="cls_'+obj.id+'">'+
                             '<img  onclick="app.updateItems(\''+qrCode+'\')" src="img/update.png" style="float:right;margin-right:10px; height:32px;width: 32px">'+
                             '</div>';
-                    if(obj.roadSign.signs.lenght>0)
+                    if(obj.sopraluoghi.signs.lenght>0)
                     {
                     html+='<div style="margin-right:5px;overflow:hidden;float:left">'+
                             '<img class="img'+obj.roadSign.signs[0].roadSignId+'"  style="width:50px;height:50px;">'+
@@ -169,7 +167,6 @@ var app = {
         }
         console.log('Received Event: ' + id);
     },
-    
     updateItems: function(qrCode)
     {
         $('#curr_qrcode','#localizeroadSignPage').val(qrCode);
@@ -324,46 +321,16 @@ var app = {
         
         // Update the Census entity...
         app.census.dateAdded = new Date();
-        app.census.qrCode = $('#qrCode').val();
+        //app.census.qrCode = $('#qrCode').val();
         //app.census.position.latitude = '';    // Already set
         //app.census.position.longitude = '';   // Already set
         //app.census.position.accuracy = '';    // Already set
         app.census.fixedOnMap = $('#positionIsCorrect').val();
         
-        app.census.roadSign.comune = $ ('#comune').val();
-        app.census.roadSign.provincia = $ ('#provincia').val();
-        app.census.roadSign.street = $('#street').val();
-        app.census.roadSign.streetNumber = $('#streetNumber').val();
-        app.census.roadSign.denominazione_strada = $('#denominazione_strada').val();
-        app.census.roadSign.tipo_strada = $('#tipo_strada').val();
-        app.census.roadSign.itinerario_internazionale = $('#itinerario_internazionale').val();
-        app.census.roadSign.distanza = $('#distanza').val();
-        app.census.roadSign.ditta_installatrice = $('#ditta_installatrice').val();
-        app.census.roadSign.data_installazione = $('#data_installazione').val();
-        app.census.roadSign.installatore = $('#installatore').val();
-        app.census.roadSign.ditta_produttrice = $('#ditta_produttrice').val();
-        app.census.roadSign.ordinanza_numero = $('#ordinanza_numero').val();
-        app.census.roadSign.ordinanza_del = $('#ordinanza_del').val();
-        app.census.roadSign.ordinanza_dismissione = $('#ordinanza_dismissione').val();
-        app.census.roadSign.dismissione_del = $('#dismissione_del').val();
-        app.census.roadSign.note = $('#note').val();
-        
-        app.census.roadSign.posizione = $('#posizione').val();
-        app.census.roadSign.distanza_pos = $('#distanza_pos').val();
-        app.census.roadSign.cippo = $('#cippo').val();
-        app.census.roadSign.tipo_impianto = $('#tipo_impianto').val();
-        app.census.roadSign.altro_tipo_impianto = $('#altro_tipo_impianto').val();
-        app.census.roadSign.tipo_supporto = $('#tipo_supporto').val();
-        app.census.roadSign.altro_tipo_supporto = $('#altro_tipo_supporto').val();
-        app.census.roadSign.materiale_supporto = $('#materiale_supporto').val();
-        app.census.roadSign.sezione = $('#sezione').val();
-        app.census.roadSign.altezza_supporto = $('#poleHeight').val();
-        app.census.roadSign.distanza_ciglio = $('#distanza_ciglio').val();
-        app.census.roadSign.stato_conservazione = $('#stato_conservazione').val();
-        app.census.roadSign.disposizione_segnali = $('#disposizione_segnali').val();
-    
-        
-        
+        app.census.sopralluoghi.comune = $ ('#comune').val();
+        app.census.sopralluoghi.provincia = $ ('#provincia').val();
+        app.census.sopralluoghi.street = $('#street').val();
+        app.census.sopralluoghi.note = $('#note').val();
         
         // Pictures related to the city asset
         var imageKeys = ['front', 'back', 'perspective'];
@@ -378,7 +345,7 @@ var app = {
         }
         
         // Loop into roadsigns
-         app.census.roadSign.signs=Array();
+        app.census.roadSign.signs=Array();
         $('#roadSignContainer div[data-roadsignno]').each(function() {
             var $container = $(this);
            
@@ -390,52 +357,18 @@ var app = {
             signInfo.roadSignType = $('a label.roadsign-type[data-changed="true"]', $container).html() || ''; // Tipologia (monofacciale, bifacciale)
             signInfo.support = $('a label.roadsign-support', $container).attr('data-supportid');    // Supporto (alluminio, ferro)
             signInfo.film = $('a label.roadsign-film', $container).attr('data-filmid');             // Pellicola
-            signInfo.maintenance = $('a label.roadsign-maintenance', $container).attr('data-maintenanceid');    // Tipo intervento
-            signInfo.maintenanceNotes = $('textarea.roadsign-notes', $container).val();             // Descrizione (eventuali note)
-            
-            // Back
-            signInfo.marking = $('input[type="radio"].roadsign-mark:checked', $container).val();                                    // Marchio [CE], [OM]ologato, []Non Omologato
-            signInfo.manufacturer = $('a label.roadsign-manufacturer[data-changed="true"] span.roadsign-manufacturer-name', $container).html() || '';          // Ditta produttrice
-            signInfo.manufacturerNo = $('a label.roadsign-manufacturer[data-changed="true"] span.roadsign-manufacturer-no', $container).html() || '';          // Numero autorizzazione ditta produttrice
-            signInfo.manufacturingYear = $('a label.roadsign-manufacturer[data-changed="true"] span.roadsign-manufacturer-year', $container).html() || d.getFullYear();     // Anno di produzione
-            signInfo.installer = $('a label.roadsign-installer[data-changed="true"] span.roadsign-installer', $container).html() || '';                        // Azienda installatrice
-            signInfo.installationDate = $('a label.roadsign-installer[data-changed="true"] span.roadsign-installation-date', $container).html() || '';         // Azienda installatrice
-            signInfo.owner = $('a label.roadsign-owner[data-changed="true"]', $container).html() || '';                                                        // Proprietario
-            signInfo.ordinanceNo = $('a label.roadsign-ordinance[data-changed="true"] span.roadsign-ordinance-no', $container).html() || '';                   // Ordinanza numero
-            signInfo.ordinanceDate = $('a label.roadsign-ordinance[data-changed="true"] span.roadsign-ordinance-date', $container).html() || '';               // Data dell'ordinanza
-            
-           
-            
-            // TODO Review
-            // Add entries to the supportTableData object
-            if((signInfo.manufacturer || '') != '')
-                supportTableData.manufacturers.push({'name': signInfo.manufacturer, 'authNo': (signInfo.manufacturerNo || '')});
-            if((signInfo.installer || '') != '') 
-                supportTableData.installers.push({'name': signInfo.installer});
-            if((signInfo.owner || '') != '')
-                supportTableData.owners.push({'name': signInfo.owner});
-            
-            
-             app.census.roadSign.signs.push(signInfo);
+            app.census.roadSign.signs.push(signInfo);
              
-             console.log(app.census.roadSign.signs);
+            
         });
 
         // Add pole and brackets informations
         var poleInfo = new RoadSign.PoleInfo();
-        poleInfo.numberOfPoles = $('#totPoles').val();                                  // Numero di pali
+        poleInfo.numberOfPoles = $('#numberOfPoles').val();                                  // Numero di pali
         poleInfo.poleDiameter = $('#poleDiameter').val();                               // Diametro dei pali
         poleInfo.poleHeight = $('#poleHeight').val();                                   // Altezza dei pali
-        poleInfo.poleNumberOfSingleSidedBrackets = $('#totBrackets').val();             // Numero staffe monofacciali usate per i pali
-        poleInfo.poleNumberOfDoubleSidedBrackets = $('#totBrackets2').val();            // Numero staffe bifacciali usate per i pali
-        poleInfo.numberOfPolesUpwind = $('#totUpwindPoles').val();                      // Numero di pali controvento
-        poleInfo.poleUpwindDiameter = $('#upwindPoleDiameter').val();                   // Diametro dei pali controvento
-        poleInfo.poleUpwindHeight = $('#upwindPoleHeight').val();                       // Altezza dei pali controvento
-        poleInfo.poleUpwindNumberOfSingleSidedBrackets = $('#totUpwindBrackets').val(); // Numero staffe monofacciali usate per i pali controvento
-        poleInfo.poleUpwindNumberOfDoubleSidedBrackets = $('#totUpwindBrackets2').val();// Numero staffe bifacciali usate per i pali controvento
-        poleInfo.poleUpwindNumberOfUpwindBrackets = $('#totUpwindBrackets3').val();     // Numero staffe controvento usate per i pali controvento
-//      console.log(poleInfo);
-        app.census.roadSign.poleInfo = poleInfo;
+        
+        app.census.sopralluoghi.poleInfo = poleInfo;
         // ...and save it
         // TODO Reenable
         //data.sopralluoghi.updateSupportTables(supportTableData);
@@ -445,32 +378,12 @@ var app = {
         
         
         // Once saved the census, empty fields of all the steps
-        var $page = $('#sopralluoghiStep0Page');
-        $('input[type="text"]', $page).val('');
-        $('input[type="hidden"]', $page).val('');
-        $('#geoStatusText', $page).html('Latitudine e longitudine');
-        $('#geoStatusTitle', $page).html('Ottieni');
-        $('#openMapPanel', $page).hide();
-        var $page = $('#sopralluoghiStep3Page');
-        $('input[type="text"]', $page).val('');
-        $('input[type="hidden"]', $page).val('');
+        
+        $('input[type="text"]').val('');
+        $('input[type="hidden"]').val('');
         app.removePhoto('front');
         app.removePhoto('back');
-        app.removePhoto('perspective');
-        var $page = $('#sopralluoghiStep2Page');
-        $('#roadSignContainer', $page).empty();
-        $('#startMessage', $page).show();
-        var $page = $('#sopralluoghiStep3Page');
-        $('input[type="text"]', $page).val('');
-        $('input[type="hidden"]', $page).val('');
-        $('textarea', $page).val('');
-        $('select', $page).val(0);
-        $('#saveButton', $page).removeClass('ui-disabled');
-        $('#syncNowButton').removeClass('ui-disabled').html('Sincronizza subito');
-        
-        // Speed up development/testing
-        $('#qrCode').val(config.QR_CODE_TEST);
-        
+        app.removePhoto('perspective');     
         // Move to the last page of the wizard
         $.mobile.changePage('#ElencoSopralluoghiPage', {
             transition: 'slide'
@@ -753,8 +666,6 @@ var app = {
             html+='<li><a href="javascript:app.setRoadSignTypes(0, \'Nessuna selezione\')">Nessuna selezione</a></li>';
         } 
         
-        
-        
         for(var i = 0; i < rowCount; i++) {
         
           
@@ -833,14 +744,9 @@ var app = {
     _roadSignCounter: 0,    // Counter increased each time a new panel is added
     _currentRoadSign: null, // Current roadsign in editing
     addRoadSignPanel: function() {
-        
-        
-        $("#exp").remove();
-      
+        var rem=0;
         var count = ++app._roadSignCounter;
-        
-       
-        
+        app.openRoadSignFinder( count,rem);
         var $roadSignPanel = $('<div data-roadsignno="' + count + '" data-inset="false" data-role="collapsible" data-collapsed="true" data-collapsed-icon="carat-r" data-expanded-icon="carat-d" data-theme="b">' +
                                     '<h1>' +
                                         '<img src="" class="roadsign-picture" /> <span>Cartello</span>' +
@@ -848,22 +754,10 @@ var app = {
                                     '<ul data-role="listview" class="ui-listview ui-group-theme-b"></ul>' +
                                 '</div>');
         $('#roadSignContainer').append($roadSignPanel);
-        
-        
-        
         $roadSignPanel.collapsible({collapsed: false});
         $roadSignPanel.trigger("create");
-        
         $listview = $('ul', $roadSignPanel);
-      
-        $listview.append('<li class="roadsign-sign-li">' +
-                            '<a href="javascript:app.openInterventoTypes(' + count + ')">' +
-                                '<!--img src="img/Segnali/cod_1.svg" /-->' +
-                                '<input type="hidden" id="rimozione" value="0" />' +
-                                 '<div class="roadsign-rimozione">Intervento</div>' +
-                            '</a>' +
-                
-                                '</li>');    
+        $listview.append('<input type="hidden" id="rimozione" value="0" />');    
                                    
       
       
@@ -903,6 +797,7 @@ var app = {
         
         $listview.listview("refresh");
         $('#startMessage').hide();
+       
     },
     removeRoadSignPanel: function(index) {
         var $el = $('#roadSignContainer div[data-roadsignno="' + index + '"]');
@@ -925,13 +820,100 @@ var app = {
         $.mobile.changePage('#roadSignFinder', {
             transition: 'pop'
         });
+        if($("#oldpole").val()==-1)
+        {
+            $("#a_sp_dialog a").addClass("alert_sup");
+            $("#supp_title").html("Specificare esistente");
+        }
+        else
+        {
+            $("#a_sp_dialog a").removeClass("alert_sup");
+            $("#supp_title").html("Supporto");
+        }    
         $("#searchRoadSignText").val('').focus();
+        
+        data.sopralluoghi.getRoadSignSupports(function(result) {
+            var params={
+                rows: result,
+                textFieldName: 'name',
+                hrefFields: ['id', 'name'],
+                hrefFormat: 'javascript:app.setRoadSignSupport({0}, \'{1}\')'
+            };
+            
+            
+            
+                var $dialog = $('#materiale_supporto');
+                var $listview = $('ul',$dialog );
+                //$listview.appendTo($dialog);
+      
+                var html = '';
+                // (params.rows.constructor.name == 'SQLResultSetRowList')
+                var isSQLResulSetRowList = (typeof(params.rows.item) != 'undefined');
+                var rowCount = params.rows.length;
+                for(var i = 0; i < rowCount; i++)
+                {
+                    var r = params.rows[i];
+                    var refVals = [];
+                    for(var j in params.hrefFields)
+                    {
+                        var val = '';
+                        if(isSQLResulSetRowList) {
+                            val = eval('params.rows.item(i).' + params.hrefFields[j]);
+                        } else {
+                            val = eval('r.' + params.hrefFields[j]);
+                        }
+                        refVals.push(val);
+                    }
+
+                    if(refVals.length == 0) {
+                        refVals[0] = r;
+                    }
+
+                    // Set ref
+                    var ref = null;
+                    if((params.hrefFormat || '') == '') {
+                        // In this case always takes first element of refVals
+                        ref = refVals[0];
+                    } else {
+                        // params.hrefFormat.replace('{0}', refVal.replace('\'', '\\\''));
+                        ref = params.hrefFormat;
+                        for(var j in refVals) {
+                            var val = refVals[j];
+                            if(typeof(refVals[j]) == 'string') {
+                                val = val.replace('\'', '\\\'');
+                            }
+                            ref = ref.replace('{' + j + '}', val);
+                        }
+                    }
+
+                    //var text = (params.textFieldName == '') ? r : eval('r.' + params.textFieldName);
+                    var text = '';
+                    if(params.textFieldName == '') {
+                        text = r;
+                    } else if(isSQLResulSetRowList) {
+                        text = eval('params.rows.item(i).' + params.textFieldName);
+                    } else {
+                        text = eval('r.' + params.textFieldName);
+                    }
+
+                    html += '<li><a href="' + ref + '">' + text + '</a></li>';
+                }
+                $listview.html(html);
+                $listview.listview();
+                //$listview.trigger("create");
+                $listview.listview("refresh");
+            
+            
+        });
+        
+        
+        
+        
+        //app.setRoadSignSizeDialog(0);
     },
     
     searchRoadSign: function() {
-        
         var MAX_RESULTS = 20;
-        
         // Text used for searching
         var searchText = $("#searchRoadSignText").val();
         if(searchText == '') {
@@ -968,7 +950,7 @@ var app = {
         
         data.sopralluoghi.getRoadSigns(params, function(result) {
             
-            console.log(result.length);
+       
             
             var lenght = result.length;
             
@@ -1032,7 +1014,10 @@ var app = {
                 break;
             }
         }
-        if(roadSign != null) {
+        if(roadSign != null) 
+        {
+            
+            $("#roadSignList").html("");
             //var imageUrl = config.ROADSIGN_BASE_PATH_ICONS + roadSign.icon;
             var imageUrl = config.getNativeBaseURL();
             if(imageUrl.substr(-1) != '/') imageUrl += '/';
@@ -1040,12 +1025,100 @@ var app = {
             var roadSignPanel = $('div[data-roadsignno="' + app._currentRoadSign + '"]');
             $('h1 img', roadSignPanel).attr('src', imageUrl);
             $('h1 span', roadSignPanel).html(roadSign.name);
+            
+            $('h3 img', $("#img_segnale")).attr('src', imageUrl);
+            $('h3 span',$("#img_segnale")).html(roadSign.name);
+            
+            
             $('input[type="hidden"].roadsign-signid', roadSignPanel).val(roadSign.id);
             $('p.roadsign-signdescr', roadSignPanel).html(roadSign.figure);
+            
+         
+            var _params = {
+             search: roadSign.id
+            }; 
+            app._currentRoadSign = roadSign.id;
+            data.sopralluoghi.getRoadSignSizes(_params,function(result)
+            {
+                 
+                var params={
+                    rows: result, //data.sopralluoghi.getRoadSignSizes(),
+                    textFieldName: 'size',
+                    hrefFields: ['id', 'size'],
+                    hrefFormat: 'javascript:app.setRoadSignSizeDialog({0}, \'{1}\')'
+                }
+                var dialog = $('#dimensioni_segnale');
+                var $listview = $('ul',dialog );
+                //$listview.appendTo(dialog);
+      
+                var html = '';
+                // (params.rows.constructor.name == 'SQLResultSetRowList')
+                var isSQLResulSetRowList = (typeof(params.rows.item) != 'undefined');
+                var rowCount = params.rows.length;
+                for(var i = 0; i < rowCount; i++)
+                {
+                    var r = params.rows[i];
+                    var refVals = [];
+                    for(var j in params.hrefFields)
+                    {
+                        var val = '';
+                        if(isSQLResulSetRowList) {
+                            val = eval('params.rows.item(i).' + params.hrefFields[j]);
+                        } else {
+                            val = eval('r.' + params.hrefFields[j]);
+                        }
+                        refVals.push(val);
+                    }
+
+                    if(refVals.length == 0) {
+                        refVals[0] = r;
+                    }
+
+                    // Set ref
+                    var ref = null;
+                    if((params.hrefFormat || '') == '') {
+                        // In this case always takes first element of refVals
+                        ref = refVals[0];
+                    } else {
+                        // params.hrefFormat.replace('{0}', refVal.replace('\'', '\\\''));
+                        ref = params.hrefFormat;
+                        for(var j in refVals) {
+                            var val = refVals[j];
+                            if(typeof(refVals[j]) == 'string') {
+                                val = val.replace('\'', '\\\'');
+                            }
+                            ref = ref.replace('{' + j + '}', val);
+                        }
+                    }
+
+                    //var text = (params.textFieldName == '') ? r : eval('r.' + params.textFieldName);
+                    var text = '';
+                    if(params.textFieldName == '') {
+                        text = r;
+                    } else if(isSQLResulSetRowList) {
+                        text = eval('params.rows.item(i).' + params.textFieldName);
+                    } else {
+                        text = eval('r.' + params.textFieldName);
+                    }
+
+                    html += '<li><a href="' + ref + '">' + text + '</a></li>';
+                }
+                $listview.html(html);
+                $listview.listview();
+                //$listview.trigger("create");
+                $listview.listview("refresh");
+                
+            });
         }
-        app.closeRoadSignFinder();
+
+        //app.closeRoadSignFinder();
     },
     closeRoadSignFinder: function() {
+        $("#oldpole").val($("#oldpole_p").val());
+        $("#numberOfPoles_p").val($("#numberOfPoles_p").val());
+        $("#poleHeight").val($("#poleHeight_p").val());
+        $("#poleDiameter").val($("#poleDiameter_p").val());
+
         app._allRoadSigns = null;
         app._currentRoadSign = null;
         $('#roadSignList').empty().listview("refresh");
@@ -1081,10 +1154,90 @@ var app = {
                 });
             });
         }
-         else
+        else
         {
            helper.alert('Seleziona il segnale ',null,'Dimensione');
         }        
+    },
+    setRoadSignSizeDialog: function(signSizeId, signSize) {
+        var roadSignPanel = $('div[data-roadsignno="' + app._currentRoadSign + '"]');
+        $('a label.roadsign-size', roadSignPanel).attr('data-sizeid', signSizeId).html(signSize);
+         data.sopralluoghi.getRoadSignSupports(function(result) {
+            var params={
+                rows: result,
+                textFieldName: 'name',
+                hrefFields: ['id', 'name'],
+                hrefFormat: 'javascript:app.setRoadSignSupport({0}, \'{1}\')'
+            };
+            
+            
+            
+                var $dialog = $('#materiale_supporto');
+                var $listview = $('ul',$dialog );
+                //$listview.appendTo($dialog);
+      
+                var html = '';
+                // (params.rows.constructor.name == 'SQLResultSetRowList')
+                var isSQLResulSetRowList = (typeof(params.rows.item) != 'undefined');
+                var rowCount = params.rows.length;
+                for(var i = 0; i < rowCount; i++)
+                {
+                    var r = params.rows[i];
+                    var refVals = [];
+                    for(var j in params.hrefFields)
+                    {
+                        var val = '';
+                        if(isSQLResulSetRowList) {
+                            val = eval('params.rows.item(i).' + params.hrefFields[j]);
+                        } else {
+                            val = eval('r.' + params.hrefFields[j]);
+                        }
+                        refVals.push(val);
+                    }
+
+                    if(refVals.length == 0) {
+                        refVals[0] = r;
+                    }
+
+                    // Set ref
+                    var ref = null;
+                    if((params.hrefFormat || '') == '') {
+                        // In this case always takes first element of refVals
+                        ref = refVals[0];
+                    } else {
+                        // params.hrefFormat.replace('{0}', refVal.replace('\'', '\\\''));
+                        ref = params.hrefFormat;
+                        for(var j in refVals) {
+                            var val = refVals[j];
+                            if(typeof(refVals[j]) == 'string') {
+                                val = val.replace('\'', '\\\'');
+                            }
+                            ref = ref.replace('{' + j + '}', val);
+                        }
+                    }
+
+                    //var text = (params.textFieldName == '') ? r : eval('r.' + params.textFieldName);
+                    var text = '';
+                    if(params.textFieldName == '') {
+                        text = r;
+                    } else if(isSQLResulSetRowList) {
+                        text = eval('params.rows.item(i).' + params.textFieldName);
+                    } else {
+                        text = eval('r.' + params.textFieldName);
+                    }
+
+                    html += '<li><a href="' + ref + '">' + text + '</a></li>';
+                }
+                $listview.html(html);
+                $listview.listview();
+                //$listview.trigger("create");
+                $listview.listview("refresh");
+            
+            
+        });
+        
+        
+        
     },
     setRoadSignSize: function(signSizeId, signSize) {
         var roadSignPanel = $('div[data-roadsignno="' + app._currentRoadSign + '"]');
@@ -1103,14 +1256,12 @@ var app = {
         });
     },
     
-    
-    
-    setRoadSignType: function(signType) {
+    setRoadSignType: function(signType)
+    {
         var roadSignPanel = $('div[data-roadsignno="' + app._currentRoadSign + '"]');
         $('a label.roadsign-type', roadSignPanel).html(signType).attr('data-changed', 'true');
         app.closeListDialog();
     },
-    
     openRoadSignSupportPanel: function(signIndex) {
         // Changed: now use the async pattern
         data.sopralluoghi.getRoadSignSupports(function(result) {
@@ -1146,8 +1297,8 @@ var app = {
         });
     },
     
-    
-    setRoadSignTypes: function(typeid, typename) {
+    setRoadSignTypes: function(typeid, typename)
+    {
         
         
         var roadSignPanel = $('div[data-roadsignno="' + app._currentRoadSign + '"]');
@@ -1160,25 +1311,7 @@ var app = {
     
     openInterventoTypes: function(signIndex)
     {
-       
-       
-       /*
-        data.sopralluoghi.getRoadSignIntervento(function(result) {
-            
-         
-            console.log(result);
-            
-            app.openListDialog({
-                roadSignIndex: signIndex,
-                title: 'Tipo Intervento',
-                rows: result,
-                textFieldName: 'nome',
-                hrefFields: ['id', 'nome'],
-                hrefFormat: 'javascript:app.setRoadSignIntervento({0}, \'{1}\')'
-            });
-        });*/
-        
-         app.openListDialog({
+       app.openListDialog({
             roadSignIndex: signIndex,
             title: 'Tipo intervento',
             rows: data.sopralluoghi.getRoadSignIntervento(),
@@ -1197,12 +1330,6 @@ var app = {
         $('.roadsign-rimozione', roadSignPanel).html(typename);
         app.closeListDialog();
     },
-    
-    
-    
-    
-    
-    
     
     openRoadSignFilmPanel: function(signIndex) {
         data.sopralluoghi.getRoadSignFilms(function(result) {
@@ -1223,9 +1350,7 @@ var app = {
     },
     
     showOlPoleInfo: function() {
-        
-        console.log("-------------");
-        var val=$("#oldpole").val();
+        var val=$("#oldpole_p").val();
         if(val==0)
         {
             $('#info_pole_div').css("height","auto");
