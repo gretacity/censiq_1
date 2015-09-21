@@ -829,7 +829,7 @@ var app = {
         else
         {
             $("#a_sp_dialog a").removeClass("alert_sup");
-            $("#supp_title").html("Supporto");
+            $("#supp_title").html("Esistente");
         }    
         $("#searchRoadSignText").val('').focus();
         
@@ -976,9 +976,11 @@ var app = {
                     html += '<li><a href="' + ref + '" id="sp'+r.id+'">' + text + '</a></li>';
                 }
                 $listview.html(html);
-                $listview.listview();
+                //$listview.listview();
+                //$listview.listview("refresh");
+                
                 //$listview.trigger("create");
-                $listview.listview("refresh");
+                
             
             
         });
