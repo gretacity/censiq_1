@@ -741,7 +741,7 @@ var app = {
         app.openRoadSignFinder( count,rem);
         var $roadSignPanel = $('<div data-roadsignno="' + count + '" data-inset="false" data-role="collapsible" data-collapsed="true" data-collapsed-icon="carat-r" data-expanded-icon="carat-d" data-theme="b">' +
                                     '<h1>' +
-                                        '<img src="" class="roadsign-picture" /> <span>Cartello</span>' +
+                                        '<img src="" class="roadsign-picture" style="width:24px;height:24px"/> <span>Cartello</span>' +
                                         '</h1>' +
                                     '<ul data-role="listview" class="ui-listview ui-group-theme-b"></ul>' +
                                 '</div>');
