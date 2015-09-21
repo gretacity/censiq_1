@@ -217,29 +217,34 @@
                 <ul data-role="listview" id="roadSignList" data-inset="true">
                 </ul>
                 <div style="overflow:hidden;">
-                    <div style="width:50%;overflow:hidden;float:left">
-                        <h3> Materiale </h3>
+                    <div style="width:100%;margin:0;padding:0;overflow:hidden">
+                        <div style="width:50%;overflow:hidden;float:left">
+                            <h3> Materiale </h3>
+                        </div>
+                         <div style="width:50%;overflow:hidden;float:left">
+                            <h3> Pellicola</h3>
+                        </div>
                     </div>
-                     <div style="width:50%;overflow:hidden;float:left">
-                        <h3> Pellicola</h3>
+                    <div style="width:100%;margin:0;padding:0;overflow:hidden">
+                        <div id="materiale_supporto" style="width:50%;overflow:hidden;float:left">
+                           <ul data-role="listview" class="ui-listview ui-group-theme-b" style="margin:0!important">
+                           </ul>
+                        </div>
+                         <div id="pellicola_segnale" style="width:50%;overflow:hidden;float:left">
+                           <ul data-role="listview" class="ui-listview ui-group-theme-b" style="margin:0!important">
+                           </ul>
+                        </div>
                     </div>
-                     <div id="materiale_supporto" style="width:50%;overflow:hidden;float:left">
-                       <ul data-role="listview" class="ui-listview ui-group-theme-b" style="margin:0!important">
-                       </ul>
-                    </div>
-                     <div id="pellicola_segnale" style="width:50%;overflow:hidden;float:left">
-                       <ul data-role="listview" class="ui-listview ui-group-theme-b" style="margin:0!important">
-                       </ul>
-                    </div>
-                    
-                    <div style="width:100%;clear:left;overflow:hidden">
-                        <h3> Dimensioni </h3>
-                    </div>
-                   
-                    <div id="dimensioni_segnale">
-                        <ul data-role="listview" class="ui-listview ui-group-theme-b" style="margin:0!important">
-                            <li>Specificare segnale</li>
-                        </ul>
+                    <div style="width:100%;margin:0;padding:0;overflow:hidden">
+                        <div style="width:100%;clear:left;overflow:hidden">
+                            <h3> Dimensioni </h3>
+                        </div>
+
+                        <div id="dimensioni_segnale">
+                            <ul data-role="listview" class="ui-listview ui-group-theme-b" style="margin:0!important">
+                                <li>Specificare segnale</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>    
                 <div id="supporto_dialogs" style="margin:10px 0">

@@ -96,7 +96,7 @@ var app = {
                     var dateAdded = Date.parseFromYMDHMS(row.date_added).toDMYHMS();
                     html += '<li id="row'+obj.id+'" style="padding:0;">';
                     html+='<div id="cls_'+obj.id+'">'+
-                            '<img  onclick="app.updateItems(\''+qrCode+'\')" src="img/update.png" style="float:right;margin-right:10px; height:32px;width: 32px">'+
+                            //'<img  onclick="app.updateItems(\''+qrCode+'\')" src="img/update.png" style="float:right;margin-right:10px; height:32px;width: 32px">'+
                             '</div>';
                     if(obj.sopraluoghi.signs.lenght>0)
                     {
@@ -719,7 +719,7 @@ var app = {
     },
     closeListDialog: function() {
         app._currentRoadSign = null;
-        $.mobile.changePage('#sopralluoghiStep3Page', {
+        $.mobile.changePage('#sopralluoghiStep2Page', {
             reverse: true,
         });
     },
@@ -744,6 +744,7 @@ var app = {
         app.openRoadSignFinder( count,rem);
         var $roadSignPanel = $('<div data-roadsignno="' + count + '" data-inset="false" data-role="collapsible" data-collapsed="true" data-collapsed-icon="carat-r" data-expanded-icon="carat-d" data-theme="b">' +
                                     '<h1>' +
+                                        '<input type="hidden" class="roadsign-signid"/>' +
                                         '<img src="" class="roadsign-picture" style="width:32px;height:32px"/> <span>Cartello</span>' +
                                         '</h1>' +
                                     '<ul data-role="listview" class="ui-listview ui-group-theme-b"></ul>' +
@@ -756,18 +757,10 @@ var app = {
                                    
       
       
-        $listview.append('<li class="roadsign-sign-li">' +
-                            '<a href="javascript:app.openRoadSignTypes(' + count + ')">' +
-                                '<!--img src="img/Segnali/cod_1.svg" /-->' +
-                                '<input type="hidden" id="roadsign-signtypeid" value="0" />' +
-                                 '<div class="roadsign-type">Categoria</div>' +
-                                
-                            '</a>' +
-                        '</li>');
-                
-      
+        
                 
         // ROADSIGN PICTURE
+        /*
         $listview.append('<li class="roadsign-sign-li">' +
                             '<a disabled="true" href="javascript:app.openRoadSignFinder(' + count + ')">' +
                                 '<!--img src="img/Segnali/cod_1.svg" /-->' +
@@ -775,17 +768,23 @@ var app = {
                                  '<div class="roadsign-signdescr">Figura</div>' +
                             '</a>' +
                         '</li>');
+        */
         // SIZE
-        $listview.append('<li><a href="javascript:app.openRoadSignSizePanel(' + count + ')">Dimensione</a></li>');
-        // TYPE
-        $listview.append('<li><a href="javascript:app.openRoadSignTypePanel(' + count + ')">Tipologia</a></li>');
-        // SUPPORT
-        $listview.append('<li><a href="javascript:app.openRoadSignSupportPanel(' + count + ')">Supporto </a></li>');
+        $listview.append('<li><a href="javascript:app.openRoadSignSizePanel(' + count + ')">Dimensione <label class="roadsign-size" style="float:right;margin-right:35px"></label></a></li>');
+        
+        $listview.append('<li><a href="javascript:app.openRoadSignSupportPanel(' + count + ')">Supporto <label class="roadsign-support" style="float:right;margin-right:35px"></label></a></li>');
         // FILM
-        $listview.append('<li><a href="javascript:app.openRoadSignFilmPanel(' + count + ')">Pellicola</a></li>');
+        $listview.append('<li><a href="javascript:app.openRoadSignFilmPanel(' + count + ')">Pellicola <label class="roadsign-film" style="float:right;margin-right:35px"></label></a></li>');
         // NOTE
         $('<li data-theme="b"><a href="#" class="textarea"><textarea class="roadsign-notes" placeholder="Note"></textarea></a></li>').appendTo($listview).trigger('create');
         // REMOVE BUTTON
+        
+        $listview.append('<li class="roadsign-sign-li" style="display:none !important">' +
+                            '<input type="hidden" id="roadsign-signtypeid" value="0" />' +
+                        '</li>');
+                
+      
+        
         $listview.append('<li data-theme="b">' +
                             '<a href="javascript:app.removeRoadSignPanel(' + app._roadSignCounter + ')" class="ui-btn ui-icon-delete ui-btn-icon-right">Rimuovi cartello</a>' +
                         '</li>');
@@ -1179,7 +1178,7 @@ var app = {
                         text = eval('r.' + params.textFieldName);
                     }
 
-                    html += '<li><a href="' + ref + '">' + text + '</a></li>';
+                    html += '<li><a href="' + ref + '" id="sz'+r.id+'">' + text + '</a></li>';
                 }
                 $listview.html(html);
                 $listview.listview();
@@ -1244,14 +1243,12 @@ var app = {
      *  the ListDialog
      */
     openRoadSignSizePanel: function(signIndex) {
-        
         var roadSignPanel = $('div[data-roadsignno="' + signIndex + '"]');
         if($('.roadsign-signid',roadSignPanel).val()!='' )
-        {    
+        {   
             var params = {
              search: $('.roadsign-signid',roadSignPanel).val()
             }; 
-            
             data.sopralluoghi.getRoadSignSizes(params,function(result) {
                 app.openListDialog({
                     roadSignIndex: signIndex,
@@ -1265,24 +1262,19 @@ var app = {
         }
         else
         {
-           helper.alert('Seleziona il segnale ',null,'Dimensione');
+           
+            helper.alert('Seleziona il segnale ',null,'Dimensione');
         }        
     },
     
     setRoadSignSizeDialog: function(signSizeId, signSize) {
-        var roadSignPanel = $('div[data-roadsignno="' + app._currentRoadSign + '"]');
+        
+        
+        
+        var roadSignPanel = $('div[data-roadsignno="' + app._roadSignCounter + '"]');
         $('a label.roadsign-size', roadSignPanel).attr('data-sizeid', signSizeId).html(signSize);
-         $("#dimensioni_segnale a").removeClass("itm_selected");
-        $("#sz"+signSupportId).addClass("itm_selected");
-        
-        
-        
-        
-        
-         
-        
-        
-        
+        $("#dimensioni_segnale a").removeClass("itm_selected");
+        $("#sz"+signSizeId).addClass("itm_selected");
     },
     setRoadSignSize: function(signSizeId, signSize) {
         var roadSignPanel = $('div[data-roadsignno="' + app._currentRoadSign + '"]');
@@ -1290,23 +1282,7 @@ var app = {
         app.closeListDialog();
     },
     
-    openRoadSignTypePanel: function(signIndex) {
-        app.openListDialog({
-            roadSignIndex: signIndex,
-            title: 'Tipologia del segnale',
-            rows: data.sopralluoghi.getRoadSignType(),
-            textFieldName: '',
-            hrefFields: [],
-            hrefFormat: 'javascript:app.setRoadSignType(\'{0}\')'
-        });
-    },
     
-    setRoadSignType: function(signType)
-    {
-        var roadSignPanel = $('div[data-roadsignno="' + app._currentRoadSign + '"]');
-        $('a label.roadsign-type', roadSignPanel).html(signType).attr('data-changed', 'true');
-        app.closeListDialog();
-    },
     openRoadSignSupportPanel: function(signIndex) {
         // Changed: now use the async pattern
         data.sopralluoghi.getRoadSignSupports(function(result) {
@@ -1328,41 +1304,12 @@ var app = {
     setRoadSignSupportPanel: function(signSupportId, signSupport) {
         
         
-        var roadSignPanel = $('div[data-roadsignno="' + app._currentRoadSign + '"]');
+        var roadSignPanel = $('div[data-roadsignno="' + app._roadSignCounter + '"]');
         $('a label.roadsign-support', roadSignPanel).attr('data-supportid', signSupportId).html(signSupport);
         $("#materiale_supporto a").removeClass("itm_selected");
         $("#sp"+signSupportId).addClass("itm_selected");
         
     },
-    
-    openRoadSignTypes: function(signIndex)
-    {
-        data.sopralluoghi.getRoadSignTypes(function(result) {
-            
-           
-            
-            app.openListDialog({
-                roadSignIndex: signIndex,
-                title: 'Tipo segnale',
-                rows: result,
-                textFieldName: 'nome',
-                hrefFields: ['id', 'nome'],
-                hrefFormat: 'javascript:app.setRoadSignTypes({0}, \'{1}\')'
-            });
-        });
-    },
-    
-    setRoadSignTypes: function(typeid, typename)
-    {
-        
-        
-        var roadSignPanel = $('div[data-roadsignno="' + app._currentRoadSign + '"]');
-        $('#roadsign-signtypeid', roadSignPanel).val(typeid);
-        $('.roadsign-signtypename', roadSignPanel).html(typename);
-        app.closeListDialog();
-    },
-    
-    
     
     openInterventoTypes: function(signIndex)
     {
@@ -1404,7 +1351,7 @@ var app = {
         app.closeListDialog();
     },
      setRoadSignFilmPanel: function(signFilmId, signFilm) {
-        var roadSignPanel = $('div[data-roadsignno="' + app._currentRoadSign + '"]');
+        var roadSignPanel = $('div[data-roadsignno="' + app._roadSignCounter + '"]');
         $('a label.roadsign-film', roadSignPanel).attr('data-filmid', signFilmId).html(signFilm);
         $("#pellicola_segnale a").removeClass("itm_selected");
         $("#fl"+signFilmId).addClass("itm_selected");
