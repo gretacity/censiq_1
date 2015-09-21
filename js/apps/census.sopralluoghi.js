@@ -101,13 +101,13 @@ var app = {
                     if(obj.sopraluoghi.signs.lenght>0)
                     {
                     html+='<div style="margin-right:5px;overflow:hidden;float:left">'+
-                            '<img class="img'+obj.roadSign.signs[0].roadSignId+'"  style="width:50px;height:50px;">'+
+                            '<img class="img'+obj.roadSign.signs[0].roadSignId+'"  style="width:24px;height:24px;">'+
                             '</div>';
                     }
                     else
                     {
-                        html+='<div style="margin-right:5px;overflow:hidden;float:left;width:50px;height:50px;">'+
-                            
+                        html+='<div style="margin-right:5px;overflow:hidden;float:left;width:24px;height:24px;">'+
+                            '<img src="img/noPhoto.png"  style="width:24px;height:24px;">'+
                             '</div>';
                     }    
                     html += '<div style="overflow:hidden;float:left"><b>'+qrCode+'</b><br>';
@@ -125,8 +125,8 @@ var app = {
                                 var imageUrl =config.getNativeBaseURL()+ config.ROADSIGN_BASE_PATH_ICONS + result.item(0).icon;
                                
                                 $(".img"+result.item(0).id).attr("src",imageUrl);
-                                $(".img"+result.item(0).id).css("width","50px");
-                                $(".img"+result.item(0).id).css("height","50px");
+                                $(".img"+result.item(0).id).css("width","24px");
+                                $(".img"+result.item(0).id).css("height","24px");
                                 
                             }
                             catch(e)
@@ -169,8 +169,6 @@ var app = {
         if(stepIndex == app.STEP_1) {
             if(app.ADDRESS_ACQ==0)
             {
-                
-                console.log("-----------------");
                 this.acquireCoords();
                 app.ADDRESS_ACQ=1;
                 $("#localizzazione").fadeIn(500);
@@ -1116,8 +1114,15 @@ var app = {
         //app.addRoadSignPanel();
         app._allRoadSigns = null;
         app._currentRoadSign = null;
+        
         $('#roadSignList').empty().listview("refresh");
-         app.addRoadSignPanel(); 
+        $("#img_segnale").html( '<h3>'+
+                        '<img src="img/noPhoto.png" style="width:70%; margin:0 auto">'+
+                    '</h3>'+
+                    '<span>Ricerca segnale per nome o codice</span>');
+        $("#dimensioni_segnale").html('');    
+        
+        app.addRoadSignPanel(); 
     },
     
     
