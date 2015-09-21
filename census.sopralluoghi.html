@@ -41,12 +41,12 @@
             <div data-role="header" class="header" data-position="fixed">
                 <a data-step="1" href="#" class="ui-btn-left toolbar-button-back ui-alt-icon ui-nodisc-icon ui-btn ui-icon-toolbar-button ui-btn-icon-notext prev-step" data-role="button" role="button" ></a>
             </div>
+           
             <div data-role="main" style="position:relative">
                 <div id="map_0" style="background:#dedede;text-align:center;font-size:1.3em;font-family:Arial !important;font-weight:bold;color:#888888">
                     
                 </div>
-                <div id="localizzazione" style="position:absolute; bottom:0;width:100%;display:none">
-                    
+                <div id="localizzazione" style="position:absolute; top:0;width:100%;display:none;overflow:hidden;z-index:1000">
                     <ul data-role="listview" data-inset="false" data-theme="b" style="width:100%;background-color:#FFFFFF;overflow:hidden">
                         <li style="float:left">
                             <label for="comune">Comune</label>
@@ -57,7 +57,7 @@
                             <input id="provincia" placeholder="Provincia" />
                         </li>
 
-                        <li style="float:left">
+                        <li style="float:left;border:0 !important">
                             <label for="street">Strada / Via</label>
                             <input id="street" placeholder="Strada o via" />
                         </li>
@@ -68,14 +68,13 @@
                         </li>
                         -->
                    </ul>
-                    
-                    
                 </div>
             </div>
-            <div data-role="footer" class="footer"  data-position="fixed" align="center" style="background:none !important; background-color: #f2f2f2 !important;">
+             <div data-role="footer" class="footer"  data-position="fixed" align="center" style="background:none !important; background-color: #f2f2f2 !important;">
                 <div style="line-height:25px; color:#0086cc;">1 di 3</div>
                 <a href="#" id="btnCoord" style="display:none" class="button-next next-step" data-step="1">AVANTI</a>                
             </div>
+            
             <div  style="z-index:1000;position:absolute;top:10px;right:10px;height:45px;overflow:hidden">
 
                 <div id="btn_gps_control_0" style="display:none;width:80px;float:right;text-align:center;background:#ffffff;padding: 12px 6px;; border-radius:5px;overflow:hidden;">

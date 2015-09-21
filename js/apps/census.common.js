@@ -167,7 +167,6 @@ app.mapLoaded = function() {
 app.openMap = function() {
     if(typeof(google) == 'undefined') {
         //helper.alert('Il servizio mappe non è al momento disponibile');
-        console.log(app.id_map);
         $('#'+app.id_map).html('Il servizio mappe non è al momento disponibile');
         return false;
     }
