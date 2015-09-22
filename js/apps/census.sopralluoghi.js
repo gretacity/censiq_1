@@ -974,7 +974,7 @@ var app = {
                     var id="";
                     try
                     {
-                        id=eval('r.id');
+                        id=eval('params.rows.item(i).id');
                     }
                     catch(e){alert(e.message);}
                     html += '<li><a href="' + ref + '" id="sp'+id+'">' + text + '</a></li>';
