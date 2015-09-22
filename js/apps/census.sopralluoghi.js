@@ -48,6 +48,8 @@ var app = {
         if(config.EMULATE_ON_BROWSER) this.onDeviceReady();
         $('.prev-step').on('click', this.previousStep);
         $('.next-step').on('click', this.stepCompleted);
+       
+        
         
         var $page3 = $('#foto');
         $('a[data-addview]', $page3).on('click', this.acquirePhoto);
@@ -167,15 +169,19 @@ var app = {
     validateStep: function(stepIndex, stepValidCallback, stepNotValidCallback) {
         var errors = [];
         if(stepIndex == app.STEP_1) {
+            console.log(app.ADDRESS_ACQ);
+            
             if(app.ADDRESS_ACQ==0)
             {
                 this.acquireCoords();
                 app.ADDRESS_ACQ=1;
-                $("#btnCoord").html("CONFERMA");
+                $("#btnCoord").appendTo("#confirm_address");
+               
                 $("#localizzazione").fadeIn(500);
             }    
             else
             {   
+                
                 if($.trim($('#comune','#sopralluoghiStep1Page').val()) == '')
                 {
                     errors.push('specificare Comune');
@@ -194,7 +200,8 @@ var app = {
                     stepNotValidCallback(errors);
                     return false;
                 }
-                $("#btnCoord").html("AVANTI");
+                app.ADDRESS_ACQ=0;
+                 $("#btnCoord").appendTo("#pg1_footer");
                 $("localizzazione").fadeOut(500,stepValidCallback());
                 
             }    
