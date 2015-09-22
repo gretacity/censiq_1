@@ -137,15 +137,15 @@ data.sopralluoghi = {
          
             
             var entry = {
-                ss_segnale_id: sign.roadSignId,
-                ss_pellicola_id: sign.film,
-                ss_supporto_id: sign.support,
+                sp_segnale_id: sign.roadSignId,
+                sp_pellicola_id: sign.film,
+                sp_supporto_id: sign.support,
                 tipologia: roadSignType,      // Monofacciale / bifacciale
                 dimensioni: sign.size,
                 rimozione:sign.rimozione
                 //ss_censimento_id: 0
             };
-            obj.sp_sopralluighi_cartello.push(entry);
+            obj.sp_soparlluoghi_cartello.push(entry);
         }
         
         return obj;

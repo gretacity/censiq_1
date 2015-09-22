@@ -11,7 +11,7 @@ CensusTypeNames[CensusTypes.undefinedType]  = "";
 CensusTypeNames[CensusTypes.cityAsset]      = "Bene comunale";
 CensusTypeNames[CensusTypes.roadSign]       = "Segnaletica stradale";
 CensusTypeNames[CensusTypes.guardrail]      = "Guard Rail";
-CensusTypeNames[CensusTypes.sopralluoghi]   = "sopralluoghi";
+CensusTypeNames[CensusTypes.sopralluoghi]   = "Sopralluoghi";
 
 
 function Census(entityType) {

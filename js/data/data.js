@@ -17,14 +17,12 @@ var data = {
                 //console.log("Guardrail-Handler",handler);
             break;
             case CensusTypes.sopralluoghi:
-                //console.log("Guardrail-data",data);
                 handler = data.sopralluoghi;
                 //console.log("Guardrail-Handler",handler);
             break;
-            
             default:
                 throw 'Entity type not allowed';
-                return;
+            return;
         }
         return handler;
     },
@@ -33,10 +31,8 @@ var data = {
         return data._getEntityHandler(entity.entityType).serialize(entity);
     },
     
-    deserialize: function(serialized, entityType) {
-        
-        console.log(entityType);
-        
+    deserialize: function(serialized, entityType)
+    {
         return data._getEntityHandler(entityType).deserialize(serialized);
     },
     
