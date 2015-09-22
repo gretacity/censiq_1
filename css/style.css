@@ -134,7 +134,7 @@ margin:0 15px !important;
 {
     border:0 !important;
     border-radius:20px !important;
-margin:0 15px !important;
+    margin: 0 5px !important;
 }
 
 #riepilogo li
@@ -167,3 +167,9 @@ margin:0 15px !important;
     box-shadow: 2px 2px 5px #cdcdcd;
     margin-left:5px;
 }
+
+.sopralluogo_elements a, .sopralluogo_elements
+{
+    font-size:12px;
+}
+
