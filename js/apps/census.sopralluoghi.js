@@ -56,7 +56,7 @@ var app = {
         $('a[data-removeview]', $page3).on('click', this.removePhoto);
         $('#photoPage a').on('tap', this.hidePhotoDialog);
         //$('#addRoadSignButton').on('click', app.addRoadSignPanel);
-        $('#addRoadSignButtonBIG').on('click', app.addRoadSignPanel);
+        //$('#addRoadSignButtonBIG').on('click', app.addRoadSignPanel);
         $('#addRoadSignButtonPanel').on('click', app.nuovoCartello);
         $('div[data-role="dialog"]').on('create', function() {
             app.pageOffsetTop = $(this).offset().top;
@@ -270,12 +270,11 @@ var app = {
         
         // Current step
         var step = $(this).attr('data-step');
-        
-         if(step == app.STEP_2) {
-            $.mobile.changePage('#sopralluoghiStep1Page');
+        if(step == app.STEP_2) {
+            //$.mobile.changePage('#sopralluoghiStep1Page');
+            app.addRoadSignPanel();
         } else if(step == app.STEP_3) {
-            
-            $.mobile.changePage('#sopralluoghiStep2Page');
+            //$.mobile.changePage('#sopralluoghiStep2Page');
         }  
     },
     updateCode: function()
@@ -364,6 +363,7 @@ var app = {
         poleInfo.numberOfPoles = $('#numberOfPoles').val();                                  // Numero di pali
         poleInfo.poleDiameter = $('#poleDiameter').val();                               // Diametro dei pali
         poleInfo.poleHeight = $('#poleHeight').val();                                   // Altezza dei pali
+        
         poleInfo.old_signs_number=$('#old_signs_number').val();
         poleInfo.old_pole_number=$('#old_pole_number').val();
         
@@ -1231,8 +1231,7 @@ var app = {
                         '<img src="img/noPhoto.png" style="width:70%; margin:0 auto">'+
                     '</h3>'+
                     '<span>Ricerca segnale per nome o codice</span>');
-        $("#dimensioni_segnale ul").html(' <li style="border:0">Specificare il segnale</li>');    
-        
+        $("#dimensioni_segnale ul").html('<li style="border:0">Specificare il segnale</li>');    
         app.addRoadSignPanel(); 
     },
     
@@ -1240,10 +1239,20 @@ var app = {
     
     
     saveRoadSign: function() {
+        
+        
         $("#oldpole").val($("#oldpole_p").val());
-        $("#numberOfPoles_p").val($("#numberOfPoles_p").val());
+        $("#numberOfPoles").val($("#numberOfPoles_p").val());
         $("#poleHeight").val($("#poleHeight_p").val());
         $("#poleDiameter").val($("#poleDiameter_p").val());
+        
+        $("#old_pole_number").val($("#old_pole_number_p").val());
+        $("#old_signs_number").val($("#old_signs_number_p").val());
+        
+        
+        
+        
+        
 
         app._allRoadSigns = null;
         app._currentRoadSign = null;

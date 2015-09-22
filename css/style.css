@@ -136,3 +136,24 @@ margin:0 15px !important;
     border-radius:20px !important;
 margin:0 15px !important;
 }
+
+#riepilogo li
+{
+    padding:0 !important;
+    width:95% !important;
+    margin:0 auto !important;
+}
+#riepilogo li ul
+{
+    margin: 10px 0;
+}
+
+
+#riepilogo h1
+{
+    width: 95%;
+    margin: 10px auto 0 auto;
+    border-radius: 5px;
+    overflow: hidden;
+    border: 1px solid;
+}
