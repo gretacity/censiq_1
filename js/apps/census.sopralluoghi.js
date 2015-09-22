@@ -917,7 +917,6 @@ var app = {
                 hrefFormat: 'javascript:app.setRoadSignSupportPanel({0}, \'{1}\')'
             };
             
-            alert("------------");
             
                 var $dialog = $('#materiale_supporto');
                 var $listview = $('ul',$dialog );
@@ -926,7 +925,6 @@ var app = {
                 var html = '';
                 // (params.rows.constructor.name == 'SQLResultSetRowList')
                 var isSQLResulSetRowList = (typeof(params.rows.item) != 'undefined');
-                alert(params.rows.length)
                 var rowCount = params.rows.length;
                 for(var i = 0; i < rowCount; i++)
                 {
@@ -975,9 +973,9 @@ var app = {
                     }
 
                     //html += '<li><a href="' + ref + '" id="sp'+r.id+'">' + text + '</a></li>';
-                    html += '<li><a href="' + ref + '" id="sp'+r.id+'">' + text + '</a></li>';
+                    html += '<li><a href="' + ref + '" >' + text + '</a></li>';
                 }
-                alert(html);
+                
                 $listview.html(html);
                 //$listview.listview();
                 //$listview.listview("refresh");
