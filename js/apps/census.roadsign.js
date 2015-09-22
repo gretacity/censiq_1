@@ -183,7 +183,7 @@ var app = {
                     html+='<div id="cls_'+obj.id+'">'+
                             '<img  onclick="app.updateItems(\''+qrCode+'\')" src="img/update.png" style="float:right;margin-right:10px; height:32px;width: 32px">'+
                             '</div>';
-                    if(obj.roadSign.signs.lenght>0)
+                    if(obj.roadSign.signs.length>0)
                     {
                     html+='<div style="margin-right:5px;overflow:hidden;float:left">'+
                             '<img class="img'+obj.roadSign.signs[0].roadSignId+'"  style="width:50px;height:50px;">'+
@@ -1071,12 +1071,12 @@ var app = {
         
         data.roadSign.getRoadSigns(params, function(result) {
             
-            var lenght = result.length;
+            var length = result.length;
             
             var foundRoadSigns = [];
             var found = 0;
             var html = '';
-            for(var i = 0; i < lenght; i++) {
+            for(var i = 0; i < length; i++) {
                 //var roadSign = app._allRoadSigns[i];
                 var roadSign = result.item(i);
                 foundRoadSigns.push(roadSign);

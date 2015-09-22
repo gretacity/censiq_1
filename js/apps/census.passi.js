@@ -814,11 +814,11 @@ var app = {
         };
         data.roadSign.getRoadSigns(params, function(result) 
         {
-            var lenght = result.length;
+            var length = result.length;
             var foundRoadSigns = [];
             var found = 0;
             var html = '';
-            for(var i = 0; i < lenght; i++)
+            for(var i = 0; i < length; i++)
             {
                 var roadSign = result.item(i);
                 if(roadSign.id==signId)

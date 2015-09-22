@@ -99,7 +99,7 @@ var app = {
                     html+='<div id="cls_'+obj.id+'">'+
                             //'<img  onclick="app.updateItems(\''+qrCode+'\')" src="img/update.png" style="float:right;margin-right:10px; height:32px;width: 32px">'+
                             '</div>';
-                    if(obj.sopralluoghi.signs.lenght>0)
+                    if(obj.sopralluoghi.signs.length>0)
                     {
                     html+='<div style="margin-right:5px;overflow:hidden;float:left">'+
                             '<img class="img'+obj.sopralluoghi.signs[0].roadSignId+'"  style="width:32px;height:32px;">'+
@@ -124,7 +124,7 @@ var app = {
                             try
                             {
                                 var imageUrl =config.getNativeBaseURL()+ config.ROADSIGN_BASE_PATH_ICONS + result.item(0).icon;
-                               
+                                console.log("img"+result.item(0).id);
                                 $(".img"+result.item(0).id).attr("src",imageUrl);
                                 $(".img"+result.item(0).id).css("width","32px");
                                 $(".img"+result.item(0).id).css("height","32px");
