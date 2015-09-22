@@ -974,9 +974,9 @@ var app = {
                     var id="";
                     try
                     {
-                        id=eval('r.id')
+                        id=eval('r.id');
                     }
-                    catch(e){}
+                    catch(e){alert(e.message);}
                     html += '<li><a href="' + ref + '" id="sp'+id+'">' + text + '</a></li>';
                     //html += '<li><a href="' + ref + '" >' + text + '</a></li>';
                 }
