@@ -897,8 +897,14 @@ var app = {
                     } else {
                         text = eval('r.' + params.textFieldName);
                     }
-
-                    html += '<li><a href="' + ref + '" id="fl'+r.id+'">' + text + '</a></li>';
+                    var id="";
+                    try
+                    {
+                        id=eval('params.rows.item(i).id');
+                    }
+                    catch(e){}
+                    
+                    html += '<li><a href="' + ref + '" id="fl'+id+'">' + text + '</a></li>';
                 }
                 $listview.html(html);
                 $listview.listview();
@@ -976,9 +982,9 @@ var app = {
                     {
                         id=eval('params.rows.item(i).id');
                     }
-                    catch(e){alert(e.message);}
+                    catch(e){}
                     html += '<li><a href="' + ref + '" id="sp'+id+'">' + text + '</a></li>';
-                    //html += '<li><a href="' + ref + '" >' + text + '</a></li>';
+                    
                 }
                 
                 $listview.html(html);
@@ -1185,8 +1191,14 @@ var app = {
                     } else {
                         text = eval('r.' + params.textFieldName);
                     }
-
-                    html += '<li><a href="' + ref + '" id="sz'+r.id+'">' + text + '</a></li>';
+                    var id="";
+                    try
+                    {
+                        id=eval('params.rows.item(i).id');
+                    }
+                    catch(e){}
+                    
+                    html += '<li><a href="' + ref + '" id="sz'+id+'">' + text + '</a></li>';
                 }
                 $listview.html(html);
                 $listview.listview();
