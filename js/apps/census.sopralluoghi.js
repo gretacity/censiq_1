@@ -93,16 +93,16 @@ var app = {
                     //console.log("ROW",row);
                     var obj = data.deserialize(row, row.entity_type);
                     var itemId = 'item' + obj.id;
-                    var qrCode = obj.qrCode;
+                 
                     var dateAdded = Date.parseFromYMDHMS(row.date_added).toDMYHMS();
                     html += '<li id="row'+obj.id+'" style="padding:0;">';
                     html+='<div id="cls_'+obj.id+'">'+
                             //'<img  onclick="app.updateItems(\''+qrCode+'\')" src="img/update.png" style="float:right;margin-right:10px; height:32px;width: 32px">'+
                             '</div>';
-                    if(obj.sopraluoghi.signs.lenght>0)
+                    if(obj.sopralluoghi.signs.lenght>0)
                     {
                     html+='<div style="margin-right:5px;overflow:hidden;float:left">'+
-                            '<img class="img'+obj.roadSign.signs[0].roadSignId+'"  style="width:32px;height:32px;">'+
+                            '<img class="img'+obj.sopralluoghi.signs[0].roadSignId+'"  style="width:32px;height:32px;">'+
                             '</div>';
                     }
                     else
@@ -111,14 +111,14 @@ var app = {
                             '<img src="img/noPhoto.png"  style="width:32px;height:32px;">'+
                             '</div>';
                     }    
-                    html += '<div style="overflow:hidden;float:left"><b>'+qrCode+'</b><br>';
-                    html += obj.roadSign.street+' '+obj.roadSign.streetNumber+' '+obj.roadSign.comune+'<br>';
+                    html += '<div style="overflow:hidden;float:left">';
+                    html += obj.sopralluoghi.street+' '+obj.sopralluoghi.streetNumber+' '+obj.sopralluoghi.comune+'<br>';
                             '</div></li>';
                     
-                    for(var j=0;j<obj.roadSign.signs.length;j++)
+                    for(var j=0;j<obj.sopralluoghi.signs.length;j++)
                     {    
                         
-                        params = { id: obj.roadSign.signs[j].roadSignId}; 
+                        params = { id: obj.sopralluoghi.signs[j].roadSignId}; 
                         data.sopralluoghi.getRoadSigns(params, function(result)
                         {
                             try
@@ -249,16 +249,9 @@ var app = {
             } 
             else if(step == app.STEP_2)
             {
-                
-                $.mobile.changePage('#sopralluoghiStep3Page');
+                app.save();
             } 
            
-            else if(step == app.STEP_3)
-            {
-                app.save();
-            }
-             
-            
         }, function(errors) {
             // Validation failed: display an error message if there is at least one
             if(Array.isArray(errors) && errors.length > 0) {
@@ -332,7 +325,7 @@ var app = {
         var imageKeys = ['front', 'back', 'perspective'];
         for(var i in imageKeys) {
             var k = imageKeys[i];
-            var imageSrc = $('#sopralluoghiStep3Page a[data-viewtype="' + k + '"][data-showview] img').attr('src');
+            var imageSrc = $('#foto a[data-viewtype="' + k + '"][data-showview] img').attr('src');
             if(imageSrc != '') {
                 // Remove this from src attribute:
                 // data:image/jpeg;base64,
@@ -341,11 +334,11 @@ var app = {
         }
         
         // Loop into roadsigns
-        app.census.roadSign.signs=Array();
+        app.census.sopralluoghi.signs=Array();
         $('#roadSignContainer div[data-roadsignno]').each(function() {
             var $container = $(this);
            
-            var signInfo = new RoadSign.SignInfo();
+            var signInfo = new Sopralluoghi.SignInfo();
             
             // Front
             signInfo.roadSignId = $('input[type="hidden"].roadsign-signid', $container).val();      // ID dell'immagine del segnale
@@ -353,13 +346,13 @@ var app = {
             signInfo.roadSignType = $('a label.roadsign-type[data-changed="true"]', $container).html() || ''; // Tipologia (monofacciale, bifacciale)
             signInfo.support = $('a label.roadsign-support', $container).attr('data-supportid');    // Supporto (alluminio, ferro)
             signInfo.film = $('a label.roadsign-film', $container).attr('data-filmid');             // Pellicola
-            app.census.roadSign.signs.push(signInfo);
+            app.census.sopralluoghi.signs.push(signInfo);
              
             
         });
 
         // Add pole and brackets informations
-        var poleInfo = new RoadSign.PoleInfo();
+        var poleInfo = new Sopralluoghi.PoleInfo();
         poleInfo.numberOfPoles = $('#numberOfPoles').val();                                  // Numero di pali
         poleInfo.poleDiameter = $('#poleDiameter').val();                               // Diametro dei pali
         poleInfo.poleHeight = $('#poleHeight').val();                                   // Altezza dei pali

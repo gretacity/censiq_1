@@ -51,13 +51,13 @@ data.sopralluoghi = {
     // Return the serialized entity string
     serialize: function(entity) {
         var data = {
-            comune: entity.roadSign.comune,
-            provincia: entity.roadSign.provincia,
-            street: entity.roadSign.street,
-            streetNumber: entity.roadSign.streetNumber,
-            note:entity.roadSign.note,
-            signs: entity.roadSign.signs,
-            poleInfo: entity.roadSign.poleInfo
+            comune: entity.sopralluoghi.comune,
+            provincia: entity.sopralluoghi.provincia,
+            street: entity.sopralluoghi.street,
+            streetNumber: entity.sopralluoghi.streetNumber,
+            note:entity.sopralluoghi.note,
+            signs: entity.sopralluoghi.signs,
+            poleInfo: entity.sopralluoghi.poleInfo
         };
         return JSON.stringify(data);
     },
