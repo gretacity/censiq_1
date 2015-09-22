@@ -971,14 +971,19 @@ var app = {
                     } else {
                         text = eval('r.' + params.textFieldName);
                     }
-
-                    //html += '<li><a href="' + ref + '" id="sp'+r.id+'">' + text + '</a></li>';
-                    html += '<li><a href="' + ref + '" >' + text + '</a></li>';
+                    var id="";
+                    try
+                    {
+                        id=eval(r.id)
+                    }
+                    catch(e){}
+                    html += '<li><a href="' + ref + '" id="sp'+id+'">' + text + '</a></li>';
+                    //html += '<li><a href="' + ref + '" >' + text + '</a></li>';
                 }
                 
                 $listview.html(html);
-                //$listview.listview();
-                //$listview.listview("refresh");
+                $listview.listview();
+                $listview.listview("refresh");
                 
                 //$listview.trigger("create");
                 
