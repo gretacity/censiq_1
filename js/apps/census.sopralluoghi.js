@@ -58,7 +58,6 @@ var app = {
         //$('#addRoadSignButton').on('click', app.addRoadSignPanel);
         $('#addRoadSignButtonBIG').on('click', app.addRoadSignPanel);
         $('#addRoadSignButtonPanel').on('click', app.nuovoCartello);
-        $('#oldpole_p').on('change', app.showOlPoleInfo);
         $('div[data-role="dialog"]').on('create', function() {
             app.pageOffsetTop = $(this).offset().top;
         });
@@ -366,6 +365,7 @@ var app = {
         poleInfo.poleDiameter = $('#poleDiameter').val();                               // Diametro dei pali
         poleInfo.poleHeight = $('#poleHeight').val();                                   // Altezza dei pali
         poleInfo.old_signs_number=$('#old_signs_number').val();
+        poleInfo.old_pole_number=$('#old_pole_number').val();
         
         
         app.census.sopralluoghi.poleInfo = poleInfo;
@@ -819,7 +819,7 @@ var app = {
                         '<img src="img/noPhoto.png" style="width:70%; margin:0 auto">'+
                     '</h3>'+
                     '<span>Ricerca segnale per nome o codice</span>');
-        $("#dimensioni_segnale ul").html(' <li>Specificare segnale</li>');    
+        $("#dimensioni_segnale ul").html(' <li style="border:0">Specificare il segnale</li>');    
         
         var roadSignPanel = $('div[data-roadsignno="' + signIndex + '"]');
         
@@ -831,12 +831,11 @@ var app = {
         if($("#oldpole").val()==-1)
         {
             $("#a_sp_dialog a").addClass("alert_sup");
-            $("#supp_title").html("Specificare esistente");
         }
         else
         {
             $("#a_sp_dialog a").removeClass("alert_sup");
-            $("#supp_title").html("Esistente");
+        
         }    
         $("#searchRoadSignText").val('').focus();
         
@@ -1232,7 +1231,7 @@ var app = {
                         '<img src="img/noPhoto.png" style="width:70%; margin:0 auto">'+
                     '</h3>'+
                     '<span>Ricerca segnale per nome o codice</span>');
-        $("#dimensioni_segnale ul").html(' <li>Specificare segnale</li>');    
+        $("#dimensioni_segnale ul").html(' <li style="border:0">Specificare il segnale</li>');    
         
         app.addRoadSignPanel(); 
     },

@@ -234,13 +234,47 @@
                         </div>
                     </div>
                     <div style="width:100%;margin:0;padding:0;overflow:hidden">
-                        <div style="width:100%;clear:left;overflow:hidden">
+                        <div style="width:50%;overflow:hidden;float:left">
                             <h3> Dimensioni </h3>
                         </div>
-
-                        <div id="dimensioni_segnale">
+                        <div style="width:50%;overflow:hidden;float:left">
+                            <h3> Nuovi pali </h3>
+                        </div>
+                    </div>    
+                    <div style="width:100%;margin:0;padding:0;overflow:hidden">    
+                        <div id="dimensioni_segnale" style="width:50%;margin:0;padding:0;;float:left">
                             <ul data-role="listview" class="ui-listview ui-group-theme-b" style="margin:0!important">
-                                <li>Specificare segnale</li>
+                                <li style="border:0">Specificare segnale</li>
+                            </ul>
+                        </div>
+                        <div  style="width:50%;margin:0;padding:0;overflow:hidden;float:left">
+                            <ul data-role="listview" class="ui-listview ui-group-theme-b" style="margin:0!important">
+                               <li style="border-bottom:0 !important">
+                                           <label>Numero pali</label>
+                                           <div style="text-align:center;padding:0;">
+                                               <input type="text" name="numberOfPoles_p" value="" placeolder="n°">
+                                           </div>    
+                                        </li>
+                                         <li style="border-bottom:0 !important">
+                                            <label>Altezza</label>
+                                            <div style="text-align:center;padding:0;">
+                                               <select name="poleHeight_p">
+                                                    <option value="220">220 mm</option>
+                                                    <option value="330">330 mm</option>
+                                                    <option value="400">400 mm</option>
+                                                    <option value="440">440 mm</option>
+                                                </select>
+                                            </div>    
+                                        </li>
+                                        <li style="border-bottom:0 !important">
+                                            <label>Sezione</label>
+                                            <div style="text-align:center;padding:0;">
+                                                 <select name="poleDiameter_p">
+                                                    <option value="60">60 mm</option>
+                                                    <option value="40">40 mm</option>
+                                                </select>
+                                            </div>    
+                                        </li>
                             </ul>
                         </div>
                     </div>
@@ -248,57 +282,27 @@
                 <div id="supporto_dialogs" style="margin:10px 0">
                     <div id="a_sp_dialog" data-inset="false" data-role="collapsible" data-collapsed="true" data-collapsed-icon="carat-r" data-expanded-icon="carat-d" data-theme="b">
                         <h1 class="ui-collapsible-heading">
-                                <span id="supp_title">Specificare esistente</span>
+                                <span id="supp_title">Rimozioni</span>
                         </h1>    
+                        <input type="hidden" name="oldpole_p" id="oldpole_p" value="1">
                         <ul data-role="listview" class="ui-listview ui-group-theme-b">
                                 <li style="border-bottom:0 !important">
-                                    <label>Intervento</label>
-                                    <div style="text-align:center;padding:0;">
-
-                                        <select name="oldpole_p" id="oldpole_p">
-                                             <option value="1">Rimozione</option>
-                                            <option value="0">Sostituzione</option>
-                                            <option value="2">Riutilizzo</option>
-                                        </select>
-                                    </div>    
-
-                                </li>
-                                <li style="border-bottom:0 !important">
                                     <ul data-role="listview" data-inset="false" data-theme="b" id="info_pole_div">        
-                                 <li style="border-bottom:0 !important">
-                                    <label>Numero pali</label>
-                                    <div style="text-align:center;padding:0;">
-                                        <input type="text" name="numberOfPoles_p" value="1">
-                                    </div>    
+                                        
+                                        <li style="border-bottom:0 !important">
+                                            <label>Cartelli</label>
+                                            <div style="text-align:center;padding:0;">
+                                                <input type="text" name="old_signs_number" placeholder="n°">
+                                            </div>    
+                                        </li>
+                                         <li style="border-bottom:0 !important">
+                                            <label>Pali</label>
+                                            <div style="text-align:center;padding:0;">
+                                                <input type="text" name="old_pole_number" placeholder="n°">
+                                            </div>    
+                                        </li>
+                                    </ul>
                                 </li>
-                                 <li style="border-bottom:0 !important">
-                                    <label>Altezza</label>
-                                    <div style="text-align:center;padding:0;">
-                                        <input type="text" name="poleHeight_p">
-                                    </div>    
-                                </li>
-                                <li style="border-bottom:0 !important">
-                                    <label>Sezione</label>
-                                    <div style="text-align:center;padding:0;">
-                                         <select name="poleDiameter_p">
-                                            <option value="60">60 mm</option>
-                                            <option value="40">40 mm</option>
-                                        </select>
-                                    </div>    
-                                </li>
-                                <li style="border-bottom:0 !important">
-                                    <label>Cartelli</label>
-                                    <div style="text-align:center;padding:0;">
-                                        <input type="text" name="old_signs_number">
-                                    </div>    
-                                </li>
-                                
-                                
-                                
-                                
-                            </ul>
-
-                            </li>
                             <li style="border-bottom:0 !important">
                                     <div id="foto">
                                         <ul data-role="listview" data-inset="false" data-theme="b" id="foto" style="margin-top:1em">        
