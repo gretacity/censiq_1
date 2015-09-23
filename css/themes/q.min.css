@@ -294,7 +294,7 @@ color:#3388cc ;font-weight:bold;}
    .ui-overlay-b,.ui-page-theme-b,.ui-page-theme-b .ui-panel-wrapper{
    background-color:#f9f9f9 ;border-color:#bbbbbb ;color:#333333 ;text-shadow:0  1px  0  #f3f3f3 ;}
    .ui-body-b,.ui-page-theme-b .ui-body-inherit,html .ui-bar-b .ui-body-inherit,html .ui-body-b .ui-body-inherit,html body .ui-group-theme-b .ui-body-inherit,html .ui-panel-page-container-b{
-   background-color:#ffffff ;
+   /* background-color:#ffffff ; */
    border-color:#8c8c8c ;
    color:#000000 ;
    text-shadow:0  1px  0  #eeeeee ;

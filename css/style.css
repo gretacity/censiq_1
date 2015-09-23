@@ -174,10 +174,26 @@ margin:0 15px !important;
 }
 
 
+#localizzazione
+{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    overflow: hidden;
+    z-index: 1000;
+    border: 1px solid #cccccc;
+    border-radius: 0 !important;
+    box-shadow: 2px 2px 5px #cccccc;
+    display:none;
+    background:#FFFFFF;
+}
+
+
 #localizzazione li
 {
     margin:0;
-    padding: 5px;
+    padding: 4px 10px;
     font-size: 12px;
 }
 
