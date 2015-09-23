@@ -354,6 +354,10 @@ var app = {
             signInfo.roadSignType = $('a label.roadsign-type[data-changed="true"]', $container).html() || ''; // Tipologia (monofacciale, bifacciale)
             signInfo.support = $('a label.roadsign-support', $container).attr('data-supportid');    // Supporto (alluminio, ferro)
             signInfo.film = $('a label.roadsign-film', $container).attr('data-filmid');             // Pellicola
+            signInfo.note=$(".roadsign-notes",$container).val();
+            
+            
+            
             app.census.sopralluoghi.signs.push(signInfo);
              
             

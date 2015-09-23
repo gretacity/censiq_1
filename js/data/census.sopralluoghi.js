@@ -7,6 +7,7 @@ Sopralluoghi.SignInfo = function() {
     this.roadSignType = '';         // Tipologia (monofacciale, bifacciale)
     this.support = '';              // Supporto (alluminio, ferro)
     this.film = '';
+    this.note='';
     this.rimozione=0;// Pellicola
     
     
@@ -142,7 +143,8 @@ data.sopralluoghi = {
                 sp_supporto_id: sign.support,
                 tipologia: roadSignType,      // Monofacciale / bifacciale
                 dimensioni: sign.size,
-                rimozione:sign.rimozione
+                rimozione:sign.rimozione,
+                note: sign.note
                 //ss_censimento_id: 0
             };
             obj.sp_soparlluoghi_cartello.push(entry);
