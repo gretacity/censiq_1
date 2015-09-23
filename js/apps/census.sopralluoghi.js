@@ -201,7 +201,7 @@ var app = {
                 }
                 app.ADDRESS_ACQ=0;
                  $("#btnCoord").appendTo("#pg1_footer");
-                $("localizzazione").fadeOut(500,stepValidCallback());
+                $("#localizzazione").fadeOut(500,stepValidCallback());
                 
             }    
         } else if(stepIndex == app.STEP_2) {
