@@ -86,7 +86,7 @@ a.textarea:after
 
 #sopralluoghiStep2Page #roadSignContainer .ui-collapsible
 {
-    margin: 0 10px 10px 20px;
+    margin: 0 0 10px 10px;
     border-radius: 10px;
     border: 1px solid #cdcdcd;
     box-shadow: 2px 2px 5px #cdcdcd;
@@ -217,10 +217,15 @@ margin:0 15px !important;
    
 }
 
+#riepilogo a, #roadSignContainer a
+{
+    font-size:12px !important;
+    font-weight:300 !important;
+}
 
 #roadSignContainer
 {
-    width:65%;
+    width: 60%;
     float:left;
     overflow:hidden
 ;

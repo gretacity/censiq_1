@@ -312,7 +312,7 @@ var app = {
         var d= new Date();
         // Form is valid, proceed with saving.
         // Disable save button
-        $('#saveButton').addClass('ui-disabled');
+        //$('#saveButton').addClass('ui-disabled');
         
         var supportTableData = {manufacturers: [], installers: [], owners: []};
         
