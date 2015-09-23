@@ -208,3 +208,21 @@ margin:0 15px !important;
 .toolbar-button-next {
     background-image: url('../img/NextButton.png') !important;
 }
+
+#riepilogo 
+{
+    border: 1px solid #cccccc;
+    border-radius: 0 !important;
+    box-shadow: 2px 2px 5px #cccccc;
+   
+}
+
+
+#roadSignContainer
+{
+    width:65%;
+    float:left;
+    overflow:hidden
+;
+    margin: 0;
+}

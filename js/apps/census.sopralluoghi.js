@@ -102,18 +102,18 @@ var app = {
                     var dateAdded = Date.parseFromYMDHMS(row.date_added).toDMYHMS();
                     html += '<li id="row'+obj.id+'" style="padding:0;">';
                     html+='<div id="cls_'+obj.id+'">'+
-                            //'<img  onclick="app.updateItems(\''+qrCode+'\')" src="img/update.png" style="float:right;margin-right:10px; height:32px;width: 32px">'+
+                            //'<img  onclick="app.updateItems(\''+qrCode+'\')" src="img/update.png" style="float:right;margin-right:10px; height:40px;width: 40px">'+
                             '</div>';
                     if(obj.sopralluoghi.signs.length>0)
                     {
                     html+='<div style="margin-right:5px;overflow:hidden;float:left">'+
-                            '<img class="img'+obj.sopralluoghi.signs[0].roadSignId+'"  style="width:32px;height:32px;">'+
+                            '<img class="img'+obj.sopralluoghi.signs[0].roadSignId+'"  style="width:40px;height:40px;">'+
                             '</div>';
                     }
                     else
                     {
-                        html+='<div style="margin-right:5px;overflow:hidden;float:left;width:32px;height:32px;">'+
-                            '<img src="img/noPhoto.png"  style="width:32px;height:32px;">'+
+                        html+='<div style="margin-right:5px;overflow:hidden;float:left;width:40px;height:40px;">'+
+                            '<img src="img/noPhoto.png"  style="width:40px;height:40px;">'+
                             '</div>';
                     }    
                     html += '<div style="overflow:hidden;float:left">';
@@ -131,8 +131,8 @@ var app = {
                                 var imageUrl =config.getNativeBaseURL()+ config.ROADSIGN_BASE_PATH_ICONS + result.item(0).icon;
                                 console.log("img"+result.item(0).id);
                                 $(".img"+result.item(0).id).attr("src",imageUrl);
-                                $(".img"+result.item(0).id).css("width","32px");
-                                $(".img"+result.item(0).id).css("height","32px");
+                                $(".img"+result.item(0).id).css("width","40px");
+                                $(".img"+result.item(0).id).css("height","40px");
                                 
                             }
                             catch(e)
@@ -757,12 +757,12 @@ var app = {
         var $roadSignPanel = $('<div data-roadsignno="' + count + '" data-inset="false" data-role="collapsible" data-collapsed="true" data-collapsed-icon="carat-r" data-expanded-icon="carat-d" data-theme="b">' +
                                     '<h1>' +
                                         '<input type="hidden" class="roadsign-signid"/>' +
-                                        '<img src="" class="roadsign-picture" style="width:32px;height:32px"/> <span>Cartello</span>' +
+                                        '<img src="" class="roadsign-picture" style="width:40px;height:40px"/> <span>Cartello</span>' +
                                         '</h1>' +
                                     '<ul data-role="listview" class="ui-listview ui-group-theme-b"></ul>' +
                                 '</div>');
         $('#roadSignContainer').append($roadSignPanel);
-        $roadSignPanel.collapsible({collapsed: false});
+        $roadSignPanel.collapsible({collapsed: true});
         $roadSignPanel.trigger("create");
         $listview = $('ul', $roadSignPanel);
         $listview.append('<input type="hidden" id="rimozione" value="0" />');    
