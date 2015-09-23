@@ -829,7 +829,7 @@ var app = {
             
         app._currentRoadSign = signIndex;
         $.mobile.changePage('#roadSignFinder', {
-            transition: 'pop'
+            transition: 'flip'
         });
         if($("#oldpole").val()==-1)
         {
