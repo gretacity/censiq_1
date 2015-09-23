@@ -107,13 +107,13 @@ var app = {
                     if(obj.sopralluoghi.signs.length>0)
                     {
                     html+='<div style="margin-right:5px;overflow:hidden;float:left">'+
-                            '<img class="img'+obj.sopralluoghi.signs[0].roadSignId+'"  style="width:40px;height:40px;">'+
+                            '<img class="img'+obj.sopralluoghi.signs[0].roadSignId+'"  ">'+
                             '</div>';
                     }
                     else
                     {
-                        html+='<div style="margin-right:5px;overflow:hidden;float:left;width:40px;height:40px;">'+
-                            '<img src="img/noPhoto.png"  style="width:40px;height:40px;">'+
+                        html+='<div style="margin-right:5px;overflow:hidden;float:left;">'+
+                            '<img src="img/noPhoto.png"  ">'+
                             '</div>';
                     }    
                     html += '<div style="overflow:hidden;float:left">';
@@ -131,8 +131,8 @@ var app = {
                                 var imageUrl =config.getNativeBaseURL()+ config.ROADSIGN_BASE_PATH_ICONS + result.item(0).icon;
                                 console.log("img"+result.item(0).id);
                                 $(".img"+result.item(0).id).attr("src",imageUrl);
-                                $(".img"+result.item(0).id).css("width","40px");
-                                $(".img"+result.item(0).id).css("height","40px");
+                                //$(".img"+result.item(0).id).css("width","40px");
+                                //$(".img"+result.item(0).id).css("height","40px");
                                 
                             }
                             catch(e)
