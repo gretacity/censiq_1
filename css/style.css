@@ -173,3 +173,22 @@ margin:0 15px !important;
     font-size:12px;
 }
 
+
+#localizzazione li
+{
+    margin:0;
+    padding: 5px;
+    font-size: 12px;
+}
+
+
+#roadSignFinder .ui-icon-delete:after
+{
+    //background-image: url('../img/BackButton.png') !important;
+    //background-size: cover;
+}
+
+
+.toolbar-button-next {
+    background-image: url('../img/NextButton.png') !important;
+}

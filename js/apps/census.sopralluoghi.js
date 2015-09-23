@@ -34,6 +34,10 @@ var app = {
     bindEvents: function() {
         
         document.addEventListener('deviceready', this.onDeviceReady, false);
+        
+       
+        
+        
         $('#ElencoSopralluoghiPage').on('pageshow', this.loadElenco);
         $('#newButton').on('click', function(){
             $.mobile.changePage('#sopralluoghiStep1Page', {
@@ -58,6 +62,7 @@ var app = {
         //$('#addRoadSignButton').on('click', app.addRoadSignPanel);
         //$('#addRoadSignButtonBIG').on('click', app.addRoadSignPanel);
         $('#addRoadSignButtonPanel').on('click', app.nuovoCartello);
+        
         $('div[data-role="dialog"]').on('create', function() {
             app.pageOffsetTop = $(this).offset().top;
         });
@@ -263,11 +268,14 @@ var app = {
         
         // Current step
         var step = $(this).attr('data-step');
-        if(step == app.STEP_2) {
+        if(step == app.STEP_1) {
+            $("#localizzazione").css("display","none");
+            $("#btnCoord").appendTo("#pg1_footer");
+            $.mobile.changePage('#ElencoSopralluoghiPage');
+        }    
+        else if(step == app.STEP_2) {
             //$.mobile.changePage('#sopralluoghiStep1Page');
             app.addRoadSignPanel();
-        } else if(step == app.STEP_3) {
-            //$.mobile.changePage('#sopralluoghiStep2Page');
         }  
     },
     updateCode: function()
@@ -808,6 +816,8 @@ var app = {
      */
     openRoadSignFinder: function(signIndex) {
         
+        
+        
          $("#img_segnale").html( '<h3>'+
                         '<img src="img/noPhoto.png" style="width:70%; margin:0 auto">'+
                     '</h3>'+
@@ -909,7 +919,7 @@ var app = {
                 $listview.listview();
                 //$listview.trigger("create");
                 $listview.listview("refresh");
-            
+                app.setBackButton();
             
         });
         
@@ -1397,8 +1407,60 @@ var app = {
             $('#info_pole_div').css("height","0");
         }    
         
-    }
+    },
     
+    
+    setBackButton: function()
+    {
+        var target=$('#roadSignFinder div[data-role="header"] .ui-icon-delete');
+        
+        target.unbind("click");
+        target.attr("href","javascript:app.goBack()"  );
+        
+        var parent=target.parent();
+        target.remove();
+        
+        //var n_cartelli=$('#roadSignContainer div[data-roadsignno]').length;
+        
+        
+        
+        var btn_prev=$('<a href="javascript:app.goBack()" class="ui-btn ui-btn-icon-left ui-btn-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-back ui-alt-icon ui-nodisc-icon " data-role="button" role="button"></a>');
+        
+          
+        var btn_next=$('<a href="javascript:app.goNext()" class="ui-btn ui-btn-icon-right ui-btn-right ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-next ui-alt-icon ui-nodisc-icon " data-role="button" role="button"></a>');
+        btn_next.appendTo(parent);
+        
+        btn_prev.appendTo(parent);
+       
+        
+        
+        //$("#roadSignFinder .ui-icon-delete").addClass("ui-alt-icon");
+        //$("#roadSignFinder .ui-icon-delete").removeClass("ui-icon-delete");
+        
+        
+    },
+    
+    goBack: function()
+    {
+       
+         $.mobile.changePage('#sopralluoghiStep1Page', {
+                transition: 'slide',
+                reverse: true,
+                changeHash: false
+                });
+        
+    },
+    
+    goNext: function()
+    {
+       
+         $.mobile.changePage('#sopralluoghiStep2Page', {
+                transition: 'slide',
+                reverse: false,
+                changeHash: false
+                });
+        
+    }
     
     
 }; 
