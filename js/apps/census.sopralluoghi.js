@@ -837,7 +837,8 @@ var app = {
         
         $("#foto a").addClass("alert_sup");
         $("#nuovi_pali a").addClass("alert_sup");
-        
+        $("#a_sp_dialog a").addClass("alert_sup");
+        /*
         if($("#oldpole").val()==-1)
         {
             $("#a_sp_dialog a").addClass("alert_sup");
@@ -846,7 +847,8 @@ var app = {
         {
             $("#a_sp_dialog a").removeClass("alert_sup");
         
-        }    
+        } 
+        **/
         $("#searchRoadSignText").val('').focus();
         app.setBackButton();
         var supporti=app.SUPPORTI;
