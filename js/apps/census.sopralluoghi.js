@@ -319,15 +319,15 @@ var app = {
         // Update the Census entity...
         app.census.dateAdded = new Date();
         //app.census.qrCode = $('#qrCode').val();
-        //app.census.position.latitude = '';    // Already set
-        //app.census.position.longitude = '';   // Already set
-        //app.census.position.accuracy = '';    // Already set
+       
         app.census.fixedOnMap = $('#positionIsCorrect').val();
         
         app.census.sopralluoghi.comune = $ ('#comune').val();
         app.census.sopralluoghi.provincia = $ ('#provincia').val();
         app.census.sopralluoghi.street = $('#street').val();
         app.census.sopralluoghi.note = $('#note').val();
+        
+        
         
         // Pictures related to the city asset
         var imageKeys = ['front', 'back', 'perspective'];
@@ -383,6 +383,13 @@ var app = {
         
         
         // Once saved the census, empty fields of all the steps
+        
+        $ ('#comune').val("");
+        $ ('#provincia').val("");
+        $('#street').val("");
+        app.census.position.latitude = '';    // Already set
+        app.census.position.longitude = '';   // Already set
+        app.census.position.accuracy = '';    // Already set
         
         $('input[type="text"]').val('');
         $('input[type="hidden"]').val('');
