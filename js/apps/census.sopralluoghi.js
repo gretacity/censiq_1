@@ -858,7 +858,7 @@ var app = {
         var html='';
         for(var i=0;i<supporti.length;i++)
         {
-            for(var j=0;j<supporti.length;j++)
+            for(var j=0;j<pellicole.length;j++)
             {
                 var text=eval('supporti.item(i).name')+' - '+eval('pellicole.item(j).name');
                 var id=eval('supporti.item(i).id')+'_'+eval('pellicole.item(j).id');
