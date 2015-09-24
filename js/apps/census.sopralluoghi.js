@@ -860,7 +860,7 @@ var app = {
         {
             for(var j=0;j<supporti.length;j++)
             {
-                var text=eval('supporti.item(i).name')+' '+eval('pellicole.item(j).name');
+                var text=eval('supporti.item(i).name')+' - '+eval('pellicole.item(j).name');
                 var id=eval('supporti.item(i).id')+'_'+eval('pellicole.item(j).id');
                 var ref="javascript:app.setMatPanel('"+eval('supporti.item(i).id')+"','"+eval('pellicole.item(j).id')+"','"+eval('supporti.item(i).name')+"','"+eval('pellicole.item(j).name')+"')";
                 
