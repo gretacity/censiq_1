@@ -173,7 +173,6 @@ var app = {
     validateStep: function(stepIndex, stepValidCallback, stepNotValidCallback) {
         var errors = [];
         if(stepIndex == app.STEP_1) {
-            console.log(app.ADDRESS_ACQ);
             
             if(app.ADDRESS_ACQ==0)
             {
@@ -278,36 +277,7 @@ var app = {
             app.addRoadSignPanel();
         }  
     },
-    updateCode: function()
-    {
-        if($('#qrCode_point','#localizeroadSignPage').val()!='')
-        {
-            data.fetch({status: [data.REC_STATUS_ADDED, data.REC_STATUS_SYNCH_ERROR]}, function(result)
-            {
-                var itemCount = result.rows.length;
-                for(var i = 0; i < itemCount; i++) 
-                {
-                    var row = result.rows.item(i);
-                    var obj = data.deserialize(row, row.entity_type);
-                    if(obj.qrCode==$('#curr_qrcode','#localizeroadSignPage').val())
-                    {
-                        
-                        var new_code=$('#qrCode_point','#localizeroadSignPage').val();
-                        //console.log(row.id+'--------'+ new_code);
-                        console.log(obj);
-                        console.log(row);
-                        data.updateQrCode(row.id, new_code);
-                        return;
-                    }
-                }
-            });
-        }
-        $.mobile.changePage('#ElencoSopralluoghiPage', {
-               transition: 'slide',
-               reverse: false,
-               changeHash: false
-           });
-    },
+    
     save: function() {
         var d= new Date();
         // Form is valid, proceed with saving.
@@ -377,6 +347,9 @@ var app = {
         // ...and save it
         // TODO Reenable
         //data.sopralluoghi.updateSupportTables(supportTableData);
+        
+        //console.log(app.census);
+        
         data.save(app.census);
         
         
@@ -387,9 +360,10 @@ var app = {
         $ ('#comune').val("");
         $ ('#provincia').val("");
         $('#street').val("");
-        app.census.position.latitude = '';    // Already set
-        app.census.position.longitude = '';   // Already set
-        app.census.position.accuracy = '';    // Already set
+        
+        //app.census.position.latitude = '';    // Already set
+        //app.census.position.longitude = '';   // Already set
+        //app.census.position.accuracy = '';    // Already set
         
         $('input[type="text"]').val('');
         $('input[type="hidden"]').val('');
