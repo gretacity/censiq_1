@@ -285,79 +285,78 @@
                 <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="display:block;width:100%;">
                     
                     <a href="javascript:app.searchRoadSign()" class="ui-btn ui-icon-search ui-btn-icon-right" data-mini="true">Cerca</a>
-                    
-                    <a href="#" id="addRoadSignButtonPanel" class="ui-btn ui-icon-plus ui-btn-icon-right" data-mini="true">Nuovo</a>
-                
                 </div>
                 <ul data-role="listview" id="roadSignList" data-inset="true">
                 </ul>
                 <div style="overflow:hidden;">
                     <div style="width:100%;margin:0;padding:0;overflow:hidden">
                         <div style="width:47%;overflow:hidden;float:left">
-                            <h3> Materiale </h3>
+                            <h3> Tipo segnale </h3>
                         </div>
-                         <div style="width:47%;overflow:hidden;float:left">
-                            <h3> Pellicola</h3>
+                        <div style="width:47%;overflow:hidden;float:left">
+                            <h3> Dimensioni </h3>
                         </div>
-                    </div>
+                     </div>
+                    
                     <div style="width:100%;margin:0;padding:0;overflow:hidden;" >
                         <div id="materiale_supporto" class="sopralluogo_elements" style="width:47%;overflow:hidden;float:left;background:#FFFFFF;padding:10px 0;min-height:232px">
                            <ul data-role="listview" class="ui-listview ui-group-theme-b" style="margin:0!important">
                            </ul>
                         </div>
-                         <div id="pellicola_segnale" class="sopralluogo_elements" style="width:47%;overflow:hidden;float:left;background:#FFFFFF;padding:10px 0;min-height:232px">
-                           <ul data-role="listview" class="ui-listview ui-group-theme-b" style="margin:0!important">
-                           </ul>
-                        </div>
-                    </div>
-                    <div style="width:100%;margin:0;padding:0;overflow:hidden">
-                        <div style="width:47%;overflow:hidden;float:left">
-                            <h3> Dimensioni </h3>
-                        </div>
-                        <div style="width:47%;overflow:hidden;float:left">
-                            <h3> Nuovi pali </h3>
-                        </div>
-                    </div>    
-                    <div style="width:100%;margin:0;padding:0;overflow:hidden">    
                         <div id="dimensioni_segnale" class="sopralluogo_elements" style="width:47%;padding:0;;float:left;min-height:304px;background:#FFFFFF;padding:10px 0">
                             <ul data-role="listview" class="ui-listview ui-group-theme-b" style="margin:0!important">
                                 <li style="border:0">Specificare segnale</li>
                             </ul>
                         </div>
-                        <div  class="sopralluogo_elements" style="width:47%;padding:0;overflow:hidden;float:left;min-height:304px;background:#FFFFFF">
-                            <ul data-role="listview" class="ui-listview ui-group-theme-b" style="margin:0!important">
-                               <li style="border-bottom:0 !important">
+                        
+                        <div style="display:none">
+                            <div id="pellicola_segnale" class="sopralluogo_elements" style="width:47%;overflow:hidden;float:left;background:#FFFFFF;padding:10px 0;min-height:232px">
+                              <ul data-role="listview" class="ui-listview ui-group-theme-b" style="margin:0!important">
+                              </ul>
+                           </div>
+                        </div>    
+                    </div>
+                </div>    
+                <div id="supporto_dialogs" style="margin:10px 0">
+                    
+                    
+                    <div id="nuovi_pali" data-inset="false" data-role="collapsible" data-collapsed="false" data-collapsed-icon="carat-r" data-expanded-icon="carat-d" data-theme="b">
+                        <h1 class="ui-collapsible-heading">
+                                <span>Nuovi pali</span>
+                        </h1>    
+                        <ul data-role="listview" class="ui-listview ui-group-theme-b">
+                        
+                                <li style="border-bottom:0 !important">
                                            <label>Numero pali</label>
                                            <div style="text-align:center;padding:0;">
                                                <input type="text" name="numberOfPoles_p"  id="numberOfPoles_p" value="" placeholder="n°">
                                            </div>    
                                         </li>
-                                         <li style="border-bottom:0 !important">
-                                            <label>Altezza</label>
-                                            <div style="text-align:center;padding:0;">
-                                               <select name="poleHeight_p" id="poleHeight_p">
-                                                    <option value="220">220 cm</option>
-                                                    <option value="330">330 cm</option>
-                                                    <option value="400">400 cm</option>
-                                                    <option value="440">440 cm</option>
-                                                </select>
-                                            </div>    
-                                        </li>
-                                        <li style="border-bottom:0 !important">
-                                            <label>Sezione</label>
-                                            <div style="text-align:center;padding:0;">
-                                                 <select name="poleDiameter_p" id="poleDiameter_p">
-                                                    <option value="60">60 mm</option>
-                                                    <option value="40">40 mm</option>
-                                                </select>
-                                            </div>    
-                                        </li>
-                            </ul>
-                        </div>
+                                <li style="border-bottom:0 !important">
+                                   <label>Altezza</label>
+                                   <div style="text-align:center;padding:0;">
+                                      <select name="poleHeight_p" id="poleHeight_p">
+                                           <option value="220">220 cm</option>
+                                           <option value="330">330 cm</option>
+                                           <option value="400">400 cm</option>
+                                           <option value="440">440 cm</option>
+                                       </select>
+                                   </div>    
+                               </li>
+                                <li style="border-bottom:0 !important">
+                                    <label>Sezione</label>
+                                    <div style="text-align:center;padding:0;">
+                                         <select name="poleDiameter_p" id="poleDiameter_p">
+                                            <option value="60">60 mm</option>
+                                            <option value="40">40 mm</option>
+                                        </select>
+                                    </div>    
+                                </li>
+                        </ul>
                     </div>
-                </div>    
-                <div id="supporto_dialogs" style="margin:10px 0">
-                    <div id="a_sp_dialog" data-inset="false" data-role="collapsible" data-collapsed="true" data-collapsed-icon="carat-r" data-expanded-icon="carat-d" data-theme="b">
+                    
+                    
+                    <div id="a_sp_dialog" data-inset="false" data-role="collapsible" data-collapsed="false" data-collapsed-icon="carat-r" data-expanded-icon="carat-d" data-theme="b">
                         <h1 class="ui-collapsible-heading">
                                 <span id="supp_title">Rimozioni</span>
                         </h1>    
@@ -380,48 +379,49 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li style="border-bottom:0 !important">
-                                    <div id="foto">
-                                        <ul data-role="listview" data-inset="false" data-theme="b" id="foto" style="margin-top:1em">        
-                                                <li>
-                                                <label>Foto 1</label>
-                                                    <div style="text-align:center;padding:0;">
-                                                        <a href="#" data-viewtype="front" data-showview style="display:none;">
-                                                            <img src="" style="width:100%" />
-                                                        </a>
-                                                        <a href="#" data-viewtype="front" data-removeview class="ui-btn ui-icon-delete ui-btn-icon-left" style="display:none;">rimuovi</a>
-                                                        <a href="#" data-viewtype="front" data-addview    class="ui-btn ui-icon-camera ui-btn-icon-left">acquisisci</a>
-                                                    </div>
-                                                </li>
-                                               
-                                                <li>
-                                                    <label>Foto 2</label>
-                                                    <div style="text-align:center;">
-                                                        <a href="#" data-viewtype="back" data-showview style="display:none;">
-                                                            <img src="" style="width:100%" />
-                                                        </a>
-                                                        <a href="#" data-viewtype="back" data-removeview class="ui-btn ui-icon-delete ui-btn-icon-left" style="display:none;">rimuovi</a>
-                                                        <a href="#" data-viewtype="back" data-addview    class="ui-btn ui-icon-camera ui-btn-icon-left">acquisisci</a>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <label>Foto 3</label>
-                                                    <div style="text-align:center;">
-                                                        <a href="#" data-viewtype="perspective" data-showview style="display:none;">
-                                                            <img src="" style="width:100%" />
-                                                        </a>
-                                                        <a href="#" data-viewtype="perspective" data-removeview class="ui-btn ui-icon-delete ui-btn-icon-left" style="display:none;">rimuovi</a>
-                                                        <a href="#" data-viewtype="perspective" data-addview    class="ui-btn ui-icon-camera ui-btn-icon-left">acquisisci</a>
-                                                    </div>
-                                                </li>
-                                              
-                                            </ul>
-                                    </div>
-                                </li>
                         </ul>
-                    </div>    
+                    </div>
+                    <div id="foto" data-inset="false" data-role="collapsible" data-collapsed="false" data-collapsed-icon="carat-r" data-expanded-icon="carat-d" data-theme="b">
+                        <h1 class="ui-collapsible-heading">
+                                <span>Foto</span>
+                        </h1>    
+                        <ul data-role="listview" class="ui-listview ui-group-theme-b">
+                            <li>
+                                <label>Foto 1</label>
+                                <div style="text-align:center;padding:0;">
+                                    <a href="#" data-viewtype="front" data-showview style="display:none;">
+                                        <img src="" style="width:100%" />
+                                    </a>
+                                    <a href="#" data-viewtype="front" data-removeview class="ui-btn ui-icon-delete ui-btn-icon-left" style="display:none;">rimuovi</a>
+                                    <a href="#" data-viewtype="front" data-addview    class="ui-btn ui-icon-camera ui-btn-icon-left">acquisisci</a>
+                                </div>
+                            </li>
+                            <li>
+                                <label>Foto 2</label>
+                                <div style="text-align:center;">
+                                    <a href="#" data-viewtype="back" data-showview style="display:none;">
+                                        <img src="" style="width:100%" />
+                                    </a>
+                                    <a href="#" data-viewtype="back" data-removeview class="ui-btn ui-icon-delete ui-btn-icon-left" style="display:none;">rimuovi</a>
+                                    <a href="#" data-viewtype="back" data-addview    class="ui-btn ui-icon-camera ui-btn-icon-left">acquisisci</a>
+                                </div>
+                            </li>
+                            <li>
+                                <label>Foto 3</label>
+                                <div style="text-align:center;">
+                                    <a href="#" data-viewtype="perspective" data-showview style="display:none;">
+                                        <img src="" style="width:100%" />
+                                    </a>
+                                    <a href="#" data-viewtype="perspective" data-removeview class="ui-btn ui-icon-delete ui-btn-icon-left" style="display:none;">rimuovi</a>
+                                    <a href="#" data-viewtype="perspective" data-addview    class="ui-btn ui-icon-camera ui-btn-icon-left">acquisisci</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>     
+                    
                 </div>
                 <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="display:block;float:right;">
+                    <a href="#" id="addRoadSignButtonPanel" class="ui-btn ui-icon-plus ui-btn-icon-right" data-mini="true">Nuovo</a>
                     <a href="javascript:app.saveRoadSign()" class="ui-btn ui-icon-edit ui-btn-icon-right" data-mini="true">Salva</a>
                 </div>
                 
