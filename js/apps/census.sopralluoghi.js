@@ -351,6 +351,12 @@ var app = {
         poleInfo.poleDiameter = $('#poleDiameter').val();                               // Diametro dei pali
         poleInfo.poleHeight = $('#poleHeight').val();                                   // Altezza dei pali
         
+        poleInfo.numberOfPolesUpWind = $('#numberOfPolesUpWind').val();                                  // Numero di pali
+        poleInfo.poleUpWindDiameter = $('#poleUpWindDiameter').val();                               // Diametro dei pali
+        poleInfo.poleUpWindHeight = $('#poleUpWindHeight').val();                                   // Altezza dei pali
+        
+        
+        
         poleInfo.old_signs_number=$('#old_signs_number').val();
         poleInfo.old_pole_number=$('#old_pole_number').val();
         
@@ -1100,8 +1106,22 @@ var app = {
         $("#oldpole").val($("#oldpole_p").val());
         $("#numberOfPoles").val($("#numberOfPoles_p").val());
         $("#poleHeight").val($("#poleHeight_p").val());
+        
+        if($("#altro_h_p").val()!="")
+        {
+            $("#poleHeight").val($("#altro_h_p").val());
+            //$("#poleHeight").append('<option value="'+$("#altro_h_p").val()+'" selected>'+$("#altro_h_p").val() +' cm</option>');
+        }
         $("#poleDiameter").val($("#poleDiameter_p").val());
         
+        $("#numberOfPolesUpWind").val($("#numberOfPolesUpWind_p").val());
+        $("#poleUpWindHeight").val($("#poleUpWindHeight_p").val());
+        if($("#altro_hw_p").val()!="")
+        {    
+            //$("#poleUpWindHeight").append('<option value="'+$("#altro_hw_p").val()+'" selected>'+$("#altro_hw_p").val()+' cm</option>');
+            $("#poleUpWindHeight").val($("altro_hw_p").val());
+        }
+        $("#poleUpWindDiameter").val($("#poleUpWindDiameter_p").val());
         $("#old_pole_number").val($("#old_pole_number_p").val());
         $("#old_signs_number").val($("#old_signs_number_p").val());
         
@@ -1167,12 +1187,12 @@ var app = {
         $("#dimensioni_segnale a").removeClass("itm_selected");
         $("#sz"+signSizeId).addClass("itm_selected");
     },
+    
     setRoadSignSize: function(signSizeId, signSize) {
         var roadSignPanel = $('div[data-roadsignno="' + app._currentRoadSign + '"]');
         $('a label.roadsign-size', roadSignPanel).attr('data-sizeid', signSizeId).html(signSize);
         app.closeListDialog();
     },
-    
     
     openRoadSignSupportPanel: function(signIndex) {
         // Changed: now use the async pattern
@@ -1246,6 +1266,38 @@ var app = {
         app.closeListDialog();
     },
     
+    
+    
+    setPoleSizePanel: function(hid) {
+        
+        
+        
+        var roadSignPanel = $('#poleHeight_p').val(hid);
+        $("#hp a").removeClass("itm_selected");
+        $("#hp"+hid).addClass("itm_selected");
+    },
+    
+    setPolediameterPanel: function(did) {
+        var roadSignPanel = $('#poleDiameter_p').val(did);
+        $("#dp a").removeClass("itm_selected");
+        $("#dp"+did).addClass("itm_selected");
+    },
+    
+    
+    setPoleSizePanelUW: function(hid) {
+        var roadSignPanel = $('#poleUpWindHeight_p').val(hid);
+        $("#hpw a").removeClass("itm_selected");
+        $("#hpw"+hid).addClass("itm_selected");
+    },
+    
+    setPolediameterPanelUW: function(did) {
+        var roadSignPanel = $('#poleUpWindDiameter_p').val(did);
+        $("#dpw a").removeClass("itm_selected");
+        $("#dpw"+did).addClass("itm_selected");
+    },
+    
+    
+    
     showOlPoleInfo: function() {
         var val=$("#oldpole_p").val();
         if(val==0 || val=="1")
@@ -1258,6 +1310,7 @@ var app = {
         }    
         
     },
+    
     
     
     setBackButton: function()

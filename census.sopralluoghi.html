@@ -131,25 +131,39 @@
                                             </div>    
                                          </li>
                                           <li style="border-bottom:0 !important">
-                                             <label>Altezza</label>
-                                             <div style="text-align:center;padding:0;">
-                                                <select name="poleHeight" id="poleHeight" style="width:90%;margin: 0 auto">
-                                                     <option value="220">220 cm</option>
-                                                     <option value="330">330 cm</option>
-                                                     <option value="400">400 cm</option>
-                                                     <option value="440">440 cm</option>
-                                                 </select>
-                                             </div>    
+                                            <label>Altezza</label>
+                                            <div style="text-align:center;padding:0;">
+                                                <input type="text" name="poleHeight" id="poleHeight">
+                                            </div>    
                                          </li>
                                          <li style="border-bottom:0 !important">
                                              <label>Sezione</label>
                                              <div style="text-align:center;padding:0;">
-                                                  <select name="poleDiameter" id="poleDiameter">
-                                                     <option value="60">60 mm</option>
-                                                     <option value="40">40 mm</option>
-                                                 </select>
+                                                  <input type="text" name="poleDiameter" id="poleDiameter">
                                              </div>    
                                          </li>
+                                         
+                                        
+                                         <li style="border-bottom:0 !important">
+                                            <label>Numero CV</label>
+                                            <div style="text-align:center;padding:0;">
+                                                <input type="text" name="numberOfPolesUpWind" id="numberOfPolesUpWind" value="" placeholder="n°">
+                                            </div>    
+                                         </li>
+                                          <li style="border-bottom:0 !important">
+                                             <label>Altezza CV</label>
+                                             <div style="text-align:center;padding:0;">
+                                                <input type="text" name="poleUpWindHeight" id="poleUpWindHeight">
+                                                    
+                                             </div>    
+                                         </li>
+                                         <li style="border-bottom:0 !important">
+                                            <label>Sezione CV</label>
+                                            <div style="text-align:center;padding:0;">
+                                                  <input type="text" name="poleUpWindDiameter" id="poleUpWindDiameter">
+                                            </div>    
+                                         </li>
+                                         
                                     </ul>
                                 </div>
                                 <div data-inset="false" data-role="collapsible" data-collapsed="true" data-collapsed-icon="carat-r" data-expanded-icon="carat-d" data-theme="b" style="margin:0 0.5em 1em 0.5em">
@@ -174,46 +188,6 @@
                                                 </li>
                                             </ul>
                                         </li>
-                                        <!--
-                                        <li style="border-bottom:0 !important">
-                                                <div id="foto">
-                                                    <ul data-role="listview" data-inset="false" data-theme="b" id="foto" style="margin-top:1em">        
-                                                            <li>
-                                                            <label>Foto 1</label>
-                                                                <div style="text-align:center;padding:0;">
-                                                                    <a href="#" data-viewtype="front" data-showview style="display:none;">
-                                                                        <img src="" style="width:100%" />
-                                                                    </a>
-                                                                    <a href="#" data-viewtype="front" data-removeview class="ui-btn ui-icon-delete ui-btn-icon-left" style="display:none;">rimuovi</a>
-                                                                    <a href="#" data-viewtype="front" data-addview    class="ui-btn ui-icon-camera ui-btn-icon-left">acquisisci</a>
-                                                                </div>
-                                                            </li>
-
-                                                            <li>
-                                                                <label>Foto 2</label>
-                                                                <div style="text-align:center;">
-                                                                    <a href="#" data-viewtype="back" data-showview style="display:none;">
-                                                                        <img src="" style="width:100%" />
-                                                                    </a>
-                                                                    <a href="#" data-viewtype="back" data-removeview class="ui-btn ui-icon-delete ui-btn-icon-left" style="display:none;">rimuovi</a>
-                                                                    <a href="#" data-viewtype="back" data-addview    class="ui-btn ui-icon-camera ui-btn-icon-left">acquisisci</a>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <label>Foto 3</label>
-                                                                <div style="text-align:center;">
-                                                                    <a href="#" data-viewtype="perspective" data-showview style="display:none;">
-                                                                        <img src="" style="width:100%" />
-                                                                    </a>
-                                                                    <a href="#" data-viewtype="perspective" data-removeview class="ui-btn ui-icon-delete ui-btn-icon-left" style="display:none;">rimuovi</a>
-                                                                    <a href="#" data-viewtype="perspective" data-addview    class="ui-btn ui-icon-camera ui-btn-icon-left">acquisisci</a>
-                                                                </div>
-                                                            </li>
-
-                                                        </ul>
-                                                </div>
-                                            </li>
-                                        -->    
                                     </ul>
                                 </div>    
                             </div>
@@ -318,9 +292,7 @@
                     </div>
                 </div>    
                 <div id="supporto_dialogs" style="margin:10px 0">
-                    
-                    
-                    <div id="nuovi_pali" data-inset="false" data-role="collapsible" data-collapsed="false" data-collapsed-icon="carat-r" data-expanded-icon="carat-d" data-theme="b">
+                    <div id="nuovi_pali" data-inset="false" data-role="collapsible" data-collapsed="true" data-collapsed-icon="carat-r" data-expanded-icon="carat-d" data-theme="b">
                         <h1 class="ui-collapsible-heading">
                                 <span>Nuovi pali</span>
                         </h1>    
@@ -334,29 +306,150 @@
                                         </li>
                                 <li style="border-bottom:0 !important">
                                    <label>Altezza</label>
-                                   <div style="text-align:center;padding:0;">
-                                      <select name="poleHeight_p" id="poleHeight_p">
-                                           <option value="220">220 cm</option>
-                                           <option value="330">330 cm</option>
-                                           <option value="400">400 cm</option>
-                                           <option value="440">440 cm</option>
-                                       </select>
+                                   <div style="text-align:center;padding:0;" id="hp">
+                                       <input type="hidden" name="poleHeight_p" id="poleHeight_p" value="0">
+                                       
+                                       <ul data-role="listview" class="ui-listview ui-group-theme-b" style="margin:0!important">
+                                           <li class="ui-first-child" style="float:left">
+                                               <a href="javascript:app.setPoleSizePanel('300')" id="hp300" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                                                   300 cm
+                                               </a>
+                                           </li>
+                                           <li style="float:left">
+                                               <a href="javascript:app.setPoleSizePanel('320')" id="hp320" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                                                   320 cm
+                                               </a>
+                                           </li>
+                                           <li style="float:left">
+                                               <a href="javascript:app.setPoleSizePanel('360')" id="hp360" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                                                   360 cm
+                                               </a>
+                                           </li>
+                                           <li style="float:left">
+                                               <a href="javascript:app.setPoleSizePanel('400')" id="hp400" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                                                   400 cm
+                                               </a>
+                                           </li>
+                                           <li style="float:left">
+                                               <a href="javascript:app.setPoleSizePanel('440')" id="hp440" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                                                   440 cm
+                                               </a>
+                                           </li>
+                                           
+                                           <li style="float:left">
+                                                <div style="text-align:center;padding:0;">
+                                                    <input type="text" name="altro_h_p"  id="altro_h_p" value="" placeholder="altro" >
+                                                </div> 
+                                           </li>
+                                           
+                                           
+                                           
+                                           
+                                           
+                                       </ul>  
+                                      
                                    </div>    
                                </li>
                                 <li style="border-bottom:0 !important">
                                     <label>Sezione</label>
-                                    <div style="text-align:center;padding:0;">
-                                         <select name="poleDiameter_p" id="poleDiameter_p">
-                                            <option value="60">60 mm</option>
-                                            <option value="40">40 mm</option>
-                                        </select>
+                                    <div style="text-align:center;padding:0;" id="dp">
+                                        <input type="hidden" name="poleDiameter_p" id="poleDiameter_p" value="">
+                                        <ul data-role="listview" class="ui-listview ui-group-theme-b" style="margin:0!important">
+                                           <li class="ui-first-child" style="float:left">
+                                               <a href="javascript:app.setPolediameterPanel('40')" id="dp40" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                                                   40 mm
+                                               </a>
+                                           </li>
+                                           <li class="ui-first-child" style="float:left">
+                                               <a href="javascript:app.setPolediameterPanel('60')" id="dp60" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                                                   60 mm
+                                               </a>
+                                           </li>
+                                       </ul>       
+                                         
                                     </div>    
                                 </li>
+                                
+                                
+                                
+                                
+                                
+                                <li style="border-bottom:0 !important">
+                                           <label>Numero pali controvento</label>
+                                           <div style="text-align:center;padding:0;">
+                                               <input type="text" name="numberOfPolesUpWind_p"  id="numberOfPolesUpWind_p" value="" placeholder="n°">
+                                           </div>    
+                                        </li>
+                                <li style="border-bottom:0 !important">
+                                   <label>Altezza pali controvento</label>
+                                   <div style="text-align:center;padding:0;" id="hpw">
+                                       <input type="hidden" name="poleUpWindHeight_p" id="poleUpWindHeight_p" value="0">
+                                       
+                                       <ul data-role="listview" class="ui-listview ui-group-theme-b" style="margin:0!important">
+                                           <li class="ui-first-child" style="float:left">
+                                               <a href="javascript:app.setPoleSizePanelUW('300')" id="hpw300" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                                                   300 cm
+                                               </a>
+                                           </li>
+                                           <li style="float:left">
+                                               <a href="javascript:app.setPoleSizePanelUW('320')" id="hpw320" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                                                   320 cm
+                                               </a>
+                                           </li>
+                                           <li style="float:left">
+                                               <a href="javascript:app.setPoleSizePanelUW('360')" id="hpw360" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                                                   360 cm
+                                               </a>
+                                           </li>
+                                           <li style="float:left">
+                                               <a href="javascript:app.setPoleSizePanelUW('400')" id="hpw400" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                                                   400 cm
+                                               </a>
+                                           </li>
+                                           <li style="float:left">
+                                               <a href="javascript:app.setPoleSizePanelUW('440')" id="hpw440" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                                                   440 cm
+                                               </a>
+                                           </li>
+                                           
+                                           <li style="float:left">
+                                                <div style="text-align:center;padding:0;">
+                                                    <input type="text" name="altro_hw_p"  id="altro_hw_p" value="" placeholder="altro" >
+                                                </div> 
+                                           </li>
+                                           
+                                           
+                                           
+                                           
+                                           
+                                       </ul>  
+                                      
+                                   </div>    
+                               </li>
+                                <li style="border-bottom:0 !important">
+                                    <label>Sezione pali controvento</label>
+                                    <div style="text-align:center;padding:0;" id="dpw">
+                                        <input type="hidden" name="poleUpWindDiameter_p" id="poleUpWindDiameter_p" value="">
+                                        <ul data-role="listview" class="ui-listview ui-group-theme-b" style="margin:0!important">
+                                           <li class="ui-first-child" style="float:left">
+                                               <a href="javascript:app.setPolediameterPanelUW('40')" id="dpw40" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                                                   40 mm
+                                               </a>
+                                           </li>
+                                           <li class="ui-first-child" style="float:left">
+                                               <a href="javascript:app.setPolediameterPanelUW('60')" id="dpw60" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                                                   60 mm
+                                               </a>
+                                           </li>
+                                       </ul>       
+                                         
+                                    </div>    
+                                </li>
+                                
+                                
                         </ul>
                     </div>
-                    
-                    
-                    <div id="a_sp_dialog" data-inset="false" data-role="collapsible" data-collapsed="false" data-collapsed-icon="carat-r" data-expanded-icon="carat-d" data-theme="b">
+                    <div id="a_sp_dialog" data-inset="false" data-role="collapsible" data-collapsed="true" data-collapsed-icon="carat-r" data-expanded-icon="carat-d" data-theme="b">
                         <h1 class="ui-collapsible-heading">
                                 <span id="supp_title">Rimozioni</span>
                         </h1>    
@@ -381,7 +474,7 @@
                                 </li>
                         </ul>
                     </div>
-                    <div id="foto" data-inset="false" data-role="collapsible" data-collapsed="false" data-collapsed-icon="carat-r" data-expanded-icon="carat-d" data-theme="b">
+                    <div id="foto" data-inset="false" data-role="collapsible" data-collapsed="true" data-collapsed-icon="carat-r" data-expanded-icon="carat-d" data-theme="b">
                         <h1 class="ui-collapsible-heading">
                                 <span>Foto</span>
                         </h1>    
@@ -418,7 +511,6 @@
                             </li>
                         </ul>
                     </div>     
-                    
                 </div>
                 <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="display:block;float:right;">
                     <a href="#" id="addRoadSignButtonPanel" class="ui-btn ui-icon-plus ui-btn-icon-right" data-mini="true">Nuovo</a>

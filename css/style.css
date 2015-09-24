@@ -130,7 +130,7 @@ margin:0 15px 5px 15px !important;
 }
 
 
-#materiale_supporto li a, #dimensioni_segnale li a,#pellicola_segnale li a
+#materiale_supporto li a, #dimensioni_segnale li a,#pellicola_segnale li a,#hp li a,#dp li a,#hpw li a,#dpw li a
 {
     border:0 !important;
     border-radius:20px !important;
@@ -217,7 +217,7 @@ margin:0 15px 5px 15px !important;
    
 }
 
-#riepilogo a, #roadSignContainer a
+#riepilogo a, #roadSignContainer a, #hp a,#dp a, #hpw a,#dpw a
 {
     font-size:12px !important;
     font-weight:300 !important;
