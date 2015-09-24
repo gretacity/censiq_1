@@ -348,10 +348,10 @@ var app = {
         // TODO Reenable
         //data.sopralluoghi.updateSupportTables(supportTableData);
         
-        //console.log(app.census);
+        
         
         data.save(app.census);
-        
+        $('#roadSignContainer div[data-roadsignno]').remove();
         
         
         
