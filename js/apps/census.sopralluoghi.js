@@ -1099,7 +1099,8 @@ var app = {
                         '<img src="img/noPhoto.png" style="width:70%; margin:0 auto">'+
                     '</h3>'+
                     '<span>Ricerca segnale per nome o codice</span>');
-        $("#dimensioni_segnale ul").html('<li style="border:0">Specificare il segnale</li>');    
+        $("#dimensioni_segnale ul").html('<li style="border:0">Specificare il segnale</li>');  
+        $("#supporto_dialogs").css("display","none");
         app.addRoadSignPanel(); 
     },
     
