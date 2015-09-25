@@ -1089,6 +1089,10 @@ var app = {
         //app.addRoadSignPanel();
         app._allRoadSigns = null;
         app._currentRoadSign = null;
+        if($('#roadSignContainer div[data-roadsignno]').length>0)
+        {
+            $("#supporto_dialogs").css("display","none");
+        }    
         
         $('#roadSignList').empty().listview("refresh");
         $("#img_segnale").html( '<h3>'+
