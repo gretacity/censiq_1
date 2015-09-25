@@ -261,3 +261,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7abcff', end
 {
  background-color:#FFFFFF;
 } 
+
+
+.ui-icon-check:after
+{
+    color:#10FF00;
+    margin-right: -3px;
+}
+
+.ui-btn
+{
+    border-color:#dedede !important;;
+}

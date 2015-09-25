@@ -753,7 +753,7 @@ var app = {
         var rem=0;
         var count = ++app._roadSignCounter;
         app.openRoadSignFinder( count,rem);
-        var $roadSignPanel = $('<div data-roadsignno="' + count + '" data-inset="false" data-role="collapsible" data-collapsed="true" data-collapsed-icon="carat-r" data-expanded-icon="carat-d" data-theme="b">' +
+        var $roadSignPanel = $('<div data-roadsignno="' + count + '" data-inset="false" data-role="collapsible" data-collapsed="true" data-collapsed-icon="check" data-expanded-icon="carat-d" data-theme="b">' +
                                     '<h1>' +
                                         '<input type="hidden" class="roadsign-signid"/>' +
                                         '<img src="" class="roadsign-picture" style="width:40px;height:40px"/> <span>Cartello</span>' +
@@ -864,7 +864,7 @@ var app = {
                 var id=eval('supporti.item(i).id')+'_'+eval('pellicole.item(j).id');
                 var ref="javascript:app.setMatPanel('"+eval('supporti.item(i).id')+"','"+eval('pellicole.item(j).id')+"','"+eval('supporti.item(i).name')+"','"+eval('pellicole.item(j).name')+"')";
                 
-                html+='<li><a href="' + ref + '" id="mat'+id+'">' + text + '</a></li>'
+                html+='<li><a href="' + ref + '" id="mat'+id+'" class="ui-icon-check">' + text + '</a></li>'
             }    
         }    
         $listview.html(html);
@@ -1068,7 +1068,7 @@ var app = {
                     }
                     catch(e){}
                     
-                    html += '<li><a href="' + ref + '" id="sz'+id+'">' + text + '</a></li>';
+                    html += '<li><a href="' + ref + '" id="sz'+id+'" class="ui-icon-check">' + text + '</a></li>';
                 }
                 $listview.html(html);
                 $listview.listview();
