@@ -141,7 +141,7 @@ var app = {
                             try
                             {
                                 var imageUrl =config.getNativeBaseURL()+ config.ROADSIGN_BASE_PATH_ICONS + result.item(0).icon;
-                                console.log("img"+result.item(0).id);
+                                
                                 $(".img"+result.item(0).id).attr("src",imageUrl);
                                 $(".img"+result.item(0).id).css("width","60px");
                                 $(".img"+result.item(0).id).css("height","60px");
@@ -353,7 +353,7 @@ var app = {
         
         poleInfo.numberOfPolesUpWind = $('#numberOfPolesUpWind').val();                                  // Numero di pali
         poleInfo.poleUpWindDiameter = $('#poleUpWindDiameter').val();                               // Diametro dei pali
-        poleInfo.poleUpWindHeight = $('#poleUpWindHeight').val();                                   // Altezza dei pali
+        poleInfo.poleUpwindHeight = $('#poleUpWindHeight').val();                                   // Altezza dei pali
         
         
         
@@ -1104,9 +1104,6 @@ var app = {
         app.addRoadSignPanel(); 
     },
     
-    
-    
-    
     saveRoadSign: function() {
         
         
@@ -1125,8 +1122,8 @@ var app = {
         $("#poleUpWindHeight").val($("#poleUpWindHeight_p").val());
         if($("#altro_hw_p").val()!="")
         {    
-            //$("#poleUpWindHeight").append('<option value="'+$("#altro_hw_p").val()+'" selected>'+$("#altro_hw_p").val()+' cm</option>');
-            $("#poleUpWindHeight").val($("altro_hw_p").val());
+           
+            $("#poleUpWindHeight").val($("#altro_hw_p").val());
         }
         $("#poleUpWindDiameter").val($("#poleUpWindDiameter_p").val());
         $("#old_pole_number").val($("#old_pole_number_p").val());
@@ -1276,9 +1273,6 @@ var app = {
     
     
     setPoleSizePanel: function(hid) {
-        
-        
-        
         var roadSignPanel = $('#poleHeight_p').val(hid);
         $("#hp a").removeClass("itm_selected");
         $("#hp"+hid).addClass("itm_selected");
