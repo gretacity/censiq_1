@@ -389,6 +389,8 @@ var app = {
         app.removePhoto('back');
         app.removePhoto('perspective');     
         // Move to the last page of the wizard
+        app. ACQ=false;
+        app.ID_GPS=0; 
         $.mobile.changePage('#ElencoSopralluoghiPage', {
             transition: 'slide'
         });
@@ -490,6 +492,8 @@ var app = {
     }, 
     readGPS :function()
     {
+        
+        
         if(app.ID_GPS!=0)
         {
             clearInterval(app.ID_GPS);
