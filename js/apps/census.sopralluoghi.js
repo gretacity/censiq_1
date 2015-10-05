@@ -509,7 +509,6 @@ var app = {
                 app.acquireGeoCoordinates1(
                 function()
                 {
-                    
                     if(app.ID_GPS!=0)
                     {
                         clearInterval(app.ID_GPS);
@@ -583,6 +582,7 @@ var app = {
                         app.ID_GPS=setInterval(function(){app.readGPS()},5000);
                         
                     }
+                    alert(errorMessage);
                 }
                 );
             }
@@ -624,7 +624,6 @@ var app = {
                   
                 
             }
-            alert("ok");
             app.readGPS();
         }
         else
