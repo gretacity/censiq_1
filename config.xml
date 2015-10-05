@@ -58,6 +58,14 @@
     <gap:plugin name="org.apache.cordova.network-information" />
     <gap:plugin name="org.apache.cordova.camera" />
     <gap:plugin name="org.apache.cordova.file" />
+    
+    
+    <gap:config-file platform="ios" parent="NSLocationAlwaysUsageDescription" overwrite="true">
+
+        <string>Consenti a Censiq di accedere alla tua posizione attuale</string>
+
+    </gap:config-file>
+
 
     <!-- Define app icon for each platform. -->
     <icon src="icon.png" />
