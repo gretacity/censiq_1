@@ -50,7 +50,7 @@ var config = {
     
     GEO_OPTS_MAXIMUM_AGE: 3000,
     GEO_OPTS_TIMEOUT: 5000,
-    GEO_OPTS_HIGH_ACCURACY: true,
+    GEO_OPTS_HIGH_ACCURACY: false,
     // Minimum accuracy level required of the latitude
     // and longitude coordinates in meters
     GEO_OTPS_MINIMUM_ACCURACY_REQUIRED: 3,
