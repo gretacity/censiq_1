@@ -873,7 +873,7 @@ var app = {
         }    
         $listview.html(html);
         $listview.listview();
-        $listview.listview("refresh");
+        //$listview.listview("refresh");
          $.mobile.changePage('#roadSignFinder', {
              transition: 'flip'
         });
