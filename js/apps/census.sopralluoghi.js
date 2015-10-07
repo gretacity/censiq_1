@@ -567,7 +567,7 @@ var app = {
                     }
                     catch(e)
                     {
-                        helper.alert(e.message);
+                        //helper.alert(e.message);
                     }
                     $("#btnCoord").fadeIn(100);
 
