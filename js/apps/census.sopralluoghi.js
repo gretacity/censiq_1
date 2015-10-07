@@ -68,6 +68,7 @@ var app = {
         
         
         var $page3 = $('#foto');
+        $("#supporto_dialogs").css("display","block");
         $('a[data-addview]', $page3).on('click', this.acquirePhoto);
         $('a[data-removeview]', $page3).on('click', this.removePhoto);
         $('#photoPage a').on('tap', this.hidePhotoDialog);
