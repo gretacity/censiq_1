@@ -737,7 +737,7 @@ var app = {
     closeListDialog: function() {
         app._currentRoadSign = null;
         $.mobile.changePage('#sopralluoghiStep2Page', {
-            reverse: true,
+            reverse: true
         });
     },
 
@@ -838,7 +838,7 @@ var app = {
             
         app._currentRoadSign = signIndex;
         $.mobile.changePage('#roadSignFinder', {
-            transition: 'flip'
+             transition: 'slide'
         });
         
         $("#foto a").addClass("alert_sup");
