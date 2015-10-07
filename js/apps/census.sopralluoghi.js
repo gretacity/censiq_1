@@ -837,9 +837,7 @@ var app = {
         
             
         app._currentRoadSign = signIndex;
-        $.mobile.changePage('#roadSignFinder', {
-             transition: 'slide'
-        });
+       
         
         $("#foto a").addClass("alert_sup");
         $("#nuovi_pali a").addClass("alert_sup");
@@ -876,6 +874,9 @@ var app = {
         $listview.html(html);
         $listview.listview();
         $listview.listview("refresh");
+         $.mobile.changePage('#roadSignFinder', {
+             transition: 'flip'
+        });
         
     },
     
