@@ -68,7 +68,7 @@ var app = {
         
         
         var $page3 = $('#foto');
-        $("#supporto_dialogs").css("display","block");
+        //$("#supporto_dialogs").css("display","block");
         $('a[data-addview]', $page3).on('click', this.acquirePhoto);
         $('a[data-removeview]', $page3).on('click', this.removePhoto);
         $('#photoPage a').on('tap', this.hidePhotoDialog);
@@ -1097,7 +1097,7 @@ var app = {
         app._currentRoadSign = null;
         if($('#roadSignContainer div[data-roadsignno]').length>0)
         {
-            $("#supporto_dialogs").css("display","none");
+            //$("#supporto_dialogs").css("display","none");
         }    
         
         $('#roadSignList').empty().listview("refresh");
