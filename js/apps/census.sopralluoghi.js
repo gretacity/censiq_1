@@ -589,7 +589,7 @@ var app = {
                         app.ID_GPS=setInterval(function(){app.readGPS()},5000);
                         
                     }
-                    alert(errorMessage);
+                    //alert(errorMessage);
                 }
                 );
             }
