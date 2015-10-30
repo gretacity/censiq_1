@@ -392,7 +392,13 @@ var app = {
         // Move to the last page of the wizard
         app. ACQ=false;
         app.ID_GPS=0; 
+        
+        /*
         $.mobile.changePage('#ElencoSopralluoghiPage', {
+            transition: 'slide'
+        });
+        */
+        $.mobile.changePage('#summaryPage', {
             transition: 'slide'
         });
     },

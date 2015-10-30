@@ -568,8 +568,13 @@ var app = {
         $('#qrCode').val(config.QR_CODE_TEST);
         app. ACQ=false;
         app.ID_GPS=0; 
+        /*
         // Move to the last page of the wizard
         $.mobile.changePage('#ElencoRoadsignPage', {
+            transition: 'slide'
+        });
+        */
+        $.mobile.changePage('#summaryPage', {
             transition: 'slide'
         });
     },
