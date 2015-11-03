@@ -811,8 +811,11 @@ var app = {
         $listview.append('<li data-theme="b">' +
                             '<a href="javascript:app.removeRoadSignPanel(' + app._roadSignCounter + ')" class="ui-btn ui-icon-delete ui-btn-icon-right">Rimuovi cartello</a>' +
                         '</li>');
-        
-        $listview.listview("refresh");
+        try
+        {
+            $listview.listview("refresh");
+        }
+        catch(e){}
         $('#startMessage').hide();
        
     },
