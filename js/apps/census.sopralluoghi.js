@@ -737,7 +737,7 @@ var app = {
         $listview.html(html);
         $listview.listview();
         //$listview.trigger("create");
-        $listview.listview("refresh");
+        //$listview.listview("refresh");
         
         $.mobile.changePage('#listDialog');
     },
@@ -814,7 +814,7 @@ var app = {
                         '</li>');
         try
         {
-            $listview.listview("refresh");
+            //$listview.listview("refresh");
         }
         catch(e){}
         $('#startMessage').hide();
