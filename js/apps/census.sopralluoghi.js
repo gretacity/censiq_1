@@ -26,6 +26,7 @@ var app = {
     // Application Constructor
     initialize: function() 
     {
+         page.injector.injectPage('#summaryPage', 'summary', {continueLink: '#roadSignStep0Page'});
         
         data.sopralluoghi.getRoadSignFilms(function(result)
         {
