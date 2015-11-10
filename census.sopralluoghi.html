@@ -240,8 +240,12 @@
         
         
         <!-- roadSignFinder -->
-        <div data-role="dialog" id="roadSignFinder">
-            <div data-role="header" class="header"><h1>Ricerca segnale</h1></div>
+        <div data-role="page" id="roadSignFinder">
+            <div data-role="header" class="header">
+                <a href="javascript:app.goBack()" class="ui-btn ui-btn-icon-left ui-btn-left ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-back ui-alt-icon ui-nodisc-icon " data-role="button" role="button"></a>
+                <a href="javascript:app.goNext()" class="ui-btn ui-btn-icon-right ui-btn-right ui-btn-icon-notext ui-icon-toolbar-button toolbar-button-next ui-alt-icon ui-nodisc-icon " data-role="button" role="button"></a>
+                <h1>Ricerca segnale</h1>
+            </div>
             <div data-role="main" class="ui-content">
                 <div id="img_segnale" style="text-align:center">
                     <h3>
