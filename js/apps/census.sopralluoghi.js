@@ -737,7 +737,7 @@ var app = {
         $listview.html(html);
         $listview.listview();
         //$listview.trigger("create");
-        //$listview.listview("refresh");
+        $listview.listview("refresh");
         
         $.mobile.changePage('#listDialog');
     },
@@ -812,12 +812,17 @@ var app = {
         $listview.append('<li data-theme="b">' +
                             '<a href="javascript:app.removeRoadSignPanel(' + app._roadSignCounter + ')" class="ui-btn ui-icon-delete ui-btn-icon-right">Rimuovi cartello</a>' +
                         '</li>');
+        window.alert("1");
         try
         {
             //$listview.listview("refresh");
         }
         catch(e){}
+        
+        
+        
         $('#startMessage').hide();
+        window.alert("2");
        
     },
     removeRoadSignPanel: function(index) {
