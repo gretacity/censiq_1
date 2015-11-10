@@ -849,7 +849,7 @@ var app = {
              transition: 'flip',
              role:'dialog'
         })}
-        ,2000);
+        ,1000);
         
         
     },
