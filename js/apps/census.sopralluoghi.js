@@ -843,15 +843,13 @@ var app = {
         }    
         $listview.html(html);
         $listview.listview();
-        $listview.listview("refresh");
+        //$listview.listview("refresh");
         
         setTimeout(function(){$.mobile.changePage('#roadSignFinder', {
              transition: 'flip',
              role:'dialog'
         })}
         ,500);
-        
-        
     },
     
     searchRoadSign: function() {
