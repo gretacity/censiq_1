@@ -811,7 +811,7 @@ var app = {
      */
     openRoadSignFinder: function(signIndex)
     {
-        /*
+        
         $("#img_segnale").html( '<h3>'+
                         '<img src="img/noPhoto.png" style="width:70%; margin:0 auto">'+
                     '</h3>'+
@@ -844,9 +844,10 @@ var app = {
         $listview.html(html);
         $listview.listview();
         $listview.listview("refresh");
-        */
+        
         $.mobile.changePage('#roadSignFinder', {
-             transition: 'flip'
+             transition: 'flip',
+             role:'dialog'
         });
         
         
