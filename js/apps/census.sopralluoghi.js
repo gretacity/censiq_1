@@ -845,10 +845,11 @@ var app = {
         $listview.listview();
         $listview.listview("refresh");
         
-        $.mobile.changePage('#roadSignFinder', {
+        setTimeout(function(){$.mobile.changePage('#roadSignFinder', {
              transition: 'flip',
              role:'dialog'
-        });
+        })}
+        ,2000);
         
         
     },
