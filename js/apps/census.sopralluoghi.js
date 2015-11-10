@@ -84,14 +84,13 @@ var app = {
             $.mobile.silentScroll(app.pageOffsetTop);
         });
         
-        $('#roadSignFinder').on('pagecreate', this.loadSupporti);
+        this.loadSupporti(0);
         
         
     },
     
-    loadSupporti : function()
+    loadSupporti : function(signIndex)
     {
-        var signIndex=++app._roadSignCounter;
         $("#img_segnale").html( '<h3>'+
                         '<img src="img/noPhoto.png" style="width:70%; margin:0 auto">'+
                     '</h3>'+
@@ -856,7 +855,7 @@ var app = {
      */
     openRoadSignFinder: function(signIndex)
     {
-        /*
+        
         $("#img_segnale").html( '<h3>'+
                         '<img src="img/noPhoto.png" style="width:70%; margin:0 auto">'+
                     '</h3>'+
@@ -889,18 +888,18 @@ var app = {
         $listview.html(html);
         $listview.listview();
         $listview.listview("refresh");
-        */
-       /*
+        /*
         setTimeout(function(){$.mobile.changePage('#roadSignFinder', {
              transition: 'flip',
              role:'dialog'
         })}
         ,1000);
         */
-       $.mobile.changePage('#roadSignFinder', {
+        $.mobile.changePage('#roadSignFinder', {
              transition: 'flip',
              role:'dialog'
         });
+        
     },
     
     searchRoadSign: function() {
