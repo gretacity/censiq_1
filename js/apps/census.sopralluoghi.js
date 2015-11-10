@@ -288,6 +288,7 @@ var app = {
         }    
         else if(step == app.STEP_2) {
             //$.mobile.changePage('#sopralluoghiStep1Page');
+            window.alert("-------");
             app.addRoadSignPanel();
         }  
     },
@@ -747,15 +748,6 @@ var app = {
             reverse: true
         });
     },
-
-    
-    
-    
-    
-    
-    
-    
-    
     /***************************************************************
      *  CENSIMENTI
      */
@@ -778,52 +770,26 @@ var app = {
         $roadSignPanel.trigger("create");
         $listview = $('ul', $roadSignPanel);
         $listview.append('<input type="hidden" id="rimozione" value="0" />');    
-                                   
-      
-      
-        
-                
-        // ROADSIGN PICTURE
-        /*
-        $listview.append('<li class="roadsign-sign-li">' +
-                            '<a disabled="true" href="javascript:app.openRoadSignFinder(' + count + ')">' +
-                                '<!--img src="img/Segnali/cod_1.svg" /-->' +
-                                '<input type="hidden" class="roadsign-signid" />' +
-                                 '<div class="roadsign-signdescr">Figura</div>' +
-                            '</a>' +
-                        '</li>');
-        */
         // SIZE
         $listview.append('<li><a href="javascript:app.openRoadSignSizePanel(' + count + ')">Dimensione <label class="roadsign-size" style="float:right;margin-right:35px"></label></a></li>');
-        
         $listview.append('<li><a href="javascript:app.openRoadSignSupportPanel(' + count + ')">Supporto <label class="roadsign-support" style="float:right;margin-right:35px"></label></a></li>');
         // FILM
         $listview.append('<li><a href="javascript:app.openRoadSignFilmPanel(' + count + ')">Pellicola <label class="roadsign-film" style="float:right;margin-right:35px"></label></a></li>');
         // NOTE
         $('<li data-theme="b"><a href="#" class="textarea"><textarea class="roadsign-notes" placeholder="Note"></textarea></a></li>').appendTo($listview).trigger('create');
         // REMOVE BUTTON
-        
         $listview.append('<li class="roadsign-sign-li" style="display:none !important">' +
                             '<input type="hidden" id="roadsign-signtypeid" value="0" />' +
                         '</li>');
-                
-      
-        
         $listview.append('<li data-theme="b">' +
                             '<a href="javascript:app.removeRoadSignPanel(' + app._roadSignCounter + ')" class="ui-btn ui-icon-delete ui-btn-icon-right">Rimuovi cartello</a>' +
                         '</li>');
-        window.alert("1");
         try
         {
-            //$listview.listview("refresh");
+            $listview.listview("refresh");
         }
         catch(e){}
-        
-        
-        
         $('#startMessage').hide();
-        window.alert("2");
-       
     },
     removeRoadSignPanel: function(index) {
         var $el = $('#roadSignContainer div[data-roadsignno="' + index + '"]');
@@ -838,22 +804,15 @@ var app = {
     /***************************************************************
      *  Functions related to roadsigns search
      */
-    openRoadSignFinder: function(signIndex) {
-        
-        
-        
-         $("#img_segnale").html( '<h3>'+
+    openRoadSignFinder: function(signIndex)
+    {
+        $("#img_segnale").html( '<h3>'+
                         '<img src="img/noPhoto.png" style="width:70%; margin:0 auto">'+
                     '</h3>'+
                     '<span>Ricerca segnale per nome o codice</span>');
         $("#dimensioni_segnale ul").html(' <li style="border:0">Specificare il segnale</li>');    
-        
         var roadSignPanel = $('div[data-roadsignno="' + signIndex + '"]');
-        
-            
         app._currentRoadSign = signIndex;
-       
-        
         $("#foto a").addClass("alert_sup");
         $("#nuovi_pali a").addClass("alert_sup");
         $("#a_sp_dialog a").addClass("alert_sup");
