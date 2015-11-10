@@ -889,17 +889,14 @@ var app = {
         $listview.listview();
         $listview.listview("refresh");
         */
-       /*
+       
         setTimeout(function(){$.mobile.changePage('#roadSignFinder', {
              transition: 'flip',
              role:'dialog'
         })}
-        ,1000);
-        */
-       $.mobile.changePage('#roadSignFinder', {
-             transition: 'flip',
-             role:'dialog'
-        });
+        ,500);
+        
+       
     },
     
     searchRoadSign: function() {
