@@ -26,7 +26,7 @@ var app = {
     // Application Constructor
     initialize: function() 
     {
-         page.injector.injectPage('#summaryPage', 'summary', {continueLink: '#roadSignStep0Page'});
+        page.injector.injectPage('#summaryPage', 'summary', {continueLink: '#roadSignStep0Page'});
         
         data.sopralluoghi.getRoadSignFilms(function(result)
         {
@@ -381,14 +381,27 @@ var app = {
         app. ACQ=false;
         app.ID_GPS=0; 
         
+        
         /*
-        $.mobile.changePage('#ElencoSopralluoghiPage', {
-            transition: 'slide'
+        $.mobile.changePage('census.sopralluoghi.html', {
+            transition: 'slide',
         });
+        */
+        
+        /*  
+        $.mobile.changePage('#ElencoSopralluoghiPage', {
+            transition: 'slide',
+            reloadPage:true
+            
+        });
+        
+        
+        
         */
         $.mobile.changePage('#summaryPage', {
             transition: 'slide'
         });
+        
     },
     
     
