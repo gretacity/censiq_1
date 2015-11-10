@@ -84,7 +84,7 @@ var app = {
             $.mobile.silentScroll(app.pageOffsetTop);
         });
         
-        $('#roadSignFinder').on('pageshow', this.loadSupporti);
+        $('#roadSignFinder').on('pagecreate', this.loadSupporti);
         
         
     },
@@ -889,14 +889,17 @@ var app = {
         $listview.listview();
         $listview.listview("refresh");
         */
-       
+       /*
         setTimeout(function(){$.mobile.changePage('#roadSignFinder', {
              transition: 'flip',
              role:'dialog'
         })}
-        ,500);
-        
-       
+        ,1000);
+        */
+       $.mobile.changePage('#roadSignFinder', {
+             transition: 'flip',
+             role:'dialog'
+        });
     },
     
     searchRoadSign: function() {
