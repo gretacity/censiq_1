@@ -811,6 +811,7 @@ var app = {
      */
     openRoadSignFinder: function(signIndex)
     {
+        /*
         $("#img_segnale").html( '<h3>'+
                         '<img src="img/noPhoto.png" style="width:70%; margin:0 auto">'+
                     '</h3>'+
@@ -821,17 +822,7 @@ var app = {
         $("#foto a").addClass("alert_sup");
         $("#nuovi_pali a").addClass("alert_sup");
         $("#a_sp_dialog a").addClass("alert_sup");
-        /*
-        if($("#oldpole").val()==-1)
-        {
-            $("#a_sp_dialog a").addClass("alert_sup");
-        }
-        else
-        {
-            $("#a_sp_dialog a").removeClass("alert_sup");
-        
-        } 
-        **/
+       
         $("#searchRoadSignText").val('').focus();
         app.setBackButton();
         var supporti=app.SUPPORTI;
@@ -853,8 +844,9 @@ var app = {
         $listview.html(html);
         $listview.listview();
         $listview.listview("refresh");
-         $.mobile.changePage('#roadSignFinder', {
-             transition: 'slide'
+        */
+        $.mobile.changePage('#roadSignFinder', {
+             transition: 'flip'
         });
         
         
