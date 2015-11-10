@@ -791,7 +791,7 @@ var app = {
         }
         catch(e){}
         $('#startMessage').hide();
-        app.openRoadSignFinder( count,rem);
+        //app.openRoadSignFinder( count,rem);
     
     },
     
