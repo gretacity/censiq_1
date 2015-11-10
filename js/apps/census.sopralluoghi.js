@@ -791,7 +791,7 @@ var app = {
         }
         catch(e){}
         $('#startMessage').hide();
-        //app.openRoadSignFinder( count,rem);
+        app.openRoadSignFinder( count,rem);
     
     },
     
@@ -854,7 +854,7 @@ var app = {
         $listview.listview();
         $listview.listview("refresh");
          $.mobile.changePage('#roadSignFinder', {
-             transition: 'flip'
+             transition: 'slide'
         });
         
         
