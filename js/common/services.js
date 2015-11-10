@@ -157,8 +157,8 @@ return;*/
                 }).fail(function(jqXHR, textStatus, errorThrown) {
 
 
-console.log('services.uploadEntity', textStatus);
-console.log("JQXHR",jqXHR);
+//console.log('services.uploadEntity', textStatus);
+//console.log("JQXHR",jqXHR);
 //console.log(textStatus);//return;
                     // Login required
                     var loginRequired = ((jqXHR.status == services.CODE_UNAUTHORIZED) || (jqXHR.status == services.CODE_FORBIDDEN));

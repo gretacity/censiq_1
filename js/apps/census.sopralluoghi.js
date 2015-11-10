@@ -260,6 +260,7 @@ var app = {
                     clearInterval(app.ID_GPS);
                 }
                 catch(e){}
+                
                
                 //$.mobile.changePage('#sopralluoghiStep2Page');
                 //app.openRoadSignFinder();
@@ -284,11 +285,12 @@ var app = {
         if(step == app.STEP_1) {
             $("#localizzazione").css("display","none");
             $("#btnCoord").appendTo("#pg1_footer");
+            
             $.mobile.changePage('#ElencoSopralluoghiPage');
         }    
         else if(step == app.STEP_2) {
             //$.mobile.changePage('#sopralluoghiStep1Page');
-            window.alert("-------");
+           
             app.addRoadSignPanel();
         }  
     },
@@ -757,7 +759,6 @@ var app = {
     addRoadSignPanel: function() {
         var rem=0;
         var count = ++app._roadSignCounter;
-        app.openRoadSignFinder( count,rem);
         var $roadSignPanel = $('<div data-roadsignno="' + count + '" data-inset="false" data-role="collapsible" data-collapsed="true" data-collapsed-icon="check" data-expanded-icon="carat-d" data-theme="b">' +
                                     '<h1>' +
                                         '<input type="hidden" class="roadsign-signid"/>' +
@@ -790,7 +791,11 @@ var app = {
         }
         catch(e){}
         $('#startMessage').hide();
+        app.openRoadSignFinder( count,rem);
+    
     },
+    
+    
     removeRoadSignPanel: function(index) {
         var $el = $('#roadSignContainer div[data-roadsignno="' + index + '"]');
         $el.collapsible('destroy');
@@ -847,10 +852,11 @@ var app = {
         }    
         $listview.html(html);
         $listview.listview();
-        //$listview.listview("refresh");
+        $listview.listview("refresh");
          $.mobile.changePage('#roadSignFinder', {
              transition: 'flip'
         });
+        
         
     },
     
