@@ -91,6 +91,7 @@ var app = {
     
     loadSupporti : function()
     {
+        var signIndex=++app._roadSignCounter;
         $("#img_segnale").html( '<h3>'+
                         '<img src="img/noPhoto.png" style="width:70%; margin:0 auto">'+
                     '</h3>'+
