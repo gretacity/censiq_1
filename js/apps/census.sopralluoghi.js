@@ -83,7 +83,51 @@ var app = {
         $('div[data-role="dialog"]').on('pagehide', function() {
             $.mobile.silentScroll(app.pageOffsetTop);
         });
+        
+        $('#roadSignFinder').on('pageshow', this.loadSupporti);
+        
+        
     },
+    
+    loadSupporti : function()
+    {
+        $("#img_segnale").html( '<h3>'+
+                        '<img src="img/noPhoto.png" style="width:70%; margin:0 auto">'+
+                    '</h3>'+
+                    '<span>Ricerca segnale per nome o codice</span>');
+        $("#dimensioni_segnale ul").html(' <li style="border:0">Specificare il segnale</li>');    
+        var roadSignPanel = $('div[data-roadsignno="' + signIndex + '"]');
+        app._currentRoadSign = signIndex;
+        $("#foto a").addClass("alert_sup");
+        $("#nuovi_pali a").addClass("alert_sup");
+        $("#a_sp_dialog a").addClass("alert_sup");
+       
+        $("#searchRoadSignText").val('').focus();
+        app.setBackButton();
+        var supporti=app.SUPPORTI;
+        var pellicole=app.PELLICOLE;
+        var $dialog = $('#materiale_supporto');
+        var $listview = $('ul',$dialog );
+        var html='';
+        for(var i=0;i<supporti.length;i++)
+        {
+            for(var j=0;j<pellicole.length;j++)
+            {
+                var text=eval('supporti.item(i).name')+' - '+eval('pellicole.item(j).name');
+                var id=eval('supporti.item(i).id')+'_'+eval('pellicole.item(j).id');
+                var ref="javascript:app.setMatPanel('"+eval('supporti.item(i).id')+"','"+eval('pellicole.item(j).id')+"','"+eval('supporti.item(i).name')+"','"+eval('pellicole.item(j).name')+"')";
+                
+                html+='<li><a href="' + ref + '" id="mat'+id+'" class="ui-icon-check">' + text + '</a></li>'
+            }    
+        }    
+        $listview.html(html);
+        $listview.listview();
+        $listview.listview("refresh");
+        
+        
+        
+    },
+    
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
         document.addEventListener("backbutton", function(e) {
@@ -811,7 +855,7 @@ var app = {
      */
     openRoadSignFinder: function(signIndex)
     {
-        
+        /*
         $("#img_segnale").html( '<h3>'+
                         '<img src="img/noPhoto.png" style="width:70%; margin:0 auto">'+
                     '</h3>'+
@@ -843,13 +887,19 @@ var app = {
         }    
         $listview.html(html);
         $listview.listview();
-        //$listview.listview("refresh");
-        
+        $listview.listview("refresh");
+        */
+       /*
         setTimeout(function(){$.mobile.changePage('#roadSignFinder', {
              transition: 'flip',
-             role:'page'
+             role:'dialog'
         })}
         ,1000);
+        */
+       $.mobile.changePage('#roadSignFinder', {
+             transition: 'flip',
+             role:'dialog'
+        });
     },
     
     searchRoadSign: function() {
