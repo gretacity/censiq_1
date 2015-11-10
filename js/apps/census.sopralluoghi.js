@@ -791,13 +791,26 @@ var app = {
         }
         catch(e){}
         $('#startMessage').hide();
-        
-        
-        
-        
-        
-        
-        
+        app.openRoadSignFinder( count,rem);
+    
+    },
+    
+    
+    removeRoadSignPanel: function(index) {
+        var $el = $('#roadSignContainer div[data-roadsignno="' + index + '"]');
+        $el.collapsible('destroy');
+        $el.remove();
+        if($('#roadSignContainer div[data-roadsignno]').length == 0) {
+            $('#startMessage').show();
+        }
+    },
+    
+    
+    /***************************************************************
+     *  Functions related to roadsigns search
+     */
+    openRoadSignFinder: function(signIndex)
+    {
         
         $("#img_segnale").html( '<h3>'+
                         '<img src="img/noPhoto.png" style="width:70%; margin:0 auto">'+
@@ -830,46 +843,13 @@ var app = {
         }    
         $listview.html(html);
         $listview.listview();
-        
-        
-        
-        
-        
-        app.openRoadSignFinder( count,rem);
-    
-    },
-    
-    
-    removeRoadSignPanel: function(index) {
-        var $el = $('#roadSignContainer div[data-roadsignno="' + index + '"]');
-        $el.collapsible('destroy');
-        $el.remove();
-        if($('#roadSignContainer div[data-roadsignno]').length == 0) {
-            $('#startMessage').show();
-        }
-    },
-    
-    
-    /***************************************************************
-     *  Functions related to roadsigns search
-     */
-    openRoadSignFinder: function(signIndex)
-    {
-        
-        
         //$listview.listview("refresh");
-        /*
+        
         setTimeout(function(){$.mobile.changePage('#roadSignFinder', {
              transition: 'flip',
-             role:'dialog'
+             role:'page'
         })}
         ,1000);
-        */
-       $.mobile.changePage('#roadSignFinder', {
-             transition: 'flip',
-             role:'dialog'
-        });
-       
     },
     
     searchRoadSign: function() {
