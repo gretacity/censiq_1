@@ -273,3 +273,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7abcff', end
 {
     border-color:#dedede !important;;
 }
+
+
+.ui-header, .ui-footer {
+    border-width: 0 !important;
+ 
+}
